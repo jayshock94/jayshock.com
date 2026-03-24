@@ -46,8 +46,6 @@ export interface CaseStudy {
   types: string[]
   /** One-line impact summary shown on homepage/work index cards. */
   cardImpactLine: string
-  /** Whether a password is required to view the case study. */
-  isProtected: boolean
   /**
    * Brand color hex — processed through generateTokens() before use.
    * Never used directly; only used as algorithm input.

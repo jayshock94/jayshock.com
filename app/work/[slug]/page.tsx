@@ -1,14 +1,13 @@
 import type { Metadata } from 'next'
-import { notFound }       from 'next/navigation'
-import Link               from 'next/link'
-import { getCaseStudy, caseStudySlugs, caseStudies } from '@/data/case-studies'
-import { generateTokens } from '@/lib/colorAlgorithm'
-import CaseStudyHero      from '@/components/case-study/CaseStudyHero'
-import PhaseSection       from '@/components/case-study/PhaseSection'
-import PhaseObserver      from '@/components/case-study/PhaseObserver'
-import PasswordGate       from '@/components/case-study/PasswordGate'
-import WorkCard           from '@/components/work/WorkCard'
-import Button             from '@/components/ui/Button'
+import { notFound }  from 'next/navigation'
+import Link          from 'next/link'
+import { getCaseStudy, caseStudySlugs } from '@/data/case-studies'
+import { generateTokens }  from '@/lib/colorAlgorithm'
+import CaseStudyHero       from '@/components/case-study/CaseStudyHero'
+import PhaseSection        from '@/components/case-study/PhaseSection'
+import PhaseObserver       from '@/components/case-study/PhaseObserver'
+import WorkCard            from '@/components/work/WorkCard'
+import Button              from '@/components/ui/Button'
 
 interface PageProps {
   params: { slug: string }
@@ -37,7 +36,7 @@ export default function CaseStudyPage({ params }: PageProps) {
   // Find the next case study for bottom navigation
   const nextCS = getCaseStudy(cs.nextSlug)
 
-  const content = (
+  return (
     <>
       {/* Case study hero — brand color zone, phase color not yet active */}
       <CaseStudyHero caseStudy={cs} tokens={tokens} />
@@ -52,10 +51,7 @@ export default function CaseStudyPage({ params }: PageProps) {
 
       {/* Next case study + contact CTA */}
       <section
-        className="
-          py-[var(--space-section-md)]
-          bg-[var(--color-canvas)]
-        "
+        className="py-[var(--space-section-md)] bg-[var(--color-canvas)]"
         aria-label="What to read next"
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
@@ -71,14 +67,12 @@ export default function CaseStudyPage({ params }: PageProps) {
             </p>
           </div>
 
-          {/* Next case study card */}
           {nextCS && (
             <div className="max-w-[480px] mb-[var(--space-section-sm)]">
               <WorkCard caseStudy={nextCS} monochromatic />
             </div>
           )}
 
-          {/* Back to all work */}
           <div className="flex flex-wrap items-center gap-[var(--space-component-md)] mb-[var(--space-section-md)]">
             <Link
               href="/work"
@@ -92,13 +86,7 @@ export default function CaseStudyPage({ params }: PageProps) {
             </Link>
           </div>
 
-          {/* Contact CTA */}
-          <div
-            className="
-              border-t border-[var(--color-border)]
-              pt-[var(--space-section-sm)]
-            "
-          >
+          <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
             <p className="text-body-lg text-[var(--color-text-secondary)] mb-[var(--space-stack-lg)] max-w-content">
               Whether you are looking for a senior product designer or a
               partner for a complex problem, I want to hear about it.
@@ -111,15 +99,4 @@ export default function CaseStudyPage({ params }: PageProps) {
       </section>
     </>
   )
-
-  // Wrap in password gate if protected
-  if (cs.isProtected) {
-    return (
-      <PasswordGate slug={cs.slug} title={cs.title} industry={cs.industry}>
-        {content}
-      </PasswordGate>
-    )
-  }
-
-  return content
 }

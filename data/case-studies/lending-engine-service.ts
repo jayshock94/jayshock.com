@@ -18,7 +18,6 @@ const lendingEngineService: CaseStudy = {
   types:        ['Research', 'Systems', 'Enterprise', 'White-label'],
   cardImpactLine:
     'Delivered a white-label ready system that works across any brand. Same constraints. Better product.',
-  isProtected:  true,
 
   // Financial slate blue — processed through color algorithm on the page
   brandColorHex: '#3A6B9E',

@@ -43,7 +43,6 @@ interface ExperienceRoleProps {
   body:      string
   caseSlug?: string
   caseLabel?: string
-  isNDA?:    boolean
 }
 
 function ExperienceRole({
@@ -53,7 +52,6 @@ function ExperienceRole({
   body,
   caseSlug,
   caseLabel,
-  isNDA,
 }: ExperienceRoleProps) {
   return (
     <div
@@ -68,11 +66,6 @@ function ExperienceRole({
       </div>
       <div className="flex flex-wrap gap-x-[var(--space-component-sm)] gap-y-[2px] items-center">
         <span className="text-body-sm text-[var(--color-text-muted)]">{company}</span>
-        {isNDA && (
-          <span className="text-label text-[var(--color-text-muted)] px-[6px] py-[2px] bg-[var(--color-surface)] border border-[var(--color-border)] rounded-[4px]">
-            NDA
-          </span>
-        )}
         <span className="text-body-sm text-[var(--color-text-muted)]" aria-hidden="true">·</span>
         <span className="text-body-sm text-[var(--color-text-muted)]">{period}</span>
       </div>
@@ -223,10 +216,9 @@ export default function ExperiencePage() {
               role="Product Designer"
               company="Fintech SaaS Company"
               period="2021 to present"
-              isNDA
               body="Grew the design team from 3 to 4 designers. Contributing to a design system that spans multiple products and serves clients across the financial industry, each with their own brand guidelines. Led new product work beyond legacy redesigns. Headed the lending management platform redesign from the ground up."
               caseSlug="lending-engine-service"
-              caseLabel="Case study (NDA protected)"
+              caseLabel="View case study"
             />
 
             <ExperienceRole

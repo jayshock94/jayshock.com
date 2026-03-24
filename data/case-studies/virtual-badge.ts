@@ -17,7 +17,6 @@ const virtualBadge: CaseStudy = {
   types:        ['Research', 'Internal Tools', 'Mobile', 'Initiative'],
   cardImpactLine:
     'Identified the problem, pitched the solution, built it. Reps went from waiting 3 weeks to selling immediately.',
-  isProtected:  false,
 
   // Warm copper — processed through color algorithm on the page
   brandColorHex: '#B07340',

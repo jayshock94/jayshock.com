@@ -17,7 +17,6 @@ const mobileLendingManagement: CaseStudy = {
   types:        ['Mobile', 'Systems', 'White-label', 'Design System'],
   cardImpactLine:
     'A lending management app rebuilt for how people actually work today. Dynamic theming across any brand, same constraints.',
-  isProtected:  false,
 
   // Solar-adjacent green — processed through color algorithm on the page
   brandColorHex: '#3D8A6E',
