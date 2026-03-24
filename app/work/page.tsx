@@ -35,7 +35,7 @@ export default function WorkPage() {
           "
         >
           {caseStudies.map(cs => (
-            <WorkCard key={cs.slug} caseStudy={cs} monochromatic />
+            <WorkCard key={cs.slug} caseStudy={cs} />
           ))}
         </div>
 
