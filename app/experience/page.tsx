@@ -249,19 +249,33 @@ export default function ExperiencePage() {
 
           {/* Section 05 — Education */}
           <section aria-labelledby="education-heading">
-            <div className="border-t border-[var(--color-border)] pt-[var(--space-stack-lg)]">
+            <div className="border-t border-[var(--color-border)] pt-[var(--space-stack-lg)] flex flex-col gap-[var(--space-stack-lg)]">
               <h2
                 id="education-heading"
-                className="text-h3 text-[var(--color-ink)] mb-[var(--space-stack-md)]"
+                className="text-h3 text-[var(--color-ink)]"
               >
                 Education
               </h2>
-              <p className="text-body text-[var(--color-text-muted)]">
-                [Degree · Institution · Year — add before launch]
-              </p>
-              <p className="text-body text-[var(--color-text-muted)] mt-[var(--space-stack-xs)]">
-                [Certifications if current — Nielsen Norman, Google UX, etc.]
-              </p>
+
+              <div className="flex flex-col gap-[var(--space-stack-sm)]">
+                <h3 className="text-h4 text-[var(--color-ink)]">Certifications</h3>
+                <ul className="flex flex-col gap-[var(--space-stack-xs)] list-none p-0 m-0">
+                  <li className="text-body text-[var(--color-text-secondary)]">Google UX Design Certificate</li>
+                  <li className="text-body text-[var(--color-text-secondary)]">Nielsen Norman Group UX Certificate</li>
+                  <li className="text-body text-[var(--color-text-secondary)]">WebAIM Web Accessibility Certificate</li>
+                </ul>
+              </div>
+
+              <div className="flex flex-col gap-[var(--space-stack-sm)]">
+                <h3 className="text-h4 text-[var(--color-ink)]">
+                  Studied design and videography · 2015 to 2017
+                </h3>
+                <p className="text-body text-[var(--color-text-secondary)]">
+                  Coursework in graphic design, digital media, and video
+                  production. Continued through self-directed study and online
+                  courses in UX design and front end development.
+                </p>
+              </div>
             </div>
           </section>
 
