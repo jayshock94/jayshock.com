@@ -34,14 +34,14 @@ export default function CaseStudyHero({ caseStudy, tokens }: CaseStudyHeroProps)
 
           {/* Eyebrow */}
           <p
-            className="text-label mb-[var(--space-stack-sm)] text-center md:text-left"
+            className="text-label mb-[var(--space-stack-sm)]"
             style={{ color: 'var(--case-label)' }}
           >
             {eyebrow}
           </p>
 
           {/* Title */}
-          <h1 className="text-h1 text-[var(--color-ink)] mb-[var(--space-stack-md)] text-center md:text-left">
+          <h1 className="text-h1 text-[var(--color-ink)] mb-[var(--space-stack-md)]">
             {title}
           </h1>
 

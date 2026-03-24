@@ -49,14 +49,14 @@ export default function HowIWork() {
     <div>
 
       {/* Header */}
-      <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-sm)] text-center md:text-left">
+      <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-sm)]">
         How I work
       </p>
-      <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-md)] text-center md:text-left">
+      <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-md)]">
         Design gets messy. What matters is what you do next.
       </h2>
       <p
-        className="text-body text-[var(--color-text-secondary)] mb-[var(--space-stack-lg)] text-center md:text-left"
+        className="text-body text-[var(--color-text-secondary)] mb-[var(--space-stack-lg)]"
         style={{ maxWidth: '560px' }}
       >
         Requirements change, research points the wrong way, features ship

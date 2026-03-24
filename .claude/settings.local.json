@@ -3,7 +3,14 @@
     "allow": [
       "Bash(npm install:*)",
       "Bash(npx next:*)",
-      "Bash(cd:*)"
+      "Bash(cd:*)",
+      "Bash(npx tsc:*)",
+      "Bash(cp \"C:/Users/jaysh/Desktop/Design Stuff/Branding/Shock design/Product mocks/Exported mocks/lending engine/lending engine  v2.png\" \"C:/Users/jaysh/Desktop/claude-code/jayshock-portfolio/public/images/work/lending-engine.png\")",
+      "Bash(cp \"C:/Users/jaysh/Desktop/Design Stuff/Branding/Shock design/Product mocks/Exported mocks/Gac/gac case study cover image v5.png\" \"C:/Users/jaysh/Desktop/claude-code/jayshock-portfolio/public/images/work/mobile-lending.png\")",
+      "Bash(cp \"C:/Users/jaysh/Desktop/Design Stuff/Branding/Shock design/Product mocks/Exported mocks/tel.png\" \"C:/Users/jaysh/Desktop/claude-code/jayshock-portfolio/public/images/work/virtual-badge.png\")",
+      "mcp__claude_ai_Vercel__list_teams",
+      "mcp__claude_ai_Vercel__list_projects",
+      "mcp__claude_ai_Vercel__list_deployments"
     ]
   }
 }

@@ -84,7 +84,7 @@ export default function HomePage() {
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
 
           <p
-            className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-md)] text-center md:text-left"
+            className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-md)]"
             id="work-eyebrow"
           >
             Selected Work
