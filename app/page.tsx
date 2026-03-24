@@ -32,7 +32,7 @@ export default function HomePage() {
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
 
           {/* Brand badge — dark mode toggle */}
-          <div className="mb-[32px]">
+          <div className="mb-[32px] flex justify-center md:justify-start">
             <ThemeToggle />
           </div>
 

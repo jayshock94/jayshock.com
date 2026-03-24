@@ -127,9 +127,9 @@ export default function ThemeToggle() {
         style={{
           fontFamily:    'var(--font-outfit), system-ui, sans-serif',
           fontSize:      '20px',
-          fontWeight:    700,
+          fontWeight:    800,
           color:         'var(--color-badge-fg)',
-          letterSpacing: '-0.01em',
+          letterSpacing: '-0.02em',
           lineHeight:    1,
           userSelect:    'none',
         }}
