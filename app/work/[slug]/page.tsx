@@ -69,7 +69,7 @@ export default function CaseStudyPage({ params }: PageProps) {
 
           {nextCS && (
             <div className="max-w-[480px] mb-[var(--space-section-sm)]">
-              <WorkCard caseStudy={nextCS} monochromatic />
+              <WorkCard caseStudy={nextCS} />
             </div>
           )}
 
