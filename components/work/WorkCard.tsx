@@ -38,6 +38,10 @@ export default function WorkCard({ caseStudy }: WorkCardProps) {
   const tokens = deriveTokens(brandColorHex)
 
   return (
+    <Link
+      href={`/work/${slug}`}
+      style={{ textDecoration: 'none', display: 'block', height: '100%' }}
+    >
     <article
       className="flex flex-col h-full"
       onMouseEnter={() => setHovered(true)}
@@ -117,23 +121,22 @@ export default function WorkCard({ caseStudy }: WorkCardProps) {
           }}
         />
 
-        <Link
-          href={`/work/${slug}`}
+        <span
           className="glass-pill absolute left-1/2 -translate-x-1/2 bottom-[16px] whitespace-nowrap"
           style={{
-            color:          'rgba(255, 255, 255, 0.92)',
-            fontFamily:     'var(--font-outfit), system-ui, sans-serif',
-            fontSize:       '13px',
-            fontWeight:     400,
-            padding:        '10px 24px',
-            borderRadius:   '40px',
-            textDecoration: 'none',
-            display:        'block',
+            color:      'rgba(255, 255, 255, 0.92)',
+            fontFamily: 'var(--font-outfit), system-ui, sans-serif',
+            fontSize:   '13px',
+            fontWeight: 400,
+            padding:    '10px 24px',
+            borderRadius: '40px',
+            display:    'block',
           }}
         >
           View project
-        </Link>
+        </span>
       </div>
     </article>
+    </Link>
   )
 }
