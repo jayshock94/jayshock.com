@@ -74,7 +74,7 @@ export default function PhaseSection({ phase, content }: PhaseSectionProps) {
 
           {/* Phase eyebrow */}
           <p
-            className="text-ui-sm mb-[var(--space-stack-sm)]"
+            className="text-ui-sm mb-[var(--space-stack-sm)] text-center md:text-left"
             style={{ color: vars.label }}
           >
             {label}
@@ -83,7 +83,7 @@ export default function PhaseSection({ phase, content }: PhaseSectionProps) {
           {/* Section headline */}
           <h2
             id={`phase-heading-${phase}`}
-            className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-md)]"
+            className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-md)] text-center md:text-left"
           >
             {headline}
           </h2>

@@ -76,10 +76,10 @@ export default function AboutPage() {
 
         {/* Page header */}
         <header className="mb-[var(--space-section-sm)] max-w-content">
-          <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-sm)]">
+          <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-sm)] text-center md:text-left">
             About
           </p>
-          <h1 className="text-h1 text-[var(--color-ink)]">
+          <h1 className="text-h1 text-[var(--color-ink)] text-center md:text-left">
             Jay Shock
           </h1>
         </header>
@@ -90,7 +90,7 @@ export default function AboutPage() {
           <section aria-labelledby="who-i-am">
             <h2
               id="who-i-am"
-              className="text-h3 text-[var(--color-ink)] mb-[var(--space-stack-md)]"
+              className="text-h3 text-[var(--color-ink)] mb-[var(--space-stack-md)] text-center md:text-left"
             >
               Who I am
             </h2>
@@ -139,7 +139,7 @@ export default function AboutPage() {
           <section aria-labelledby="how-i-think">
             <h2
               id="how-i-think"
-              className="text-h3 text-[var(--color-ink)] mb-[var(--space-stack-md)]"
+              className="text-h3 text-[var(--color-ink)] mb-[var(--space-stack-md)] text-center md:text-left"
             >
               How I think
             </h2>
@@ -170,7 +170,7 @@ export default function AboutPage() {
           <section aria-labelledby="how-i-work">
             <h2
               id="how-i-work"
-              className="text-h3 text-[var(--color-ink)] mb-[var(--space-stack-md)]"
+              className="text-h3 text-[var(--color-ink)] mb-[var(--space-stack-md)] text-center md:text-left"
             >
               How I work
             </h2>
@@ -217,7 +217,7 @@ export default function AboutPage() {
             <div className="flex items-baseline justify-between gap-[var(--space-component-lg)] mb-[var(--space-stack-md)] flex-wrap">
               <h2
                 id="experience-snapshot"
-                className="text-h3 text-[var(--color-ink)]"
+                className="text-h3 text-[var(--color-ink)] text-center md:text-left"
               >
                 Experience
               </h2>

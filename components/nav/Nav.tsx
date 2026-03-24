@@ -45,7 +45,7 @@ export default function Nav() {
           {/* Main nav row — 80px height */}
           <nav
             aria-label="Main navigation"
-            className="relative flex items-center justify-center md:justify-between px-[28px]"
+            className="flex items-center justify-between px-[28px]"
             style={{ height: '80px' }}
           >
             {/* Logo + title */}
@@ -122,8 +122,8 @@ export default function Nav() {
               </Button>
             </div>
 
-            {/* Mobile: hamburger — absolute right so logo stays centered */}
-            <div className="flex md:hidden items-center absolute right-[16px]">
+            {/* Mobile: hamburger */}
+            <div className="flex md:hidden items-center">
               <button
                 type="button"
                 className="flex items-center justify-center w-[44px] h-[44px] rounded-[8px] text-[var(--color-text-muted)] hover:text-[var(--color-ink)] transition-colors duration-200"
@@ -154,7 +154,7 @@ export default function Nav() {
                       key={link.href}
                       href={link.href}
                       onClick={close}
-                      className="flex items-center justify-center min-h-[48px] px-[12px] rounded-[10px] transition-colors duration-200 text-ui-md"
+                      className="flex items-center min-h-[48px] px-[12px] rounded-[10px] transition-colors duration-200 text-ui-md"
                       style={{
                         color:      isActive ? 'var(--color-ink)' : 'var(--color-text-secondary)',
                         background: isActive ? 'var(--color-hover-subtle)' : 'transparent',
@@ -171,7 +171,7 @@ export default function Nav() {
                 <Link
                   href="/contact"
                   onClick={close}
-                  className="flex items-center justify-center min-h-[48px] px-[12px] rounded-[10px] transition-colors duration-200 text-ui-md"
+                  className="flex items-center min-h-[48px] px-[12px] rounded-[10px] transition-colors duration-200 text-ui-md"
                   style={{
                     color:          pathname === '/contact' ? 'var(--color-ink)' : 'var(--color-text-secondary)',
                     background:     pathname === '/contact' ? 'var(--color-hover-subtle)' : 'transparent',

@@ -38,7 +38,7 @@ export default function HomePage() {
 
           {/* Mixed weight headline */}
           <h1
-            className="text-display mb-[20px]"
+            className="text-display mb-[20px] text-center md:text-left"
             style={{ maxWidth: '900px' }}
           >
             <span style={{ fontWeight: 300, color: 'var(--color-text-muted)' }}>I make </span>
@@ -49,7 +49,7 @@ export default function HomePage() {
 
           {/* Subline */}
           <p
-            className="text-body-lg mb-[36px]"
+            className="text-body-lg mb-[36px] text-center md:text-left"
             style={{
               color:    'var(--color-text-muted)',
               maxWidth: '480px',
@@ -61,7 +61,7 @@ export default function HomePage() {
           </p>
 
           {/* CTAs */}
-          <div className="flex flex-wrap gap-[12px] items-center">
+          <div className="flex flex-wrap gap-[12px] items-center justify-center md:justify-start">
             <Button variant="primary" href="/api/resume" download>
               Download resume
             </Button>
@@ -84,7 +84,7 @@ export default function HomePage() {
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
 
           <p
-            className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-md)]"
+            className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-md)] text-center md:text-left"
             id="work-eyebrow"
           >
             Selected Work
