@@ -248,6 +248,49 @@ body > * {
 }
 
 /* -----------------------------------------------------------
+   NAV CARD — responsive floating card
+   Mobile: full-width bar with bottom border, no radius.
+   Desktop (md+): floating glass card with blur and radius.
+----------------------------------------------------------- */
+.nav-card {
+  background: var(--color-canvas);
+  border-bottom: 0.5px solid var(--color-border);
+  border-radius: 0;
+  transition: background 0.5s ease, box-shadow 0.5s ease;
+}
+
+@media (min-width: 768px) {
+  .nav-card {
+    background: var(--color-nav-card-bg);
+    backdrop-filter: blur(48px) saturate(180%);
+    -webkit-backdrop-filter: blur(48px) saturate(180%);
+    border: 0.5px solid var(--color-nav-card-border);
+    border-bottom: 0.5px solid var(--color-nav-card-border);
+    border-radius: 16px;
+    box-shadow:
+      0 2px 24px rgba(28, 25, 23, 0.06),
+      inset 0 1px 0 var(--glass-border-light);
+  }
+
+  .nav-card--open {
+    border-radius: 16px 16px 0 0;
+  }
+}
+
+.nav-drawer {
+  border-top: 0.5px solid var(--color-border);
+  border-radius: 0;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .nav-drawer {
+    border-top: 0.5px solid var(--color-nav-card-border);
+    border-radius: 0 0 16px 16px;
+  }
+}
+
+/* -----------------------------------------------------------
    FOCUS STYLES
 ----------------------------------------------------------- */
 :focus-visible {

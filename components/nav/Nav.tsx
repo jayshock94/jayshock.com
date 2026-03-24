@@ -37,28 +37,11 @@ export default function Nav() {
   const close = () => setIsOpen(false)
 
   return (
-    <header
-      className="sticky top-0 z-50"
-      style={{
-        paddingTop:    '12px',
-        paddingBottom: '8px',
-        paddingLeft:   'var(--space-page-margin)',
-        paddingRight:  'var(--space-page-margin)',
-      }}
-    >
-      <div className="max-w-layout mx-auto">
+    <header className="sticky top-0 z-50 md:pt-[12px] md:pb-[8px] md:px-[var(--space-page-margin)]">
+      <div className="md:max-w-layout md:mx-auto">
 
-        {/* Floating nav card */}
-        <div
-          style={{
-            background:           'var(--color-nav-card-bg)',
-            backdropFilter:       'blur(20px) saturate(180%)',
-            WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-            borderRadius:         isOpen ? '16px 16px 0 0' : '16px',
-            border:               '0.5px solid var(--color-nav-card-border)',
-            boxShadow:            '0 2px 20px rgba(0, 0, 0, 0.07)',
-          }}
-        >
+        {/* Nav card — full-width bar on mobile, floating glass card on desktop */}
+        <div className={`nav-card${isOpen ? ' nav-card--open' : ''}`}>
           {/* Main nav row — 80px height */}
           <nav
             aria-label="Main navigation"
@@ -161,12 +144,7 @@ export default function Nav() {
           {isOpen && (
             <div
               id="mobile-menu"
-              className="md:hidden"
-              style={{
-                borderTop:    '0.5px solid var(--color-nav-card-border)',
-                borderRadius: '0 0 16px 16px',
-                overflow:     'hidden',
-              }}
+              className="md:hidden nav-drawer"
             >
               <nav
                 aria-label="Mobile navigation"
