@@ -17,9 +17,10 @@ const mobileLendingManagement: CaseStudy = {
   types:        ['Mobile', 'Systems', 'White-label', 'Design System'],
   cardImpactLine:
     'A lending management app rebuilt for how people actually work today. Dynamic theming across any brand, same constraints.',
+  cardImage: '/images/work/mobile-lending.png',
 
-  // Solar-adjacent green — processed through color algorithm on the page
-  brandColorHex: '#3D8A6E',
+  // Lendmark crimson — extracted from brand image, run through color algorithm
+  brandColorHex: '#C01C2C',
 
   impact: {
     headline: '[PLACEHOLDER] What changed for the people using it',

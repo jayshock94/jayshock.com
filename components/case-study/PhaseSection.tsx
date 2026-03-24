@@ -19,25 +19,25 @@ const PHASE_VARS: Record<PhaseKey, {
   text:   string
 }> = {
   impact: {
-    bg:     'var(--phase-impact-bg)',
+    bg:     'var(--phase-impact-glass)',
     border: 'var(--phase-impact-border)',
     label:  'var(--phase-impact-label)',
     text:   'var(--phase-impact-text)',
   },
   problem: {
-    bg:     'var(--phase-problem-bg)',
+    bg:     'var(--phase-problem-glass)',
     border: 'var(--phase-problem-border)',
     label:  'var(--phase-problem-label)',
     text:   'var(--phase-problem-text)',
   },
   discovery: {
-    bg:     'var(--phase-discovery-bg)',
+    bg:     'var(--phase-discovery-glass)',
     border: 'var(--phase-discovery-border)',
     label:  'var(--phase-discovery-label)',
     text:   'var(--phase-discovery-text)',
   },
   solution: {
-    bg:     'var(--phase-solution-bg)',
+    bg:     'var(--phase-solution-glass)',
     border: 'var(--phase-solution-border)',
     label:  'var(--phase-solution-label)',
     text:   'var(--phase-solution-text)',
@@ -103,7 +103,7 @@ export default function PhaseSection({ phase, content }: PhaseSectionProps) {
                 <div
                   key={i}
                   className="
-                    bg-[rgba(255,255,255,0.55)]
+                    bg-[var(--color-stat-box-bg)]
                     border border-[var(--color-border)]
                     rounded-[8px]
                     p-[var(--space-component-md)]

@@ -5,20 +5,24 @@
 
 :root {
 
+  /* Dark is default; site supports both modes */
+  color-scheme: dark light;
+
   /* -----------------------------------------------------------
      PRIMITIVE SCALE — NEUTRAL
-     Warm neutrals — no cool greys anywhere in the system.
+     Clean neutrals — barely-warm gray scale.
+     Canvas reads as light gray, not cream.
      Never use these directly; use semantic tokens below.
   ----------------------------------------------------------- */
-  --neutral-50:  #FAF8F5;
-  --neutral-100: #F0EDE8;
-  --neutral-200: #E2DDD6;
-  --neutral-300: #C8C4BC;
-  --neutral-400: #B8B2A8;
-  --neutral-500: #9A948A;
-  --neutral-600: #7A746C;
-  --neutral-700: #5A5450;
-  --neutral-800: #3D3A36;
+  --neutral-50:  #EDEDED;
+  --neutral-100: #F5F5F4;
+  --neutral-200: #E0DFDD;
+  --neutral-300: #C6C5C3;
+  --neutral-400: #AEADAB;
+  --neutral-500: #929190;
+  --neutral-600: #646260;
+  --neutral-700: #4E4D4C;
+  --neutral-800: #323130;
   --neutral-900: #1C1917;
 
   /* -----------------------------------------------------------
@@ -34,20 +38,34 @@
 
   /* -----------------------------------------------------------
      PRIMITIVE SCALE — GLASS
-     Warm sepia tint — not Apple's cool frosted glass.
+     Four tiers, Apple-standard opacity ranges.
+     Base is barely-warm white so glass reads neutral, not cold.
+     Blur is always heavy (40px+) — that's what makes it glass.
   ----------------------------------------------------------- */
-  --glass-warm-light: rgba(245, 240, 228, 0.40);
-  --glass-warm-mid:   rgba(245, 240, 228, 0.72);
-  --glass-warm-heavy: rgba(245, 240, 228, 0.88);
-  --glass-dark:       rgba(28, 25, 23, 0.75);
-  --glass-dark-light: rgba(28, 25, 23, 0.55);
+
+  /* Light glass — over images, content surfaces */
+  --glass-ultra-thin: rgba(252, 251, 250, 0.08);
+  --glass-thin:       rgba(252, 251, 250, 0.16);
+  --glass-regular:    rgba(252, 251, 250, 0.26);
+  --glass-thick:      rgba(252, 251, 250, 0.40);
+
+  /* Dark glass — for dark-mode surfaces and smoked buttons */
+  --glass-dark-thin:    rgba(22, 22, 22, 0.16);
+  --glass-dark-regular: rgba(22, 22, 22, 0.28);
+  --glass-dark-thick:   rgba(22, 22, 22, 0.50);
+
+  /* Glass borders — the edge of glass is always brighter than the fill */
+  --glass-border-light:  rgba(255, 255, 255, 0.50);
+  --glass-border-mid:    rgba(255, 255, 255, 0.28);
+  --glass-border-subtle: rgba(255, 255, 255, 0.14);
+  --glass-border-dark:   rgba(255, 255, 255, 0.10);
 
   /* -----------------------------------------------------------
      SEMANTIC TOKENS — SURFACES
   ----------------------------------------------------------- */
   --color-canvas:           var(--neutral-50);
-  --color-surface:          var(--neutral-100);
-  --color-surface-glass:    var(--glass-warm-mid);
+  --color-surface:          #FFFFFF;
+  --color-surface-glass:    var(--glass-regular);
   --color-surface-elevated: #FFFFFF;
 
   /* -----------------------------------------------------------
@@ -77,10 +95,77 @@
 
   /* -----------------------------------------------------------
      SEMANTIC TOKENS — INTERACTIVE (BUTTONS)
+     Primary is solid ink — confident, not decorative.
   ----------------------------------------------------------- */
-  --color-button-primary: var(--glass-dark);
+  --color-button-primary: var(--neutral-900);
+  --color-button-primary-hover: var(--neutral-800);
   --color-button-text:    var(--neutral-50);
   --color-button-border:  rgba(255, 255, 255, 0.12);
+
+  /* -----------------------------------------------------------
+     SEMANTIC TOKENS — BLOOM GRADIENT
+     Used in globals.css for the body background radial gradient.
+     Swapped out in dark mode.
+  ----------------------------------------------------------- */
+  --color-bloom-center: #F5F5F4;
+  --color-bloom-mid:    #EDEDED;
+  --color-bloom-edge:   #E2E1DF;
+
+  /* -----------------------------------------------------------
+     SEMANTIC TOKENS — SURFACE INTERACTIONS
+  ----------------------------------------------------------- */
+  --color-hover-subtle: rgba(0, 0, 0, 0.04);
+
+  /* -----------------------------------------------------------
+     SEMANTIC TOKENS — SHADOWS
+     Token-driven so dark mode can swap to lighter shadows.
+  ----------------------------------------------------------- */
+  --shadow-card:       0 1px 4px rgba(28, 25, 23, 0.05);
+  --shadow-card-hover: 0 16px 48px rgba(28, 25, 23, 0.10);
+  --shadow-nav:        0 2px 24px rgba(28, 25, 23, 0.06);
+
+  /* -----------------------------------------------------------
+     SEMANTIC TOKENS — SCRIM
+     Dark overlay for image wells. Black in light and dark mode.
+  ----------------------------------------------------------- */
+  --color-scrim-heavy: rgba(0, 0, 0, 0.58);
+  --color-scrim-mid:   rgba(0, 0, 0, 0.22);
+  --color-scrim-soft:  rgba(0, 0, 0, 0.06);
+
+  /* -----------------------------------------------------------
+     SEMANTIC TOKENS — CARD GLASS
+     Base RGB values used by the brand tint algorithm.
+     Light mode blends into near-white; dark mode into surface.
+  ----------------------------------------------------------- */
+  --card-glass-base-r: 252;
+  --card-glass-base-g: 251;
+  --card-glass-base-b: 250;
+  --card-glass-opacity: 0.80;
+
+  /* -----------------------------------------------------------
+     SEMANTIC TOKENS — NAV CARD
+  ----------------------------------------------------------- */
+  --color-nav-card-bg:     var(--glass-regular);
+  --color-nav-card-border: var(--glass-border-light);
+
+  /* -----------------------------------------------------------
+     SEMANTIC TOKENS — PILL GLASS (work card CTA)
+  ----------------------------------------------------------- */
+  --color-pill-bg:       var(--glass-thin);
+  --color-pill-bg-hover: var(--glass-regular);
+
+  /* -----------------------------------------------------------
+     SEMANTIC TOKENS — BADGE (ThemeToggle)
+     Inverts automatically in dark mode via ink/canvas flip.
+  ----------------------------------------------------------- */
+  --color-badge-bg:      var(--color-ink);
+  --color-badge-fg:      var(--color-canvas);
+  --color-badge-divider: rgba(255, 255, 255, 0.20);
+
+  /* -----------------------------------------------------------
+     SEMANTIC TOKENS — STAT BOX (phase section impact metrics)
+  ----------------------------------------------------------- */
+  --color-stat-box-bg: rgba(255, 255, 255, 0.55);
 
   /* -----------------------------------------------------------
      PHASE COLOR TOKENS
@@ -90,24 +175,28 @@
 
   /* Impact — opens the case study, deepest tone */
   --phase-impact-bg:     #EAE6F5;
+  --phase-impact-glass:  rgba(234, 230, 245, 0.52);
   --phase-impact-border: #C4BAE8;
   --phase-impact-label:  #4A3A7A;
   --phase-impact-text:   #1C1917;
 
   /* Problem — context and constraints, warm neutral */
   --phase-problem-bg:     #F5F0EB;
+  --phase-problem-glass:  rgba(245, 240, 235, 0.52);
   --phase-problem-border: #DDD0C0;
   --phase-problem-label:  #8C6A50;
   --phase-problem-text:   #1C1917;
 
   /* Discovery — research and insights, cool-warm neutral */
   --phase-discovery-bg:     #EAF0EE;
+  --phase-discovery-glass:  rgba(234, 240, 238, 0.52);
   --phase-discovery-border: #BACED4;
   --phase-discovery-label:  #3A7A68;
   --phase-discovery-text:   #1C1917;
 
   /* Solution — closes with craft, brand slate */
   --phase-solution-bg:     #E8EEF4;
+  --phase-solution-glass:  rgba(232, 238, 244, 0.52);
   --phase-solution-border: #B8CCE0;
   --phase-solution-label:  #2C4A6B;
   --phase-solution-text:   #1C1917;
@@ -126,58 +215,67 @@
 
   /* -----------------------------------------------------------
      CASE STUDY OVERRIDE TOKENS
-     Set per case study via inline style on the hero wrapper.
+     Hero sets --case-*-light and --case-*-dark as inline CSS vars.
+     These tokens pick the right variant based on current mode.
      Never used outside the case study hero section.
-     Default to brand values when not overridden.
   ----------------------------------------------------------- */
-  --case-accent:  var(--color-accent);
-  --case-surface: var(--color-canvas);
-  --case-border:  var(--color-border);
-  --case-label:   var(--color-accent);
+  --case-canvas: var(--case-canvas-light, var(--color-canvas));
+  --case-label:  var(--case-label-light,  var(--color-accent));
+  --case-border: var(--case-border-light, var(--color-border));
+  --case-bg:     var(--case-bg-light,     var(--color-canvas));
 
   /* -----------------------------------------------------------
      TYPOGRAPHY TOKENS
+     Single font family: Outfit
+     Sizes use clamp() where fluid scaling applies.
   ----------------------------------------------------------- */
 
-  /* Display — homepage hero, major statements */
-  --text-display-size:        56px;
-  --text-display-weight:      400;
-  --text-display-line-height: 1.1;
-  --text-display-tracking:    0.02em;
+  /* Display — homepage hero only. Mixed-weight technique allowed at this level. */
+  --text-display-size:        clamp(48px, 7vw, 80px);
+  --text-display-weight:      700;
+  --text-display-line-height: 1.05;
+  --text-display-tracking:    -0.02em;
 
   /* H1 — page titles, case study titles */
-  --text-h1-size:             36px;
-  --text-h1-weight:           400;
-  --text-h1-line-height:      1.2;
-  --text-h1-tracking:         0.015em;
+  --text-h1-size:             clamp(32px, 5vw, 52px);
+  --text-h1-weight:           600;
+  --text-h1-line-height:      1.1;
+  --text-h1-tracking:         -0.02em;
 
   /* H2 — section headings, phase titles */
-  --text-h2-size:             26px;
-  --text-h2-weight:           400;
-  --text-h2-line-height:      1.25;
-  --text-h2-tracking:         0.01em;
+  --text-h2-size:             28px;
+  --text-h2-weight:           500;
+  --text-h2-line-height:      1.2;
+  --text-h2-tracking:         -0.01em;
 
   /* H3 — subsection headings, card titles */
-  --text-h3-size:             20px;
-  --text-h3-weight:           400;
-  --text-h3-line-height:      1.3;
-  --text-h3-tracking:         0.008em;
+  --text-h3-size:             22px;
+  --text-h3-weight:           500;
+  --text-h3-line-height:      1.25;
+  --text-h3-tracking:         -0.01em;
 
   /* H4 — minor headings, tight contexts */
-  --text-h4-size:             16px;
-  --text-h4-weight:           400;
-  --text-h4-line-height:      1.35;
-  --text-h4-tracking:         0.006em;
+  --text-h4-size:             18px;
+  --text-h4-weight:           500;
+  --text-h4-line-height:      1.3;
+  --text-h4-tracking:         0em;
 
-  /* Body large — intro paragraphs, hero body copy */
-  --text-body-lg-size:        18px;
+  /* Intro — lead paragraphs, hero sublines, section openers.
+     Sits between body-lg and H3. Use when 17px is too small
+     but the content is prose, not a heading. */
+  --text-intro-size:          20px;
+  --text-intro-weight:        300;
+  --text-intro-line-height:   1.7;
+
+  /* Body large — supporting intro copy, about page openers */
+  --text-body-lg-size:        17px;
   --text-body-lg-weight:      300;
   --text-body-lg-line-height: 1.75;
 
-  /* Body — standard body copy */
+  /* Body — standard body copy, case study content */
   --text-body-size:           15px;
   --text-body-weight:         300;
-  --text-body-line-height:    1.7;
+  --text-body-line-height:    1.8;
 
   /* Body small — secondary content, card descriptions */
   --text-body-sm-size:        13px;
@@ -196,7 +294,7 @@
   --text-ui-sm-tracking:      0.08em;
 
   /* Label — eyebrows, metadata, captions */
-  --text-label-size:          10px;
+  --text-label-size:          11px;
   --text-label-weight:        400;
   --text-label-line-height:   1.3;
   --text-label-tracking:      0.1em;
@@ -246,49 +344,126 @@
 
 /* -----------------------------------------------------------
    RESPONSIVE TYPE ADJUSTMENTS
-   Display and H1 scale down on mobile. Other levels stay fixed.
+   Display and H1 use clamp() — no media query overrides needed.
+   Body large scales slightly on mobile.
 ----------------------------------------------------------- */
 @media (max-width: 768px) {
   :root {
-    --text-display-size:    36px;
-    --text-display-tracking: 0.015em;
-    --text-h1-size:         26px;
-    --text-h1-tracking:     0.01em;
-    --text-h2-size:         22px;
-    --text-body-lg-size:    16px;
+    --text-intro-size:   17px;
+    --text-body-lg-size: 16px;
   }
 }
 
 /* -----------------------------------------------------------
    DARK MODE
-   Inverts to warm dark — not pure black.
+   Opt-in only — requires data-theme="dark" on <html>.
+   Phase 1 does not expose a toggle; this block is inert.
 ----------------------------------------------------------- */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-canvas:           #1A1816;
-    --color-surface:          #242018;
-    --color-surface-glass:    rgba(40, 35, 28, 0.85);
-    --color-surface-elevated: #2E2A24;
+html[data-theme="dark"] {
+  /* Surfaces */
+  --color-canvas:           #161616;
+  --color-surface:          #202020;
+  --color-surface-glass:    var(--glass-dark-regular);
+  --color-surface-elevated: #2A2A2A;
 
-    --color-border:        #2E2A26;
-    --color-border-mid:    #3A3630;
-    --color-border-strong: #4A4640;
+  /* Borders */
+  --color-border:        rgba(255, 255, 255, 0.10);
+  --color-border-mid:    rgba(255, 255, 255, 0.16);
+  --color-border-strong: rgba(255, 255, 255, 0.24);
 
-    --color-ink:              #F0EDE8;
-    --color-text-primary:     #F0EDE8;
-    --color-text-secondary:   #B8B2A8;
-    --color-text-muted:       #7A746C;
-    --color-text-placeholder: #5A5450;
+  /* Text */
+  --color-ink:              #F2F2F2;
+  --color-text-primary:     #F2F2F2;
+  --color-text-secondary:   #BEBEBE;
+  --color-text-muted:       #888888;
+  --color-text-placeholder: #555555;
 
-    --color-accent:        #6A94B9;
-    --color-accent-tint:   rgba(74, 116, 153, 0.15);
-    --color-accent-border: rgba(74, 116, 153, 0.30);
-    --color-accent-deep:   #8AAAC8;
+  /* Accent */
+  --color-accent:        #6A94B9;
+  --color-accent-tint:   rgba(74, 116, 153, 0.15);
+  --color-accent-border: rgba(74, 116, 153, 0.30);
+  --color-accent-deep:   #8AAAC8;
 
-    --color-button-primary: rgba(240, 237, 232, 0.12);
-    --color-button-text:    #F0EDE8;
-    --color-button-border:  rgba(255, 255, 255, 0.15);
-  }
+  /* Buttons — solid light pill in dark mode */
+  --color-button-primary:       var(--neutral-100);
+  --color-button-primary-hover: #FFFFFF;
+  --color-button-text:          var(--neutral-900);
+
+  /* Bloom gradient */
+  --color-bloom-center: #1E1E1C;
+  --color-bloom-mid:    #161616;
+  --color-bloom-edge:   #111111;
+
+  /* Surface interactions */
+  --color-hover-subtle: rgba(255, 255, 255, 0.06);
+
+  /* Shadows — lighter in dark mode */
+  --shadow-card:       0 1px 4px rgba(0, 0, 0, 0.20);
+  --shadow-card-hover: 0 16px 48px rgba(0, 0, 0, 0.36);
+  --shadow-nav:        0 2px 24px rgba(0, 0, 0, 0.24);
+
+  /* Card glass base — blends into dark surface in dark mode */
+  --card-glass-base-r: 32;
+  --card-glass-base-g: 32;
+  --card-glass-base-b: 32;
+  --card-glass-opacity: 0.85;
+
+  /* Nav card */
+  --color-nav-card-bg:     var(--glass-dark-regular);
+  --color-nav-card-border: var(--glass-border-dark);
+
+  /* Pill glass */
+  --color-pill-bg:       var(--glass-dark-thin);
+  --color-pill-bg-hover: var(--glass-dark-regular);
+
+  /* Badge — ink becomes light, canvas becomes dark → auto-inverts */
+  --color-badge-divider: rgba(0, 0, 0, 0.18);
+
+  /* Stat box */
+  --color-stat-box-bg: rgba(255, 255, 255, 0.06);
+
+  /* Case study hero tokens — dark mode picks dark variants */
+  --case-canvas: var(--case-canvas-dark, var(--color-canvas));
+  --case-label:  var(--case-label-dark,  var(--color-accent));
+  --case-border: var(--case-border-dark, var(--color-border));
+  --case-bg:     var(--case-bg-dark,     var(--color-surface));
+
+  /* Phase section tokens — dark mode */
+  /* Impact — deep purple-black */
+  --phase-impact-bg:     #1E1A28;
+  --phase-impact-glass:  rgba(30, 26, 40, 0.42);
+  --phase-impact-border: rgba(180, 160, 224, 0.18);
+  --phase-impact-label:  #B4A0E0;
+
+  /* Problem — deep warm-brown-black */
+  --phase-problem-bg:     #211D18;
+  --phase-problem-glass:  rgba(33, 29, 24, 0.42);
+  --phase-problem-border: rgba(200, 170, 140, 0.18);
+  --phase-problem-label:  #C8A880;
+
+  /* Discovery — deep teal-black */
+  --phase-discovery-bg:     #181F1E;
+  --phase-discovery-glass:  rgba(24, 31, 30, 0.42);
+  --phase-discovery-border: rgba(128, 196, 180, 0.18);
+  --phase-discovery-label:  #80C4B4;
+
+  /* Solution — deep blue-black */
+  --phase-solution-bg:     #181D25;
+  --phase-solution-glass:  rgba(24, 29, 37, 0.42);
+  --phase-solution-border: rgba(140, 174, 214, 0.18);
+  --phase-solution-label:  #80A8D4;
+
+  /* Phase ambient canvas — barely-tinted dark backgrounds */
+  --phase-impact-canvas:    #1A1822;
+  --phase-problem-canvas:   #1E1B18;
+  --phase-discovery-canvas: #161D1C;
+  --phase-solution-canvas:  #161A21;
+
+  /* Phase nav glass — dark tinted */
+  --phase-impact-nav:    rgba(26, 24, 34, 0.88);
+  --phase-problem-nav:   rgba(30, 27, 23, 0.88);
+  --phase-discovery-nav: rgba(22, 29, 28, 0.88);
+  --phase-solution-nav:  rgba(22, 26, 33, 0.88);
 }
 
 /* -----------------------------------------------------------
@@ -296,6 +471,8 @@
    Applied by PhaseObserver via data-phase on <html>.
    Canvas and nav glass shift to match the active phase.
    Typography, borders, spacing — nothing else changes.
+   Dark mode variants are scoped to html[data-theme="dark"]
+   so they take precedence over the light defaults.
 ----------------------------------------------------------- */
 [data-phase="impact"] {
   --color-canvas:        var(--phase-impact-canvas);
@@ -310,6 +487,24 @@
   --color-surface-glass: var(--phase-discovery-nav);
 }
 [data-phase="solution"] {
+  --color-canvas:        var(--phase-solution-canvas);
+  --color-surface-glass: var(--phase-solution-nav);
+}
+
+/* Dark mode phase canvas — must win over the generic [data-phase] rule above */
+html[data-theme="dark"][data-phase="impact"] {
+  --color-canvas:        var(--phase-impact-canvas);
+  --color-surface-glass: var(--phase-impact-nav);
+}
+html[data-theme="dark"][data-phase="problem"] {
+  --color-canvas:        var(--phase-problem-canvas);
+  --color-surface-glass: var(--phase-problem-nav);
+}
+html[data-theme="dark"][data-phase="discovery"] {
+  --color-canvas:        var(--phase-discovery-canvas);
+  --color-surface-glass: var(--phase-discovery-nav);
+}
+html[data-theme="dark"][data-phase="solution"] {
   --color-canvas:        var(--phase-solution-canvas);
   --color-surface-glass: var(--phase-solution-nav);
 }

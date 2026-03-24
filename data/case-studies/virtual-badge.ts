@@ -17,9 +17,10 @@ const virtualBadge: CaseStudy = {
   types:        ['Research', 'Internal Tools', 'Mobile', 'Initiative'],
   cardImpactLine:
     'Identified the problem, pitched the solution, built it. Reps went from waiting 3 weeks to selling immediately.',
+  cardImage: '/images/work/virtual-badge.png',
 
-  // Warm copper — processed through color algorithm on the page
-  brandColorHex: '#B07340',
+  // Lending Engine navy — extracted from brand image, run through color algorithm
+  brandColorHex: '#1B4B8C',
 
   impact: {
     headline: 'Reps stopped waiting. They started selling.',

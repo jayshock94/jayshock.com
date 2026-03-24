@@ -253,36 +253,27 @@ export function generateTokens(inputHex: string): ColorTokenSet {
 ### Fonts
 
 ```
-Heading font:   Fraunces (Google Fonts)
-                Variable font with optical size axis
-                Use opsz 9–144 for optical adaptation at different sizes
-                Weight: 400 throughout — let optical size carry the variation
-
-Body font:      Jost (Google Fonts)
-                Weight 300 for long reads and body copy
+Single font:    Outfit (Google Fonts)
+                Variable-weight sans-serif — humanist with geometric clarity
+                Weight 300 for body copy and long reads
                 Weight 400 for UI text, buttons, labels
-                Weight 500 for uppercase labels and strong UI emphasis
+                Weight 500 for headings H2–H4 and uppercase labels
+                Weight 600 for H1
+                Weight 700 for Display only
+                Variable: --font-outfit
 ```
 
 ### Loading
 
 ```typescript
 // app/layout.tsx
-import { Fraunces, Jost } from 'next/font/google'
+import { Outfit } from 'next/font/google'
 
-const fraunces = Fraunces({
-  subsets: ['latin'],
-  axes: ['opsz'],           // Enable optical size axis
-  weight: ['300', '400', '500'],
-  variable: '--font-fraunces',
-  display: 'swap',
-})
-
-const jost = Jost({
-  subsets: ['latin'],
-  weight: ['300', '400', '500'],
-  variable: '--font-jost',
-  display: 'swap',
+const outfit = Outfit({
+  subsets:  ['latin'],
+  weight:   ['300', '400', '500', '600', '700'],
+  variable: '--font-outfit',
+  display:  'swap',
 })
 ```
 
@@ -293,72 +284,83 @@ const jost = Jost({
 All sizes in px for reference. Always use the named token in components.
 Never hardcode a font size, weight, line height, or letter spacing value.
 
+**Weight logic:** Display is the only level at 700. Each step down sheds weight.
+This creates genuine hierarchy — not just size changes.
+
+```
+Display   700   — commanding. Homepage hero only.
+H1        600   — confident. Page titles, case study titles.
+H2        500   — clear. Section headings, phase titles.
+H3        500   — present. Subsection headings, card titles.
+H4        500   — grounded. Minor headings, tight contexts.
+Intro     300   — spacious. Lead paragraphs, hero sublines.
+Body-lg   300   — readable. Supporting intro copy.
+Body      300   — workhorse. Case study content, long reads.
+Body-sm   300   — compact. Secondary content, captions.
+UI-md     400   — functional. Buttons, nav, interactive text.
+UI-sm     500   — distinct. Uppercase labels, tags.
+Label     400   — metadata. Eyebrows, timestamps, captions.
+```
+
 ```css
-/* Display — homepage hero, major statements */
---text-display-family:      var(--font-fraunces);
---text-display-size:        56px;
---text-display-weight:      400;
---text-display-line-height: 1.1;
---text-display-tracking:    0.02em;
+/* Display — homepage hero only */
+--text-display-size:        clamp(48px, 7vw, 80px);
+--text-display-weight:      700;
+--text-display-line-height: 1.05;
+--text-display-tracking:    -0.02em;
 
 /* H1 — page titles, case study titles */
---text-h1-family:           var(--font-fraunces);
---text-h1-size:             36px;
---text-h1-weight:           400;
---text-h1-line-height:      1.2;
---text-h1-tracking:         0.015em;
+--text-h1-size:             clamp(32px, 5vw, 52px);
+--text-h1-weight:           600;
+--text-h1-line-height:      1.1;
+--text-h1-tracking:         -0.02em;
 
 /* H2 — section headings, phase titles */
---text-h2-family:           var(--font-fraunces);
---text-h2-size:             26px;
---text-h2-weight:           400;
---text-h2-line-height:      1.25;
---text-h2-tracking:         0.01em;
+--text-h2-size:             28px;
+--text-h2-weight:           500;
+--text-h2-line-height:      1.2;
+--text-h2-tracking:         -0.01em;
 
 /* H3 — subsection headings, card titles */
---text-h3-family:           var(--font-fraunces);
---text-h3-size:             20px;
---text-h3-weight:           400;
---text-h3-line-height:      1.3;
---text-h3-tracking:         0.008em;
+--text-h3-size:             22px;
+--text-h3-weight:           500;
+--text-h3-line-height:      1.25;
+--text-h3-tracking:         -0.01em;
 
 /* H4 — minor headings, tight contexts */
---text-h4-family:           var(--font-fraunces);
---text-h4-size:             16px;
---text-h4-weight:           400;
---text-h4-line-height:      1.35;
---text-h4-tracking:         0.006em;
+--text-h4-size:             18px;
+--text-h4-weight:           500;
+--text-h4-line-height:      1.3;
+--text-h4-tracking:         0em;
 
-/* Body large — intro paragraphs, hero body copy */
---text-body-lg-family:      var(--font-jost);
---text-body-lg-size:        18px;
+/* Intro — lead paragraphs, hero sublines, section openers.
+   Use when body-lg (17px) is too small but content is prose not a heading.
+   Sits between body-lg and H3. Never use for headings. */
+--text-intro-size:          20px;
+--text-intro-weight:        300;
+--text-intro-line-height:   1.7;
+
+/* Body large — supporting intro copy, about page openers */
+--text-body-lg-size:        17px;
 --text-body-lg-weight:      300;
 --text-body-lg-line-height: 1.75;
---text-body-lg-tracking:    0;
 
 /* Body — standard body copy, case study content */
---text-body-family:         var(--font-jost);
 --text-body-size:           15px;
 --text-body-weight:         300;
---text-body-line-height:    1.7;
---text-body-tracking:       0;
+--text-body-line-height:    1.8;
 
 /* Body small — secondary content, card descriptions */
---text-body-sm-family:      var(--font-jost);
 --text-body-sm-size:        13px;
 --text-body-sm-weight:      300;
 --text-body-sm-line-height: 1.65;
---text-body-sm-tracking:    0;
 
 /* UI medium — buttons, nav links, interactive text */
---text-ui-md-family:        var(--font-jost);
 --text-ui-md-size:          13px;
 --text-ui-md-weight:        400;
 --text-ui-md-line-height:   1.4;
---text-ui-md-tracking:      0;
 
 /* UI small — phase labels, tags, uppercase UI */
---text-ui-sm-family:        var(--font-jost);
 --text-ui-sm-size:          11px;
 --text-ui-sm-weight:        500;
 --text-ui-sm-line-height:   1.3;
@@ -366,8 +368,7 @@ Never hardcode a font size, weight, line height, or letter spacing value.
 --text-ui-sm-transform:     uppercase;
 
 /* Label — eyebrows, metadata, captions */
---text-label-family:        var(--font-jost);
---text-label-size:          10px;
+--text-label-size:          11px;
 --text-label-weight:        400;
 --text-label-line-height:   1.3;
 --text-label-tracking:      0.1em;
@@ -376,20 +377,45 @@ Never hardcode a font size, weight, line height, or letter spacing value.
 
 ### Responsive Type Adjustments
 
-Display and H1 scale down on mobile. All other levels stay fixed.
+Display and H1 scale via clamp — no media query needed.
+Intro and body-lg compress slightly on mobile.
 
 ```css
 @media (max-width: 768px) {
-  --text-display-size: 36px;
-  --text-display-tracking: 0.015em;
-
-  --text-h1-size: 26px;
-  --text-h1-tracking: 0.01em;
-
-  --text-h2-size: 22px;
-
+  --text-intro-size:   17px;
   --text-body-lg-size: 16px;
 }
+```
+
+---
+
+### Mixed-Weight Headline Pattern
+
+A documented technique for the display level only. Alternates weight 300 and
+weight 700 spans within a single headline to create rhythm and emphasis.
+
+**Rules:**
+- Only permitted at `text-display` size. Never at H1 or below.
+- Maximum one alternation — two segments, not four.
+- Weight 300 carries the connective or descriptive words.
+- Weight 700 carries the core statement the reader should remember.
+- Color follows the existing text token rules — no custom colors.
+- Never use this technique for a heading that will appear more than once on a page.
+
+```tsx
+// Correct — one alternation, connective words at 300, statement at 700
+<h1 className="text-display">
+  <span style={{ fontWeight: 300, color: 'var(--color-text-muted)' }}>I make </span>
+  <span style={{ fontWeight: 700, color: 'var(--color-ink)' }}>complex products </span>
+  <span style={{ fontWeight: 300, color: 'var(--color-text-muted)' }}>feel like they were always </span>
+  <span style={{ fontWeight: 700, color: 'var(--color-ink)' }}>simple.</span>
+</h1>
+
+// Wrong — used at H2 size
+<h2 className="text-h2">
+  <span style={{ fontWeight: 300 }}>How I </span>
+  <span style={{ fontWeight: 700 }}>work</span>
+</h2>
 ```
 
 ---

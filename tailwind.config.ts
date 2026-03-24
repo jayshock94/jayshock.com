@@ -29,8 +29,7 @@ const config: Config = {
         'border-strong':   'var(--color-border-strong)',
       },
       fontFamily: {
-        display: ['var(--font-fraunces)', 'Georgia', 'serif'],
-        body:    ['var(--font-jost)',     'system-ui', 'sans-serif'],
+        outfit: ['var(--font-outfit)', 'system-ui', 'sans-serif'],
       },
       maxWidth: {
         content: 'var(--space-content-max)',

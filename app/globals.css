@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /* -----------------------------------------------------------
-   BASE RESET AND FOUNDATION
+   BASE RESET
 ----------------------------------------------------------- */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -15,69 +15,147 @@ html {
   text-rendering: optimizeLegibility;
 }
 
+/* -----------------------------------------------------------
+   BACKGROUND CANVAS SYSTEM
+   Radial light bloom — page feels lit from within.
+   --bloom-y updated by BloomScroll client component.
+   background-attachment: fixed positions bloom relative
+   to viewport so it shifts subtly as the user scrolls.
+   Note: background-attachment: fixed is inert on iOS Safari.
+----------------------------------------------------------- */
 body {
   background-color: var(--color-canvas);
+  background-image: radial-gradient(
+    ellipse 90% 70% at 50% var(--bloom-y, 20%),
+    var(--color-bloom-center) 0%,
+    var(--color-bloom-mid) 45%,
+    var(--color-bloom-edge) 100%
+  );
+  background-attachment: fixed;
+  background-size: 100% 100%;
   color: var(--color-text-primary);
-  font-family: var(--font-jost), system-ui, sans-serif;
+  font-family: var(--font-outfit), system-ui, sans-serif;
   font-size: var(--text-body-size);
   font-weight: var(--text-body-weight);
   line-height: var(--text-body-line-height);
-  /* Phase canvas shift — transition on computed background-color */
+  min-height: 100vh;
   transition: background-color 0.7s ease;
+}
+
+/* Edge vignette — subtle depth at viewport perimeter */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 100% 100% at 50% 50%,
+    transparent 50%,
+    rgba(28, 25, 23, 0.04) 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* All content must sit above the vignette layer */
+body > * {
+  position: relative;
+  z-index: 1;
 }
 
 /* -----------------------------------------------------------
    GLASS TREATMENT CLASSES
    Glass is a functional signal — interactive elements only.
-   Never apply glass to non-interactive content surfaces.
 ----------------------------------------------------------- */
 
-/* Nav bar glass */
+/* -----------------------------------------------------------
+   NAV GLASS
+   Regular tier — 26% fill, 48px blur, saturated.
+   The heavy blur is what makes it read as glass.
+----------------------------------------------------------- */
 .glass-nav {
-  background: var(--color-surface-glass);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 0.5px solid rgba(0, 0, 0, 0.06);
-  transition: background 0.7s ease;
+  background:              var(--color-nav-card-bg);
+  backdrop-filter:         blur(48px) saturate(180%);
+  -webkit-backdrop-filter: blur(48px) saturate(180%);
+  border:                  0.5px solid var(--color-nav-card-border);
+  box-shadow:
+    0 2px 24px rgba(28, 25, 23, 0.06),
+    inset 0 1px 0 var(--glass-border-light);
+  transition: background 0.5s ease, box-shadow 0.5s ease;
 }
 
-/* Primary button — smoked dark glass */
+/* -----------------------------------------------------------
+   PILL GLASS
+   Thin tier — see-through frosted pill for CTAs over images.
+   Used in WorkCard and anywhere a floating pill appears.
+----------------------------------------------------------- */
+.glass-pill {
+  background:              var(--color-pill-bg);
+  backdrop-filter:         blur(40px) saturate(160%);
+  -webkit-backdrop-filter: blur(40px) saturate(160%);
+  border:                  0.5px solid var(--glass-border-light);
+  box-shadow:
+    0 2px 12px rgba(28, 25, 23, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.70);
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.glass-pill:hover {
+  background: var(--color-pill-bg-hover);
+  box-shadow:
+    0 4px 20px rgba(28, 25, 23, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.80);
+}
+
+/* -----------------------------------------------------------
+   PRIMARY BUTTON — solid dark pill, not glass
+   Confidence comes from opacity, not blur.
+----------------------------------------------------------- */
 .glass-button-primary {
   background: var(--color-button-primary);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 0.5px solid var(--color-button-border);
-  box-shadow: inset 0 0.5px 0 rgba(255, 255, 255, 0.10);
+  border: none;
   color: var(--color-button-text);
-  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.10),
+    0 1px 3px rgba(28, 25, 23, 0.20);
+  transition: all 0.2s ease;
 }
 
 .glass-button-primary:hover:not(:disabled) {
-  background: rgba(28, 25, 23, 0.88);
+  background: var(--color-button-primary-hover);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.10),
+    0 3px 10px rgba(28, 25, 23, 0.22);
 }
 
 .glass-button-primary:active:not(:disabled) {
   transform: scale(0.98);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .glass-button-primary:disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
-/* Modal and overlay glass */
+/* -----------------------------------------------------------
+   OVERLAY GLASS
+   Thick tier — modals, drawers, dropdowns.
+----------------------------------------------------------- */
 .glass-overlay {
-  background: var(--glass-warm-heavy);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background:              var(--glass-thick);
+  backdrop-filter:         blur(48px) saturate(160%);
+  -webkit-backdrop-filter: blur(48px) saturate(160%);
+  border:                  0.5px solid var(--glass-border-mid);
 }
 
 /* -----------------------------------------------------------
    TYPOGRAPHY UTILITY CLASSES
+   Single font family: Outfit throughout.
+   Weights: 300 body, 400 UI, 500 labels, 600 h4, 700 headings.
 ----------------------------------------------------------- */
 
 .text-display {
-  font-family: var(--font-fraunces), Georgia, serif;
+  font-family: var(--font-outfit), system-ui, sans-serif;
   font-size: var(--text-display-size);
   font-weight: var(--text-display-weight);
   line-height: var(--text-display-line-height);
@@ -85,7 +163,7 @@ body {
 }
 
 .text-h1 {
-  font-family: var(--font-fraunces), Georgia, serif;
+  font-family: var(--font-outfit), system-ui, sans-serif;
   font-size: var(--text-h1-size);
   font-weight: var(--text-h1-weight);
   line-height: var(--text-h1-line-height);
@@ -93,7 +171,7 @@ body {
 }
 
 .text-h2 {
-  font-family: var(--font-fraunces), Georgia, serif;
+  font-family: var(--font-outfit), system-ui, sans-serif;
   font-size: var(--text-h2-size);
   font-weight: var(--text-h2-weight);
   line-height: var(--text-h2-line-height);
@@ -101,7 +179,7 @@ body {
 }
 
 .text-h3 {
-  font-family: var(--font-fraunces), Georgia, serif;
+  font-family: var(--font-outfit), system-ui, sans-serif;
   font-size: var(--text-h3-size);
   font-weight: var(--text-h3-weight);
   line-height: var(--text-h3-line-height);
@@ -109,43 +187,50 @@ body {
 }
 
 .text-h4 {
-  font-family: var(--font-fraunces), Georgia, serif;
+  font-family: var(--font-outfit), system-ui, sans-serif;
   font-size: var(--text-h4-size);
   font-weight: var(--text-h4-weight);
   line-height: var(--text-h4-line-height);
   letter-spacing: var(--text-h4-tracking);
 }
 
+.text-intro {
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: var(--text-intro-size);
+  font-weight: var(--text-intro-weight);
+  line-height: var(--text-intro-line-height);
+}
+
 .text-body-lg {
-  font-family: var(--font-jost), system-ui, sans-serif;
+  font-family: var(--font-outfit), system-ui, sans-serif;
   font-size: var(--text-body-lg-size);
   font-weight: var(--text-body-lg-weight);
   line-height: var(--text-body-lg-line-height);
 }
 
 .text-body {
-  font-family: var(--font-jost), system-ui, sans-serif;
+  font-family: var(--font-outfit), system-ui, sans-serif;
   font-size: var(--text-body-size);
   font-weight: var(--text-body-weight);
   line-height: var(--text-body-line-height);
 }
 
 .text-body-sm {
-  font-family: var(--font-jost), system-ui, sans-serif;
+  font-family: var(--font-outfit), system-ui, sans-serif;
   font-size: var(--text-body-sm-size);
   font-weight: var(--text-body-sm-weight);
   line-height: var(--text-body-sm-line-height);
 }
 
 .text-ui-md {
-  font-family: var(--font-jost), system-ui, sans-serif;
+  font-family: var(--font-outfit), system-ui, sans-serif;
   font-size: var(--text-ui-md-size);
   font-weight: var(--text-ui-md-weight);
   line-height: var(--text-ui-md-line-height);
 }
 
 .text-ui-sm {
-  font-family: var(--font-jost), system-ui, sans-serif;
+  font-family: var(--font-outfit), system-ui, sans-serif;
   font-size: var(--text-ui-sm-size);
   font-weight: var(--text-ui-sm-weight);
   line-height: var(--text-ui-sm-line-height);
@@ -154,7 +239,7 @@ body {
 }
 
 .text-label {
-  font-family: var(--font-jost), system-ui, sans-serif;
+  font-family: var(--font-outfit), system-ui, sans-serif;
   font-size: var(--text-label-size);
   font-weight: var(--text-label-weight);
   line-height: var(--text-label-line-height);
@@ -163,7 +248,7 @@ body {
 }
 
 /* -----------------------------------------------------------
-   FOCUS STYLES — accessible, on-brand
+   FOCUS STYLES
 ----------------------------------------------------------- */
 :focus-visible {
   outline: 2px solid var(--color-accent);
@@ -177,4 +262,19 @@ body {
 ::selection {
   background: var(--color-accent-tint);
   color: var(--color-ink);
+}
+
+/* -----------------------------------------------------------
+   THEME TRANSITION
+   Applied momentarily during dark/light mode switch.
+   Smooths token-driven color changes across all elements.
+----------------------------------------------------------- */
+html.theme-transitioning,
+html.theme-transitioning *,
+html.theme-transitioning *::before,
+html.theme-transitioning *::after {
+  transition:
+    background-color 0.55s ease,
+    border-color     0.45s ease,
+    color            0.35s ease !important;
 }

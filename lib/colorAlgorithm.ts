@@ -16,6 +16,11 @@ export interface ColorTokenSet {
   text: string
   canvas: string
   nav: string
+  // Dark mode equivalents — applied when data-theme="dark"
+  darkCanvas: string
+  darkBg:     string
+  darkBorder: string
+  darkLabel:  string
 }
 
 // Design-system.md constraints
@@ -25,11 +30,19 @@ const CONSTRAINTS = {
   border: { lightness: { min: 0.82, max: 0.88 } },
   label:  { lightness: { min: 0.35, max: 0.55 } },
   canvas: { lightness: 0.965, chroma: 0.015 },
+  // Dark mode — deep tinted surfaces, bright readable labels
+  dark: {
+    canvas: { lightness: 0.13, chroma: 0.025 },
+    bg:     { lightness: 0.17, chroma: 0.040 },
+    border: { lightness: 0.32, chroma: 0.060 },
+    label:  { lightness: { min: 0.60, max: 0.80 }, chroma: 0.10 },
+  },
 } as const
 
 // WCAG targets
 const CONTRAST_AA  = 4.5
 const INK          = '#1C1917'
+const DARK_SURFACE = '#202020' // matches --color-surface in dark mode
 
 // --- Color space conversion helpers ---
 
@@ -175,12 +188,32 @@ export function generateTokens(inputHex: string): ColorTokenSet {
   const [nr, ng, nb] = hexToSRGB(navHex)
   const nav = `rgba(${Math.round(nr * 255)},${Math.round(ng * 255)},${Math.round(nb * 255)},0.80)`
 
+  // Dark mode variants — deep tinted surfaces
+  const darkCanvas = oklchToHex(CONSTRAINTS.dark.canvas.lightness, CONSTRAINTS.dark.canvas.chroma, hue)
+  const darkBg     = oklchToHex(CONSTRAINTS.dark.bg.lightness,     CONSTRAINTS.dark.bg.chroma,     hue)
+  const darkBorder = oklchToHex(CONSTRAINTS.dark.border.lightness, CONSTRAINTS.dark.border.chroma, hue)
+
+  // Dark label — start bright, check AA against dark surface, step down if needed
+  let darkLabelL   = CONSTRAINTS.dark.label.lightness.max
+  let darkLabelHex = oklchToHex(darkLabelL, CONSTRAINTS.dark.label.chroma, hue)
+  while (
+    contrastRatio(DARK_SURFACE, darkLabelHex) < CONTRAST_AA &&
+    darkLabelL >= CONSTRAINTS.dark.label.lightness.min
+  ) {
+    darkLabelL  -= 0.005
+    darkLabelHex = oklchToHex(darkLabelL, CONSTRAINTS.dark.label.chroma, hue)
+  }
+
   return {
     bg,
     border,
-    label: labelHex,
-    text:  INK,
+    label:       labelHex,
+    text:        INK,
     canvas,
     nav,
+    darkCanvas,
+    darkBg,
+    darkBorder,
+    darkLabel:   darkLabelHex,
   }
 }

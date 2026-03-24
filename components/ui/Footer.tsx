@@ -1,4 +1,5 @@
-import Link from 'next/link'
+import Link     from 'next/link'
+import LogoSVG  from '@/components/ui/LogoSVG'
 
 const NAV_LINKS = [
   { label: 'Work',       href: '/work'       },
@@ -12,7 +13,6 @@ const SOCIAL_LINKS = [
     label: 'LinkedIn',
     href:  'https://www.linkedin.com/in/jay-shock-089605156/',
   },
-  // Phase 1 placeholder — add URL before launch
   { label: 'Read.cv', href: 'https://read.cv' },
 ] as const
 
@@ -21,64 +21,99 @@ export default function Footer() {
 
   return (
     <footer
-      className="border-t border-[var(--color-border)] mt-[var(--space-section-lg)]"
+      className="mt-[var(--space-section-lg)]"
+      style={{ borderTop: '0.5px solid var(--color-border)' }}
       aria-label="Site footer"
     >
+      {/* Main row */}
       <div
         className="
           max-w-layout mx-auto
           px-[var(--space-page-margin)]
-          py-[var(--space-section-sm)]
-          flex flex-col gap-[var(--space-component-md)]
+          py-[28px]
+          flex flex-col gap-[20px]
           md:flex-row md:items-center md:justify-between
         "
       >
-        {/* Name + nav links */}
-        <div className="flex flex-col gap-[var(--space-stack-sm)] md:flex-row md:items-center md:gap-[var(--space-component-lg)]">
-          <Link
-            href="/"
-            className="text-h4 text-[var(--color-ink)] hover:opacity-70 transition-opacity duration-200"
-          >
-            Jay Shock
-          </Link>
-          <nav aria-label="Footer navigation">
-            <ul className="flex flex-wrap gap-x-[var(--space-component-md)] gap-y-[var(--space-component-sm)] list-none p-0 m-0">
-              {NAV_LINKS.map(link => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-ui-md text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors duration-200"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </div>
+        {/* Left — logo */}
+        <Link
+          href="/"
+          className="block w-[80px] text-[var(--color-ink)] hover:opacity-60 transition-opacity duration-200 shrink-0"
+          aria-label="Jay Shock — home"
+        >
+          <LogoSVG />
+        </Link>
 
-        {/* Copyright + social */}
-        <div className="flex flex-col gap-[var(--space-stack-sm)] md:flex-row md:items-center md:gap-[var(--space-component-lg)]">
-          <span className="text-body-sm text-[var(--color-text-muted)]">
-            &copy; {year}
-          </span>
-          <nav aria-label="Social links">
-            <ul className="flex gap-[var(--space-component-md)] list-none p-0 m-0">
-              {SOCIAL_LINKS.map(link => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-body-sm text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors duration-200"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </div>
+        {/* Center — nav links */}
+        <nav aria-label="Footer navigation">
+          <ul className="flex flex-wrap gap-x-[24px] gap-y-[8px] list-none p-0 m-0">
+            {NAV_LINKS.map(link => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  style={{
+                    fontFamily: 'var(--font-outfit), system-ui, sans-serif',
+                    fontSize:   '12px',
+                    fontWeight: 400,
+                    color:      'var(--color-text-muted)',
+                    textDecoration: 'none',
+                    transition: 'color 0.2s ease',
+                  }}
+                  className="hover:text-[var(--color-ink)]"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* Right — social links */}
+        <nav aria-label="Social links">
+          <ul className="flex gap-[16px] list-none p-0 m-0">
+            {SOCIAL_LINKS.map(link => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    fontFamily: 'var(--font-outfit), system-ui, sans-serif',
+                    fontSize:   '12px',
+                    fontWeight: 400,
+                    color:      'var(--color-text-muted)',
+                    textDecoration: 'none',
+                    transition: 'color 0.2s ease',
+                  }}
+                  className="hover:text-[var(--color-ink)]"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+
+      {/* Copyright row */}
+      <div
+        className="
+          max-w-layout mx-auto
+          px-[var(--space-page-margin)]
+          pb-[24px]
+          text-center
+        "
+      >
+        <span
+          style={{
+            fontFamily: 'var(--font-outfit), system-ui, sans-serif',
+            fontSize:   '11px',
+            fontWeight: 300,
+            color:      'var(--color-text-muted)',
+          }}
+        >
+          &copy; {year} Jay Shock
+        </span>
       </div>
     </footer>
   )

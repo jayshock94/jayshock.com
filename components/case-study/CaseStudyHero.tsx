@@ -1,6 +1,5 @@
 import type { CaseStudy } from '@/data/types'
 import type { ColorTokenSet } from '@/lib/colorAlgorithm'
-import Button from '@/components/ui/Button'
 
 interface CaseStudyHeroProps {
   caseStudy: CaseStudy
@@ -15,12 +14,17 @@ export default function CaseStudyHero({ caseStudy, tokens }: CaseStudyHeroProps)
       className="pt-[var(--space-section-lg)] pb-[var(--space-section-md)]"
       style={
         {
-          '--case-surface': tokens.canvas,
-          '--case-accent':  tokens.label,
-          '--case-border':  tokens.border,
-          '--case-label':   tokens.label,
-          backgroundColor:  tokens.canvas,
-          transition:       'background-color 0.7s ease',
+          // Light-mode values
+          '--case-canvas-light': tokens.canvas,
+          '--case-label-light':  tokens.label,
+          '--case-border-light': tokens.border,
+          '--case-bg-light':     tokens.bg,
+          // Dark-mode values
+          '--case-canvas-dark':  tokens.darkCanvas,
+          '--case-label-dark':   tokens.darkLabel,
+          '--case-border-dark':  tokens.darkBorder,
+          '--case-bg-dark':      tokens.darkBg,
+          backgroundColor: 'transparent',
         } as React.CSSProperties
       }
       aria-label="Case study overview"
@@ -31,7 +35,7 @@ export default function CaseStudyHero({ caseStudy, tokens }: CaseStudyHeroProps)
           {/* Eyebrow */}
           <p
             className="text-label mb-[var(--space-stack-sm)]"
-            style={{ color: tokens.label }}
+            style={{ color: 'var(--case-label)' }}
           >
             {eyebrow}
           </p>
@@ -68,9 +72,9 @@ export default function CaseStudyHero({ caseStudy, tokens }: CaseStudyHeroProps)
                   key={tag}
                   className="text-ui-sm px-[10px] py-[4px] rounded-[4px] border"
                   style={{
-                    color:       tokens.label,
-                    borderColor: tokens.border,
-                    backgroundColor: tokens.bg,
+                    color:           'var(--case-label)',
+                    borderColor:     'var(--case-border)',
+                    backgroundColor: 'var(--case-bg)',
                   }}
                 >
                   {tag}
@@ -79,14 +83,7 @@ export default function CaseStudyHero({ caseStudy, tokens }: CaseStudyHeroProps)
             </div>
           )}
 
-          {/* CTA */}
-          <div className="flex gap-[var(--space-component-md)]">
-            <Button variant="primary" href="#impact">
-              Read the case study
-            </Button>
-          </div>
-
-        </div>
+</div>
       </div>
     </section>
   )

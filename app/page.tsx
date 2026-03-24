@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import Button from '@/components/ui/Button'
-import WorkCard from '@/components/work/WorkCard'
+import Button       from '@/components/ui/Button'
+import WorkCard     from '@/components/work/WorkCard'
+import ThemeToggle  from '@/components/ui/ThemeToggle'
+import HowIWork     from '@/components/about/HowIWork'
 import { caseStudies } from '@/data/case-studies'
 
 export const metadata: Metadata = {
@@ -10,23 +12,8 @@ export const metadata: Metadata = {
     'I make complex products feel like they were always simple. 8 plus years in fintech and enterprise SaaS.',
 }
 
-// Arrow icon for about teaser link
-function ArrowRight() {
-  return (
-    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
-      <path
-        d="M2.5 6.5h8M7 3l3.5 3.5L7 10"
-        stroke="currentColor"
-        strokeWidth="1.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  )
-}
 
 export default function HomePage() {
-  // Show the first three case studies — homepage grid
   const featured = caseStudies.slice(0, 3)
 
   return (
@@ -36,45 +23,62 @@ export default function HomePage() {
           Black and white only. No phase color. No accent.
       ========================================================= */}
       <section
-        className="
-          pt-[var(--space-section-lg)]
-          pb-[var(--space-section-md)]
-        "
+        style={{
+          paddingTop:    'clamp(80px, 12vw, 140px)',
+          paddingBottom: 'clamp(60px, 8vw, 100px)',
+        }}
         aria-label="Introduction"
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
-          <div className="max-w-content">
 
-            <h1 className="text-display text-[var(--color-ink)] mb-[var(--space-stack-md)]">
-              I make complex products feel like they were always simple.
-            </h1>
-
-            <p className="text-body-lg text-[var(--color-text-secondary)] mb-[var(--space-stack-lg)]">
-              8 plus years in fintech and enterprise SaaS. I work end to end,
-              from research to ship. I care about the problem as much as the
-              pixels.
-            </p>
-
-            <div className="flex flex-wrap gap-[var(--space-component-md)]">
-              <Button variant="primary" href="/work">
-                View my work
-              </Button>
-              <Button variant="secondary" href="/api/resume" download>
-                Download resume
-              </Button>
-            </div>
-
+          {/* Brand badge — dark mode toggle */}
+          <div className="mb-[32px]">
+            <ThemeToggle />
           </div>
+
+          {/* Mixed weight headline */}
+          <h1
+            className="text-display mb-[20px]"
+            style={{ maxWidth: '900px' }}
+          >
+            <span style={{ fontWeight: 300, color: 'var(--color-text-muted)' }}>I make </span>
+            <span style={{ fontWeight: 700, color: 'var(--color-ink)' }}>complex products </span>
+            <span style={{ fontWeight: 300, color: 'var(--color-text-muted)' }}>feel like they were always </span>
+            <span style={{ fontWeight: 700, color: 'var(--color-ink)' }}>simple.</span>
+          </h1>
+
+          {/* Subline */}
+          <p
+            className="text-body-lg mb-[36px]"
+            style={{
+              color:    'var(--color-text-muted)',
+              maxWidth: '480px',
+            }}
+          >
+            Product designer with 8 plus years in fintech and enterprise SaaS.
+            I work end to end, from research to ship. I care about the problem
+            as much as the pixels.
+          </p>
+
+          {/* CTAs */}
+          <div className="flex flex-wrap gap-[12px] items-center">
+            <Button variant="primary" href="/api/resume" download>
+              Download resume
+            </Button>
+            <Button variant="secondary" href="/about">
+              More about me
+            </Button>
+          </div>
+
         </div>
       </section>
 
       {/* =========================================================
           Section 02 — Featured Work
-          Monochromatic — no color thumbnails.
       ========================================================= */}
       <section
         id="work"
-        className="py-[var(--space-section-md)]"
+        className="py-[var(--space-section-sm)]"
         aria-labelledby="work-heading"
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
@@ -86,22 +90,19 @@ export default function HomePage() {
             Selected Work
           </p>
 
-          <h2
-            id="work-heading"
-            className="sr-only"
-          >
+          <h2 id="work-heading" className="sr-only">
             Featured case studies
           </h2>
 
           <div
             className="
-              grid grid-cols-1 gap-[var(--space-component-lg)]
-              md:grid-cols-2
+              grid grid-cols-1 gap-[16px] items-stretch
+              md:grid-cols-2 md:gap-[20px]
               lg:grid-cols-3
             "
           >
             {featured.map(cs => (
-              <WorkCard key={cs.slug} caseStudy={cs} monochromatic />
+              <WorkCard key={cs.slug} caseStudy={cs} />
             ))}
           </div>
 
@@ -109,42 +110,15 @@ export default function HomePage() {
       </section>
 
       {/* =========================================================
-          Section 03 — About Teaser
+          Section 03 — How I Work
       ========================================================= */}
       <section
         className="py-[var(--space-section-md)]"
-        aria-label="About"
+        aria-label="How I work"
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
-          <div
-            className="
-              max-w-content
-              border-t border-[var(--color-border)]
-              pt-[var(--space-section-sm)]
-            "
-          >
-            <p className="text-body-lg text-[var(--color-text-secondary)] mb-[var(--space-stack-lg)]">
-              I work at the intersection of business constraints and user
-              reality. My job is to hold both until they resolve into something
-              that serves everyone. That usually means doing work nobody wants
-              to name out loud.
-            </p>
-
-            <Link
-              href="/about"
-              className="
-                inline-flex items-center gap-[var(--space-component-xs)]
-                text-ui-md text-[var(--color-text-muted)]
-                hover:text-[var(--color-ink)]
-                transition-colors duration-200
-                group
-              "
-            >
-              More about how I work
-              <span className="transition-transform duration-200 group-hover:translate-x-[2px]">
-                <ArrowRight />
-              </span>
-            </Link>
+          <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
+            <HowIWork />
           </div>
         </div>
       </section>
@@ -153,7 +127,7 @@ export default function HomePage() {
           Section 04 — Contact CTA
       ========================================================= */}
       <section
-        className="py-[var(--space-section-md)]"
+        className="py-[var(--space-section-sm)]"
         aria-label="Contact"
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
