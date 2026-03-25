@@ -13,8 +13,8 @@ interface WorkCardProps {
 export default function WorkCard({ caseStudy }: WorkCardProps) {
   const [hovered, setHovered] = useState(false)
 
-  const { slug, title, cardImage, types, brandColorHex } = caseStudy
-  const tokens = generateTokens(brandColorHex)
+  const { slug, title, cardImage, cardImpactLine, types, brandColorHex } = caseStudy
+  const { heroZone } = generateTokens(brandColorHex)
 
   return (
     <Link href={`/work/${slug}`} className="block h-full" style={{ textDecoration: 'none' }}>
@@ -25,23 +25,23 @@ export default function WorkCard({ caseStudy }: WorkCardProps) {
         style={{
           borderRadius: '16px',
           overflow:     'hidden',
-          border:       `1px solid ${hovered ? tokens.border : 'var(--color-border)'}`,
+          border:       `1px solid var(--color-border)`,
           background:   'var(--color-surface)',
           transform:    hovered ? 'translateY(-4px)' : 'translateY(0)',
           boxShadow:    hovered ? 'var(--shadow-card-hover)' : 'var(--shadow-card)',
-          transition:   'transform 0.30s cubic-bezier(0.16,1,0.3,1), box-shadow 0.30s ease, border-color 0.25s ease',
+          transition:   'transform 0.30s cubic-bezier(0.16,1,0.3,1), box-shadow 0.30s ease',
         }}
       >
 
         {/* ── Image zone ──────────────────────────────────────────────────
-            Large image area on a light brand-tinted surface.
-            The tint mirrors the case study's brand at a whisper —
-            enough to differentiate cards, not enough to fight the site palette. */}
+            heroZone background — the exact color from the case study hero.
+            Image sits on top. Bottom edge fades into the color so the
+            screenshot feels placed, not clipped. */}
         <div
           style={{
             position:   'relative',
-            height:     '280px',
-            background: tokens.bg,
+            height:     '260px',
+            background: heroZone,
             overflow:   'hidden',
           }}
         >
@@ -53,32 +53,32 @@ export default function WorkCard({ caseStudy }: WorkCardProps) {
             style={{ objectFit: 'cover', objectPosition: 'center top' }}
           />
 
-          {/* Subtle bottom fade into the brand tint surface */}
+          {/* Bottom fade into heroZone color */}
           <div
             aria-hidden="true"
             style={{
-              position:   'absolute',
-              bottom:     0,
-              left:       0,
-              right:      0,
-              height:     '80px',
-              background: `linear-gradient(to top, ${tokens.bg}, transparent)`,
+              position:      'absolute',
+              bottom:        0,
+              left:          0,
+              right:         0,
+              height:        '60px',
+              background:    `linear-gradient(to top, ${heroZone}, transparent)`,
               pointerEvents: 'none',
             }}
           />
         </div>
 
         {/* ── Text zone ───────────────────────────────────────────────────
-            Clean, neutral. Title + type tags. That's it.
-            Recruiters scanning get: what does it look like, what is it,
-            what kind of work. */}
+            Neutral surface. Title is the headline. Impact line is the hook —
+            the one sentence that makes a recruiter want to read more.
+            Tags ground the type of work. */}
         <div
           style={{
-            padding:    '20px 22px 22px',
-            display:    'flex',
+            padding:       '20px 22px 22px',
+            display:       'flex',
             flexDirection: 'column',
-            gap:        '12px',
-            flex:       1,
+            gap:           '10px',
+            flex:          1,
           }}
         >
           {/* Title */}
@@ -95,16 +95,26 @@ export default function WorkCard({ caseStudy }: WorkCardProps) {
             {title}
           </h3>
 
-          {/* Type tags — pushed to bottom */}
+          {/* Impact line — the hook */}
+          <p
+            className="text-body-sm"
+            style={{
+              color:      'var(--color-text-secondary)',
+              lineHeight: 1.55,
+            }}
+          >
+            {cardImpactLine}
+          </p>
+
+          {/* Type tags — anchored to bottom */}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: 'auto' }}>
             {types.slice(0, 3).map(tag => (
               <span
                 key={tag}
                 className="text-ui-sm"
                 style={{
-                  color:           tokens.label,
-                  border:          `1px solid ${tokens.border}`,
-                  backgroundColor: tokens.bg,
+                  color:           'var(--color-text-muted)',
+                  border:          '1px solid var(--color-border)',
                   padding:         '3px 10px',
                   borderRadius:    '4px',
                   whiteSpace:      'nowrap',
