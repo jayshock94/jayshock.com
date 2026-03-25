@@ -66,7 +66,7 @@ export default function CaseStudyHero({ caseStudy, tokens, heroImageSlot }: Case
                 {types.map(tag => (
                   <span
                     key={tag}
-                    className="text-ui-sm px-[12px] py-[5px] rounded-full"
+                    className="text-ui-sm px-[12px] py-[5px] rounded-[4px]"
                     style={{
                       color:           '#ffffff',
                       border:          '1.5px solid rgba(255,255,255,0.50)',
