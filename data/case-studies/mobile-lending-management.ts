@@ -22,6 +22,9 @@ const mobileLendingManagement: CaseStudy = {
   // Lendmark crimson — extracted from brand image, run through color algorithm
   brandColorHex: '#C01C2C',
 
+  // Hero image — composite of key screens across device mockups
+  heroImage: 'Hero: app overview — home screen, payment flow, and confirmation screen across device mockups',
+
   impact: {
     headline: 'Borrowers stopped calling. They just managed it themselves.',
     paragraphs: [
@@ -31,6 +34,14 @@ const mobileLendingManagement: CaseStudy = {
     stats: [
       { value: '5+',    label: 'Lenders on platform', estimated: false },
       { value: '~3 mo', label: 'Design to handoff',   estimated: false },
+    ],
+    images: [
+      {
+        src:     '',
+        alt:     'Final app composite — finished screens across multiple lender white-label instances showing the design working at scale',
+        caption: 'The same design system working across multiple lender brands.',
+        aspect:  'landscape',
+      },
     ],
     estimatedNote:
       'Outcomes reported qualitatively by client teams. Formal analytics weren\'t tracked at launch.',
@@ -44,6 +55,15 @@ const mobileLendingManagement: CaseStudy = {
       'I led research and design end to end. Product owners handled direct client contact. They flew out to meet lender teams. I worked closely with them to shape what to ask and what to bring back.',
       'We couldn\'t rebuild from scratch. The dev team had to work within the existing codebase, which locked certain navigation structures, payment flows, and screen locations. One lender required a full legal paragraph under the login button instead of a simple security indicator. That stayed.',
     ],
+    images: [
+      {
+        src:            '',
+        alt:            'Before: loan list showing numbered entries with no labels, due dates, or loan type context',
+        caption:        'The original loan list — borrowers had no way to tell which loan was which.',
+        aspect:         'portrait',
+        afterParagraph: 1,
+      },
+    ],
   },
 
   discovery: {
@@ -53,6 +73,15 @@ const mobileLendingManagement: CaseStudy = {
       'Borrowers weren\'t confused because features were missing. The app had everything they needed. It just didn\'t help them find it. Loan numbers meant nothing. Navigation labels didn\'t match the tasks people were actually trying to do.',
       'You can\'t always fix the UX. Sometimes the architecture is locked. But you can almost always fix how it feels, and that gap is bigger than most people expect. If restructuring the flow wasn\'t on the table, I had to absorb complexity through language, hierarchy, and visual clarity instead.',
       'The payment confirmation screen looked like a throwaway. Borrowers had real anxiety about whether a payment went through, especially people managing multiple loans. That screen wasn\'t just a confirmation. It was the moment the whole interaction either resolved or left them with doubt. Recognizing that changed how I thought about every endpoint in the app.',
+    ],
+    images: [
+      {
+        src:            '',
+        alt:            'Original payment confirmation screen — the throwaway moment that identified the need for deliberate endpoint design',
+        caption:        'The original confirmation screen. Nothing communicated that the payment actually went through.',
+        aspect:         'portrait',
+        afterParagraph: 3,
+      },
     ],
     quote: {
       text:        'I always had anxiety about whether the payment actually was submitted. That confetti screen, I know that sounds silly, but I like it a lot, because now I know I did it right.',
@@ -67,6 +96,22 @@ const mobileLendingManagement: CaseStudy = {
       'The feature people talked about most wasn\'t the payment flow. It was what happened after. A checkmark, confetti, done. Small. But it turned a moment of anxiety into a moment of confidence. The peak-end rule says people remember how an experience felt at its high point and at its close. We designed the close deliberately. That screen got more unsolicited feedback than anything else we built.',
       'I designed a contextual chatbot to help borrowers find buried features and answer common support questions. Engineering scoped it out. Too large for the current sprint. I took the problems it was solving and worked them back into navigation labels and clearer hierarchy. Not the same answer, but it covered the same ground.',
       'Engineering was a good partnership throughout. A handful of components came back for redesign, not for UX issues but for implementation scope. The existing codebase couldn\'t support certain builds without blowing past the sprint. Those went back lighter.',
+    ],
+    images: [
+      {
+        src:            '',
+        alt:            'Redesigned loan dashboard — each loan showing its name, due date, and amount owed on the home screen without any navigation required',
+        caption:        'Home screen loan dashboard. Everything a borrower needs without a single tap.',
+        aspect:         'portrait',
+        afterParagraph: 0,
+      },
+      {
+        src:            '',
+        alt:            'Payment confirmation screen — checkmark and confetti animation confirming the payment was submitted',
+        caption:        'The confetti screen. The moment that got more unsolicited feedback than anything else we shipped.',
+        aspect:         'portrait',
+        afterParagraph: 1,
+      },
     ],
   },
 

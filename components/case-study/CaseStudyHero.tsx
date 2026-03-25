@@ -7,7 +7,7 @@ interface CaseStudyHeroProps {
 }
 
 export default function CaseStudyHero({ caseStudy, tokens }: CaseStudyHeroProps) {
-  const { title, eyebrow, role, year, types, impact } = caseStudy
+  const { title, eyebrow, role, year, types, impact, heroImage } = caseStudy
 
   return (
     <section
@@ -80,6 +80,26 @@ export default function CaseStudyHero({ caseStudy, tokens }: CaseStudyHeroProps)
                   {tag}
                 </span>
               ))}
+            </div>
+          )}
+
+          {/* Hero image — full-width showcase below stats */}
+          {heroImage && (
+            <div
+              className="
+                mt-[var(--space-stack-lg)]
+                w-full rounded-[12px] border border-[var(--color-border)] overflow-hidden
+                flex items-center justify-center p-[var(--space-component-lg)]
+              "
+              style={{
+                background:  'var(--color-surface)',
+                aspectRatio: '16/9',
+              }}
+            >
+              {/* Placeholder — replace this div with <img src={heroImage} … /> when real image exists */}
+              <p className="text-body-sm text-[var(--color-text-muted)] opacity-60">
+                {heroImage}
+              </p>
             </div>
           )}
 

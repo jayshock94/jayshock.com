@@ -1,4 +1,4 @@
-import type { PhaseContent, PhaseKey } from '@/data/types'
+import type { CaseStudyImage, PhaseContent, PhaseKey } from '@/data/types'
 
 interface PhaseSectionProps {
   phase:   PhaseKey
@@ -47,7 +47,17 @@ const PHASE_VARS: Record<PhaseKey, {
 export default function PhaseSection({ phase, content }: PhaseSectionProps) {
   const vars   = PHASE_VARS[phase]
   const label  = PHASE_LABELS[phase]
-  const { headline, paragraphs, stats, quote, estimatedNote } = content
+  const { headline, paragraphs, stats, images, quote, estimatedNote } = content
+
+  // Group images by which paragraph they follow (undefined = after last paragraph)
+  const imagesByPara = (images ?? []).reduce<Record<number, CaseStudyImage[]>>(
+    (acc, img) => {
+      const key = img.afterParagraph ?? paragraphs.length - 1
+      acc[key] = [...(acc[key] ?? []), img]
+      return acc
+    },
+    {},
+  )
 
   return (
     <section
@@ -133,15 +143,50 @@ export default function PhaseSection({ phase, content }: PhaseSectionProps) {
             </div>
           )}
 
-          {/* Body paragraphs */}
+          {/* Body paragraphs — images interleaved after their target paragraph */}
           <div className="flex flex-col gap-[var(--space-stack-md)]">
             {paragraphs.map((p, i) => (
-              <p
-                key={i}
-                className="text-body text-[var(--color-text-secondary)]"
-              >
-                {p}
-              </p>
+              <>
+                <p
+                  key={`p-${i}`}
+                  className="text-body text-[var(--color-text-secondary)]"
+                >
+                  {p}
+                </p>
+
+                {/* Images that follow this paragraph */}
+                {imagesByPara[i] && (
+                  <div
+                    key={`imgs-${i}`}
+                    className={`
+                      grid gap-[var(--space-component-md)] mt-[var(--space-stack-sm)]
+                      ${imagesByPara[i].length >= 2 ? 'grid-cols-2' : 'grid-cols-1'}
+                    `}
+                  >
+                    {imagesByPara[i].map((img, j) => (
+                      <figure key={j} className="m-0">
+                        {/* Placeholder box — replace inner content with <img> when real image exists */}
+                        <div
+                          className="w-full rounded-[8px] border border-[var(--color-border)] flex items-center justify-center p-[var(--space-component-md)]"
+                          style={{
+                            background:  'var(--color-surface)',
+                            aspectRatio: img.aspect === 'landscape' ? '16/9' : '9/18',
+                          }}
+                        >
+                          <p className="text-body-sm text-[var(--color-text-muted)] text-center opacity-60">
+                            {img.alt}
+                          </p>
+                        </div>
+                        {img.caption && (
+                          <figcaption className="mt-[var(--space-stack-sm)] text-body-sm text-[var(--color-text-muted)]">
+                            {img.caption}
+                          </figcaption>
+                        )}
+                      </figure>
+                    ))}
+                  </div>
+                )}
+              </>
             ))}
           </div>
 

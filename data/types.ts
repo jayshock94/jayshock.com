@@ -12,6 +12,26 @@ export interface Stat {
   estimated?: boolean
 }
 
+export interface CaseStudyImage {
+  /** Descriptive alt text — also shown as placeholder label before real images exist. */
+  alt: string
+  /** Path relative to /public. Empty string while placeholder. */
+  src: string
+  /** Optional caption rendered below the image. */
+  caption?: string
+  /**
+   * Aspect ratio hint for the placeholder box.
+   * 'portrait'  → 9/18  (phone screenshots)
+   * 'landscape' → 16/9  (wide composites)
+   */
+  aspect?: 'portrait' | 'landscape'
+  /**
+   * Insert this image after paragraph N (0-indexed).
+   * If omitted, image renders after all paragraphs.
+   */
+  afterParagraph?: number
+}
+
 export interface PhaseContent {
   /** Section headline — under 10 words, plain language. */
   headline: string
@@ -19,6 +39,8 @@ export interface PhaseContent {
   paragraphs: string[]
   /** Impact phase only: stat blocks. */
   stats?: Stat[]
+  /** Optional images — can be placed after specific paragraphs via afterParagraph. */
+  images?: CaseStudyImage[]
   /** Optional pull-quote for Discovery phase. */
   quote?: {
     text: string
@@ -53,6 +75,11 @@ export interface CaseStudy {
    * Never used directly; only used as algorithm input.
    */
   brandColorHex: string
+  /**
+   * Optional hero image shown below the impact stats in the case study header.
+   * Path relative to /public. Omit until real image exists.
+   */
+  heroImage?: string
   /** Phase content — always in Impact → Problem → Discovery → Solution order. */
   impact:     PhaseContent
   problem:    PhaseContent
