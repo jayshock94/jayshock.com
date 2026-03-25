@@ -2,74 +2,84 @@ import Image from 'next/image'
 
 /**
  * Hero image for the Mobile Lending Management case study.
- * Shows three white-label instances of the same app — Lendmark, Heights Finance, Sheffield —
- * demonstrating the "same codebase, different brands" story at a glance.
+ *
+ * Three screens, one journey: dashboard → payment review → confirmation.
+ * Center phone (account overview) is the redesign's key moment — loan name,
+ * balance, and actions visible without a single tap.
  */
 export default function MobileLendingHeroImage() {
-  const PHONE_RADIUS = '18px'
-
-  const sidePhone: React.CSSProperties = {
-    position:     'relative',
-    width:        '108px',
-    height:       '233px',
-    borderRadius: PHONE_RADIUS,
-    overflow:     'hidden',
-    flexShrink:   0,
-    alignSelf:    'center',
-    boxShadow:    'var(--shadow-card)',
-  }
-
-  const centerPhone: React.CSSProperties = {
-    position:     'relative',
-    width:        '130px',
-    height:       '281px',
-    borderRadius: PHONE_RADIUS,
-    overflow:     'hidden',
-    flexShrink:   0,
-    boxShadow:    'var(--shadow-card-hover)',
-  }
-
   return (
     <div
       style={{
-        width:           '100%',
-        height:          '100%',
-        display:         'flex',
-        alignItems:      'center',
-        justifyContent:  'center',
-        gap:             'var(--space-component-md)',
+        width:          '100%',
+        height:         '100%',
+        display:        'flex',
+        alignItems:     'flex-end',
+        justifyContent: 'center',
+        gap:            'var(--space-component-md)',
         backgroundColor: 'var(--color-canvas)',
+        padding:        '0 var(--space-component-lg)',
       }}
     >
-      {/* Heights Finance — left */}
-      <div style={sidePhone}>
+      {/* Review payment — left */}
+      <div
+        style={{
+          position:     'relative',
+          width:        '118px',
+          height:       '255px',
+          borderRadius: '18px 18px 0 0',
+          overflow:     'hidden',
+          flexShrink:   0,
+          boxShadow:    'var(--shadow-card)',
+        }}
+      >
         <Image
-          src="/images/mobile/Heights.png"
-          alt="Heights Finance — white-label instance"
+          src="/images/mobile/Account details-2.png"
+          alt="Review payment screen"
           fill
-          sizes="108px"
+          sizes="118px"
           style={{ objectFit: 'cover', objectPosition: 'top' }}
         />
       </div>
 
-      {/* Lendmark — center, featured */}
-      <div style={centerPhone}>
+      {/* Account overview — center, featured */}
+      <div
+        style={{
+          position:     'relative',
+          width:        '148px',
+          height:       '330px',
+          borderRadius: '18px 18px 0 0',
+          overflow:     'hidden',
+          flexShrink:   0,
+          boxShadow:    'var(--shadow-card-hover)',
+        }}
+      >
         <Image
-          src="/images/mobile/Lendmark.png"
-          alt="Lendmark Financial Services — white-label instance"
+          src="/images/mobile/Lendmark account overview.png"
+          alt="Loan dashboard — account overview"
           fill
-          sizes="130px"
+          sizes="148px"
           style={{ objectFit: 'cover', objectPosition: 'top' }}
         />
       </div>
 
-      {/* Sheffield Financial — right */}
-      <div style={sidePhone}>
+      {/* Payment confirmation — right */}
+      <div
+        style={{
+          position:     'relative',
+          width:        '118px',
+          height:       '255px',
+          borderRadius: '18px 18px 0 0',
+          overflow:     'hidden',
+          flexShrink:   0,
+          boxShadow:    'var(--shadow-card)',
+        }}
+      >
         <Image
-          src="/images/mobile/Sheffield.png"
-          alt="Sheffield Financial — white-label instance"
+          src="/images/mobile/Account details-5.png"
+          alt="Payment submitted successfully"
           fill
-          sizes="108px"
+          sizes="118px"
           style={{ objectFit: 'cover', objectPosition: 'top' }}
         />
       </div>
