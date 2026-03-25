@@ -16,8 +16,9 @@ export default function MobileLendingCardImage() {
         justifyContent: 'center',
         width:          '100%',
         height:         '100%',
-        paddingTop:     '24px',
-        paddingBottom:  '12px',
+        paddingTop:     '40px',
+        paddingBottom:  '-20px',
+        marginBottom:   '-28px',
       }}
     >
       {/* Back phone — payment success */}
