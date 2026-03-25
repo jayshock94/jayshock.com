@@ -29,11 +29,6 @@ export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
   const tokens = generateTokens(brandColorHex)
   const [r, g, b] = hexToRGB(tokens.heroZone)
 
-  // Glass version of heroZone — brand color at reduced opacity,
-  // card surface bleeds through like the phase toggle buttons.
-  const heroGlass = `rgba(${r},${g},${b},0.55)`
-  const heroGlassDeep = `rgba(${r},${g},${b},0.70)`
-
   return (
     <Link href={`/work/${slug}`} className="block h-full" style={{ textDecoration: 'none' }}>
       <article
@@ -52,44 +47,74 @@ export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
       >
 
         {/* ── Image zone ──────────────────────────────────────────────────
-            Glass treatment — heroZone at reduced opacity so the card
-            surface shows through. Brand color reads as a tint, not a
-            solid block. Gradient adds depth from top to bottom. */}
+            Dark glass base with the brand color as an ambient glow from
+            below — like the glassmorphism icons. The product color feels
+            like it's illuminating the surface from behind. */}
         <div
           style={{
             position:   'relative',
             height:     '280px',
-            background: `linear-gradient(to bottom, ${heroGlass}, ${heroGlassDeep})`,
+            background: 'var(--color-ink)',
             overflow:   'hidden',
           }}
         >
-          {cardImageSlot ? (
-            cardImageSlot
-          ) : (
-            <>
-              <Image
-                src={cardImage}
-                alt={title}
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                style={{ objectFit: 'cover', objectPosition: 'center top' }}
-              />
+          {/* Brand color glow — radial from bottom center */}
+          <div
+            aria-hidden="true"
+            style={{
+              position:      'absolute',
+              inset:         0,
+              background:    `radial-gradient(ellipse 80% 70% at 50% 100%, rgba(${r},${g},${b},0.35) 0%, transparent 70%)`,
+              pointerEvents: 'none',
+              zIndex:        0,
+            }}
+          />
 
-              {/* Bottom fade into glass color */}
-              <div
-                aria-hidden="true"
-                style={{
-                  position:      'absolute',
-                  bottom:        0,
-                  left:          0,
-                  right:         0,
-                  height:        '60px',
-                  background:    `linear-gradient(to top, ${heroGlassDeep}, transparent)`,
-                  pointerEvents: 'none',
-                }}
-              />
-            </>
-          )}
+          {/* Subtle top highlight — glass reflection */}
+          <div
+            aria-hidden="true"
+            style={{
+              position:      'absolute',
+              top:           0,
+              left:          0,
+              right:         0,
+              height:        '1px',
+              background:    `rgba(255,255,255,0.08)`,
+              pointerEvents: 'none',
+              zIndex:        3,
+            }}
+          />
+
+          {/* Content — image slot or static image */}
+          <div style={{ position: 'relative', width: '100%', height: '100%', zIndex: 1 }}>
+            {cardImageSlot ? (
+              cardImageSlot
+            ) : (
+              <>
+                <Image
+                  src={cardImage}
+                  alt={title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  style={{ objectFit: 'cover', objectPosition: 'center top' }}
+                />
+
+                {/* Bottom fade into dark base */}
+                <div
+                  aria-hidden="true"
+                  style={{
+                    position:      'absolute',
+                    bottom:        0,
+                    left:          0,
+                    right:         0,
+                    height:        '80px',
+                    background:    `linear-gradient(to top, rgba(${r},${g},${b},0.30), transparent)`,
+                    pointerEvents: 'none',
+                  }}
+                />
+              </>
+            )}
+          </div>
         </div>
 
         {/* ── Text zone ─────────────────────────────────────────────────── */}
