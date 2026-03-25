@@ -14,7 +14,7 @@ export default function WorkCard({ caseStudy }: WorkCardProps) {
   const [hovered, setHovered] = useState(false)
 
   const { slug, title, cardImage, cardImpactLine, types, brandColorHex } = caseStudy
-  const { heroZone } = generateTokens(brandColorHex)
+  const tokens = generateTokens(brandColorHex)
 
   return (
     <Link href={`/work/${slug}`} className="block h-full" style={{ textDecoration: 'none' }}>
@@ -25,11 +25,11 @@ export default function WorkCard({ caseStudy }: WorkCardProps) {
         style={{
           borderRadius: '16px',
           overflow:     'hidden',
-          border:       `1px solid var(--color-border)`,
+          border:       `1.5px solid ${hovered ? tokens.border : 'var(--color-border)'}`,
           background:   'var(--color-surface)',
-          transform:    hovered ? 'translateY(-4px)' : 'translateY(0)',
+          transform:    hovered ? 'translateY(-5px)' : 'translateY(0)',
           boxShadow:    hovered ? 'var(--shadow-card-hover)' : 'var(--shadow-card)',
-          transition:   'transform 0.30s cubic-bezier(0.16,1,0.3,1), box-shadow 0.30s ease',
+          transition:   'transform 0.30s cubic-bezier(0.16,1,0.3,1), box-shadow 0.30s ease, border-color 0.25s ease',
         }}
       >
 
@@ -41,7 +41,7 @@ export default function WorkCard({ caseStudy }: WorkCardProps) {
           style={{
             position:   'relative',
             height:     '260px',
-            background: heroZone,
+            background: tokens.heroZone,
             overflow:   'hidden',
           }}
         >
@@ -62,7 +62,7 @@ export default function WorkCard({ caseStudy }: WorkCardProps) {
               left:          0,
               right:         0,
               height:        '60px',
-              background:    `linear-gradient(to top, ${heroZone}, transparent)`,
+              background:    `linear-gradient(to top, ${tokens.heroZone}, transparent)`,
               pointerEvents: 'none',
             }}
           />
