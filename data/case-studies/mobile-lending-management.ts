@@ -31,12 +31,7 @@ const mobileLendingManagement: CaseStudy = {
   impact: {
     headline: 'Borrowers stopped calling. They just managed it themselves.',
     paragraphs: [
-      'Borrowers were figuring things out on their own. That hadn\'t happened with the old system. Client teams reported fewer missed payments, less pressure on support lines, and borrowers coming back for second loans.',
-      'GAC is a white-label loan management platform used by lenders across the US. Borrowers use it to make payments, set up autopay, manage documents, and track loans across powersports, auto, home, and personal lending.',
-    ],
-    stats: [
-      { value: '5+',    label: 'Lenders on platform', estimated: false },
-      { value: '~3 mo', label: 'Design to handoff',   estimated: false },
+      'Client teams reported fewer missed payments, less pressure on support lines, and borrowers coming back for second loans. That hadn\'t happened with the old system.',
     ],
     images: [
       {
