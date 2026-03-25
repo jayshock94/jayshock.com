@@ -2,84 +2,94 @@ import Image from 'next/image'
 
 /**
  * Hero image for the Mobile Lending Management case study.
- *
- * Three screens, one journey: dashboard → payment review → confirmation.
- * Center phone (account overview) is the redesign's key moment — loan name,
- * balance, and actions visible without a single tap.
+ * Three screens from the core borrower journey — angled and layered
+ * so the dashboard dominates while the flow reads left to right.
  */
 export default function MobileLendingHeroImage() {
   return (
     <div
       style={{
-        width:          '100%',
-        height:         '100%',
-        display:        'flex',
-        alignItems:     'flex-end',
+        width:    '100%',
+        height:   '100%',
+        display:  'flex',
+        alignItems: 'flex-end',
         justifyContent: 'center',
-        gap:            'var(--space-component-md)',
-        backgroundColor: 'var(--color-canvas)',
-        padding:        '0 var(--space-component-lg)',
+        overflow: 'hidden',
+        // Brand-tinted radial glow up from the bottom — depth without hardcoded color
+        background: `
+          radial-gradient(ellipse 80% 60% at 50% 110%, var(--case-bg) 0%, transparent 70%),
+          var(--color-canvas)
+        `,
       }}
     >
-      {/* Review payment — left */}
+      {/* Review payment — left, angled in */}
       <div
         style={{
-          position:     'relative',
-          width:        '118px',
-          height:       '255px',
+          position:  'relative',
+          width:     '128px',
+          height:    '260px',
+          flexShrink: 0,
           borderRadius: '18px 18px 0 0',
-          overflow:     'hidden',
-          flexShrink:   0,
-          boxShadow:    'var(--shadow-card)',
+          overflow:  'hidden',
+          marginRight: '-18px',
+          transform: 'perspective(700px) rotateY(18deg) translateY(12px)',
+          transformOrigin: 'right center',
+          boxShadow: '-8px 16px 48px rgba(0,0,0,0.18)',
+          zIndex:    1,
         }}
       >
         <Image
           src="/images/mobile/Account details-2.png"
           alt="Review payment screen"
           fill
-          sizes="118px"
+          sizes="128px"
           style={{ objectFit: 'cover', objectPosition: 'top' }}
         />
       </div>
 
-      {/* Account overview — center, featured */}
+      {/* Account overview — center, dominant */}
       <div
         style={{
           position:     'relative',
-          width:        '148px',
-          height:       '330px',
+          width:        '158px',
+          height:       '340px',
+          flexShrink:   0,
           borderRadius: '18px 18px 0 0',
           overflow:     'hidden',
-          flexShrink:   0,
-          boxShadow:    'var(--shadow-card-hover)',
+          boxShadow:    '0 24px 80px rgba(0,0,0,0.22)',
+          zIndex:       3,
         }}
       >
         <Image
           src="/images/mobile/Lendmark account overview.png"
           alt="Loan dashboard — account overview"
           fill
-          sizes="148px"
+          sizes="158px"
           style={{ objectFit: 'cover', objectPosition: 'top' }}
         />
       </div>
 
-      {/* Payment confirmation — right */}
+      {/* Payment confirmation — right, angled in */}
       <div
         style={{
-          position:     'relative',
-          width:        '118px',
-          height:       '255px',
+          position:  'relative',
+          width:     '128px',
+          height:    '260px',
+          flexShrink: 0,
           borderRadius: '18px 18px 0 0',
-          overflow:     'hidden',
-          flexShrink:   0,
-          boxShadow:    'var(--shadow-card)',
+          overflow:  'hidden',
+          marginLeft: '-18px',
+          transform: 'perspective(700px) rotateY(-18deg) translateY(12px)',
+          transformOrigin: 'left center',
+          boxShadow: '8px 16px 48px rgba(0,0,0,0.18)',
+          zIndex:    1,
         }}
       >
         <Image
           src="/images/mobile/Account details-5.png"
           alt="Payment submitted successfully"
           fill
-          sizes="118px"
+          sizes="128px"
           style={{ objectFit: 'cover', objectPosition: 'top' }}
         />
       </div>
