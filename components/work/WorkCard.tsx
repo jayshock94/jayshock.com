@@ -47,30 +47,44 @@ export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
       >
 
         {/* ── Image zone ──────────────────────────────────────────────────
-            Dark glass base with the brand color as an ambient glow from
-            below — like the glassmorphism icons. The product color feels
-            like it's illuminating the surface from behind. */}
+            Brand color as the surface with glassmorphism depth:
+            - Solid heroZone base
+            - Lighter radial highlight from top center (glass reflection)
+            - Darker vignette at edges for depth
+            - Subtle top edge highlight */}
         <div
           style={{
             position:   'relative',
             height:     '280px',
-            background: 'var(--color-ink)',
+            background: tokens.heroZone,
             overflow:   'hidden',
           }}
         >
-          {/* Brand color glow — radial from bottom center */}
+          {/* Glass highlight — lighter wash from top center */}
           <div
             aria-hidden="true"
             style={{
               position:      'absolute',
               inset:         0,
-              background:    `radial-gradient(ellipse 80% 70% at 50% 100%, rgba(${r},${g},${b},0.35) 0%, transparent 70%)`,
+              background:    'radial-gradient(ellipse 90% 60% at 50% 0%, rgba(255,255,255,0.15) 0%, transparent 60%)',
               pointerEvents: 'none',
               zIndex:        0,
             }}
           />
 
-          {/* Subtle top highlight — glass reflection */}
+          {/* Depth vignette — darker at edges */}
+          <div
+            aria-hidden="true"
+            style={{
+              position:      'absolute',
+              inset:         0,
+              background:    'radial-gradient(ellipse 70% 60% at 50% 40%, transparent 30%, rgba(0,0,0,0.18) 100%)',
+              pointerEvents: 'none',
+              zIndex:        0,
+            }}
+          />
+
+          {/* Top edge highlight — glass reflection line */}
           <div
             aria-hidden="true"
             style={{
@@ -79,13 +93,13 @@ export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
               left:          0,
               right:         0,
               height:        '1px',
-              background:    `rgba(255,255,255,0.08)`,
+              background:    'rgba(255,255,255,0.20)',
               pointerEvents: 'none',
               zIndex:        3,
             }}
           />
 
-          {/* Content — image slot or static image */}
+          {/* Content */}
           <div style={{ position: 'relative', width: '100%', height: '100%', zIndex: 1 }}>
             {cardImageSlot ? (
               cardImageSlot
@@ -99,7 +113,7 @@ export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
                   style={{ objectFit: 'cover', objectPosition: 'center top' }}
                 />
 
-                {/* Bottom fade into dark base */}
+                {/* Bottom fade into brand color */}
                 <div
                   aria-hidden="true"
                   style={{
@@ -108,7 +122,7 @@ export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
                     left:          0,
                     right:         0,
                     height:        '80px',
-                    background:    `linear-gradient(to top, rgba(${r},${g},${b},0.30), transparent)`,
+                    background:    `linear-gradient(to top, ${tokens.heroZone}, transparent)`,
                     pointerEvents: 'none',
                   }}
                 />
