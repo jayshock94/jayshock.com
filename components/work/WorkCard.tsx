@@ -33,35 +33,54 @@ export default function WorkCard({ caseStudy }: WorkCardProps) {
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         style={{
-          borderRadius:  '20px',
-          overflow:      'hidden',
-          border:        `1px solid rgba(${r},${g},${b},${hovered ? 0.22 : 0.10})`,
-          transform:     hovered ? 'translateY(-5px)' : 'translateY(0)',
-          boxShadow:     hovered ? 'var(--shadow-card-hover)' : 'var(--shadow-card)',
-          transition:    'transform 0.30s cubic-bezier(0.16,1,0.3,1), box-shadow 0.30s ease, border-color 0.25s ease',
+          borderRadius: '20px',
+          overflow:     'hidden',
+          border:       `1px solid rgba(${r},${g},${b},${hovered ? 0.22 : 0.10})`,
+          transform:    hovered ? 'translateY(-5px)' : 'translateY(0)',
+          boxShadow:    hovered ? 'var(--shadow-card-hover)' : 'var(--shadow-card)',
+          transition:   'transform 0.30s cubic-bezier(0.16,1,0.3,1), box-shadow 0.30s ease, border-color 0.25s ease',
         }}
       >
 
-        {/* ── Zone 1: Hero color band ─────────────────────────────────────
-            Mirrors the case study hero: same heroZone color, white title,
-            white chips. When the user clicks, this color expands to fill
-            the entire hero section — the visual bridge. */}
+        {/* ── Zone 1: App screenshot (top) ──────────────────────────────────
+            Image fills the top of the card. The bottom edge is masked out
+            so it dissolves into the heroZone color below — no hard seam. */}
         <div
           style={{
+            position:        'relative',
+            height:          '210px',
+            overflow:        'hidden',
+            WebkitMaskImage: 'linear-gradient(to top, transparent 0%, black 38%)',
+            maskImage:       'linear-gradient(to top, transparent 0%, black 38%)',
+          }}
+        >
+          <Image
+            src={cardImage}
+            alt={title}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            style={{ objectFit: 'cover', objectPosition: 'center top' }}
+          />
+        </div>
+
+        {/* ── Zone 2: Hero color band (bottom) ─────────────────────────────
+            Same heroZone color as the case study hero. White text, same
+            chips. The image above dissolves into this color. When the user
+            clicks, this color expands to fill the hero section. */}
+        <div
+          className="flex flex-col flex-1"
+          style={{
             background:    heroZone,
-            padding:       '22px 22px 20px',
-            display:       'flex',
-            flexDirection: 'column',
-            minHeight:     '210px',
+            padding:       '18px 22px 22px',
           }}
         >
           {/* Eyebrow + year */}
           <div
             style={{
-              display:         'flex',
-              justifyContent:  'space-between',
-              alignItems:      'baseline',
-              marginBottom:    '10px',
+              display:        'flex',
+              justifyContent: 'space-between',
+              alignItems:     'baseline',
+              marginBottom:   '8px',
             }}
           >
             <p className="text-label" style={{ color: 'rgba(255,255,255,0.60)' }}>
@@ -72,111 +91,76 @@ export default function WorkCard({ caseStudy }: WorkCardProps) {
             </p>
           </div>
 
-          {/* Title — white, prominent, grows to fill available space */}
+          {/* Title */}
           <h3
             style={{
               color:         '#ffffff',
               fontFamily:    'var(--font-outfit), system-ui, sans-serif',
-              fontSize:      '20px',
+              fontSize:      '19px',
               fontWeight:    700,
               lineHeight:    1.28,
               letterSpacing: '-0.01em',
-              flex:          1,
-              marginBottom:  '0',
+              marginBottom:  '10px',
             }}
           >
             {title}
           </h3>
 
-          {/* Type chips — same style as case study hero chips */}
-          {types.length > 0 && (
-            <div
-              style={{
-                display:   'flex',
-                flexWrap:  'wrap',
-                gap:       '6px',
-                marginTop: '16px',
-              }}
-            >
-              {types.slice(0, 3).map(tag => (
+          {/* Impact line */}
+          <p
+            className="text-body-sm"
+            style={{
+              color:        'rgba(255,255,255,0.70)',
+              lineHeight:   1.60,
+              flex:         1,
+              marginBottom: '14px',
+            }}
+          >
+            {cardImpactLine}
+          </p>
+
+          {/* Bottom row: chips left, view project right */}
+          <div
+            style={{
+              display:        'flex',
+              alignItems:     'center',
+              justifyContent: 'space-between',
+              gap:            '8px',
+            }}
+          >
+            {/* Type chips */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>
+              {types.slice(0, 2).map(tag => (
                 <span
                   key={tag}
                   className="text-ui-sm"
                   style={{
                     color:           '#ffffff',
-                    border:          '1.5px solid rgba(255,255,255,0.38)',
-                    backgroundColor: 'rgba(255,255,255,0.12)',
-                    padding:         '4px 10px',
+                    border:          '1.5px solid rgba(255,255,255,0.35)',
+                    backgroundColor: 'rgba(255,255,255,0.10)',
+                    padding:         '3px 9px',
                     borderRadius:    '4px',
+                    whiteSpace:      'nowrap',
                   }}
                 >
                   {tag}
                 </span>
               ))}
             </div>
-          )}
-        </div>
 
-        {/* ── Zone 2: App preview + content ───────────────────────────────
-            Canvas-colored surface. The cardImage fades in from the top
-            via CSS mask, blending naturally into the canvas. Impact line
-            and role/view-project below. */}
-        <div
-          className="flex flex-col flex-1"
-          style={{ background: 'var(--color-canvas)' }}
-        >
-          {/* App screenshot — masked at top to dissolve into canvas */}
-          <div
-            style={{
-              position:             'relative',
-              height:               '170px',
-              overflow:             'hidden',
-              WebkitMaskImage:      'linear-gradient(to bottom, transparent 0%, black 32%)',
-              maskImage:            'linear-gradient(to bottom, transparent 0%, black 32%)',
-            }}
-          >
-            <Image
-              src={cardImage}
-              alt={title}
-              fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              style={{ objectFit: 'cover', objectPosition: 'center top' }}
-            />
-          </div>
-
-          {/* Impact line + meta */}
-          <div style={{ padding: '0 22px 22px', marginTop: '-8px' }}>
-            <p
-              className="text-body-sm"
+            {/* View project */}
+            <span
+              className="text-label"
               style={{
-                color:        'var(--color-text-muted)',
-                lineHeight:   1.65,
-                marginBottom: '16px',
+                color:      'rgba(255,255,255,0.70)',
+                whiteSpace: 'nowrap',
+                flexShrink: 0,
+                transition: 'color 0.20s ease',
+                opacity:    hovered ? 1 : 0.70,
               }}
             >
-              {cardImpactLine}
-            </p>
-
-            <div
-              style={{
-                display:        'flex',
-                alignItems:     'center',
-                justifyContent: 'space-between',
-              }}
-            >
-              <span className="text-label" style={{ color: 'var(--color-text-muted)' }}>
-                {role}
-              </span>
-              <span
-                className="text-label"
-                style={{
-                  color:      hovered ? heroZone : 'var(--color-text-muted)',
-                  transition: 'color 0.20s ease',
-                }}
-              >
-                View project →
-              </span>
-            </div>
+              View project →
+            </span>
           </div>
         </div>
 
