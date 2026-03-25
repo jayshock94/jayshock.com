@@ -7,8 +7,6 @@ import CaseStudyHero       from '@/components/case-study/CaseStudyHero'
 import PhaseSection        from '@/components/case-study/PhaseSection'
 import PhaseObserver       from '@/components/case-study/PhaseObserver'
 import EraserReveal        from '@/components/case-study/EraserReveal'
-import LegacyLoanApp       from '@/components/case-study/LegacyLoanApp'
-import RedesignedLoanApp   from '@/components/case-study/RedesignedLoanApp'
 import WorkCard            from '@/components/work/WorkCard'
 import Button              from '@/components/ui/Button'
 
@@ -52,8 +50,24 @@ export default function CaseStudyPage({ params }: PageProps) {
             content={cs.problem}
             mediaSlot={
               <EraserReveal
-                legacy={<LegacyLoanApp />}
-                updated={<RedesignedLoanApp />}
+                legacy={
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src="/images/mobile/gac%20legacy.png"
+                    alt="Legacy GoldPoint loan management app before the redesign"
+                    draggable={false}
+                    style={{ width: '100%', height: 'auto', display: 'block' }}
+                  />
+                }
+                updated={
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src="/images/mobile/gac%20new.png"
+                    alt="Redesigned Lendmark loan management app"
+                    draggable={false}
+                    style={{ width: '100%', height: 'auto', display: 'block' }}
+                  />
+                }
               />
             }
             mediaSlotAfterParagraph={1}
