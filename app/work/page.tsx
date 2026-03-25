@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import WorkCard from '@/components/work/WorkCard'
+import MobileLendingCardImage from '@/components/work/MobileLendingCardImage'
 import { caseStudies } from '@/data/case-studies'
 
 export const metadata: Metadata = {
@@ -35,7 +36,11 @@ export default function WorkPage() {
           "
         >
           {caseStudies.map(cs => (
-            <WorkCard key={cs.slug} caseStudy={cs} />
+            <WorkCard
+              key={cs.slug}
+              caseStudy={cs}
+              cardImageSlot={cs.slug === 'mobile-lending-management' ? <MobileLendingCardImage /> : undefined}
+            />
           ))}
         </div>
 

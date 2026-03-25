@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Button        from '@/components/ui/Button'
 import WorkCard      from '@/components/work/WorkCard'
+import MobileLendingCardImage from '@/components/work/MobileLendingCardImage'
 import ThemeToggle   from '@/components/ui/ThemeToggle'
 import HowIWork      from '@/components/about/HowIWork'
 import ScrollReveal  from '@/components/ui/ScrollReveal'
@@ -127,7 +128,10 @@ export default function HomePage() {
           >
             {featured.map((cs, i) => (
               <ScrollReveal key={cs.slug} delay={i * 120} className="h-full">
-                <WorkCard caseStudy={cs} />
+                <WorkCard
+                  caseStudy={cs}
+                  cardImageSlot={cs.slug === 'mobile-lending-management' ? <MobileLendingCardImage /> : undefined}
+                />
               </ScrollReveal>
             ))}
           </div>

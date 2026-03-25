@@ -17,7 +17,7 @@ const mobileLendingManagement: CaseStudy = {
   types:        ['Mobile', 'White-label', 'Research', 'End to End'],
   cardImpactLine:
     'Borrowers stopped calling. The architecture was locked. The experience didn\'t have to be.',
-  cardImage: '/images/mobile/Lendmark account overview.png',
+  cardImage: '/images/work/mobile-lending.png',
 
   // Lendmark crimson — extracted from brand image, run through color algorithm
   brandColorHex: '#C01C2C',

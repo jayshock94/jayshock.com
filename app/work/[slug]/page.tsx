@@ -9,6 +9,7 @@ import PhaseObserver       from '@/components/case-study/PhaseObserver'
 import EraserReveal           from '@/components/case-study/EraserReveal'
 import MobileLendingHeroImage from '@/components/case-study/MobileLendingHeroImage'
 import WorkCard            from '@/components/work/WorkCard'
+import MobileLendingCardImage from '@/components/work/MobileLendingCardImage'
 import Button              from '@/components/ui/Button'
 
 interface PageProps {
@@ -92,7 +93,10 @@ export default function CaseStudyPage({ params }: PageProps) {
 
           {nextCS && (
             <div className="max-w-[480px] mb-[var(--space-section-sm)]">
-              <WorkCard caseStudy={nextCS} />
+              <WorkCard
+                caseStudy={nextCS}
+                cardImageSlot={nextCS.slug === 'mobile-lending-management' ? <MobileLendingCardImage /> : undefined}
+              />
             </div>
           )}
 
