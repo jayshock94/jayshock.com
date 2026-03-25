@@ -50,7 +50,7 @@ const mobileLendingManagement: CaseStudy = {
   problem: {
     headline: 'The product hadn\'t been updated in years. Clients were noticing.',
     paragraphs: [
-      'Lenders were starting to look at other platforms. The app hadn\'t been updated in years and the gap had become a retention problem. I led research and design end to end, working through product owners who had direct client contact with lender teams.',
+      'The app hadn\'t been updated in years. Lenders were starting to look elsewhere. I led research and design end to end, working through product owners who had direct client contact with lender teams.',
       'Loans were listed by number with no label or context. A borrower with three loans had no idea which was the car and which was the house. Autopay was buried. Due dates were there, but the layout made it hard to take anything in at a glance.',
       'We couldn\'t rebuild from scratch. Engineering had too much on their plate to commit time and resources to sweeping changes.',
     ],
