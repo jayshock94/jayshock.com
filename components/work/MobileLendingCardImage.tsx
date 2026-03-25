@@ -1,9 +1,10 @@
 import Image from 'next/image'
+import PaymentSuccessAnimation from '@/components/case-study/PaymentSuccessAnimation'
 
 /**
- * Static two-phone composition for the mobile-lending WorkCard.
- * Mirrors the hero layout (payment screen + loan dashboard)
- * but at card scale and without animation.
+ * Two-phone composition for the mobile-lending WorkCard.
+ * Account details (front) + Payment success (behind).
+ * Matches the hero layout style at card scale.
  */
 export default function MobileLendingCardImage() {
   return (
@@ -15,42 +16,31 @@ export default function MobileLendingCardImage() {
         justifyContent: 'center',
         width:          '100%',
         height:         '100%',
-        paddingTop:     '32px',
-        paddingBottom:  '16px',
+        paddingTop:     '24px',
+        paddingBottom:  '12px',
       }}
     >
-      {/* Secondary phone — payment confirmation, slightly behind */}
+      {/* Back phone — payment success */}
       <div
         style={{
           position:     'relative',
-          width:        '120px',
-          height:       '260px',
-          borderRadius: '20px',
-          overflow:     'hidden',
-          flexShrink:   0,
-          marginRight:  '-16px',
-          marginBottom: '12px',
+          marginRight:  '-18px',
+          marginBottom: '16px',
           transform:    'rotate(-4deg)',
-          boxShadow:    '0 16px 48px rgba(0,0,0,0.30), 0 0 0 1px rgba(255,255,255,0.10)',
           zIndex:       1,
+          flexShrink:   0,
         }}
       >
-        <Image
-          src="/images/mobile/Lendmark.png"
-          alt="Payment confirmation screen"
-          fill
-          sizes="120px"
-          style={{ objectFit: 'cover', objectPosition: 'top' }}
-        />
+        <PaymentSuccessAnimation />
       </div>
 
-      {/* Main phone — loan dashboard, dominant, front */}
+      {/* Front phone — account details */}
       <div
         style={{
           position:     'relative',
-          width:        '130px',
-          height:       '280px',
-          borderRadius: '20px',
+          width:        '140px',
+          height:       '300px',
+          borderRadius: '22px',
           overflow:     'hidden',
           flexShrink:   0,
           transform:    'rotate(2deg)',
@@ -59,10 +49,10 @@ export default function MobileLendingCardImage() {
         }}
       >
         <Image
-          src="/images/mobile/Lendmark account overview.png"
-          alt="Loan dashboard — account overview"
+          src="/images/mobile/Account details.png"
+          alt="Account details — loan dashboard with balance and payment options"
           fill
-          sizes="130px"
+          sizes="140px"
           style={{ objectFit: 'cover', objectPosition: 'top' }}
         />
       </div>
