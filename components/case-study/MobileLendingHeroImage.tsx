@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import PaymentSuccessAnimation from './PaymentSuccessAnimation'
 
 export default function MobileLendingHeroImage() {
   return (
@@ -14,29 +15,18 @@ export default function MobileLendingHeroImage() {
         overflow:       'visible',
       }}
     >
-      {/* Secondary phone — review payment, slightly behind and offset */}
+      {/* Secondary phone — animated payment flow */}
       <div
         style={{
           position:     'relative',
-          width:        '130px',
-          height:       '281px',
-          borderRadius: '24px',
-          overflow:     'hidden',
-          flexShrink:   0,
           marginRight:  '-24px',
           marginBottom: '40px',
           transform:    'rotate(-4deg)',
-          boxShadow:    '0 20px 60px rgba(0,0,0,0.35)',
           zIndex:       1,
+          flexShrink:   0,
         }}
       >
-        <Image
-          src="/images/mobile/Account details-2.png"
-          alt="Review payment screen"
-          fill
-          sizes="130px"
-          style={{ objectFit: 'cover', objectPosition: 'top' }}
-        />
+        <PaymentSuccessAnimation />
       </div>
 
       {/* Main phone — loan dashboard, dominant, front */}
