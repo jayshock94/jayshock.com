@@ -49,6 +49,7 @@ export default function CaseStudyPage({ params }: PageProps) {
             phase="problem"
             content={cs.problem}
             mediaSlot={
+              <div className="max-w-[320px] mx-auto">
               <EraserReveal
                 legacy={
                   // eslint-disable-next-line @next/next/no-img-element
@@ -69,6 +70,7 @@ export default function CaseStudyPage({ params }: PageProps) {
                   />
                 }
               />
+              </div>
             }
             mediaSlotAfterParagraph={1}
           />
