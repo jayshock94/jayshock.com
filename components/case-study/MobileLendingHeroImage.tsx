@@ -15,8 +15,9 @@ export default function MobileLendingHeroImage() {
         overflow:       'visible',
       }}
     >
-      {/* Secondary phone — animated payment flow */}
+      {/* Secondary phone — animated payment flow (desktop only) */}
       <div
+        className="hidden md:block"
         style={{
           position:     'relative',
           marginRight:  '-24px',

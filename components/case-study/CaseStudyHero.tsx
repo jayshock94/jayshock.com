@@ -8,7 +8,7 @@ interface CaseStudyHeroProps {
 }
 
 export default function CaseStudyHero({ caseStudy, tokens, heroImageSlot }: CaseStudyHeroProps) {
-  const { title, eyebrow, role, year, types, impact, overview, context } = caseStudy
+  const { title, role, year, types, impact, overview, context } = caseStudy
 
   return (
     <>
@@ -29,14 +29,6 @@ export default function CaseStudyHero({ caseStudy, tokens, heroImageSlot }: Case
         >
           {/* Left — text */}
           <div>
-            {/* Eyebrow */}
-            <p
-              className="text-label mb-[var(--space-stack-sm)]"
-              style={{ color: 'rgba(255,255,255,0.80)' }}
-            >
-              {eyebrow}
-            </p>
-
             {/* Title */}
             <h1
               className="text-h1 mb-[var(--space-stack-md)]"
@@ -78,15 +70,13 @@ export default function CaseStudyHero({ caseStudy, tokens, heroImageSlot }: Case
             )}
           </div>
 
-          {/* Right — hero image slot (hidden on mobile, shown md+) */}
+          {/* Right — hero image slot */}
           {heroImageSlot && (
             <div
-              className="hidden md:flex"
+              className="flex min-h-[300px] md:min-h-[420px]"
               style={{
                 justifyContent: 'center',
                 alignItems:     'flex-end',
-                height:         '100%',
-                minHeight:      '420px',
                 overflow:       'visible',
               }}
             >
