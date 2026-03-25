@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 
 interface Circle {
   id: number
@@ -12,47 +12,23 @@ interface EraserRevealProps {
   legacy:       React.ReactNode
   updated:      React.ReactNode
   brushRadius?: number
-  resetDelay?:  number
 }
 
 const MIN_MOVE_DIST = 6
 const MAX_CIRCLES   = 300
-const FADE_MS       = 400
 
 export default function EraserReveal({
   legacy,
   updated,
   brushRadius = 44,
-  resetDelay  = 2000,
 }: EraserRevealProps) {
   const [circles,     setCircles]     = useState<Circle[]>([])
-  const [isResetting, setIsResetting] = useState(false)
   const [hintVisible, setHintVisible] = useState(true)
 
   const containerRef = useRef<HTMLDivElement>(null)
-  const timerA       = useRef<ReturnType<typeof setTimeout> | null>(null) // idle → fade out
-  const timerB       = useRef<ReturnType<typeof setTimeout> | null>(null) // fade out → clear + fade in
   const lastPos      = useRef<{ x: number; y: number } | null>(null)
   const idCounter    = useRef(0)
   const maskId       = useRef(`eraser-mask-${Math.random().toString(36).slice(2, 8)}`)
-
-  const clearTimers = useCallback(() => {
-    if (timerA.current) { clearTimeout(timerA.current); timerA.current = null }
-    if (timerB.current) { clearTimeout(timerB.current); timerB.current = null }
-  }, [])
-
-  const scheduleReset = useCallback(() => {
-    clearTimers()
-    timerA.current = setTimeout(() => {
-      setIsResetting(true)
-      // After fade completes, clear circles and snap back
-      timerB.current = setTimeout(() => {
-        lastPos.current = null
-        setCircles([])
-        setIsResetting(false)
-      }, FADE_MS + 50)
-    }, resetDelay)
-  }, [clearTimers, resetDelay])
 
   const getLocalPos = useCallback((clientX: number, clientY: number) => {
     const rect = containerRef.current?.getBoundingClientRect()
@@ -71,22 +47,14 @@ export default function EraserReveal({
     }
     lastPos.current = pos
 
-    clearTimers()
     if (hintVisible) setHintVisible(false)
-    // Cancel any in-progress reset
-    setIsResetting(false)
 
     setCircles(prev => {
       if (prev.length >= MAX_CIRCLES) return prev
       return [...prev, { id: idCounter.current++, x: pos.x, y: pos.y }]
     })
-    scheduleReset()
-  }, [getLocalPos, clearTimers, scheduleReset, hintVisible])
+  }, [getLocalPos, hintVisible])
 
-  // ─── ALL pointer events on the container, not the masked layer ───────────────
-  // The masked layer has transparent holes where erasing has happened — pointer
-  // events fall through those holes to the layer below, causing the "freezing"
-  // bug. Listening on the container guarantees we always get events.
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
     addCircle(e.clientX, e.clientY)
   }, [addCircle])
@@ -96,7 +64,13 @@ export default function EraserReveal({
     addCircle(e.touches[0].clientX, e.touches[0].clientY)
   }, [addCircle])
 
-  useEffect(() => () => clearTimers(), [clearTimers])
+  const handleReset = useCallback(() => {
+    lastPos.current = null
+    setCircles([])
+    setHintVisible(true)
+  }, [])
+
+  const hasErased = circles.length > 0
 
   return (
     <div
@@ -109,7 +83,7 @@ export default function EraserReveal({
       onTouchMove={handleTouchMove}
       onTouchStart={handleTouchMove}
     >
-      {/* SVG mask defs — fills container so local coordinates match mouse positions */}
+      {/* SVG mask defs */}
       <svg
         aria-hidden="true"
         focusable={false}
@@ -127,33 +101,31 @@ export default function EraserReveal({
         <defs>
           <mask id={maskId.current} maskUnits="userSpaceOnUse">
             <rect width="9999" height="9999" fill="white" />
-            {!isResetting && circles.map(c => (
+            {circles.map(c => (
               <circle key={c.id} cx={c.x} cy={c.y} r={brushRadius} fill="black" />
             ))}
           </mask>
         </defs>
       </svg>
 
-      {/* New design — bottom layer, always visible */}
+      {/* New design — bottom layer */}
       <div aria-label="Redesigned app">
         {updated}
       </div>
 
-      {/* Legacy design — top layer, erased via SVG mask */}
+      {/* Legacy design — top layer */}
       <div
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
         style={{
           mask:       `url(#${maskId.current})`,
           WebkitMask: `url(#${maskId.current})`,
-          opacity:    isResetting ? 0 : 1,
-          transition: isResetting ? `opacity ${FADE_MS}ms ease` : 'none',
         }}
       >
         {legacy}
       </div>
 
-      {/* Hint badge */}
+      {/* Hint badge — visible until first scratch */}
       <div
         aria-hidden="true"
         className="absolute inset-x-0 bottom-0 flex justify-center pointer-events-none transition-opacity duration-500"
@@ -179,6 +151,28 @@ export default function EraserReveal({
           <span>Scratch to reveal the redesign</span>
         </div>
       </div>
+
+      {/* Reset button — appears once erasing starts */}
+      {hasErased && (
+        <button
+          type="button"
+          onClick={handleReset}
+          className="absolute top-[var(--space-component-md)] right-[var(--space-component-md)] text-body-sm rounded-full transition-opacity duration-200 hover:opacity-80"
+          style={{
+            padding:             '6px 14px',
+            background:          'rgba(28,25,23,0.72)',
+            color:               'white',
+            backdropFilter:      'blur(8px)',
+            WebkitBackdropFilter:'blur(8px)',
+            border:              'none',
+            cursor:              'pointer',
+            zIndex:              10,
+          }}
+          aria-label="Reset to original design"
+        >
+          Reset
+        </button>
+      )}
     </div>
   )
 }
