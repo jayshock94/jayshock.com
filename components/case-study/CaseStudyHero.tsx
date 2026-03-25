@@ -34,7 +34,7 @@ export default function CaseStudyHero({ caseStudy, tokens, heroImageSlot }: Case
             {/* Eyebrow */}
             <p
               className="text-label mb-[var(--space-stack-sm)]"
-              style={{ color: 'rgba(255,255,255,0.65)' }}
+              style={{ color: 'rgba(255,255,255,0.80)' }}
             >
               {eyebrow}
             </p>
@@ -51,11 +51,11 @@ export default function CaseStudyHero({ caseStudy, tokens, heroImageSlot }: Case
             <div
               className="flex flex-wrap gap-x-[var(--space-component-lg)] gap-y-[var(--space-component-xs)] mb-[var(--space-stack-lg)]"
             >
-              <span className="text-body-sm" style={{ color: 'rgba(255,255,255,0.80)' }}>
+              <span className="text-body-sm" style={{ color: 'rgba(255,255,255,0.92)' }}>
                 {role}
               </span>
-              <span className="text-body-sm" style={{ color: 'rgba(255,255,255,0.45)' }} aria-hidden="true">·</span>
-              <span className="text-body-sm" style={{ color: 'rgba(255,255,255,0.55)' }}>
+              <span className="text-body-sm" style={{ color: 'rgba(255,255,255,0.50)' }} aria-hidden="true">·</span>
+              <span className="text-body-sm" style={{ color: 'rgba(255,255,255,0.75)' }}>
                 {year}
               </span>
             </div>
@@ -66,11 +66,11 @@ export default function CaseStudyHero({ caseStudy, tokens, heroImageSlot }: Case
                 {types.map(tag => (
                   <span
                     key={tag}
-                    className="text-ui-sm px-[10px] py-[4px] rounded-[4px]"
+                    className="text-ui-sm px-[12px] py-[5px] rounded-full"
                     style={{
-                      color:           'rgba(255,255,255,0.80)',
-                      border:          '1px solid rgba(255,255,255,0.25)',
-                      backgroundColor: 'rgba(255,255,255,0.10)',
+                      color:           '#ffffff',
+                      border:          '1.5px solid rgba(255,255,255,0.50)',
+                      backgroundColor: 'rgba(255,255,255,0.14)',
                     }}
                   >
                     {tag}
