@@ -1,18 +1,17 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 /**
  * Animated payment flow for the Mobile Lending Management hero.
  *
- * Sequence:
+ * Plays once on mount:
  *   1. Review payment screen (idle)
- *   2. Submit button press animation
- *   3. Fade to success screen
- *   4. Confetti bursts from checkmark
- *   5. Hold on success screen → loop after 6s
+ *   2. Submit button press at 900ms
+ *   3. Fade to success screen at 1400ms + confetti burst
+ *   4. Stays on success screen permanently
  *
- * Designed at 440px (Figma spec) and scaled down to 130×281px display size.
+ * Designed at 440px (Figma spec) and scaled to 130×281px display size.
  */
 
 // ── Constants ──────────────────────────────────────────────────────────────
@@ -20,14 +19,15 @@ import { useEffect, useRef, useState } from 'react'
 const DESIGN_W = 440
 const DISP_W   = 130
 const DISP_H   = 281
-const SCALE    = DISP_W / DESIGN_W  // 0.2955
+const SCALE    = DISP_W / DESIGN_W        // 0.2955
+const DESIGN_H = Math.round(DISP_H / SCALE) // 951
 
-// Lendmark design tokens (from Figma)
+// Lendmark design tokens
 const RED     = '#a50011'
 const RED_DIM = '#7a0008'
 const SURFACE = '#fff8f7'
 const INK     = '#291715'
-const MUTED   = '#5e3f3c'
+const MUTED   = '#6b4c49'
 const SUBTLE  = '#534341'
 
 // ── Types ──────────────────────────────────────────────────────────────────
@@ -86,21 +86,21 @@ function StatusBar() {
       <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
         {/* Signal */}
         <svg width="17" height="12" viewBox="0 0 17 12" fill={INK}>
-          <rect x="0"   y="8" width="3" height="4" rx="0.5" />
-          <rect x="4.5" y="5" width="3" height="7" rx="0.5" />
-          <rect x="9"   y="2" width="3" height="10" rx="0.5" />
+          <rect x="0"    y="8" width="3" height="4"  rx="0.5" />
+          <rect x="4.5"  y="5" width="3" height="7"  rx="0.5" />
+          <rect x="9"    y="2" width="3" height="10" rx="0.5" />
           <rect x="13.5" y="0" width="3" height="12" rx="0.5" opacity="0.3" />
         </svg>
-        {/* Wifi */}
+        {/* WiFi */}
         <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
           <circle cx="8" cy="11" r="1.2" fill={INK} />
           <path d="M4.8 7.8a4.5 4.5 0 0 1 6.4 0" stroke={INK} strokeWidth="1.4" strokeLinecap="round" />
-          <path d="M2 5a8 8 0 0 1 12 0" stroke={INK} strokeWidth="1.4" strokeLinecap="round" opacity="0.5" />
+          <path d="M2 5a8 8 0 0 1 12 0"          stroke={INK} strokeWidth="1.4" strokeLinecap="round" opacity="0.5" />
         </svg>
         {/* Battery */}
         <svg width="25" height="12" viewBox="0 0 25 12" fill="none">
-          <rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke={INK} strokeOpacity="0.35" />
-          <rect x="2" y="2" width="17.5" height="8" rx="2" fill={INK} />
+          <rect x="0.5" y="0.5" width="21"   height="11" rx="3.5" stroke={INK} strokeOpacity="0.35" />
+          <rect x="2"   y="2"   width="17.5" height="8"  rx="2"   fill={INK} />
           <path d="M23 4.5v3" stroke={INK} strokeWidth="1.5" strokeLinecap="round" strokeOpacity="0.4" />
         </svg>
       </div>
@@ -108,14 +108,24 @@ function StatusBar() {
   )
 }
 
-const DETAIL_ROWS: [string, string][] = [
-  ['Pay to',           '2021 Jeep Rubicon 1234'],
-  ['Pay from',         'Card ending in 1234'],
-  ['When',             'One time'],
-  ['Payment date',     '01/28/2025'],
-  ['Min. payment',     '$500.38'],
-  ['Processing fee',   '$5.00'],
-]
+// ── Row helpers ────────────────────────────────────────────────────────────
+
+const ROW_LABEL: React.CSSProperties = {
+  fontFamily:    'system-ui, sans-serif',
+  fontSize:      13,
+  color:         MUTED,
+  letterSpacing: '0.3px',
+  marginBottom:  3,
+}
+const ROW_VALUE: React.CSSProperties = {
+  fontFamily: 'system-ui, sans-serif',
+  fontSize:   17,
+  color:      INK,
+}
+const ROW_DIVIDER: React.CSSProperties = {
+  borderBottom: `1px solid rgba(41,23,21,0.10)`,
+  padding:      '16px 0',
+}
 
 // ── Main component ─────────────────────────────────────────────────────────
 
@@ -132,20 +142,12 @@ export default function PaymentSuccessAnimation() {
       timers.push(t)
     }
 
-    function run() {
-      setPhase('idle')
-      setConfetti([])
-      after(() => setPhase('pressing'), 900)
-      after(() => {
-        setPhase('success')
-        // Checkmark is at ~30% height in display coords
-        setConfetti(makeConfetti(DISP_W / 2, DISP_H * 0.30))
-      }, 1400)
-      // Loop: hold on success then replay
-      after(run, 1400 + 6000)
-    }
-
-    after(run, 700)
+    // Play once — idle → pressing → success (stays)
+    after(() => setPhase('pressing'), 900)
+    after(() => {
+      setPhase('success')
+      setConfetti(makeConfetti(DISP_W / 2, DISP_H * 0.32))
+    }, 1400)
 
     return () => {
       alive = false
@@ -177,26 +179,27 @@ export default function PaymentSuccessAnimation() {
           <div
             key={p.id}
             style={{
-              '--cdx':          p.dx,
-              '--cdy':          p.dy,
-              '--cdr':          p.rot,
-              position:         'absolute',
-              left:             p.x,
-              top:              p.y,
-              width:            p.w,
-              height:           p.h,
-              borderRadius:     1,
-              backgroundColor:  p.color,
-              animation:        `confettiFly ${p.dur}ms ease-out ${p.delay}ms both`,
-              zIndex:           10,
-              pointerEvents:    'none',
+              '--cdx':         p.dx,
+              '--cdy':         p.dy,
+              '--cdr':         p.rot,
+              position:        'absolute',
+              left:            p.x,
+              top:             p.y,
+              width:           p.w,
+              height:          p.h,
+              borderRadius:    1,
+              backgroundColor: p.color,
+              animation:       `confettiFly ${p.dur}ms ease-out ${p.delay}ms both`,
+              zIndex:          10,
+              pointerEvents:   'none',
             } as React.CSSProperties}
           />
         ))}
 
-        {/* ── Scaled design canvas (440px → 130px) ── */}
+        {/* ── Scaled design canvas (440×951px → 130×281px) ── */}
         <div style={{
           width:           DESIGN_W,
+          height:          DESIGN_H,
           position:        'absolute',
           top:             0,
           left:            0,
@@ -207,7 +210,7 @@ export default function PaymentSuccessAnimation() {
           {/* ── Review payment screen ── */}
           <div style={{
             width:         DESIGN_W,
-            height:        DESIGN_W / SCALE,
+            height:        DESIGN_H,
             background:    SURFACE,
             display:       'flex',
             flexDirection: 'column',
@@ -226,14 +229,14 @@ export default function PaymentSuccessAnimation() {
                   <path d="M15 18l-6-6 6-6" stroke={INK} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
-              <span style={{ fontFamily: 'system-ui', fontSize: 22, color: INK }}>
+              <span style={{ fontFamily: 'system-ui, sans-serif', fontSize: 22, color: INK }}>
                 Review payment
               </span>
             </div>
 
-            {/* Payment amount */}
-            <div style={{ textAlign: 'center', padding: '16px 44px 24px' }}>
-              <div style={{ fontFamily: 'system-ui', fontSize: 14, color: INK, marginBottom: 8, letterSpacing: '0.25px' }}>
+            {/* Payment amount — centered */}
+            <div style={{ textAlign: 'center', padding: '20px 44px 28px' }}>
+              <div style={{ fontFamily: 'system-ui, sans-serif', fontSize: 14, color: INK, marginBottom: 6, letterSpacing: '0.25px' }}>
                 Payment amount
               </div>
               <div style={{ fontFamily: 'Georgia, serif', fontSize: 57, color: RED, lineHeight: '64px', letterSpacing: '-0.25px' }}>
@@ -241,46 +244,64 @@ export default function PaymentSuccessAnimation() {
               </div>
             </div>
 
-            {/* Detail rows */}
+            {/* Detail rows — stacked label / value */}
             <div style={{ padding: '0 44px', flex: 1, display: 'flex', flexDirection: 'column' }}>
-              {DETAIL_ROWS.map(([label, value]) => (
-                <div
-                  key={label}
-                  style={{
-                    display:       'flex',
-                    justifyContent:'space-between',
-                    alignItems:    'center',
-                    padding:       '14px 0',
-                    borderBottom:  '1px solid rgba(41,23,21,0.10)',
-                  }}
-                >
-                  <span style={{ fontFamily: 'system-ui', fontSize: 12, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.5px', fontWeight: 500 }}>
-                    {label}
-                  </span>
-                  <span style={{ fontFamily: 'system-ui', fontSize: 16, color: INK }}>
-                    {value}
-                  </span>
+
+              <div style={ROW_DIVIDER}>
+                <div style={ROW_LABEL}>Pay to</div>
+                <div style={ROW_VALUE}>2021 Jeep Rubicon 1234</div>
+              </div>
+
+              <div style={ROW_DIVIDER}>
+                <div style={ROW_LABEL}>Pay from</div>
+                <div style={ROW_VALUE}>Card ending in 1234</div>
+              </div>
+
+              <div style={ROW_DIVIDER}>
+                <div style={ROW_LABEL}>When</div>
+                <div style={ROW_VALUE}>One time</div>
+              </div>
+
+              {/* Payment date — date left, "Earliest" right on value row */}
+              <div style={ROW_DIVIDER}>
+                <div style={ROW_LABEL}>Payment date</div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={ROW_VALUE}>01/28/2025</span>
+                  <span style={ROW_VALUE}>Earliest</span>
                 </div>
-              ))}
+              </div>
+
+              {/* Payment type — label then two sub-rows with amounts */}
+              <div style={ROW_DIVIDER}>
+                <div style={ROW_LABEL}>Payment type</div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
+                  <span style={ROW_VALUE}>Minimum payment</span>
+                  <span style={ROW_VALUE}>$500.38</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={ROW_VALUE}>Card processing fee</span>
+                  <span style={ROW_VALUE}>$5.00</span>
+                </div>
+              </div>
 
               <div style={{ flex: 1 }} />
 
               {/* Submit button */}
-              <div style={{ paddingBottom: 48 }}>
+              <div style={{ paddingBottom: 52 }}>
                 <div style={{
-                  height:          56,
-                  borderRadius:    100,
-                  background:      phase === 'pressing' ? RED_DIM : RED,
-                  display:         'flex',
-                  alignItems:      'center',
-                  justifyContent:  'center',
-                  color:           '#ffffff',
-                  fontFamily:      'system-ui',
-                  fontSize:        14,
-                  fontWeight:      500,
-                  letterSpacing:   '0.1px',
-                  transform:       phase === 'pressing' ? 'scale(0.97)' : 'scale(1)',
-                  transition:      'transform 150ms ease, background 150ms ease',
+                  height:         56,
+                  borderRadius:   100,
+                  background:     phase === 'pressing' ? RED_DIM : RED,
+                  display:        'flex',
+                  alignItems:     'center',
+                  justifyContent: 'center',
+                  color:          '#ffffff',
+                  fontFamily:     'system-ui, sans-serif',
+                  fontSize:       15,
+                  fontWeight:     500,
+                  letterSpacing:  '0.1px',
+                  transform:      phase === 'pressing' ? 'scale(0.97)' : 'scale(1)',
+                  transition:     'transform 150ms ease, background 150ms ease',
                 }}>
                   Submit payment
                 </div>
@@ -291,7 +312,7 @@ export default function PaymentSuccessAnimation() {
           {/* ── Success screen ── */}
           <div style={{
             width:          DESIGN_W,
-            height:         DESIGN_W / SCALE,
+            height:         DESIGN_H,
             background:     SURFACE,
             display:        'flex',
             flexDirection:  'column',
@@ -302,74 +323,109 @@ export default function PaymentSuccessAnimation() {
             opacity:        phase === 'success' ? 1 : 0,
             transition:     'opacity 300ms ease',
           }}>
-            {/* Status bar */}
             <div style={{ position: 'absolute', top: 0, left: 0, right: 0 }}>
               <StatusBar />
             </div>
 
-            {/* Content — centered */}
+            {/* Content — centered vertically */}
             <div style={{
-              flex:          1,
-              display:       'flex',
-              flexDirection: 'column',
-              alignItems:    'center',
-              justifyContent:'center',
-              padding:       '0 44px',
-              paddingTop:    54 + 32,
-              width:         '100%',
+              flex:           1,
+              display:        'flex',
+              flexDirection:  'column',
+              alignItems:     'center',
+              justifyContent: 'center',
+              padding:        '0 44px',
+              paddingTop:     54 + 40,
+              width:          '100%',
             }}>
-              {/* Checkmark */}
-              <div style={{
-                width:           86,
-                height:          86,
-                borderRadius:    '50%',
-                background:      'rgba(165,0,17,0.10)',
-                display:         'flex',
-                alignItems:      'center',
-                justifyContent:  'center',
-                marginBottom:    16,
-              }}>
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                  <circle cx="24" cy="24" r="21" stroke={RED} strokeWidth="2.5" />
-                  <path d="M14 24.5l7 7 13-14.5" stroke={RED} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+              {/* Checkmark — stroke only, no background fill */}
+              <div style={{ marginBottom: 18 }}>
+                <svg width="96" height="96" viewBox="0 0 96 96" fill="none">
+                  <circle cx="48" cy="48" r="40" stroke={RED} strokeWidth="4.5" />
+                  <path d="M29 49l13 13 25-28" stroke={RED} strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
 
-              <div style={{ fontFamily: 'Georgia, serif', fontSize: 24, color: INK, textAlign: 'center', marginBottom: 6 }}>
+              <div style={{
+                fontFamily:   'Georgia, serif',
+                fontSize:     24,
+                color:        INK,
+                textAlign:    'center',
+                marginBottom: 8,
+              }}>
                 Submitted successfully
               </div>
 
-              <div style={{ fontFamily: 'Georgia, serif', fontSize: 57, color: RED, lineHeight: '64px', letterSpacing: '-0.25px', textAlign: 'center', marginBottom: 16 }}>
+              <div style={{
+                fontFamily:    'Georgia, serif',
+                fontSize:      57,
+                color:         RED,
+                lineHeight:    '64px',
+                letterSpacing: '-0.25px',
+                textAlign:     'center',
+                marginBottom:  18,
+              }}>
                 $505.38
               </div>
 
-              <div style={{ fontFamily: 'system-ui', fontSize: 22, color: INK, textAlign: 'center', marginBottom: 6 }}>
+              <div style={{
+                fontFamily:   'system-ui, sans-serif',
+                fontSize:     22,
+                fontWeight:   700,
+                color:        INK,
+                textAlign:    'center',
+                marginBottom: 10,
+              }}>
                 Payment made on time!
               </div>
 
-              <div style={{ fontFamily: 'system-ui', fontSize: 14, color: SUBTLE, textAlign: 'center', width: 308, lineHeight: '20px', marginBottom: 32 }}>
+              <div style={{
+                fontFamily:   'system-ui, sans-serif',
+                fontSize:     14,
+                color:        SUBTLE,
+                textAlign:    'center',
+                lineHeight:   '22px',
+                marginBottom: 28,
+                width:        320,
+              }}>
                 Your payment has been successfully completed. Please allow 1–2 business days for your payment to process.
               </div>
 
-              <div style={{ fontFamily: 'system-ui', fontSize: 16, color: SUBTLE, textAlign: 'center', lineHeight: '28px' }}>
+              <div style={{
+                fontFamily: 'system-ui, sans-serif',
+                fontSize:   15,
+                color:      SUBTLE,
+                textAlign:  'center',
+                lineHeight: '28px',
+              }}>
                 <div>Payment date: 01/28/2025</div>
                 <div>Confirmation code: <strong>1234567890</strong></div>
               </div>
             </div>
 
-            {/* Buttons */}
-            <div style={{ width: '100%', padding: '0 44px 48px', display: 'flex', flexDirection: 'column', gap: 16 }}>
+            {/* Buttons — Close pill + text link */}
+            <div style={{ width: '100%', padding: '0 44px 48px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 0 }}>
               <div style={{
-                height: 56, borderRadius: 100, background: RED,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                color: '#fff', fontFamily: 'system-ui', fontSize: 14, fontWeight: 500,
+                width:          '100%',
+                height:         56,
+                borderRadius:   100,
+                background:     RED,
+                display:        'flex',
+                alignItems:     'center',
+                justifyContent: 'center',
+                color:          '#fff',
+                fontFamily:     'system-ui, sans-serif',
+                fontSize:       15,
+                fontWeight:     500,
+                marginBottom:   20,
               }}>
                 Close
               </div>
               <div style={{
-                height: 56, borderRadius: 100,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                color: RED, fontFamily: 'system-ui', fontSize: 14, fontWeight: 500,
+                fontFamily: 'system-ui, sans-serif',
+                fontSize:   15,
+                fontWeight: 500,
+                color:      RED,
               }}>
                 View payment activity
               </div>
