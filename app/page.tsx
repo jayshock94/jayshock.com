@@ -85,7 +85,7 @@ export default function HomePage() {
             className="flex flex-wrap gap-[12px] items-center justify-center md:justify-start hero-fade-up"
             style={{ animationDelay: '1100ms' }}
           >
-            <Button variant="primary" href="/api/resume" download>
+            <Button variant="glass" href="/api/resume" download>
               Download resume
             </Button>
             <Button variant="secondary" href="/about">
@@ -176,7 +176,7 @@ export default function HomePage() {
                 partner for a complex problem, I want to hear about it.
               </p>
 
-              <Button variant="primary" href="/contact">
+              <Button variant="glass" href="/contact">
                 Get in touch
               </Button>
             </div>

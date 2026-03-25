@@ -35,7 +35,7 @@ function SubmitButton() {
   return (
     <Button
       type="submit"
-      variant="primary"
+      variant="glass"
       disabled={pending}
       className="w-full sm:w-auto justify-center"
     >

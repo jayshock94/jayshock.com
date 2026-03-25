@@ -118,7 +118,7 @@ export default function CaseStudyPage({ params }: PageProps) {
               Whether you are looking for a senior product designer or a
               partner for a complex problem, I want to hear about it.
             </p>
-            <Button variant="primary" href="/contact">
+            <Button variant="glass" href="/contact">
               Get in touch
             </Button>
           </div>

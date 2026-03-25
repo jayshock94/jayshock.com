@@ -8,7 +8,7 @@ const PHASES = [
     label:       'See it',
     title:       'See it',
     description: 'Understand what is actually broken. Not the stated problem. The real one underneath it.',
-    bgToken:     'var(--phase-impact-glass)',
+    glassToken:  'var(--phase-impact-glass)',
     labelToken:  'var(--phase-impact-label)',
     borderToken: 'var(--phase-impact-border)',
   },
@@ -17,7 +17,7 @@ const PHASES = [
     label:       'Own it',
     title:       'Own it',
     description: 'Name your part in it. The constraint, the gap, the decision that got you here. No blame, no excuses.',
-    bgToken:     'var(--phase-problem-glass)',
+    glassToken:  'var(--phase-problem-glass)',
     labelToken:  'var(--phase-problem-label)',
     borderToken: 'var(--phase-problem-border)',
   },
@@ -26,7 +26,7 @@ const PHASES = [
     label:       'Solve it',
     title:       'Solve it',
     description: 'Figure out what needs to happen. Business constraints and user reality both in the room. Neither one wins until they resolve into something that serves both.',
-    bgToken:     'var(--phase-discovery-glass)',
+    glassToken:  'var(--phase-discovery-glass)',
     labelToken:  'var(--phase-discovery-label)',
     borderToken: 'var(--phase-discovery-border)',
   },
@@ -35,7 +35,7 @@ const PHASES = [
     label:       'Do it',
     title:       'Do it',
     description: 'Build it, ship it, hand it off right. Engineers involved from the start, not surprised at the end.',
-    bgToken:     'var(--phase-solution-glass)',
+    glassToken:  'var(--phase-solution-glass)',
     labelToken:  'var(--phase-solution-label)',
     borderToken: 'var(--phase-solution-border)',
   },
@@ -49,7 +49,7 @@ export default function HowIWork() {
     <div>
 
       {/* Header */}
-      <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-sm)]">
+      <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)]">
         How I work
       </p>
       <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-md)]">
@@ -67,19 +67,22 @@ export default function HowIWork() {
       {/* Segmented control + phase content */}
       <div>
 
-        {/* Segmented control — full width of column */}
+        {/* Segmented control — glass surface matching nav */}
         <div
           role="tablist"
           aria-label="Process phases"
           style={{
-            display:      'flex',
-            gap:          '3px',
-            padding:      '4px',
-            background:   'var(--color-surface)',
-            border:       '0.5px solid var(--color-border)',
-            borderRadius: '40px',
-            width:        '100%',
-            marginBottom: 'var(--space-stack-lg)',
+            display:              'flex',
+            gap:                  '3px',
+            padding:              '4px',
+            background:           'var(--color-nav-card-bg)',
+            backdropFilter:       'blur(48px) saturate(180%)',
+            WebkitBackdropFilter: 'blur(48px) saturate(180%)',
+            border:               '0.5px solid var(--color-nav-card-border)',
+            borderRadius:         '40px',
+            width:                '100%',
+            marginBottom:         'var(--space-stack-lg)',
+            boxShadow:            '0 2px 24px rgba(28,25,23,0.06), inset 0 1px 0 var(--glass-border-light)',
           }}
         >
           {PHASES.map((p, i) => {
@@ -92,20 +95,27 @@ export default function HowIWork() {
                 aria-controls="how-i-work-panel"
                 onClick={() => setActive(i)}
                 style={{
-                  flex:          1,
-                  padding:       '10px 8px',
-                  borderRadius:  '36px',
-                  border:        isActive ? `0.5px solid ${p.borderToken}` : '0.5px solid transparent',
-                  background:    isActive ? p.bgToken : 'transparent',
-                  color:         isActive ? p.labelToken : 'var(--color-text-muted)',
-                  fontFamily:    'var(--font-outfit), system-ui, sans-serif',
-                  fontSize:      '13px',
-                  fontWeight:    isActive ? 600 : 400,
-                  letterSpacing: '0.01em',
-                  cursor:        'pointer',
-                  transition:    'background 0.22s ease, color 0.22s ease, border-color 0.22s ease',
-                  whiteSpace:    'nowrap',
-                  textAlign:     'center',
+                  flex:                 1,
+                  padding:              '10px 8px',
+                  borderRadius:         '36px',
+                  /* Tinted glass — phase color as glass tint (Apple pattern) */
+                  background:           isActive ? p.glassToken : 'transparent',
+                  backdropFilter:       isActive ? 'blur(40px) saturate(160%)' : 'none',
+                  WebkitBackdropFilter: isActive ? 'blur(40px) saturate(160%)' : 'none',
+                  border:               isActive
+                    ? `0.5px solid ${p.borderToken}`
+                    : '0.5px solid transparent',
+                  boxShadow:            isActive
+                    ? '0 2px 12px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.15)'
+                    : 'none',
+                  color:                isActive ? p.labelToken : 'var(--color-text-muted)',
+                  fontSize:             '13px',
+                  fontWeight:           isActive ? 500 : 400,
+                  letterSpacing:        '0.02em',
+                  cursor:               'pointer',
+                  transition:           'all 0.25s cubic-bezier(0.16,1,0.3,1)',
+                  whiteSpace:           'nowrap',
+                  textAlign:            'center',
                 }}
               >
                 {p.label}
@@ -120,22 +130,22 @@ export default function HowIWork() {
           role="tabpanel"
           style={{
             borderLeft:  `2.5px solid ${phase.labelToken}`,
-            paddingLeft: '20px',
+            paddingLeft: 'var(--space-component-lg)',
             transition:  'border-color 0.3s ease',
           }}
         >
           <p
-            className="text-h2"
+            className="text-h3"
             style={{
               color:        phase.labelToken,
-              marginBottom: '12px',
+              marginBottom: 'var(--space-stack-xs)',
               transition:   'color 0.3s ease',
             }}
           >
             {phase.title}
           </p>
           <p
-            className="text-body-lg text-[var(--color-text-secondary)]"
+            className="text-body text-[var(--color-text-secondary)]"
             style={{ transition: 'opacity 0.2s ease' }}
           >
             {phase.description}
@@ -146,4 +156,3 @@ export default function HowIWork() {
     </div>
   )
 }
-

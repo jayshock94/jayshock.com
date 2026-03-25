@@ -28,7 +28,7 @@ const CHECK_LEN  = 62
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
-type Phase = 'idle' | 'pressing' | 'success'
+type Phase = 'idle' | 'pulsing' | 'pressing' | 'success'
 
 interface ConfettiPiece {
   id:    number
@@ -108,9 +108,11 @@ function StatusBar() {
 interface PaymentSuccessAnimationProps {
   /** When true, renders the final success state with no animation. */
   static?: boolean
+  /** Delays the entire animation sequence by this many ms after mount. */
+  delayStart?: number
 }
 
-export default function PaymentSuccessAnimation({ static: isStatic }: PaymentSuccessAnimationProps = {}) {
+export default function PaymentSuccessAnimation({ static: isStatic, delayStart = 0 }: PaymentSuccessAnimationProps) {
   const [phase,    setPhase]    = useState<Phase>(isStatic ? 'success' : 'idle')
   const [confetti, setConfetti] = useState<ConfettiPiece[]>([])
 
@@ -125,14 +127,16 @@ export default function PaymentSuccessAnimation({ static: isStatic }: PaymentSuc
       timers.push(t)
     }
 
-    after(() => setPhase('pressing'), 900)
+    // Pulse the button to draw the eye → press → success
+    after(() => setPhase('pulsing'),  delayStart)
+    after(() => setPhase('pressing'), delayStart + 700)
     after(() => {
       setPhase('success')
       setConfetti(makeConfetti(DISP_W / 2, DISP_H * 0.28))
-    }, 1400)
+    }, delayStart + 1200)
 
     return () => { alive = false; timers.forEach(clearTimeout) }
-  }, [isStatic])
+  }, [isStatic, delayStart])
 
   // Staggered reveal helper — each content element uses this
   const reveal = (delayMs: number, durationMs = 350): React.CSSProperties =>
@@ -142,26 +146,6 @@ export default function PaymentSuccessAnimation({ static: isStatic }: PaymentSuc
 
   return (
     <>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400&display=swap');
-
-        /* Checkmark pops in after confetti fires */
-        @keyframes checkmarkPop {
-          0%   { opacity: 0; transform: scale(0.3); }
-          60%  { opacity: 1; transform: scale(1.15); }
-          100% { opacity: 1; transform: scale(1); }
-        }
-        /* Content elements slide up and fade in */
-        @keyframes revealContent {
-          from { opacity: 0; transform: translateY(20px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-        /* Confetti */
-        @keyframes confettiFly {
-          0%   { transform: translate(0,0) rotate(0deg); opacity: 1; }
-          100% { transform: translate(var(--cdx), var(--cdy)) rotate(var(--cdr)); opacity: 0; }
-        }
-      `}</style>
 
       {/* Outer wrapper — no overflow:hidden so confetti escapes phone edges */}
       <div style={{ width: DISP_W, height: DISP_H, position: 'relative', flexShrink: 0 }}>
@@ -302,6 +286,7 @@ export default function PaymentSuccessAnimation({ static: isStatic }: PaymentSuc
                     justifyContent: 'center',
                     transform:      phase === 'pressing' ? 'scale(0.97)' : 'scale(1)',
                     transition:     'transform 150ms ease, background 150ms ease',
+                    animation:      phase === 'pulsing' ? 'buttonPulseGlow 700ms cubic-bezier(0.16,1,0.3,1) both' : 'none',
                   }}>
                     <p style={{ fontFamily: SANS, fontSize: 14, fontWeight: 500, color: '#fff', lineHeight: '20px', letterSpacing: '0.1px' }}>Submit payment</p>
                   </div>

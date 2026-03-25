@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 
-type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'glass'
+type ButtonVariant = 'glass' | 'secondary' | 'ghost' | 'solid-white'
 
 interface ButtonProps {
   variant?:  ButtonVariant
@@ -20,25 +20,28 @@ interface ButtonProps {
 }
 
 const BASE =
-  'inline-flex items-center justify-center gap-[var(--space-component-xs)] rounded-[40px] px-[24px] py-[10px] text-ui-md cursor-pointer no-underline transition-all duration-200 select-none min-h-[44px]'
+  'inline-flex items-center justify-center gap-[var(--space-component-xs)] rounded-[40px] px-[24px] py-[10px] text-ui-md cursor-pointer no-underline select-none min-h-[44px]'
 
 const VARIANTS: Record<ButtonVariant, string> = {
-  // Solid dark pill — high-priority actions
-  primary:
-    'glass-button-primary font-[500] tracking-[0.02em]',
-  // Outlined pill — secondary choice, border strong enough to read in both modes
-  secondary:
-    'bg-transparent text-[var(--color-ink)] font-[400] tracking-[0.02em] [border:0.5px_solid_var(--color-border-mid)] hover:bg-[var(--color-hover-subtle)] hover:[border-color:var(--color-border-strong)] active:scale-[0.98]',
-  // Text only — lowest visual weight
-  ghost:
-    'bg-transparent text-[var(--color-text-muted)] border-none font-[400] hover:text-[var(--color-ink)] active:scale-[0.98]',
-  // Frosted glass pill — floating CTAs, nav, overlays
+  // Frosted glass pill — the primary CTA, most prominent
   glass:
     'glass-pill text-[var(--color-ink)] font-[400] tracking-[0.02em]',
+
+  // Subtle outlined — secondary actions, no fill
+  secondary:
+    'btn-secondary bg-transparent text-[var(--color-text-secondary)] font-[400] tracking-[0.02em] [border:0.5px_solid_var(--color-border-mid)]',
+
+  // Text only — tertiary/inline actions
+  ghost:
+    'btn-ghost bg-transparent text-[var(--color-text-muted)] border-none font-[400] tracking-[0.02em]',
+
+  // White fill — for use on colored/dark backgrounds
+  'solid-white':
+    'btn-solid-white font-[500] tracking-[0.02em]',
 }
 
 export default function Button({
-  variant = 'primary',
+  variant = 'glass',
   href,
   children,
   className = '',

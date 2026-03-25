@@ -266,7 +266,7 @@ export default function AboutPage() {
               Open to senior product design roles and consulting engagements.
               Remote first, open to hybrid.
             </p>
-            <Button variant="primary" href="/contact">
+            <Button variant="glass" href="/contact">
               Get in touch
             </Button>
           </section>

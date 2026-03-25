@@ -91,10 +91,32 @@ export default function Nav() {
                 )
               })}
 
-              {/* Contact — glass pill */}
-              <Button variant="glass" href="/contact">
-                Contact
-              </Button>
+              {/* Contact — plain link like other nav items */}
+              {(() => {
+                const isActive = pathname === '/contact'
+                return (
+                  <Link
+                    href="/contact"
+                    className={`
+                      relative inline-block text-ui-md tracking-[0.02em]
+                      pb-[6px] transition-colors duration-200
+                      ${isActive
+                        ? 'text-[var(--color-ink)]'
+                        : 'text-[var(--color-text-muted)] hover:text-[var(--color-ink)]'
+                      }
+                    `}
+                    aria-current={isActive ? 'page' : undefined}
+                  >
+                    Contact
+                    {isActive && (
+                      <span
+                        aria-hidden="true"
+                        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[3px] h-[3px] rounded-full bg-[var(--color-ink)]"
+                      />
+                    )}
+                  </Link>
+                )
+              })()}
             </div>
 
             {/* Mobile: hamburger */}

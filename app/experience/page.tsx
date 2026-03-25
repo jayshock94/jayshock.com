@@ -132,7 +132,7 @@ export default function ExperiencePage() {
           </p>
 
           <Button
-            variant="primary"
+            variant="glass"
             href="/api/resume"
             download
             aria-label="Download PDF resume"
@@ -286,7 +286,7 @@ export default function ExperiencePage() {
                 Want the full picture in one document?
               </p>
               <Button
-                variant="primary"
+                variant="glass"
                 href="/api/resume"
                 download
                 aria-label="Download PDF resume"
