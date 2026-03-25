@@ -50,7 +50,6 @@ const mobileLendingManagement: CaseStudy = {
   problem: {
     headline: 'The product hadn\'t been updated in years. Clients were noticing.',
     paragraphs: [
-      'I led research and design end to end, working through product owners who had direct client contact with lender teams.',
       'Loans were listed by number with no label or context. A borrower with three loans had no idea which was the car and which was the house. Autopay was buried. The layout made it hard to digest what was going on or know what to do next.',
       'We couldn\'t rebuild from scratch. Engineering had too much on their plate to commit time and resources to sweeping changes.',
     ],
@@ -61,7 +60,7 @@ const mobileLendingManagement: CaseStudy = {
   discovery: {
     headline: 'The flows were locked. The language wasn\'t.',
     paragraphs: [
-      'I ran competitive analysis against top fintech and lending apps to map what borrowers already expected. Where account info lives, how payment flows are structured, what a confirmation screen needs to do. I built personas from PO field notes, client sessions, app store reviews, and borrower research. I shared what I found with client teams on calls to pressure-test features before any design started.',
+      'I owned research and design end to end. Product owners handled direct client contact with lender teams — I worked closely with them to shape what to ask and what to bring back. I ran competitive analysis against top fintech and lending apps to map what borrowers already expected. Where account info lives, how payment flows are structured, what a confirmation screen needs to do. I built personas from PO field notes, client sessions, app store reviews, and borrower research, then pressure-tested findings with client teams before any design started.',
       'Borrowers weren\'t confused because features were missing. The app had everything they needed. It just didn\'t help them find it. Loan numbers meant nothing. Navigation labels didn\'t match the tasks people were actually trying to do.',
       'You can\'t always fix the UX. Sometimes the architecture is locked. But you can almost always fix how it feels, and that gap is bigger than most people expect. If restructuring the flow wasn\'t on the table, I had to absorb complexity through language, hierarchy, and visual clarity instead.',
       'The payment confirmation screen looked like a throwaway. Borrowers had real anxiety about whether a payment went through, especially people managing multiple loans. That screen wasn\'t just a confirmation. It was the moment the whole interaction either resolved or left them with doubt. Recognizing that changed how I thought about every endpoint in the app.',
