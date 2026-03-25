@@ -43,10 +43,10 @@ export default function CaseStudyPage({ params }: PageProps) {
 
       {/* Phase sections — wrapped in observer that shifts ambient color */}
       <PhaseObserver>
-        <PhaseSection phase="impact"    content={cs.impact}    />
         <PhaseSection phase="problem"   content={cs.problem}   />
         <PhaseSection phase="discovery" content={cs.discovery} />
         <PhaseSection phase="solution"  content={cs.solution}  />
+        <PhaseSection phase="impact"    content={cs.impact}    />
       </PhaseObserver>
 
       {/* Next case study + contact CTA */}

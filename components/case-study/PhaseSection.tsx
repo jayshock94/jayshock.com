@@ -64,13 +64,15 @@ export default function PhaseSection({ phase, content }: PhaseSectionProps) {
     >
       <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
         <div
-          className="
-            max-w-content
-            border-l-[2.5px] pl-[var(--space-component-lg)]
-            transition-colors duration-500
-          "
-          style={{ borderColor: vars.label }}
+          className="max-w-content pl-[var(--space-component-lg)] relative"
         >
+
+          {/* Short accent bar — sits beside the eyebrow label only */}
+          <div
+            aria-hidden="true"
+            className="absolute left-0 top-0 w-[2.5px] transition-colors duration-500"
+            style={{ height: '16px', background: vars.label }}
+          />
 
           {/* Phase eyebrow */}
           <p

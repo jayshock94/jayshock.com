@@ -8,66 +8,65 @@ import type { CaseStudy } from '@/data/types'
  */
 const mobileLendingManagement: CaseStudy = {
   slug:         'mobile-lending-management',
-  title:        'Modernizing a lending platform built in the 2000s',
+  title:        'Better lending app. Same codebase.',
   company:      'Caliber Smart',
   industry:     'Fintech',
-  eyebrow:      'Fintech · Mobile',
+  eyebrow:      'Fintech · Mobile · White-label',
   role:         'Product Designer · End to end',
-  year:         '2019–2021',
-  types:        ['Mobile', 'Systems', 'White-label', 'Design System'],
+  year:         '2024–2025',
+  types:        ['Mobile', 'White-label', 'Research', 'End to End'],
   cardImpactLine:
-    'A lending management app rebuilt for how people actually work today. Dynamic theming across any brand, same constraints.',
+    'Borrowers stopped calling. The architecture was locked. The experience didn\'t have to be.',
   cardImage: '/images/work/mobile-lending.png',
 
   // Lendmark crimson — extracted from brand image, run through color algorithm
   brandColorHex: '#C01C2C',
 
   impact: {
-    headline: '[PLACEHOLDER] What changed for the people using it',
+    headline: 'Borrowers stopped calling. They just managed it themselves.',
     paragraphs: [
-      '[PLACEHOLDER] Replace this with the opening impact statement. Lead with the result in plain language.',
-      '[PLACEHOLDER] Context sentence: scale of the product and your involvement.',
+      'Borrowers were figuring things out on their own. That hadn\'t happened with the old system. Client teams reported fewer missed payments, less pressure on support lines, and borrowers coming back for second loans.',
+      'GAC is a white-label loan management platform used by lenders across the US. Borrowers use it to make payments, set up autopay, manage documents, and track loans across powersports, auto, home, and personal lending.',
     ],
     stats: [
-      { value: '[X]',  label: '[Metric label]', estimated: false },
-      { value: '[X]',  label: '[Metric label]', estimated: true  },
-      { value: '[X]',  label: '[Metric label]', estimated: false },
+      { value: '5+',    label: 'Lenders on platform', estimated: false },
+      { value: '~3 mo', label: 'Design to handoff',   estimated: false },
     ],
     estimatedNote:
-      '[PLACEHOLDER] Describe methodology for any estimated metrics.',
+      'Outcomes reported qualitatively by client teams. Formal analytics weren\'t tracked at launch.',
   },
 
   problem: {
-    headline: '[PLACEHOLDER] What was hard and why it mattered',
+    headline: 'The product hadn\'t been updated in years. Clients were noticing.',
     paragraphs: [
-      '[PLACEHOLDER] Business goal: what the organization needed.',
-      '[PLACEHOLDER] User reality: what people actually experienced.',
-      '[PLACEHOLDER] Your role and scope.',
-      '[PLACEHOLDER] Constraints: time, technical, organizational.',
+      'Lenders were starting to look at other platforms. The gap between what GAC offered and what borrowers expected from a modern app had become a retention problem.',
+      'Loans were listed by loan number. No label, no context. A borrower with three loans had no idea which was the car and which was the house. Autopay was buried. Due dates weren\'t visible without digging. Routine tasks felt uncertain.',
+      'I led research and design end to end. Product owners handled direct client contact. They flew out to meet lender teams. I worked closely with them to shape what to ask and what to bring back.',
+      'We couldn\'t rebuild from scratch. The dev team had to work within the existing codebase, which locked certain navigation structures, payment flows, and screen locations. One lender required a full legal paragraph under the login button instead of a simple security indicator. That stayed.',
     ],
   },
 
   discovery: {
-    headline: '[PLACEHOLDER] What you learned and how',
+    headline: 'The flows were locked. The language wasn\'t.',
     paragraphs: [
-      '[PLACEHOLDER] Research methods.',
-      '[PLACEHOLDER] Key finding 1.',
-      '[PLACEHOLDER] Key finding 2.',
-      '[PLACEHOLDER] The pivot insight.',
+      'I ran competitive analysis against top fintech and lending apps to map what borrowers already expected. Where account info lives, how payment flows are structured, what a confirmation screen needs to do. I built personas from PO field notes, client sessions, app store reviews, and borrower research. I shared what I found with client teams on calls to pressure-test features before any design started.',
+      'Borrowers weren\'t confused because features were missing. The app had everything they needed. It just didn\'t help them find it. Loan numbers meant nothing. Navigation labels didn\'t match the tasks people were actually trying to do.',
+      'You can\'t always fix the UX. Sometimes the architecture is locked. But you can almost always fix how it feels, and that gap is bigger than most people expect. If restructuring the flow wasn\'t on the table, I had to absorb complexity through language, hierarchy, and visual clarity instead.',
+      'The payment confirmation screen looked like a throwaway. Borrowers had real anxiety about whether a payment went through, especially people managing multiple loans. That screen wasn\'t just a confirmation. It was the moment the whole interaction either resolved or left them with doubt. Recognizing that changed how I thought about every endpoint in the app.',
     ],
     quote: {
-      text:        '[PLACEHOLDER] A real quote from someone who used the product.',
-      attribution: '[Role or context — no names]',
+      text:        'I always had anxiety about whether the payment actually was submitted. That confetti screen, I know that sounds silly, but I like it a lot, because now I know I did it right.',
+      attribution: '— Borrower, relayed through client team',
     },
   },
 
   solution: {
-    headline: '[PLACEHOLDER] What you made and the decisions behind it',
+    headline: 'Mobile first. The architecture stayed. The experience didn\'t.',
     paragraphs: [
-      '[PLACEHOLDER] Key decision 1: what you chose and what you rejected.',
-      '[PLACEHOLDER] Key decision 2: a tradeoff you made and the reasoning.',
-      '[PLACEHOLDER] Key decision 3: something you would do differently.',
-      '[PLACEHOLDER] Handoff note.',
+      'The home screen became a loan dashboard. Each loan shows its plain-language name, next due date, and amount owed, visible without a single tap. Before, borrowers had to navigate into a loan just to find out when they needed to pay.',
+      'The feature people talked about most wasn\'t the payment flow. It was what happened after. A checkmark, confetti, done. Small. But it turned a moment of anxiety into a moment of confidence. The peak-end rule says people remember how an experience felt at its high point and at its close. We designed the close deliberately. That screen got more unsolicited feedback than anything else we built.',
+      'I designed a contextual chatbot to help borrowers find buried features and answer common support questions. Engineering scoped it out. Too large for the current sprint. I took the problems it was solving and worked them back into navigation labels and clearer hierarchy. Not the same answer, but it covered the same ground.',
+      'Engineering was a good partnership throughout. A handful of components came back for redesign, not for UX issues but for implementation scope. The existing codebase couldn\'t support certain builds without blowing past the sprint. Those went back lighter.',
     ],
   },
 

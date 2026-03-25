@@ -7,7 +7,7 @@ interface CaseStudyHeroProps {
 }
 
 export default function CaseStudyHero({ caseStudy, tokens }: CaseStudyHeroProps) {
-  const { title, eyebrow, role, year, types } = caseStudy
+  const { title, eyebrow, role, year, types, impact } = caseStudy
 
   return (
     <section
@@ -79,6 +79,30 @@ export default function CaseStudyHero({ caseStudy, tokens }: CaseStudyHeroProps)
                 >
                   {tag}
                 </span>
+              ))}
+            </div>
+          )}
+
+          {/* Impact snapshot — quick metrics before the full story */}
+          {impact.stats && impact.stats.length > 0 && (
+            <div
+              className="
+                border-t border-[var(--color-border)]
+                pt-[var(--space-stack-lg)]
+                flex flex-wrap gap-x-[var(--space-stack-lg)] gap-y-[var(--space-stack-md)]
+              "
+              role="list"
+              aria-label="Impact at a glance"
+            >
+              {impact.stats.map((stat, i) => (
+                <div key={i} role="listitem">
+                  <p className="text-h3 text-[var(--color-ink)] mb-[var(--space-component-xs)]">
+                    {stat.value}
+                  </p>
+                  <p className="text-body-sm text-[var(--color-text-muted)]">
+                    {stat.label}
+                  </p>
+                </div>
               ))}
             </div>
           )}
