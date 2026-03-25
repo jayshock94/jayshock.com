@@ -7,7 +7,7 @@ interface CaseStudyHeroProps {
 }
 
 export default function CaseStudyHero({ caseStudy, tokens }: CaseStudyHeroProps) {
-  const { title, eyebrow, role, year, types, impact, heroImage } = caseStudy
+  const { title, eyebrow, role, year, types, impact, heroImage, overview } = caseStudy
 
   return (
     <section
@@ -60,6 +60,13 @@ export default function CaseStudyHero({ caseStudy, tokens }: CaseStudyHeroProps)
               {year}
             </span>
           </div>
+
+          {/* Overview — project-specific role or scope note */}
+          {overview && (
+            <p className="text-body-sm text-[var(--color-text-secondary)] mb-[var(--space-stack-lg)]">
+              {overview}
+            </p>
+          )}
 
           {/* Type tags */}
           {types.length > 0 && (

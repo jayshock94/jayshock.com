@@ -76,6 +76,11 @@ export interface CaseStudy {
    */
   brandColorHex: string
   /**
+   * Optional short context note shown in the hero below the meta row.
+   * Use for project-specific role or scope details not covered by the role field.
+   */
+  overview?: string
+  /**
    * Optional hero image shown below the impact stats in the case study header.
    * Path relative to /public. Omit until real image exists.
    */

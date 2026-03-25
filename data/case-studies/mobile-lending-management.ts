@@ -22,6 +22,9 @@ const mobileLendingManagement: CaseStudy = {
   // Lendmark crimson — extracted from brand image, run through color algorithm
   brandColorHex: '#C01C2C',
 
+  overview:
+    'I owned research and design end to end. Product owners handled direct contact with lender teams — I worked closely with them to shape what to ask and what to bring back.',
+
   // Hero image — composite of key screens across device mockups
   heroImage: 'Hero: app overview — home screen, payment flow, and confirmation screen across device mockups',
 
@@ -60,7 +63,7 @@ const mobileLendingManagement: CaseStudy = {
   discovery: {
     headline: 'The flows were locked. The language wasn\'t.',
     paragraphs: [
-      'I owned research and design end to end. Product owners handled direct client contact with lender teams — I worked closely with them to shape what to ask and what to bring back. I ran competitive analysis against top fintech and lending apps to map what borrowers already expected. Where account info lives, how payment flows are structured, what a confirmation screen needs to do. I built personas from PO field notes, client sessions, app store reviews, and borrower research, then pressure-tested findings with client teams before any design started.',
+      'I ran competitive analysis against top fintech and lending apps to map what borrowers already expected. Where account info lives, how payment flows are structured, what a confirmation screen needs to do. I built personas from PO field notes, client sessions, app store reviews, and borrower research, then pressure-tested findings with client teams before any design started.',
       'Borrowers weren\'t confused because features were missing. The app had everything they needed. It just didn\'t help them find it. Loan numbers meant nothing. Navigation labels didn\'t match the tasks people were actually trying to do.',
       'You can\'t always fix the UX. Sometimes the architecture is locked. But you can almost always fix how it feels, and that gap is bigger than most people expect. If restructuring the flow wasn\'t on the table, I had to absorb complexity through language, hierarchy, and visual clarity instead.',
       'The payment confirmation screen looked like a throwaway. Borrowers had real anxiety about whether a payment went through, especially people managing multiple loans. That screen wasn\'t just a confirmation. It was the moment the whole interaction either resolved or left them with doubt. Recognizing that changed how I thought about every endpoint in the app.',
