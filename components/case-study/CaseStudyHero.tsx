@@ -61,13 +61,6 @@ export default function CaseStudyHero({ caseStudy, tokens }: CaseStudyHeroProps)
             </span>
           </div>
 
-          {/* Overview — project-specific role or scope note */}
-          {overview && (
-            <p className="text-body text-[var(--color-text-secondary)] mb-[var(--space-stack-lg)]">
-              {overview}
-            </p>
-          )}
-
           {/* Type tags */}
           {types.length > 0 && (
             <div
@@ -90,24 +83,11 @@ export default function CaseStudyHero({ caseStudy, tokens }: CaseStudyHeroProps)
             </div>
           )}
 
-          {/* Hero image — full-width showcase below stats */}
-          {heroImage && (
-            <div
-              className="
-                mt-[var(--space-stack-lg)]
-                w-full rounded-[12px] border border-[var(--color-border)] overflow-hidden
-                flex items-center justify-center p-[var(--space-component-lg)]
-              "
-              style={{
-                background:  'var(--color-surface)',
-                aspectRatio: '16/9',
-              }}
-            >
-              {/* Placeholder — replace this div with <img src={heroImage} … /> when real image exists */}
-              <p className="text-body-sm text-[var(--color-text-muted)] opacity-60">
-                {heroImage}
-              </p>
-            </div>
+          {/* Overview — project-specific role or scope note */}
+          {overview && (
+            <p className="text-body text-[var(--color-text-secondary)] mb-[var(--space-stack-lg)]">
+              {overview}
+            </p>
           )}
 
           {/* Impact snapshot — quick metrics before the full story */}
@@ -116,6 +96,7 @@ export default function CaseStudyHero({ caseStudy, tokens }: CaseStudyHeroProps)
               className="
                 border-t border-[var(--color-border)]
                 pt-[var(--space-stack-lg)]
+                mb-[var(--space-stack-lg)]
                 flex flex-wrap gap-x-[var(--space-stack-lg)] gap-y-[var(--space-stack-md)]
               "
               role="list"
@@ -131,6 +112,25 @@ export default function CaseStudyHero({ caseStudy, tokens }: CaseStudyHeroProps)
                   </p>
                 </div>
               ))}
+            </div>
+          )}
+
+          {/* Hero image — full-width showcase */}
+          {heroImage && (
+            <div
+              className="
+                w-full rounded-[12px] border border-[var(--color-border)] overflow-hidden
+                flex items-center justify-center p-[var(--space-component-lg)]
+              "
+              style={{
+                background:  'var(--color-surface)',
+                aspectRatio: '16/9',
+              }}
+            >
+              {/* Placeholder — replace this div with <img src={heroImage} … /> when real image exists */}
+              <p className="text-body-sm text-[var(--color-text-muted)] opacity-60">
+                {heroImage}
+              </p>
             </div>
           )}
 
