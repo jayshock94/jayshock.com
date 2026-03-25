@@ -50,26 +50,11 @@ export default function CaseStudyPage({ params }: PageProps) {
             content={cs.problem}
             mediaSlot={
               <div className="max-w-[320px] mx-auto">
-              <EraserReveal
-                legacy={
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src="/images/mobile/gac%20legacy.png"
-                    alt="Legacy GoldPoint loan management app before the redesign"
-                    draggable={false}
-                    style={{ width: '100%', height: 'auto', display: 'block' }}
-                  />
-                }
-                updated={
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src="/images/mobile/gac%20new.png"
-                    alt="Redesigned Lendmark loan management app"
-                    draggable={false}
-                    style={{ width: '100%', height: 'auto', display: 'block' }}
-                  />
-                }
-              />
+                <EraserReveal
+                  legacySrc="/images/mobile/gac%20legacy.png"
+                  updatedSrc="/images/mobile/gac%20new.png"
+                  alt="Before and after: legacy GoldPoint app vs redesigned Lendmark app"
+                />
               </div>
             }
             mediaSlotAfterParagraph={1}
