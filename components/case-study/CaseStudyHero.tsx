@@ -63,7 +63,7 @@ export default function CaseStudyHero({ caseStudy, tokens }: CaseStudyHeroProps)
 
           {/* Overview — project-specific role or scope note */}
           {overview && (
-            <p className="text-body-sm text-[var(--color-text-secondary)] mb-[var(--space-stack-lg)]">
+            <p className="text-body text-[var(--color-text-secondary)] mb-[var(--space-stack-lg)]">
               {overview}
             </p>
           )}
