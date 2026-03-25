@@ -12,11 +12,27 @@ interface WorkCardProps {
   cardImageSlot?: React.ReactNode
 }
 
+/** Extract RGB channels from a hex string. */
+function hexToRGB(hex: string): [number, number, number] {
+  const h = hex.replace('#', '')
+  return [
+    parseInt(h.slice(0, 2), 16),
+    parseInt(h.slice(2, 4), 16),
+    parseInt(h.slice(4, 6), 16),
+  ]
+}
+
 export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
   const [hovered, setHovered] = useState(false)
 
   const { slug, title, cardImage, cardImpactLine, types, brandColorHex } = caseStudy
   const tokens = generateTokens(brandColorHex)
+  const [r, g, b] = hexToRGB(tokens.heroZone)
+
+  // Glass version of heroZone — brand color at reduced opacity,
+  // card surface bleeds through like the phase toggle buttons.
+  const heroGlass = `rgba(${r},${g},${b},0.55)`
+  const heroGlassDeep = `rgba(${r},${g},${b},0.70)`
 
   return (
     <Link href={`/work/${slug}`} className="block h-full" style={{ textDecoration: 'none' }}>
@@ -36,13 +52,14 @@ export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
       >
 
         {/* ── Image zone ──────────────────────────────────────────────────
-            heroZone background — the exact color from the case study hero.
-            Either a custom composition (cardImageSlot) or a static image. */}
+            Glass treatment — heroZone at reduced opacity so the card
+            surface shows through. Brand color reads as a tint, not a
+            solid block. Gradient adds depth from top to bottom. */}
         <div
           style={{
             position:   'relative',
             height:     '280px',
-            background: tokens.heroZone,
+            background: `linear-gradient(to bottom, ${heroGlass}, ${heroGlassDeep})`,
             overflow:   'hidden',
           }}
         >
@@ -58,7 +75,7 @@ export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
                 style={{ objectFit: 'cover', objectPosition: 'center top' }}
               />
 
-              {/* Bottom fade into heroZone color */}
+              {/* Bottom fade into glass color */}
               <div
                 aria-hidden="true"
                 style={{
@@ -67,7 +84,7 @@ export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
                   left:          0,
                   right:         0,
                   height:        '60px',
-                  background:    `linear-gradient(to top, ${tokens.heroZone}, transparent)`,
+                  background:    `linear-gradient(to top, ${heroGlassDeep}, transparent)`,
                   pointerEvents: 'none',
                 }}
               />
