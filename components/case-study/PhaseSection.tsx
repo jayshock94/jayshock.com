@@ -3,6 +3,10 @@ import type { CaseStudyImage, PhaseContent, PhaseKey } from '@/data/types'
 interface PhaseSectionProps {
   phase:   PhaseKey
   content: PhaseContent
+  /** Custom media node — injected after a specific paragraph instead of image placeholders. */
+  mediaSlot?: React.ReactNode
+  /** Which paragraph index to inject mediaSlot after. Default: last paragraph. */
+  mediaSlotAfterParagraph?: number
 }
 
 const PHASE_LABELS: Record<PhaseKey, string> = {
@@ -44,7 +48,12 @@ const PHASE_VARS: Record<PhaseKey, {
   },
 }
 
-export default function PhaseSection({ phase, content }: PhaseSectionProps) {
+export default function PhaseSection({
+  phase,
+  content,
+  mediaSlot,
+  mediaSlotAfterParagraph,
+}: PhaseSectionProps) {
   const vars   = PHASE_VARS[phase]
   const label  = PHASE_LABELS[phase]
   const { headline, paragraphs, stats, images, quote, estimatedNote } = content
@@ -153,6 +162,13 @@ export default function PhaseSection({ phase, content }: PhaseSectionProps) {
                 >
                   {p}
                 </p>
+
+                {/* mediaSlot — injected after the target paragraph index */}
+                {mediaSlot && (mediaSlotAfterParagraph ?? paragraphs.length - 1) === i && (
+                  <div key={`media-slot-${i}`} className="mt-[var(--space-stack-lg)]">
+                    {mediaSlot}
+                  </div>
+                )}
 
                 {/* Images that follow this paragraph */}
                 {imagesByPara[i] && (

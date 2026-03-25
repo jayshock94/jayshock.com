@@ -55,15 +55,8 @@ const mobileLendingManagement: CaseStudy = {
       'I led research and design end to end. Product owners handled direct client contact. They flew out to meet lender teams. I worked closely with them to shape what to ask and what to bring back.',
       'We couldn\'t rebuild from scratch. The dev team had to work within the existing codebase, which locked certain navigation structures, payment flows, and screen locations. One lender required a full legal paragraph under the login button instead of a simple security indicator. That stayed.',
     ],
-    images: [
-      {
-        src:            '',
-        alt:            'Before: loan list showing numbered entries with no labels, due dates, or loan type context',
-        caption:        'The original loan list — borrowers had no way to tell which loan was which.',
-        aspect:         'portrait',
-        afterParagraph: 1,
-      },
-    ],
+    // Images intentionally omitted — the before/after is rendered via EraserReveal
+    // in app/work/[slug]/page.tsx using mediaSlot on this PhaseSection.
   },
 
   discovery: {

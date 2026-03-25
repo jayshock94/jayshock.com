@@ -6,6 +6,9 @@ import { generateTokens }  from '@/lib/colorAlgorithm'
 import CaseStudyHero       from '@/components/case-study/CaseStudyHero'
 import PhaseSection        from '@/components/case-study/PhaseSection'
 import PhaseObserver       from '@/components/case-study/PhaseObserver'
+import EraserReveal        from '@/components/case-study/EraserReveal'
+import LegacyLoanApp       from '@/components/case-study/LegacyLoanApp'
+import RedesignedLoanApp   from '@/components/case-study/RedesignedLoanApp'
 import WorkCard            from '@/components/work/WorkCard'
 import Button              from '@/components/ui/Button'
 
@@ -43,7 +46,21 @@ export default function CaseStudyPage({ params }: PageProps) {
 
       {/* Phase sections — wrapped in observer that shifts ambient color */}
       <PhaseObserver>
-        <PhaseSection phase="problem"   content={cs.problem}   />
+        {cs.slug === 'mobile-lending-management' ? (
+          <PhaseSection
+            phase="problem"
+            content={cs.problem}
+            mediaSlot={
+              <EraserReveal
+                legacy={<LegacyLoanApp />}
+                updated={<RedesignedLoanApp />}
+              />
+            }
+            mediaSlotAfterParagraph={1}
+          />
+        ) : (
+          <PhaseSection phase="problem" content={cs.problem} />
+        )}
         <PhaseSection phase="discovery" content={cs.discovery} />
         <PhaseSection phase="solution"  content={cs.solution}  />
         <PhaseSection phase="impact"    content={cs.impact}    />
