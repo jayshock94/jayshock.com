@@ -119,10 +119,10 @@ export default function CaseStudyHero({ caseStudy, tokens, heroImageSlot }: Case
           {/* Hero image — full-width showcase */}
           {(heroImageSlot ?? heroImage) && (
             <div
-              className="w-full rounded-[12px] border border-[var(--color-border)] overflow-hidden"
+              className="w-full rounded-[12px] overflow-hidden"
               style={{
-                background:  'var(--color-surface)',
-                aspectRatio: '16/9',
+                background:  heroImageSlot ? 'var(--color-ink)' : 'var(--color-surface)',
+                aspectRatio: heroImageSlot ? '3/2' : '16/9',
               }}
             >
               {heroImageSlot ?? (
