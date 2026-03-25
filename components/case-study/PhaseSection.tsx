@@ -83,7 +83,7 @@ export default function PhaseSection({
     >
       <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
         <div
-          className="max-w-content pl-[var(--space-component-lg)] relative"
+          className="pl-[var(--space-component-lg)] relative"
         >
 
           {/* Short accent bar — sits beside the eyebrow label only */}
@@ -95,7 +95,7 @@ export default function PhaseSection({
 
           {/* Phase eyebrow */}
           <p
-            className="text-ui-sm mb-[var(--space-stack-sm)]"
+            className="text-ui-sm mb-[var(--space-stack-sm)] max-w-content"
             style={{ color: vars.label }}
           >
             {label}
@@ -104,7 +104,7 @@ export default function PhaseSection({
           {/* Section headline */}
           <h2
             id={`phase-heading-${phase}`}
-            className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-md)]"
+            className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-md)] max-w-content"
           >
             {headline}
           </h2>
@@ -114,7 +114,7 @@ export default function PhaseSection({
             <div
               className="
                 grid grid-cols-1 gap-[var(--space-component-md)]
-                sm:grid-cols-3
+                md:grid-cols-3
                 mb-[var(--space-stack-lg)]
               "
               role="list"
@@ -158,7 +158,7 @@ export default function PhaseSection({
               <>
                 <p
                   key={`p-${i}`}
-                  className="text-body text-[var(--color-text-secondary)]"
+                  className="text-body text-[var(--color-text-secondary)] max-w-content"
                 >
                   {p}
                 </p>
@@ -213,6 +213,7 @@ export default function PhaseSection({
                 mt-[var(--space-stack-lg)]
                 pl-[var(--space-component-md)]
                 border-l-[2px]
+                max-w-content
               "
               style={{ borderColor: vars.border }}
             >

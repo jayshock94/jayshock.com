@@ -71,15 +71,15 @@ export default function HowIWork() {
         <div
           role="tablist"
           aria-label="Process phases"
+          className="grid grid-cols-2 md:flex"
           style={{
-            display:              'flex',
             gap:                  '3px',
             padding:              '4px',
             background:           'var(--color-nav-card-bg)',
             backdropFilter:       'blur(48px) saturate(180%)',
             WebkitBackdropFilter: 'blur(48px) saturate(180%)',
             border:               '0.5px solid var(--color-nav-card-border)',
-            borderRadius:         '40px',
+            borderRadius:         '20px',
             width:                '100%',
             marginBottom:         'var(--space-stack-lg)',
             boxShadow:            '0 2px 24px rgba(28,25,23,0.06), inset 0 1px 0 var(--glass-border-light)',
@@ -94,10 +94,10 @@ export default function HowIWork() {
                 aria-selected={isActive}
                 aria-controls="how-i-work-panel"
                 onClick={() => setActive(i)}
+                className="md:flex-1"
                 style={{
-                  flex:                 1,
                   padding:              '10px 8px',
-                  borderRadius:         '36px',
+                  borderRadius:         '16px',
                   /* Tinted glass — phase color as glass tint (Apple pattern) */
                   background:           isActive ? p.glassToken : 'transparent',
                   backdropFilter:       isActive ? 'blur(40px) saturate(160%)' : 'none',

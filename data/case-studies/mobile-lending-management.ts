@@ -9,7 +9,7 @@ import type { CaseStudy } from '@/data/types'
 const mobileLendingManagement: CaseStudy = {
   slug:         'mobile-lending-management',
   title:        'Better lending app. Same codebase.',
-  company:      'Caliber Smart',
+  company:      'GoldPoint Systems',
   industry:     'Fintech',
   eyebrow:      'Fintech · Mobile · White-label',
   role:         'Product Designer · End to end',

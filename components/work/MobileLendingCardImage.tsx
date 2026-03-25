@@ -22,8 +22,8 @@ export default function MobileLendingCardImage() {
       <div
         style={{
           position:     'relative',
-          width:        '120px',
-          height:       '260px',
+          width:        'clamp(90px, 30vw, 120px)',
+          height:       'clamp(195px, 65vw, 260px)',
           borderRadius: '20px',
           overflow:     'hidden',
           flexShrink:   0,
@@ -47,8 +47,8 @@ export default function MobileLendingCardImage() {
       <div
         style={{
           position:     'relative',
-          width:        '140px',
-          height:       '300px',
+          width:        'clamp(105px, 35vw, 140px)',
+          height:       'clamp(225px, 75vw, 300px)',
           borderRadius: '22px',
           overflow:     'hidden',
           flexShrink:   0,

@@ -10,7 +10,7 @@ import type { CaseStudy } from '@/data/types'
 const lendingEngineService: CaseStudy = {
   slug:         'lending-engine-service',
   title:        'Unifying seven products into one lending engine',
-  company:      'GoldPoint Systems (Confidential)',
+  company:      'GoldPoint Systems',
   industry:     'Fintech',
   eyebrow:      'Fintech · Enterprise SaaS',
   role:         'Product Designer · End to end',

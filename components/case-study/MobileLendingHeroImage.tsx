@@ -40,8 +40,8 @@ export default function MobileLendingHeroImage() {
         <div
           style={{
             position:     'relative',
-            width:        '155px',
-            height:       '336px',
+            width:        'clamp(120px, 40vw, 155px)',
+            height:       'clamp(260px, 85vw, 336px)',
             borderRadius: '24px',
             overflow:     'hidden',
             flexShrink:   0,

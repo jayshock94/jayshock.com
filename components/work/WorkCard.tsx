@@ -25,7 +25,7 @@ function hexToRGB(hex: string): [number, number, number] {
 export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
   const [hovered, setHovered] = useState(false)
 
-  const { slug, title, eyebrow, cardImage, cardImpactLine, types, brandColorHex } = caseStudy
+  const { slug, title, company, cardImage, cardImpactLine, types, brandColorHex } = caseStudy
   const tokens = generateTokens(brandColorHex)
   const [r, g, b] = hexToRGB(tokens.heroZone)
 
@@ -62,7 +62,7 @@ export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
             borderRadius:   '10px',
             overflow:       'hidden',
             background:     tokens.heroZone,
-            height:         '260px',
+            height:         'clamp(200px, 55vw, 260px)',
             display:        'flex',
             alignItems:     'center',
             justifyContent: 'center',
@@ -130,7 +130,7 @@ export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
               marginBottom: 'var(--space-stack-xs)',
             }}
           >
-            {eyebrow}
+            {company}
           </span>
 
           {/* Heading → body: --space-stack-md (24px) */}

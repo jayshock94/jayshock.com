@@ -9,7 +9,7 @@ import type { CaseStudy } from '@/data/types'
 const virtualBadge: CaseStudy = {
   slug:         'virtual-badge',
   title:        'Getting reps on doors weeks sooner',
-  company:      'Dish One',
+  company:      'GoldPoint Systems',
   industry:     'Field Sales',
   eyebrow:      'Field Sales · Internal Tools',
   role:         'UX Designer · Pitched and led',
