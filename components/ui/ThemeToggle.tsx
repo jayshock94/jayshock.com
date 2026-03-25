@@ -1,7 +1,6 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
-import LogoSVG from '@/components/ui/LogoSVG'
 
 /**
  * Fires the shockwave transition:
@@ -19,10 +18,8 @@ function fireShockwave(
   const startSize = 60
   const scale     = (maxDim * 2.4) / startSize
 
-  // Enable smooth token transitions across the entire document
   document.documentElement.classList.add('theme-transitioning')
 
-  // Single soft radial wave — z-index 0 keeps it behind all page content (z-index 1)
   const wave = document.createElement('div')
   Object.assign(wave.style, {
     position:      'fixed',
@@ -48,14 +45,12 @@ function fireShockwave(
     )
     .finished.then(() => wave.remove())
 
-  // Apply theme near the wave's midpoint so the color shift feels connected
   setTimeout(onApplyTheme, 80)
-
-  // Remove transition class after tokens have settled
   setTimeout(() => {
     document.documentElement.classList.remove('theme-transitioning')
   }, 700)
 }
+
 
 export default function ThemeToggle() {
   const [isDark, setIsDark] = useState(true)
@@ -72,7 +67,7 @@ export default function ThemeToggle() {
     }
   }, [])
 
-  const toggle = useCallback(() => {
+const toggle = useCallback(() => {
     const btn = buttonRef.current
     if (!btn) return
 
@@ -81,7 +76,6 @@ export default function ThemeToggle() {
     const originX = rect.left + rect.width  / 2
     const originY = rect.top  + rect.height / 2
 
-    // Button micro-bounce — springy feel
     btn.animate(
       [
         { transform: 'scale(1)'    },
@@ -95,10 +89,10 @@ export default function ThemeToggle() {
       setIsDark(next)
       if (next) {
         document.documentElement.setAttribute('data-theme', 'dark')
-        localStorage.removeItem('theme') // dark is default — no need to persist
+        localStorage.removeItem('theme')
       } else {
         document.documentElement.removeAttribute('data-theme')
-        localStorage.setItem('theme', 'light') // only persist the non-default choice
+        localStorage.setItem('theme', 'light')
       }
     })
   }, [isDark])
@@ -109,16 +103,18 @@ export default function ThemeToggle() {
       onClick={toggle}
       aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
       style={{
-        display:      'inline-flex',
-        alignItems:   'center',
-        gap:          '10px',
-        background:   'var(--color-badge-bg)',
-        padding:      '10px 22px',
-        borderRadius: '40px',
-        border:       'none',
-        cursor:       'pointer',
-        boxShadow:    'inset 0 1px 0 rgba(255,255,255,0.10)',
-        transition:   'opacity 0.2s ease',
+        position:             'relative',
+        display:              'inline-flex',
+        alignItems:           'center',
+        gap:                  '6px',
+        padding:              '9px 18px',
+        borderRadius:         '40px',
+        border:               '0.5px solid var(--color-border)',
+        cursor:               'pointer',
+        background:           'var(--color-badge-bg)',
+        backdropFilter:       'none',
+        WebkitBackdropFilter: 'none',
+        boxShadow:            '0 1px 3px rgba(28,25,23,0.06), inset 0 1px 0 rgba(255,255,255,0.12)',
       }}
       onMouseEnter={e => (e.currentTarget.style.opacity = '0.85')}
       onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
@@ -126,38 +122,29 @@ export default function ThemeToggle() {
       <span
         style={{
           fontFamily:    'var(--font-outfit), system-ui, sans-serif',
-          fontSize:      '20px',
-          fontWeight:    800,
+          fontSize:      '16px',
+          fontWeight:    600,
           color:         'var(--color-badge-fg)',
-          letterSpacing: '-0.02em',
+          letterSpacing: '-0.01em',
           lineHeight:    1,
           userSelect:    'none',
         }}
       >
-        Jay
+        Jay Shock
       </span>
-
       <span
         aria-hidden="true"
         style={{
-          display:    'block',
-          width:      '1px',
-          height:     '16px',
-          background: 'var(--color-badge-divider)',
-          flexShrink: 0,
-        }}
-      />
-
-      <span
-        style={{
-          display:    'block',
-          width:      '88px',
-          color:      'var(--color-badge-fg)',
-          lineHeight: 0,
-          flexShrink: 0,
+          fontFamily:    'var(--font-outfit), system-ui, sans-serif',
+          fontSize:      '16px',
+          fontWeight:    400,
+          color:         'var(--color-text-muted)',
+          letterSpacing: '0em',
+          lineHeight:    1,
+          userSelect:    'none',
         }}
       >
-        <LogoSVG />
+        — Product Designer
       </span>
     </button>
   )

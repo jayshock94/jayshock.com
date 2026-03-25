@@ -56,6 +56,30 @@ body::before {
   z-index: 0;
 }
 
+/* Page load ambient bloom — impact-hue tint radiates from the hero
+   origin then fades completely. One transient color event on arrival,
+   gone before you start reading. */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 70% 50% at 30% 18%,
+    var(--phase-impact-label) 0%,
+    transparent 65%
+  );
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+  animation: page-bloom 2200ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes page-bloom {
+  0%   { opacity: 0;    }
+  18%  { opacity: 0.05; }
+  100% { opacity: 0;    }
+}
+
 /* All content must sit above the vignette layer */
 body > * {
   position: relative;
@@ -281,6 +305,7 @@ body > * {
   border-top: 0.5px solid var(--color-border);
   border-radius: 0;
   overflow: hidden;
+  animation: drawer-enter 220ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 @media (min-width: 768px) {
@@ -320,4 +345,174 @@ html.theme-transitioning *::after {
     background-color 0.55s ease,
     border-color     0.45s ease,
     color            0.35s ease !important;
+}
+
+/* -----------------------------------------------------------
+   HERO ENTRANCE
+   Staggered fade-up with a soft blur-clear.
+   animation-fill-mode: both —
+     backwards: holds "from" state during animation-delay
+     forwards:  holds "to" state after animation ends
+   Apply .hero-fade-up + animation-delay inline per element.
+----------------------------------------------------------- */
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0px);
+  }
+}
+
+.hero-fade-up {
+  animation: hero-fade-up 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* -----------------------------------------------------------
+   NAV LOGO ENTER
+   Slides in from left on first nav mount.
+   CSS animation fires once — no JS required.
+----------------------------------------------------------- */
+@keyframes nav-logo-enter {
+  from { opacity: 0; transform: translateX(-10px); }
+  to   { opacity: 1; transform: translateX(0);     }
+}
+
+.nav-logo-enter {
+  animation: nav-logo-enter 500ms cubic-bezier(0.22, 1, 0.36, 1) 60ms both;
+}
+
+/* -----------------------------------------------------------
+   MOBILE DRAWER ENTER
+   Slides down when the drawer opens.
+   Applied directly on .nav-drawer so it plays each open.
+----------------------------------------------------------- */
+@keyframes drawer-enter {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+/* -----------------------------------------------------------
+   SCROLL REVEAL SYSTEM
+   data-reveal="hidden"  → invisible (set in SSR HTML)
+   data-reveal="visible" → transitions in
+   ScrollReveal.tsx (client) flips the attribute via
+   IntersectionObserver. Delay is handled via setTimeout.
+----------------------------------------------------------- */
+[data-reveal="hidden"] {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+[data-reveal="visible"] {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity   600ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* -----------------------------------------------------------
+   HERO WORD REVEAL
+   Staggered word-by-word entrance. Clean fade-up with a soft
+   blur-clear — no color flash per word. Color belongs to the
+   brand pill, not the headline. Delay applied inline per word.
+----------------------------------------------------------- */
+.hero-word {
+  display: inline;
+  animation: hero-word-enter 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes hero-word-enter {
+  from { opacity: 0; transform: translateY(8px); filter: blur(2px); }
+  to   { opacity: 1; transform: translateY(0);   filter: blur(0);   }
+}
+
+/* -----------------------------------------------------------
+   JAY SHOCK PILL REVEAL
+   Same left-to-right reveal as the hero words. The pill clips
+   in from left to right while a phase gradient sweeps through
+   it — impact purple enters first, solution slate exits last.
+   Once the gradient leaves, the pill sits in its normal state.
+
+   .pill-reveal          — the containing wrapper (clips to pill shape)
+   .pill-reveal-gradient — the color sweep layer
+   Both animations fire at 1250ms, after the headline settles.
+----------------------------------------------------------- */
+.pill-reveal {
+  display:       inline-flex;
+  position:      relative;
+  border-radius: 40px;
+  overflow:      hidden;
+  animation:     pill-reveal-clip 550ms cubic-bezier(0.22, 1, 0.36, 1) 80ms both;
+}
+
+.pill-reveal-gradient {
+  position:       absolute;
+  inset:          0;
+  background: linear-gradient(
+    90deg,
+    var(--phase-impact-label)    0%,
+    var(--phase-problem-label)   33%,
+    var(--phase-discovery-label) 66%,
+    var(--phase-solution-label)  100%
+  );
+  pointer-events: none;
+  z-index:        20;
+  mix-blend-mode: color;
+  animation:      pill-reveal-gradient-sweep 1000ms cubic-bezier(0.22, 1, 0.36, 1) 60ms both;
+}
+
+@keyframes pill-reveal-clip {
+  from { clip-path: inset(0 100% 0 0 round 40px); }
+  to   { clip-path: inset(0 0%   0 0 round 40px); }
+}
+
+@keyframes pill-reveal-gradient-sweep {
+  0%   { transform: translateX(-110%); opacity: 1;   }
+  45%  { transform: translateX(-5%);   opacity: 1;   }
+  100% { transform: translateX(110%);  opacity: 0;   }
+}
+
+/* -----------------------------------------------------------
+   REDUCED MOTION — respect system preference
+----------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .hero-fade-up,
+  .nav-logo-enter {
+    animation: none;
+  }
+
+  body::after {
+    animation: none;
+    opacity: 0;
+  }
+
+  [data-reveal="hidden"] {
+    opacity: 1;
+    transform: none;
+  }
+
+  [data-reveal="visible"] {
+    transition: none;
+  }
+
+  .hero-word {
+    animation: none;
+    opacity: 1;
+    filter: none;
+  }
+
+  .pill-reveal {
+    animation: none;
+    clip-path: none;
+  }
+
+  .pill-reveal-gradient {
+    display: none;
+  }
 }

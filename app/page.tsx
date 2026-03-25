@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import Button       from '@/components/ui/Button'
-import WorkCard     from '@/components/work/WorkCard'
-import ThemeToggle  from '@/components/ui/ThemeToggle'
-import HowIWork     from '@/components/about/HowIWork'
+import Button        from '@/components/ui/Button'
+import WorkCard      from '@/components/work/WorkCard'
+import ThemeToggle   from '@/components/ui/ThemeToggle'
+import HowIWork      from '@/components/about/HowIWork'
+import ScrollReveal  from '@/components/ui/ScrollReveal'
 import { caseStudies } from '@/data/case-studies'
 
 export const metadata: Metadata = {
@@ -31,28 +32,46 @@ export default function HomePage() {
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
 
-          {/* Brand badge — dark mode toggle */}
+          {/* Brand badge — reveals left to right with phase color sweep at 1250ms */}
           <div className="mb-[32px] flex justify-center md:justify-start">
-            <ThemeToggle />
+            <div className="pill-reveal">
+              <div aria-hidden="true" className="pill-reveal-gradient" />
+              <ThemeToggle />
+            </div>
           </div>
 
-          {/* Mixed weight headline */}
+          {/* Headline — word-by-word reveal, phase colors sweep left to right */}
           <h1
             className="text-display mb-[20px] text-center md:text-left"
             style={{ maxWidth: '900px' }}
           >
-            <span style={{ fontWeight: 300, color: 'var(--color-text-muted)' }}>I make </span>
-            <span style={{ fontWeight: 700, color: 'var(--color-ink)' }}>complex products </span>
-            <span style={{ fontWeight: 300, color: 'var(--color-text-muted)' }}>feel like they were always </span>
-            <span style={{ fontWeight: 700, color: 'var(--color-ink)' }}>simple.</span>
+            <span style={{ fontWeight: 300, color: 'var(--color-text-muted)' }}>
+              <span className="hero-word hero-word--w0" style={{ animationDelay: '500ms'  }}>I </span>
+              <span className="hero-word hero-word--w1" style={{ animationDelay: '560ms'  }}>make </span>
+            </span>
+            <span style={{ fontWeight: 700, color: 'var(--color-ink)' }}>
+              <span className="hero-word hero-word--w2" style={{ animationDelay: '620ms'  }}>complex </span>
+              <span className="hero-word hero-word--w3" style={{ animationDelay: '680ms'  }}>products </span>
+            </span>
+            <span style={{ fontWeight: 300, color: 'var(--color-text-muted)' }}>
+              <span className="hero-word hero-word--w4" style={{ animationDelay: '740ms'  }}>feel </span>
+              <span className="hero-word hero-word--w5" style={{ animationDelay: '800ms'  }}>like </span>
+              <span className="hero-word hero-word--w6" style={{ animationDelay: '860ms'  }}>they </span>
+              <span className="hero-word hero-word--w7" style={{ animationDelay: '920ms'  }}>were </span>
+              <span className="hero-word hero-word--w8" style={{ animationDelay: '980ms'  }}>always </span>
+            </span>
+            <span style={{ fontWeight: 700, color: 'var(--color-ink)' }}>
+              <span className="hero-word hero-word--w9" style={{ animationDelay: '1040ms' }}>simple.</span>
+            </span>
           </h1>
 
           {/* Subline */}
           <p
-            className="text-body-lg mb-[36px] text-center md:text-left"
+            className="text-body-lg mb-[36px] text-center md:text-left hero-fade-up"
             style={{
-              color:    'var(--color-text-muted)',
-              maxWidth: '480px',
+              color:          'var(--color-text-muted)',
+              maxWidth:       '480px',
+              animationDelay: '900ms',  /* arrives as headline finishes */
             }}
           >
             Product designer with 8 plus years in fintech and enterprise SaaS.
@@ -61,7 +80,10 @@ export default function HomePage() {
           </p>
 
           {/* CTAs */}
-          <div className="flex flex-wrap gap-[12px] items-center justify-center md:justify-start">
+          <div
+            className="flex flex-wrap gap-[12px] items-center justify-center md:justify-start hero-fade-up"
+            style={{ animationDelay: '1100ms' }}
+          >
             <Button variant="primary" href="/api/resume" download>
               Download resume
             </Button>
@@ -83,12 +105,14 @@ export default function HomePage() {
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
 
-          <p
-            className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-md)]"
-            id="work-eyebrow"
-          >
-            Selected Work
-          </p>
+          <ScrollReveal>
+            <p
+              className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-md)]"
+              id="work-eyebrow"
+            >
+              Selected Work
+            </p>
+          </ScrollReveal>
 
           <h2 id="work-heading" className="sr-only">
             Featured case studies
@@ -101,8 +125,10 @@ export default function HomePage() {
               lg:grid-cols-3
             "
           >
-            {featured.map(cs => (
-              <WorkCard key={cs.slug} caseStudy={cs} />
+            {featured.map((cs, i) => (
+              <ScrollReveal key={cs.slug} delay={i * 120} className="h-full">
+                <WorkCard caseStudy={cs} />
+              </ScrollReveal>
             ))}
           </div>
 
@@ -117,9 +143,11 @@ export default function HomePage() {
         aria-label="How I work"
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
-          <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
-            <HowIWork />
-          </div>
+          <ScrollReveal>
+            <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
+              <HowIWork />
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -131,22 +159,24 @@ export default function HomePage() {
         aria-label="Contact"
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
-          <div
-            className="
-              max-w-content
-              border-t border-[var(--color-border)]
-              pt-[var(--space-section-sm)]
-            "
-          >
-            <p className="text-body-lg text-[var(--color-text-secondary)] mb-[var(--space-stack-lg)]">
-              Whether you are looking for a senior product designer or a
-              partner for a complex problem, I want to hear about it.
-            </p>
+          <ScrollReveal>
+            <div
+              className="
+                max-w-content
+                border-t border-[var(--color-border)]
+                pt-[var(--space-section-sm)]
+              "
+            >
+              <p className="text-body-lg text-[var(--color-text-secondary)] mb-[var(--space-stack-lg)]">
+                Whether you are looking for a senior product designer or a
+                partner for a complex problem, I want to hear about it.
+              </p>
 
-            <Button variant="primary" href="/contact">
-              Get in touch
-            </Button>
-          </div>
+              <Button variant="primary" href="/contact">
+                Get in touch
+              </Button>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
     </>

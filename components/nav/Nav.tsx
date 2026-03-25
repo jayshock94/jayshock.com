@@ -60,31 +60,6 @@ export default function Nav() {
                 <LogoSVG />
               </span>
 
-              <span
-                aria-hidden="true"
-                style={{
-                  display:    'block',
-                  width:      '1px',
-                  height:     '14px',
-                  background: 'var(--color-border-mid)',
-                  flexShrink: 0,
-                }}
-              />
-
-              <span
-                className="hidden sm:block"
-                style={{
-                  fontFamily:    'var(--font-outfit), system-ui, sans-serif',
-                  fontSize:      '12px',
-                  fontWeight:    400,
-                  color:         'var(--color-text-muted)',
-                  letterSpacing: '0.02em',
-                  userSelect:    'none',
-                  whiteSpace:    'nowrap',
-                }}
-              >
-                Product Designer
-              </span>
             </Link>
 
             {/* Desktop links + CTA */}
