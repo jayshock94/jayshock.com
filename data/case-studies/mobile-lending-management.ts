@@ -23,7 +23,7 @@ const mobileLendingManagement: CaseStudy = {
   brandColorHex: '#C01C2C',
 
   overview:
-    'I owned research and design end to end. Product owners handled direct contact with lender teams — I worked closely with them to shape what to ask and what to bring back.',
+    'I owned research and design end to end. Product owners had direct contact with lender teams. I worked closely with them to shape what to ask and what to bring back.',
 
   // Hero image — composite of key screens across device mockups
   heroImage: 'Hero: app overview — home screen, payment flow, and confirmation screen across device mockups',
