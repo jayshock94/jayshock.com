@@ -4,7 +4,7 @@ import PaymentSuccessAnimation from '@/components/case-study/PaymentSuccessAnima
 /**
  * Two-phone composition for the mobile-lending WorkCard.
  * Account details (front) + Payment success (behind).
- * Matches the hero layout style at card scale.
+ * Phones align to top with breathing room — bottoms clip naturally.
  */
 export default function MobileLendingCardImage() {
   return (
@@ -12,13 +12,11 @@ export default function MobileLendingCardImage() {
       style={{
         position:       'relative',
         display:        'flex',
-        alignItems:     'flex-end',
+        alignItems:     'flex-start',
         justifyContent: 'center',
         width:          '100%',
         height:         '100%',
-        paddingTop:     '40px',
-        paddingBottom:  '-20px',
-        marginBottom:   '-28px',
+        paddingTop:     '28px',
       }}
     >
       {/* Back phone — payment success */}
@@ -26,7 +24,7 @@ export default function MobileLendingCardImage() {
         style={{
           position:     'relative',
           marginRight:  '-18px',
-          marginBottom: '16px',
+          marginTop:    '20px',
           transform:    'rotate(-4deg)',
           zIndex:       1,
           flexShrink:   0,
