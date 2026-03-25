@@ -73,7 +73,7 @@ export default function CaseStudyHero({ caseStudy, tokens, heroImageSlot }: Case
           {/* Right — hero image slot */}
           {heroImageSlot && (
             <div
-              className="flex min-h-[300px] md:min-h-[420px]"
+              className="flex min-h-[340px] md:min-h-[420px]"
               style={{
                 justifyContent: 'center',
                 alignItems:     'flex-end',
