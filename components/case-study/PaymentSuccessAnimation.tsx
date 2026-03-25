@@ -53,21 +53,21 @@ interface ConfettiPiece {
 const CONFETTI_COLORS = [RED, '#ff4d4d', '#ff9999', '#ffd6cc', '#ffffff', '#ffb3b3']
 
 function makeConfetti(ox: number, oy: number): ConfettiPiece[] {
-  return Array.from({ length: 26 }, (_, i) => {
-    const angle = ((i / 26) * 360 + Math.random() * 14) * (Math.PI / 180)
-    const speed = 22 + Math.random() * 32
+  return Array.from({ length: 36 }, (_, i) => {
+    const angle = ((i / 36) * 360 + Math.random() * 10) * (Math.PI / 180)
+    const speed = 35 + Math.random() * 65
     return {
       id:    i,
       x:     ox,
       y:     oy,
       dx:    `${(Math.cos(angle) * speed).toFixed(1)}px`,
-      dy:    `${(Math.sin(angle) * speed + 38).toFixed(1)}px`,
-      rot:   `${(Math.random() - 0.5) * 540}deg`,
-      w:     2.5 + Math.random() * 3,
-      h:     1.5 + Math.random() * 2.5,
+      dy:    `${(Math.sin(angle) * speed).toFixed(1)}px`,
+      rot:   `${(Math.random() - 0.5) * 720}deg`,
+      w:     3 + Math.random() * 4,
+      h:     2 + Math.random() * 3,
       color: CONFETTI_COLORS[i % CONFETTI_COLORS.length],
-      delay: Math.floor(Math.random() * 180),
-      dur:   800 + Math.floor(Math.random() * 500),
+      delay: Math.floor(Math.random() * 120),
+      dur:   900 + Math.floor(Math.random() * 600),
     }
   })
 }
@@ -164,17 +164,18 @@ export default function PaymentSuccessAnimation() {
         }
       `}</style>
 
+      {/*
+        Outer wrapper: establishes position context for confetti.
+        No overflow:hidden here — confetti bursts beyond the phone edges.
+      */}
       <div style={{
-        width:        DISP_W,
-        height:       DISP_H,
-        position:     'relative',
-        overflow:     'hidden',
-        borderRadius: '24px',
-        flexShrink:   0,
-        boxShadow:    '0 20px 60px rgba(0,0,0,0.35)',
+        width:      DISP_W,
+        height:     DISP_H,
+        position:   'relative',
+        flexShrink: 0,
       }}>
 
-        {/* ── Confetti layer (display coordinate space) ── */}
+        {/* ── Confetti layer — overflows phone frame intentionally ── */}
         {confetti.map(p => (
           <div
             key={p.id}
@@ -190,11 +191,23 @@ export default function PaymentSuccessAnimation() {
               borderRadius:    1,
               backgroundColor: p.color,
               animation:       `confettiFly ${p.dur}ms ease-out ${p.delay}ms both`,
-              zIndex:          10,
+              zIndex:          20,
               pointerEvents:   'none',
             } as React.CSSProperties}
           />
         ))}
+
+        {/* ── Phone frame — clips screen content but NOT confetti ── */}
+        <div style={{
+          position:     'absolute',
+          top:          0,
+          left:         0,
+          width:        DISP_W,
+          height:       DISP_H,
+          overflow:     'hidden',
+          borderRadius: '24px',
+          boxShadow:    '0 20px 60px rgba(0,0,0,0.35)',
+        }}>
 
         {/* ── Scaled design canvas (440×951px → 130×281px) ── */}
         <div style={{
@@ -433,7 +446,8 @@ export default function PaymentSuccessAnimation() {
           </div>
 
         </div>
-      </div>
+        </div> {/* end phone frame */}
+      </div>   {/* end outer wrapper */}
     </>
   )
 }
