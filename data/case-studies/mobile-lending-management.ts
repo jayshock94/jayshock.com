@@ -22,6 +22,9 @@ const mobileLendingManagement: CaseStudy = {
   // Lendmark crimson — extracted from brand image, run through color algorithm
   brandColorHex: '#C01C2C',
 
+  context:
+    'GAC is a white-label loan management platform used by lenders across the US. Borrowers use it to make payments, set up autopay, and manage loans across powersports, auto, home, and personal lending. The app had not been updated in years and lenders were starting to look elsewhere.',
+
   overview:
     'I owned the full process: research, prototyping, testing, and design end to end. Product owners had direct contact with lender teams. I worked closely with them to shape what to ask and what to bring back.',
 
@@ -31,7 +34,12 @@ const mobileLendingManagement: CaseStudy = {
   impact: {
     headline: 'Borrowers stopped calling. They just managed it themselves.',
     paragraphs: [
-      'Client teams reported fewer missed payments, less pressure on support lines, and borrowers coming back for second loans. That hadn\'t happened with the old system.',
+      'Borrowers were figuring things out on their own. That hadn\'t happened with the old system. Client teams reported fewer missed payments, less pressure on support lines, and borrowers coming back for second loans.',
+      'GAC is a white-label loan management platform used by lenders across the US. Borrowers use it to make payments, set up autopay, manage documents, and track loans across powersports, auto, home, and personal lending.',
+    ],
+    stats: [
+      { value: '5+',    label: 'Lenders on platform', estimated: false },
+      { value: '~3 mo', label: 'Design to handoff',   estimated: false },
     ],
     images: [
       {

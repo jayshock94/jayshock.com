@@ -8,7 +8,7 @@ interface CaseStudyHeroProps {
 }
 
 export default function CaseStudyHero({ caseStudy, tokens, heroImageSlot }: CaseStudyHeroProps) {
-  const { title, eyebrow, role, year, types, impact, overview } = caseStudy
+  const { title, eyebrow, role, year, types, impact, overview, context } = caseStudy
 
   return (
     <>
@@ -98,29 +98,57 @@ export default function CaseStudyHero({ caseStudy, tokens, heroImageSlot }: Case
         </div>
       </section>
 
-      {/* ── Zone 2: Overview strip ──────────────────────────────────── */}
+      {/* ── Zone 2: Overview section ────────────────────────────────── */}
       <section
         className="bg-[var(--color-canvas)]"
-        style={{ paddingTop: 'var(--space-section-sm)', paddingBottom: 'var(--space-section-sm)' }}
+        style={{ paddingTop: 'var(--space-section-md)', paddingBottom: 'var(--space-section-md)' }}
+        aria-label="Project overview"
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
-          {/* Overview paragraph */}
-          {overview && (
-            <p className="text-body text-[var(--color-text-secondary)] mb-[var(--space-stack-lg)] max-w-content">
-              {overview}
-            </p>
+
+          {/* Two-column overview grid */}
+          {(context || overview) && (
+            <div
+              className="grid gap-x-[var(--space-stack-lg)] gap-y-[var(--space-stack-lg)] mb-[var(--space-stack-lg)]"
+              style={{ gridTemplateColumns: context && overview ? '1fr 1fr' : '1fr' }}
+            >
+              {context && (
+                <div>
+                  <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-sm)]">
+                    Project
+                  </p>
+                  <p className="text-body-lg text-[var(--color-text-primary)]">
+                    {context}
+                  </p>
+                </div>
+              )}
+              {overview && (
+                <div>
+                  <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-sm)]">
+                    My role
+                  </p>
+                  <p className="text-body-lg text-[var(--color-text-primary)]">
+                    {overview}
+                  </p>
+                </div>
+              )}
+            </div>
           )}
 
           {/* Impact snapshot */}
           {impact.stats && impact.stats.length > 0 && (
             <div
-              className="flex flex-wrap gap-x-[var(--space-stack-lg)] gap-y-[var(--space-stack-md)]"
+              className="
+                border-t border-[var(--color-border)]
+                pt-[var(--space-stack-lg)]
+                flex flex-wrap gap-x-[var(--space-stack-lg)] gap-y-[var(--space-stack-md)]
+              "
               role="list"
               aria-label="Impact at a glance"
             >
               {impact.stats.map((stat, i) => (
                 <div key={i} role="listitem">
-                  <p className="text-h3 text-[var(--color-ink)] mb-[var(--space-component-xs)]">
+                  <p className="text-h2 text-[var(--color-ink)] mb-[var(--space-component-xs)]">
                     {stat.value}
                   </p>
                   <p className="text-body-sm text-[var(--color-text-muted)]">
@@ -130,6 +158,7 @@ export default function CaseStudyHero({ caseStudy, tokens, heroImageSlot }: Case
               ))}
             </div>
           )}
+
         </div>
       </section>
     </>

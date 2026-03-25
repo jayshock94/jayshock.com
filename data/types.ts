@@ -76,8 +76,13 @@ export interface CaseStudy {
    */
   brandColorHex: string
   /**
-   * Optional short context note shown in the hero below the meta row.
-   * Use for project-specific role or scope details not covered by the role field.
+   * Brief project context — what the product is and why it needed work.
+   * Shown in the overview section as the "Project" column.
+   */
+  context?: string
+  /**
+   * Role description — what the designer owned on this project.
+   * Shown in the overview section as the "My role" column.
    */
   overview?: string
   /**
