@@ -30,7 +30,7 @@ export default function MobileLendingCardImage() {
           flexShrink:   0,
         }}
       >
-        <PaymentSuccessAnimation />
+        <PaymentSuccessAnimation static />
       </div>
 
       {/* Front phone — account details */}

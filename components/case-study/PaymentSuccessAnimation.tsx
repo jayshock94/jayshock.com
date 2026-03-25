@@ -105,11 +105,18 @@ function StatusBar() {
 
 // ── Main component ─────────────────────────────────────────────────────────
 
-export default function PaymentSuccessAnimation() {
-  const [phase,    setPhase]    = useState<Phase>('idle')
+interface PaymentSuccessAnimationProps {
+  /** When true, renders the final success state with no animation. */
+  static?: boolean
+}
+
+export default function PaymentSuccessAnimation({ static: isStatic }: PaymentSuccessAnimationProps = {}) {
+  const [phase,    setPhase]    = useState<Phase>(isStatic ? 'success' : 'idle')
   const [confetti, setConfetti] = useState<ConfettiPiece[]>([])
 
   useEffect(() => {
+    if (isStatic) return
+
     let alive = true
     const timers: ReturnType<typeof setTimeout>[] = []
 
@@ -119,15 +126,13 @@ export default function PaymentSuccessAnimation() {
     }
 
     after(() => setPhase('pressing'), 900)
-    // Confetti and success phase fire together — confetti bursts from empty center,
-    // then checkmark pops into that same spot 150ms later
     after(() => {
       setPhase('success')
       setConfetti(makeConfetti(DISP_W / 2, DISP_H * 0.28))
     }, 1400)
 
     return () => { alive = false; timers.forEach(clearTimeout) }
-  }, [])
+  }, [isStatic])
 
   // Staggered reveal helper — each content element uses this
   const reveal = (delayMs: number, durationMs = 350): React.CSSProperties =>
