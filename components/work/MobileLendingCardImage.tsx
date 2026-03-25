@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import PaymentSuccessAnimation from '@/components/case-study/PaymentSuccessAnimation'
 
 /**
  * Two-phone composition for the mobile-lending WorkCard.
@@ -23,14 +22,25 @@ export default function MobileLendingCardImage() {
       <div
         style={{
           position:     'relative',
+          width:        '120px',
+          height:       '260px',
+          borderRadius: '20px',
+          overflow:     'hidden',
+          flexShrink:   0,
           marginRight:  '-18px',
           marginTop:    '20px',
           transform:    'rotate(-4deg)',
+          boxShadow:    '0 16px 48px rgba(0,0,0,0.30), 0 0 0 1px rgba(255,255,255,0.10)',
           zIndex:       1,
-          flexShrink:   0,
         }}
       >
-        <PaymentSuccessAnimation static />
+        <Image
+          src="/images/mobile/Account details-5.png"
+          alt="Payment submitted successfully — $505.38 confirmed"
+          fill
+          sizes="120px"
+          style={{ objectFit: 'cover', objectPosition: 'top' }}
+        />
       </div>
 
       {/* Front phone — account details */}
@@ -48,7 +58,7 @@ export default function MobileLendingCardImage() {
         }}
       >
         <Image
-          src="/images/mobile/Account details.png"
+          src="/images/mobile/Lendmark account overview.png"
           alt="Account details — loan dashboard with balance and payment options"
           fill
           sizes="140px"
