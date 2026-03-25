@@ -16,6 +16,7 @@ export interface ColorTokenSet {
   text: string
   canvas: string
   nav: string
+  heroZone: string
   // Dark mode equivalents — applied when data-theme="dark"
   darkCanvas: string
   darkBg:     string
@@ -204,6 +205,9 @@ export function generateTokens(inputHex: string): ColorTokenSet {
     darkLabelHex = oklchToHex(darkLabelL, CONSTRAINTS.dark.label.chroma, hue)
   }
 
+  // Hero zone — vivid brand color for full-bleed hero background
+  const heroZone = oklchToHex(0.46, 0.20, hue)
+
   return {
     bg,
     border,
@@ -211,6 +215,7 @@ export function generateTokens(inputHex: string): ColorTokenSet {
     text:        INK,
     canvas,
     nav,
+    heroZone,
     darkCanvas,
     darkBg,
     darkBorder,

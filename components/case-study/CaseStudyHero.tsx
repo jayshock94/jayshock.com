@@ -8,98 +8,113 @@ interface CaseStudyHeroProps {
 }
 
 export default function CaseStudyHero({ caseStudy, tokens, heroImageSlot }: CaseStudyHeroProps) {
-  const { title, eyebrow, role, year, types, impact, heroImage, overview } = caseStudy
+  const { title, eyebrow, role, year, types, impact, overview } = caseStudy
 
   return (
-    <section
-      className="pt-[var(--space-section-lg)] pb-[var(--space-section-md)]"
-      style={
-        {
-          // Light-mode values
-          '--case-canvas-light': tokens.canvas,
-          '--case-label-light':  tokens.label,
-          '--case-border-light': tokens.border,
-          '--case-bg-light':     tokens.bg,
-          // Dark-mode values
-          '--case-canvas-dark':  tokens.darkCanvas,
-          '--case-label-dark':   tokens.darkLabel,
-          '--case-border-dark':  tokens.darkBorder,
-          '--case-bg-dark':      tokens.darkBg,
-          backgroundColor: 'transparent',
-        } as React.CSSProperties
-      }
-      aria-label="Case study overview"
-    >
-      <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
-        <div className="max-w-content">
-
-          {/* Eyebrow */}
-          <p
-            className="text-label mb-[var(--space-stack-sm)]"
-            style={{ color: 'var(--case-label)' }}
-          >
-            {eyebrow}
-          </p>
-
-          {/* Title */}
-          <h1 className="text-h1 text-[var(--color-ink)] mb-[var(--space-stack-md)]">
-            {title}
-          </h1>
-
-          {/* Meta row — role · year */}
-          <div className="flex flex-wrap gap-x-[var(--space-component-lg)] gap-y-[var(--space-component-xs)] mb-[var(--space-stack-lg)]">
-            <span className="text-body-sm text-[var(--color-text-secondary)]">
-              {role}
-            </span>
-            <span
-              className="text-body-sm text-[var(--color-text-muted)]"
-              aria-hidden="true"
+    <>
+      {/* ── Zone 1: Brand color hero band ───────────────────────────── */}
+      <section
+        style={{ background: tokens.heroZone, position: 'relative', overflow: 'visible' }}
+        aria-label="Case study overview"
+      >
+        <div
+          className="max-w-layout mx-auto px-[var(--space-page-margin)]"
+          style={{
+            display:             'grid',
+            gridTemplateColumns: '55fr 45fr',
+            gap:                 'var(--space-stack-lg)',
+            alignItems:          'center',
+            minHeight:           '420px',
+            paddingTop:          'var(--space-section-md)',
+            paddingBottom:       'var(--space-section-md)',
+          }}
+        >
+          {/* Left — text */}
+          <div>
+            {/* Eyebrow */}
+            <p
+              className="text-label mb-[var(--space-stack-sm)]"
+              style={{ color: 'rgba(255,255,255,0.65)' }}
             >
-              ·
-            </span>
-            <span className="text-body-sm text-[var(--color-text-muted)]">
-              {year}
-            </span>
+              {eyebrow}
+            </p>
+
+            {/* Title */}
+            <h1
+              className="text-h1 mb-[var(--space-stack-md)]"
+              style={{ color: '#FFFFFF' }}
+            >
+              {title}
+            </h1>
+
+            {/* Meta row — role · year */}
+            <div
+              className="flex flex-wrap gap-x-[var(--space-component-lg)] gap-y-[var(--space-component-xs)] mb-[var(--space-stack-lg)]"
+            >
+              <span className="text-body-sm" style={{ color: 'rgba(255,255,255,0.80)' }}>
+                {role}
+              </span>
+              <span className="text-body-sm" style={{ color: 'rgba(255,255,255,0.45)' }} aria-hidden="true">·</span>
+              <span className="text-body-sm" style={{ color: 'rgba(255,255,255,0.55)' }}>
+                {year}
+              </span>
+            </div>
+
+            {/* Type tags */}
+            {types.length > 0 && (
+              <div className="flex flex-wrap gap-[var(--space-component-xs)]" aria-label="Project type tags">
+                {types.map(tag => (
+                  <span
+                    key={tag}
+                    className="text-ui-sm px-[10px] py-[4px] rounded-[4px]"
+                    style={{
+                      color:           'rgba(255,255,255,0.80)',
+                      border:          '1px solid rgba(255,255,255,0.25)',
+                      backgroundColor: 'rgba(255,255,255,0.10)',
+                    }}
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
 
-          {/* Type tags */}
-          {types.length > 0 && (
+          {/* Right — hero image slot */}
+          {heroImageSlot && (
             <div
-              className="flex flex-wrap gap-[var(--space-component-xs)] mb-[var(--space-stack-lg)]"
-              aria-label="Project type tags"
+              style={{
+                display:        'flex',
+                justifyContent: 'center',
+                alignItems:     'flex-end',
+                height:         '100%',
+                minHeight:      '420px',
+                overflow:       'visible',
+              }}
             >
-              {types.map(tag => (
-                <span
-                  key={tag}
-                  className="text-ui-sm px-[10px] py-[4px] rounded-[4px] border"
-                  style={{
-                    color:           'var(--case-label)',
-                    borderColor:     'var(--case-border)',
-                    backgroundColor: 'var(--case-bg)',
-                  }}
-                >
-                  {tag}
-                </span>
-              ))}
+              {heroImageSlot}
             </div>
           )}
+        </div>
+      </section>
 
-          {/* Overview — project-specific role or scope note */}
+      {/* ── Zone 2: Overview strip ──────────────────────────────────── */}
+      <section
+        className="bg-[var(--color-canvas)]"
+        style={{ paddingTop: 'var(--space-section-sm)', paddingBottom: 'var(--space-section-sm)' }}
+      >
+        <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
+          {/* Overview paragraph */}
           {overview && (
-            <p className="text-body text-[var(--color-text-secondary)] mb-[var(--space-stack-lg)]">
+            <p className="text-body text-[var(--color-text-secondary)] mb-[var(--space-stack-lg)] max-w-content">
               {overview}
             </p>
           )}
 
-          {/* Impact snapshot — quick metrics before the full story */}
+          {/* Impact snapshot */}
           {impact.stats && impact.stats.length > 0 && (
             <div
-              className="
-                border-t border-[var(--color-border)]
-                pt-[var(--space-stack-lg)]
-                mb-[var(--space-stack-lg)]
-                flex flex-wrap gap-x-[var(--space-stack-lg)] gap-y-[var(--space-stack-md)]
-              "
+              className="flex flex-wrap gap-x-[var(--space-stack-lg)] gap-y-[var(--space-stack-md)]"
               role="list"
               aria-label="Impact at a glance"
             >
@@ -115,28 +130,8 @@ export default function CaseStudyHero({ caseStudy, tokens, heroImageSlot }: Case
               ))}
             </div>
           )}
-
-          {/* Hero image — full-width showcase */}
-          {(heroImageSlot ?? heroImage) && (
-            <div
-              className="w-full rounded-[12px] overflow-hidden"
-              style={{
-                background:  heroImageSlot ? 'var(--color-ink)' : 'var(--color-surface)',
-                aspectRatio: heroImageSlot ? '3/2' : '16/9',
-              }}
-            >
-              {heroImageSlot ?? (
-                <div className="flex items-center justify-center w-full h-full p-[var(--space-component-lg)]">
-                  <p className="text-body-sm text-[var(--color-text-muted)] opacity-60">
-                    {heroImage}
-                  </p>
-                </div>
-              )}
-            </div>
-          )}
-
-</div>
-      </div>
-    </section>
+        </div>
+      </section>
+    </>
   )
 }
