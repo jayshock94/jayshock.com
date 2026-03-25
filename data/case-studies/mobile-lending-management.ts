@@ -50,10 +50,9 @@ const mobileLendingManagement: CaseStudy = {
   problem: {
     headline: 'The product hadn\'t been updated in years. Clients were noticing.',
     paragraphs: [
-      'Lenders were starting to look at other platforms. The gap between what GAC offered and what borrowers expected from a modern app had become a retention problem.',
-      'Loans were listed by loan number. No label, no context. A borrower with three loans had no idea which was the car and which was the house. Autopay was buried. Due dates weren\'t visible without digging. Routine tasks felt uncertain.',
-      'I led research and design end to end. Product owners handled direct client contact. They flew out to meet lender teams. I worked closely with them to shape what to ask and what to bring back.',
-      'We couldn\'t rebuild from scratch. The dev team had to work within the existing codebase, which locked certain navigation structures, payment flows, and screen locations. One lender required a full legal paragraph under the login button instead of a simple security indicator. That stayed.',
+      'Lenders were starting to look at other platforms. The app hadn\'t been updated in years and the gap had become a retention problem. I led research and design end to end, working through product owners who had direct client contact with lender teams.',
+      'Loans were listed by number with no label or context. A borrower with three loans had no idea which was the car and which was the house. Autopay was buried. Due dates were there, but the layout made it hard to take anything in at a glance.',
+      'We couldn\'t rebuild from scratch. The existing codebase locked navigation structures, payment flows, and screen locations. One lender required a full legal paragraph under the login button instead of a simple security indicator. That stayed.',
     ],
     // Images intentionally omitted — the before/after is rendered via EraserReveal
     // in app/work/[slug]/page.tsx using mediaSlot on this PhaseSection.
