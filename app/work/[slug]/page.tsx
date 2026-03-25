@@ -57,7 +57,7 @@ export default function CaseStudyPage({ params }: PageProps) {
                 />
               </div>
             }
-            mediaSlotAfterParagraph={2}
+            mediaSlotAfterParagraph={1}
           />
         ) : (
           <PhaseSection phase="problem" content={cs.problem} />
