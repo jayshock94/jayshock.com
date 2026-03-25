@@ -18,15 +18,13 @@ export default function CaseStudyHero({ caseStudy, tokens, heroImageSlot }: Case
         aria-label="Case study overview"
       >
         <div
-          className="max-w-layout mx-auto px-[var(--space-page-margin)]"
+          className="max-w-layout mx-auto px-[var(--space-page-margin)] grid grid-cols-1 md:grid-cols-[55fr_45fr]"
           style={{
-            display:             'grid',
-            gridTemplateColumns: '55fr 45fr',
-            gap:                 'var(--space-stack-lg)',
-            alignItems:          'center',
-            minHeight:           '420px',
-            paddingTop:          'var(--space-section-md)',
-            paddingBottom:       'var(--space-section-md)',
+            gap:          'var(--space-stack-lg)',
+            alignItems:   'center',
+            minHeight:    '420px',
+            paddingTop:   'var(--space-section-md)',
+            paddingBottom:'var(--space-section-md)',
           }}
         >
           {/* Left — text */}
@@ -80,11 +78,11 @@ export default function CaseStudyHero({ caseStudy, tokens, heroImageSlot }: Case
             )}
           </div>
 
-          {/* Right — hero image slot */}
+          {/* Right — hero image slot (hidden on mobile, shown md+) */}
           {heroImageSlot && (
             <div
+              className="hidden md:flex"
               style={{
-                display:        'flex',
                 justifyContent: 'center',
                 alignItems:     'flex-end',
                 height:         '100%',

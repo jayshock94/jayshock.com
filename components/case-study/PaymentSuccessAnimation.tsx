@@ -119,9 +119,12 @@ export default function PaymentSuccessAnimation() {
     }
 
     after(() => setPhase('pressing'), 900)
-    after(() => setPhase('success'),  1400)
-    // Confetti fires when circle finishes drawing (500ms into success phase)
-    after(() => setConfetti(makeConfetti(DISP_W / 2, DISP_H * 0.28)), 1900)
+    // Confetti and success phase fire together — confetti bursts from empty center,
+    // then checkmark pops into that same spot 150ms later
+    after(() => {
+      setPhase('success')
+      setConfetti(makeConfetti(DISP_W / 2, DISP_H * 0.28))
+    }, 1400)
 
     return () => { alive = false; timers.forEach(clearTimeout) }
   }, [])
@@ -137,13 +140,11 @@ export default function PaymentSuccessAnimation() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400&display=swap');
 
-        /* Checkmark circle draws itself */
-        @keyframes drawCircle {
-          to { stroke-dashoffset: 0; }
-        }
-        /* Checkmark tick draws itself */
-        @keyframes drawCheck {
-          to { stroke-dashoffset: 0; }
+        /* Checkmark pops in after confetti fires */
+        @keyframes checkmarkPop {
+          0%   { opacity: 0; transform: scale(0.3); }
+          60%  { opacity: 1; transform: scale(1.15); }
+          100% { opacity: 1; transform: scale(1); }
         }
         /* Content elements slide up and fade in */
         @keyframes revealContent {
@@ -332,39 +333,15 @@ export default function PaymentSuccessAnimation() {
 
                       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12, width: '100%' }}>
 
-                        {/* Checkmark — circle draws first, tick follows */}
-                        <svg width="86" height="86" viewBox="0 0 86 86" fill="none">
-                          <circle
-                            cx="43" cy="43" r="38"
-                            stroke={PRIMARY}
-                            strokeWidth="4.5"
-                            fill="none"
-                            style={phase === 'success' ? {
-                              strokeDasharray:  CIRCLE_LEN,
-                              strokeDashoffset: CIRCLE_LEN,
-                              animation:        `drawCircle 500ms cubic-bezier(0.4,0,0.2,1) 0ms forwards`,
-                            } : {
-                              strokeDasharray:  CIRCLE_LEN,
-                              strokeDashoffset: CIRCLE_LEN,
-                            }}
-                          />
-                          <path
-                            d="M24 44L37 57L63 27"
-                            stroke={PRIMARY}
-                            strokeWidth="5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            fill="none"
-                            style={phase === 'success' ? {
-                              strokeDasharray:  CHECK_LEN,
-                              strokeDashoffset: CHECK_LEN,
-                              animation:        `drawCheck 350ms cubic-bezier(0.4,0,0.2,1) 250ms forwards`,
-                            } : {
-                              strokeDasharray:  CHECK_LEN,
-                              strokeDashoffset: CHECK_LEN,
-                            }}
-                          />
-                        </svg>
+                        {/* Checkmark — pops in 150ms after confetti fires */}
+                        <div style={phase === 'success' ? {
+                          animation: 'checkmarkPop 500ms cubic-bezier(0.34,1.56,0.64,1) 150ms both',
+                        } : { opacity: 0 }}>
+                          <svg width="86" height="86" viewBox="0 0 86 86" fill="none">
+                            <circle cx="43" cy="43" r="38" stroke={PRIMARY} strokeWidth="4.5" />
+                            <path d="M24 44L37 57L63 27" stroke={PRIMARY} strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        </div>
 
                         {/* "Submitted successfully" — reveals at 450ms */}
                         <p style={{
