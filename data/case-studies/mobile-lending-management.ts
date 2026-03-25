@@ -23,7 +23,7 @@ const mobileLendingManagement: CaseStudy = {
   brandColorHex: '#C01C2C',
 
   context:
-    'An app borrowers use to make payments and manage loans, shared by multiple lenders each with their own branding. Basic tasks were buried and hard to find. Lenders were starting to shop around.',
+    'An app borrowers use to make payments and manage loans, shared by multiple lenders each with their own branding. Basic tasks were buried and hard to find. The app was easier to avoid than figure out.',
 
   overview:
     'I owned the full process: research, prototyping, testing, and design end to end. Product owners had direct contact with lender teams. I worked closely with them to shape what to ask and what to bring back.',
