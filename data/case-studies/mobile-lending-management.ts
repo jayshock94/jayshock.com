@@ -52,7 +52,7 @@ const mobileLendingManagement: CaseStudy = {
     paragraphs: [
       'Lenders were starting to look at other platforms. The app hadn\'t been updated in years and the gap had become a retention problem. I led research and design end to end, working through product owners who had direct client contact with lender teams.',
       'Loans were listed by number with no label or context. A borrower with three loans had no idea which was the car and which was the house. Autopay was buried. Due dates were there, but the layout made it hard to take anything in at a glance.',
-      'We couldn\'t rebuild from scratch. The existing codebase and engineering capacity heavily limited what UX changes were possible.',
+      'We couldn\'t rebuild from scratch. Engineering had too much on their plate to commit time and resources to sweeping changes.',
     ],
     // Images intentionally omitted — the before/after is rendered via EraserReveal
     // in app/work/[slug]/page.tsx using mediaSlot on this PhaseSection.
