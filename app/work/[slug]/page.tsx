@@ -6,7 +6,8 @@ import { generateTokens }  from '@/lib/colorAlgorithm'
 import CaseStudyHero       from '@/components/case-study/CaseStudyHero'
 import PhaseSection        from '@/components/case-study/PhaseSection'
 import PhaseObserver       from '@/components/case-study/PhaseObserver'
-import EraserReveal        from '@/components/case-study/EraserReveal'
+import EraserReveal           from '@/components/case-study/EraserReveal'
+import MobileLendingHeroImage from '@/components/case-study/MobileLendingHeroImage'
 import WorkCard            from '@/components/work/WorkCard'
 import Button              from '@/components/ui/Button'
 
@@ -40,7 +41,11 @@ export default function CaseStudyPage({ params }: PageProps) {
   return (
     <>
       {/* Case study hero — brand color zone, phase color not yet active */}
-      <CaseStudyHero caseStudy={cs} tokens={tokens} />
+      <CaseStudyHero
+        caseStudy={cs}
+        tokens={tokens}
+        heroImageSlot={cs.slug === 'mobile-lending-management' ? <MobileLendingHeroImage /> : undefined}
+      />
 
       {/* Phase sections — wrapped in observer that shifts ambient color */}
       <PhaseObserver>

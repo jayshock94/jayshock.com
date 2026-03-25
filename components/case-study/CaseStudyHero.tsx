@@ -2,11 +2,12 @@ import type { CaseStudy } from '@/data/types'
 import type { ColorTokenSet } from '@/lib/colorAlgorithm'
 
 interface CaseStudyHeroProps {
-  caseStudy: CaseStudy
-  tokens:    ColorTokenSet
+  caseStudy:      CaseStudy
+  tokens:         ColorTokenSet
+  heroImageSlot?: React.ReactNode
 }
 
-export default function CaseStudyHero({ caseStudy, tokens }: CaseStudyHeroProps) {
+export default function CaseStudyHero({ caseStudy, tokens, heroImageSlot }: CaseStudyHeroProps) {
   const { title, eyebrow, role, year, types, impact, heroImage, overview } = caseStudy
 
   return (
@@ -116,21 +117,21 @@ export default function CaseStudyHero({ caseStudy, tokens }: CaseStudyHeroProps)
           )}
 
           {/* Hero image — full-width showcase */}
-          {heroImage && (
+          {(heroImageSlot ?? heroImage) && (
             <div
-              className="
-                w-full rounded-[12px] border border-[var(--color-border)] overflow-hidden
-                flex items-center justify-center p-[var(--space-component-lg)]
-              "
+              className="w-full rounded-[12px] border border-[var(--color-border)] overflow-hidden"
               style={{
                 background:  'var(--color-surface)',
                 aspectRatio: '16/9',
               }}
             >
-              {/* Placeholder — replace this div with <img src={heroImage} … /> when real image exists */}
-              <p className="text-body-sm text-[var(--color-text-muted)] opacity-60">
-                {heroImage}
-              </p>
+              {heroImageSlot ?? (
+                <div className="flex items-center justify-center w-full h-full p-[var(--space-component-lg)]">
+                  <p className="text-body-sm text-[var(--color-text-muted)] opacity-60">
+                    {heroImage}
+                  </p>
+                </div>
+              )}
             </div>
           )}
 
