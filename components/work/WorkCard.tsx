@@ -10,21 +10,11 @@ interface WorkCardProps {
   caseStudy: CaseStudy
 }
 
-function hexToRGB(hex: string): [number, number, number] {
-  const h = hex.replace('#', '')
-  return [
-    parseInt(h.slice(0, 2), 16),
-    parseInt(h.slice(2, 4), 16),
-    parseInt(h.slice(4, 6), 16),
-  ]
-}
-
 export default function WorkCard({ caseStudy }: WorkCardProps) {
   const [hovered, setHovered] = useState(false)
 
-  const { slug, eyebrow, title, cardImpactLine, brandColorHex, year, cardImage, types, role } = caseStudy
-  const { heroZone } = generateTokens(brandColorHex)
-  const [r, g, b] = hexToRGB(heroZone)
+  const { slug, title, cardImage, types, brandColorHex } = caseStudy
+  const tokens = generateTokens(brandColorHex)
 
   return (
     <Link href={`/work/${slug}`} className="block h-full" style={{ textDecoration: 'none' }}>
@@ -33,25 +23,26 @@ export default function WorkCard({ caseStudy }: WorkCardProps) {
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         style={{
-          borderRadius: '20px',
+          borderRadius: '16px',
           overflow:     'hidden',
-          border:       `1px solid rgba(${r},${g},${b},${hovered ? 0.22 : 0.10})`,
-          transform:    hovered ? 'translateY(-5px)' : 'translateY(0)',
+          border:       `1px solid ${hovered ? tokens.border : 'var(--color-border)'}`,
+          background:   'var(--color-surface)',
+          transform:    hovered ? 'translateY(-4px)' : 'translateY(0)',
           boxShadow:    hovered ? 'var(--shadow-card-hover)' : 'var(--shadow-card)',
           transition:   'transform 0.30s cubic-bezier(0.16,1,0.3,1), box-shadow 0.30s ease, border-color 0.25s ease',
         }}
       >
 
-        {/* ── Zone 1: App screenshot (top) ──────────────────────────────────
-            Image fills the top of the card. The bottom edge is masked out
-            so it dissolves into the heroZone color below — no hard seam. */}
+        {/* ── Image zone ──────────────────────────────────────────────────
+            Large image area on a light brand-tinted surface.
+            The tint mirrors the case study's brand at a whisper —
+            enough to differentiate cards, not enough to fight the site palette. */}
         <div
           style={{
-            position:        'relative',
-            height:          '210px',
-            overflow:        'hidden',
-            WebkitMaskImage: 'linear-gradient(to top, transparent 0%, black 38%)',
-            maskImage:       'linear-gradient(to top, transparent 0%, black 38%)',
+            position:   'relative',
+            height:     '280px',
+            background: tokens.bg,
+            overflow:   'hidden',
           }}
         >
           <Image
@@ -61,106 +52,67 @@ export default function WorkCard({ caseStudy }: WorkCardProps) {
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             style={{ objectFit: 'cover', objectPosition: 'center top' }}
           />
+
+          {/* Subtle bottom fade into the brand tint surface */}
+          <div
+            aria-hidden="true"
+            style={{
+              position:   'absolute',
+              bottom:     0,
+              left:       0,
+              right:      0,
+              height:     '80px',
+              background: `linear-gradient(to top, ${tokens.bg}, transparent)`,
+              pointerEvents: 'none',
+            }}
+          />
         </div>
 
-        {/* ── Zone 2: Hero color band (bottom) ─────────────────────────────
-            Same heroZone color as the case study hero. White text, same
-            chips. The image above dissolves into this color. When the user
-            clicks, this color expands to fill the hero section. */}
+        {/* ── Text zone ───────────────────────────────────────────────────
+            Clean, neutral. Title + type tags. That's it.
+            Recruiters scanning get: what does it look like, what is it,
+            what kind of work. */}
         <div
-          className="flex flex-col flex-1"
           style={{
-            background:    heroZone,
-            padding:       '18px 22px 22px',
+            padding:    '20px 22px 22px',
+            display:    'flex',
+            flexDirection: 'column',
+            gap:        '12px',
+            flex:       1,
           }}
         >
-          {/* Eyebrow + year */}
-          <div
-            style={{
-              display:        'flex',
-              justifyContent: 'space-between',
-              alignItems:     'baseline',
-              marginBottom:   '8px',
-            }}
-          >
-            <p className="text-label" style={{ color: 'rgba(255,255,255,0.60)' }}>
-              {eyebrow}
-            </p>
-            <p className="text-label" style={{ color: 'rgba(255,255,255,0.40)' }}>
-              {year}
-            </p>
-          </div>
-
           {/* Title */}
           <h3
             style={{
-              color:         '#ffffff',
+              color:         'var(--color-text-primary)',
               fontFamily:    'var(--font-outfit), system-ui, sans-serif',
-              fontSize:      '19px',
-              fontWeight:    700,
-              lineHeight:    1.28,
+              fontSize:      '18px',
+              fontWeight:    600,
+              lineHeight:    1.3,
               letterSpacing: '-0.01em',
-              marginBottom:  '10px',
             }}
           >
             {title}
           </h3>
 
-          {/* Impact line */}
-          <p
-            className="text-body-sm"
-            style={{
-              color:        'rgba(255,255,255,0.70)',
-              lineHeight:   1.60,
-              flex:         1,
-              marginBottom: '14px',
-            }}
-          >
-            {cardImpactLine}
-          </p>
-
-          {/* Bottom row: chips left, view project right */}
-          <div
-            style={{
-              display:        'flex',
-              alignItems:     'center',
-              justifyContent: 'space-between',
-              gap:            '8px',
-            }}
-          >
-            {/* Type chips */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>
-              {types.slice(0, 2).map(tag => (
-                <span
-                  key={tag}
-                  className="text-ui-sm"
-                  style={{
-                    color:           '#ffffff',
-                    border:          '1.5px solid rgba(255,255,255,0.35)',
-                    backgroundColor: 'rgba(255,255,255,0.10)',
-                    padding:         '3px 9px',
-                    borderRadius:    '4px',
-                    whiteSpace:      'nowrap',
-                  }}
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-
-            {/* View project */}
-            <span
-              className="text-label"
-              style={{
-                color:      'rgba(255,255,255,0.70)',
-                whiteSpace: 'nowrap',
-                flexShrink: 0,
-                transition: 'color 0.20s ease',
-                opacity:    hovered ? 1 : 0.70,
-              }}
-            >
-              View project →
-            </span>
+          {/* Type tags — pushed to bottom */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: 'auto' }}>
+            {types.slice(0, 3).map(tag => (
+              <span
+                key={tag}
+                className="text-ui-sm"
+                style={{
+                  color:           tokens.label,
+                  border:          `1px solid ${tokens.border}`,
+                  backgroundColor: tokens.bg,
+                  padding:         '3px 10px',
+                  borderRadius:    '4px',
+                  whiteSpace:      'nowrap',
+                }}
+              >
+                {tag}
+              </span>
+            ))}
           </div>
         </div>
 
