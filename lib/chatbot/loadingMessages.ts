@@ -21,18 +21,21 @@ const catPhrases: LoadingMessage[] = [
 
 /** Dry humor Jay facts for persistent "psst" tags above responses. */
 const funFacts: LoadingMessage[] = [
-  { id: 'f1', text: "Jay's top 0.5% on Spotify for Carly Rae Jepsen. Unrelated.", category: 'fun_facts' },
-  { id: 'f2', text: 'Jay claims he can still do a standing backflip. No witnesses.', category: 'fun_facts' },
-  { id: 'f3', text: "Jay says he's a great cook. I can't taste food so sure.", category: 'fun_facts' },
-  { id: 'f4', text: 'Jay can saddle and ride a horse. In Utah that counts as a skill.', category: 'fun_facts' },
+  { id: 'f1', text: "Jay's top 0.5% on Spotify for Carly Rae Jepsen. People are starting to worry.", category: 'fun_facts' },
+  { id: 'f2', text: 'Jay can walk on his hands. He also knows how to sew and crochet.', category: 'fun_facts' },
+  { id: 'f3', text: 'Jay can guess the plot twist within the first five minutes. People hate watching movies with him.', category: 'fun_facts' },
+  { id: 'f4', text: 'Jay has a 3D printer and designs his own stuff to print. Making things is his whole deal.', category: 'fun_facts' },
   { id: 'f5', text: 'Jay broke his arm snowboarding once. He tells it better.', category: 'fun_facts' },
   { id: 'f6', text: 'Jay knows every Carly Rae Jepsen song by heart. Every. One.', category: 'fun_facts' },
-  { id: 'f7', text: 'Jay once redesigned a form so hard the backend team cried.', category: 'fun_facts' },
-  { id: 'f8', text: "Jay has strong opinions about border-radius. Don't ask.", category: 'fun_facts' },
-  { id: 'f9', text: 'Jay thinks 8px grid is a personality trait. He might be right.', category: 'fun_facts' },
-  { id: 'f10', text: "Jay's favorite whitespace is the kind you don't notice.", category: 'fun_facts' },
-  { id: 'f11', text: 'Jay will debate icon-vs-label placement for an unreasonable amount of time.', category: 'fun_facts' },
-  { id: 'f12', text: "Jay has never met a dropdown he didn't want to replace.", category: 'fun_facts' },
+  { id: 'f7', text: "Jay's favorite camping drink is mint tea. Just thought you should know.", category: 'fun_facts' },
+  { id: 'f8', text: 'Jay spots continuity errors in movies. Shirt changes color between cuts? He sees it.', category: 'fun_facts' },
+  { id: 'f9', text: "Jay's really into disc golf. Like, really into it.", category: 'fun_facts' },
+  { id: 'f10', text: 'Jay claims he can still do a standing backflip. No witnesses.', category: 'fun_facts' },
+  { id: 'f11', text: "Jay says he's beaten every video game he's ever played. I haven't fact-checked this.", category: 'fun_facts' },
+  { id: 'f12', text: "Jay has strong opinions about border-radius. Don't ask.", category: 'fun_facts' },
+  { id: 'f13', text: 'Jay will debate icon-vs-label placement for an unreasonable amount of time.', category: 'fun_facts' },
+  { id: 'f14', text: "Jay has never met a dropdown he didn't want to replace.", category: 'fun_facts' },
+  { id: 'f15', text: "Jay once crocheted a... actually, I'll let him tell that story.", category: 'fun_facts' },
 ]
 
 /** All messages combined (for legacy pickLoadingMessage compatibility). */
