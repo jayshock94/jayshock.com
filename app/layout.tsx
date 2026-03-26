@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Outfit } from 'next/font/google'
 import Nav         from '@/components/nav/Nav'
 import Footer      from '@/components/ui/Footer'
+import ChatLazy    from '@/components/chat/ChatLazy'
 import BloomScroll from '@/components/BloomScroll'
 import '../styles/tokens.css'
 import './globals.css'
@@ -54,6 +55,7 @@ export default function RootLayout({
         <Nav />
         <main className="flex-1">{children}</main>
         <Footer />
+        <ChatLazy />
       </body>
     </html>
   )

@@ -341,6 +341,19 @@
   ----------------------------------------------------------- */
   --space-content-max: 720px;
   --space-layout-max:  1200px;
+
+  /* -----------------------------------------------------------
+     CHAT TOKENS
+  ----------------------------------------------------------- */
+  --chat-fab-size:         56px;
+  --chat-fab-radius:       16px;
+  --chat-panel-width:      400px;
+  --chat-panel-height:     min(580px, 70vh);
+  --chat-panel-radius:     20px;
+  --chat-message-radius:   18px;
+  --chat-bubble-max-width: 85%;
+  --shadow-chat-fab:       0 4px 24px rgba(28, 25, 23, 0.20);
+  --shadow-chat-panel:     0 8px 40px rgba(28, 25, 23, 0.12);
 }
 
 /* -----------------------------------------------------------
@@ -422,6 +435,10 @@ html[data-theme="dark"] {
 
   /* Stat box */
   --color-stat-box-bg: rgba(255, 255, 255, 0.06);
+
+  /* Chat */
+  --shadow-chat-fab:   0 4px 24px rgba(0, 0, 0, 0.40);
+  --shadow-chat-panel: 0 8px 40px rgba(0, 0, 0, 0.36);
 
   /* Case study hero tokens — dark mode picks dark variants */
   --case-canvas: var(--case-canvas-dark, var(--color-canvas));

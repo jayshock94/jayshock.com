@@ -43,7 +43,7 @@ Never assume. Never guess. Never default to your training data for visual decisi
 Framework       Next.js 14+ App Router
 Language        TypeScript — strict mode always
 Styling         Tailwind CSS + CSS custom properties for tokens
-Fonts           Fraunces (Google Fonts) + Jost (Google Fonts)
+Fonts           Outfit (Google Fonts) — single family, weights 300–700
 Color space     oklch for all color algorithm calculations
 State           React context for phase/theme state
 Auth            NextAuth.js (when Studio is built)
@@ -141,16 +141,25 @@ This section lists the token categories Claude Code must know exist.
 
 ### Color tokens
 ```
---color-canvas          Page background — the paper
---color-surface         Cards and raised elements
---color-surface-glass   Nav and interactive glass surfaces
---color-border          Default borders and dividers
---color-ink             #1C1917 — warm near-black
---color-text-primary    Headings and primary body
---color-text-secondary  Supporting body copy
---color-text-muted      Metadata, labels, captions
---color-accent          Warm slate blue — tertiary role only
---color-accent-tint     Hover backgrounds on accent elements
+--color-canvas            Page background (light: #EDEDED, dark: #161616)
+--color-surface           Cards and raised elements
+--color-surface-glass     Nav and interactive glass surfaces
+--color-surface-elevated  Elevated cards
+--color-border            Default borders and dividers
+--color-border-mid        Medium-weight borders
+--color-border-strong     Strong borders and active states
+--color-ink               Primary text (#1C1917 light, #F2F2F2 dark)
+--color-text-primary      Headings and primary body
+--color-text-secondary    Supporting body copy
+--color-text-muted        Metadata, labels, captions
+--color-text-placeholder  Input placeholders
+--color-accent            Warm slate blue — tertiary role only
+--color-accent-tint       Hover backgrounds on accent elements
+--color-accent-border     Accent-tinted borders
+--color-accent-deep       Deep accent for emphasis
+--color-button-primary    Solid button background (ink light, light dark)
+--color-button-text       Button text (inverts with mode)
+--color-hover-subtle      Subtle hover background
 ```
 
 ### Phase tokens (fixed across all case studies)
@@ -174,27 +183,34 @@ These default to `--color-canvas` and `--color-accent` when not overridden.
 They are never used outside the case study hero section.
 
 ### Typography tokens
+All typography uses the Outfit font family at varying weights.
 ```
---text-display          Fraunces 400, 56px, lh 1.1, ls 0.02em
---text-h1               Fraunces 400, 36px, lh 1.2, ls 0.015em
---text-h2               Fraunces 400, 26px, lh 1.25, ls 0.01em
---text-h3               Fraunces 400, 20px, lh 1.3, ls 0.008em
---text-h4               Fraunces 400, 16px, lh 1.35, ls 0.006em
---text-body-lg          Jost 300, 18px, lh 1.75
---text-body             Jost 300, 15px, lh 1.7
---text-body-sm          Jost 300, 13px, lh 1.65
---text-ui-md            Jost 400, 13px, lh 1.4
---text-ui-sm            Jost 500, 11px, lh 1.3, ls 0.08em, uppercase
---text-label            Jost 400, 10px, ls 0.1em, uppercase
+--text-display          Outfit 700, clamp(48px, 7vw, 80px), lh 1.05, ls -0.02em
+--text-h1               Outfit 600, clamp(32px, 5vw, 52px), lh 1.1, ls -0.02em
+--text-h2               Outfit 500, 28px, lh 1.2, ls -0.01em
+--text-h3               Outfit 500, 22px, lh 1.25, ls -0.01em
+--text-h4               Outfit 500, 18px, lh 1.3
+--text-intro            Outfit 300, 20px, lh 1.7
+--text-body-lg          Outfit 300, 17px, lh 1.75
+--text-body             Outfit 300, 15px, lh 1.8
+--text-body-sm          Outfit 300, 13px, lh 1.65
+--text-ui-md            Outfit 400, 13px, lh 1.4
+--text-ui-sm            Outfit 500, 11px, lh 1.3, ls 0.08em, uppercase
+--text-label            Outfit 400, 11px, lh 1.3, ls 0.1em, uppercase
 ```
 
 ### Spacing tokens
 ```
+Primitive scale (8pt base):
+--space-1 through --space-10 (4px, 8px, 12px, 16px, 24px, 32px, 48px, 64px, 96px, 128px)
+
 Fixed component tokens:
 --space-component-xs    4px
 --space-component-sm    8px
+--space-component-base  12px
 --space-component-md    16px
 --space-component-lg    24px
+--space-stack-xs        6px
 --space-stack-sm        12px
 --space-stack-md        24px
 --space-stack-lg        32px
@@ -219,7 +235,9 @@ Never apply glass to non-interactive surfaces.
 
 ```
 Nav bar             → glass (contains interactive elements)
-Primary button      → smoked dark glass (rgba(28,25,23,0.75))
+Chat panel          → glass (interactive container — lighter than nav)
+Primary button      → solid ink (dark light mode, light dark mode)
+Glass pill          → frosted glass (work card CTAs)
 Secondary button    → outlined, no glass
 Ghost button        → no background, no glass
 Modals/drawers      → glass surface
@@ -273,7 +291,7 @@ The homepage is black and white only. No phase color system. No case study brand
 Think of it as the gallery lobby — neutral, calm, sets the tone before you walk into any room.
 
 ```
-Background          #FAF8F5 (canvas — warm white, not pure white)
+Background          #EDEDED (canvas — clean light gray, not cream)
 All text            #1C1917 (ink) and neutral scale only
 Case study cards    Monochromatic — no color thumbnails
 Navigation          Glass, but neutral — no phase tinting on homepage
@@ -304,7 +322,7 @@ The brand color must always be processed through the color algorithm before use:
 /work               Full work index (if separate from homepage)
 /work/[slug]        Individual case study
 /about              About page
-/resume             Resume page — AI scraped and formatted for download
+/experience         Experience / resume page
 /contact            Contact page
 ```
 
@@ -328,7 +346,7 @@ In scope:
 - Design system token setup in Tailwind + CSS variables
 - Phase color shift system with Intersection Observer
 - Color algorithm utility function
-- Fraunces + Jost font loading and token setup
+- Outfit font loading and token setup
 - Responsive layout — desktop first, mobile must work
 - Homepage black and white treatment
 - Case study brand color processing
@@ -353,34 +371,54 @@ Out of scope (Phase 2):
 ├── brand-guidelines.md
 ├── design-system.md
 ├── app/
-│   ├── layout.tsx          Global layout, font loading, CSS variable injection
+│   ├── layout.tsx          Global layout, Outfit font, Nav, Footer, BloomScroll
+│   ├── globals.css         Animations, glass classes, typography utilities
 │   ├── page.tsx            Homepage
 │   ├── work/
 │   │   ├── page.tsx        Work index
 │   │   └── [slug]/
-│   │       └── page.tsx    Case study
+│   │       └── page.tsx    Case study (dynamic, phase color shift)
 │   ├── about/page.tsx
-│   ├── resume/page.tsx
-│   └── contact/page.tsx
+│   ├── experience/page.tsx Resume / experience page
+│   ├── contact/
+│   │   ├── page.tsx        Contact page
+│   │   └── ContactForm.tsx Contact form component
+│   ├── actions/
+│   │   └── contact.ts      Form server action
+│   └── api/
+│       └── resume/route.ts Resume PDF endpoint (stub)
 ├── components/
 │   ├── nav/
+│   │   └── Nav.tsx         Sticky glass nav, mobile drawer
 │   ├── case-study/
-│   │   ├── CaseStudyHero.tsx
-│   │   ├── PhaseSection.tsx
-│   │   └── PhaseObserver.tsx
+│   │   ├── CaseStudyHero.tsx    Brand color hero + overview grid
+│   │   ├── PhaseSection.tsx     Impact/Problem/Discovery/Solution sections
+│   │   ├── PhaseObserver.tsx    IntersectionObserver for phase color shifts
+│   │   └── EraserReveal.tsx     Before/after image comparison
 │   ├── work/
-│   │   └── WorkCard.tsx
-│   └── ui/
-│       ├── Button.tsx
-│       └── GlassSurface.tsx
+│   │   └── WorkCard.tsx    Glass card with brand color hero zone
+│   ├── ui/
+│   │   ├── Button.tsx      4 variants: glass, secondary, ghost, solid-white
+│   │   ├── Footer.tsx      Site footer
+│   │   ├── ScrollReveal.tsx IntersectionObserver fade-up wrapper
+│   │   └── ThemeToggle.tsx  Dark/light mode toggle
+│   ├── about/
+│   │   └── HowIWork.tsx    About page section
+│   └── BloomScroll.tsx     Updates --bloom-y CSS var on scroll
 ├── lib/
-│   └── colorAlgorithm.ts   oklch color processing utility
+│   └── colorAlgorithm.ts   oklch color processing (hex → token set)
 ├── data/
-│   └── case-studies/       Static JSON or MDX per case study
+│   ├── types.ts            CaseStudy, PhaseContent, Stat interfaces
+│   └── case-studies/
+│       ├── index.ts        Case study registry and lookup
+│       ├── lending-engine-service.ts
+│       ├── mobile-lending-management.ts
+│       └── virtual-badge.ts
 ├── styles/
-│   └── tokens.css          All CSS custom properties
+│   └── tokens.css          All CSS custom properties (512 lines)
 └── public/
-    └── assets/
+    ├── Shock_alone.svg     Logo
+    └── images/             Card images, case study screenshots
 ```
 
 ---
@@ -401,4 +439,4 @@ When in doubt, ask. Never assume.
 
 ---
 
-*Last updated: pre-build planning phase · Portfolio site · Phase 1*
+*Last updated: 2026-03-26 · Portfolio site · Phase 1 · Font updated to Outfit, file structure synced with codebase*
