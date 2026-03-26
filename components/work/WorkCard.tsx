@@ -32,7 +32,7 @@ export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
   return (
     <Link href={`/work/${slug}`} className="block h-full" style={{ textDecoration: 'none' }}>
       <article
-        className="flex flex-col h-full"
+        className="work-card flex flex-col h-full"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         style={{
@@ -68,7 +68,7 @@ export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
             justifyContent: 'center',
           }}
         >
-          <div style={{
+          <div className="work-card-image" style={{
             position:       'relative',
             width:          '100%',
             height:         '100%',

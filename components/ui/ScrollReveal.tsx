@@ -6,6 +6,9 @@ interface Props {
   children: React.ReactNode
   /** Milliseconds to wait after entering viewport before revealing */
   delay?: number
+  /** Milliseconds to wait before even starting to observe — use to hold
+   *  reveals until a prior animation sequence (e.g. hero) is finished */
+  holdUntil?: number
   className?: string
 }
 
@@ -17,7 +20,7 @@ interface Props {
  * CSS for [data-reveal] lives in globals.css.
  * Respects prefers-reduced-motion — reveals immediately if set.
  */
-export default function ScrollReveal({ children, delay = 0, className = '' }: Props) {
+export default function ScrollReveal({ children, delay = 0, holdUntil = 0, className = '' }: Props) {
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -30,26 +33,44 @@ export default function ScrollReveal({ children, delay = 0, className = '' }: Pr
       return
     }
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          // Stagger is applied via delay — setTimeout keeps it off the critical path
-          const t = setTimeout(() => el.setAttribute('data-reveal', 'visible'), delay)
-          observer.disconnect()
-          return () => clearTimeout(t)
-        }
-      },
-      {
-        threshold: 0.08,
-        // Slight negative bottom margin so elements trigger a little before the
-        // very bottom of the viewport — feels more natural than edge-of-screen pop
-        rootMargin: '0px 0px -24px 0px',
-      }
-    )
+    let observer: IntersectionObserver | null = null
+    let delayTimer: ReturnType<typeof setTimeout> | null = null
 
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [delay])
+    const reveal = () => {
+      delayTimer = setTimeout(() => el.setAttribute('data-reveal', 'visible'), delay)
+    }
+
+    const startObserving = () => {
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            observer?.disconnect()
+            observer = null
+            reveal()
+          }
+        },
+        {
+          threshold: 0.15,
+          rootMargin: '0px 0px -80px 0px',
+        }
+      )
+      observer.observe(el)
+    }
+
+    // Hold off observing until a prior animation sequence completes
+    let holdTimer: ReturnType<typeof setTimeout> | null = null
+    if (holdUntil > 0) {
+      holdTimer = setTimeout(startObserving, holdUntil)
+    } else {
+      startObserving()
+    }
+
+    return () => {
+      if (holdTimer) clearTimeout(holdTimer)
+      if (delayTimer) clearTimeout(delayTimer)
+      observer?.disconnect()
+    }
+  }, [delay, holdUntil])
 
   return (
     <div ref={ref} data-reveal="hidden" className={className}>

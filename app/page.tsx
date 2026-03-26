@@ -86,7 +86,7 @@ export default function HomePage() {
             style={{
               color:          'var(--color-text-muted)',
               maxWidth:       '520px',
-              animationDelay: '1100ms',
+              animationDelay: '900ms',
             }}
           >
             8 years experience. Currently based in Utah, designing financial systems
@@ -96,7 +96,7 @@ export default function HomePage() {
           {/* CTAs */}
           <div
             className="flex flex-wrap gap-[12px] items-center justify-center md:justify-start hero-fade-up"
-            style={{ animationDelay: '1100ms' }}
+            style={{ animationDelay: '1000ms' }}
           >
             <Button variant="glass" href="/api/resume" download>
               Download resume
@@ -119,14 +119,13 @@ export default function HomePage() {
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
 
-          <ScrollReveal>
-            <p
-              className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-md)]"
-              id="work-eyebrow"
-            >
-              Selected Work
-            </p>
-          </ScrollReveal>
+          <p
+            className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-md)] hero-fade-up"
+            id="work-eyebrow"
+            style={{ animationDelay: '1200ms' }}
+          >
+            Selected Work
+          </p>
 
           <h2 id="work-heading" className="sr-only">
             Featured case studies
@@ -140,12 +139,16 @@ export default function HomePage() {
             "
           >
             {featured.map((cs, i) => (
-              <ScrollReveal key={cs.slug} delay={i * 120} className="h-full">
+              <div
+                key={cs.slug}
+                className="h-full hero-fade-up"
+                style={{ animationDelay: `${1350 + i * 150}ms` }}
+              >
                 <WorkCard
                   caseStudy={cs}
                   cardImageSlot={cs.slug === 'mobile-lending-management' ? <MobileLendingCardImage /> : undefined}
                 />
-              </ScrollReveal>
+              </div>
             ))}
           </div>
 

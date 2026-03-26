@@ -19,7 +19,7 @@ export default function ChatFAB({ isOpen, isStreaming, onClick }: ChatFABProps) 
       type="button"
       onClick={onClick}
       aria-label={isOpen ? 'Close chat' : 'Open chat'}
-      className={isOpen ? '' : enterClass}
+      className={isOpen ? '' : `${enterClass} chat-fab-breathe`}
       style={{
         position: 'fixed',
         bottom: '24px',
