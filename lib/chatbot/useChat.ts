@@ -40,9 +40,7 @@ function saveSession(session: ChatSession): void {
 /** Greeting messages per page type. */
 const GREETINGS: Record<string, string[]> = {
   home: [
-    "Hey! I'm Barnaby. I know basically everything about Jay and almost nothing about anything else. What can I help with?",
-    "Oh, hi! I'm Barnaby. I live on this site and I'm extremely biased toward Jay. Ask me anything about his work.",
-    "Hi! I'm Barnaby. I'm Jay's AI assistant and honestly his biggest fan. What do you want to know?",
+    "Hey! I'm Barnaby. I know basically everything about Jay and almost nothing about anything else. What do you want to know?",
   ],
   'work-index': [
     "Looking at Jay's work? Good taste. I'm Barnaby, I can tell you about any of these projects. Pick one or ask me to recommend.",

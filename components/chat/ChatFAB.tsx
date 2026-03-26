@@ -9,17 +9,16 @@ interface ChatFABProps {
 }
 
 export default function ChatFAB({ isOpen, isStreaming, onClick }: ChatFABProps) {
-  // Only play the entrance animation on first mount
-  const hasAnimated = useRef(false)
-  const enterClass = !hasAnimated.current ? 'chat-fab-enter' : ''
-  if (!isOpen) hasAnimated.current = true
+  // Track if the FAB has been opened at least once — after that, skip entrance animation
+  const hasOpened = useRef(false)
+  if (isOpen) hasOpened.current = true
 
   return (
     <button
       type="button"
       onClick={onClick}
       aria-label={isOpen ? 'Close chat' : 'Open chat'}
-      className={isOpen ? '' : `${enterClass} chat-fab-breathe`}
+      className={isOpen ? '' : (hasOpened.current ? '' : 'chat-fab-enter')}
       style={{
         position: 'fixed',
         bottom: '24px',
