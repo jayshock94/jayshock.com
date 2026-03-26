@@ -64,15 +64,13 @@ export default function HomePage() {
             <span style={{ fontWeight: 300, color: 'var(--color-text-muted)' }}>
               <span className="hero-word" style={{ animationDelay: '500ms'  }}>a </span>
               <span className="hero-word" style={{ animationDelay: '560ms'  }}>product </span>
-              <span className="hero-word" style={{ animationDelay: '620ms'  }}>designer </span>
-            </span>
-            <span style={{ fontWeight: 300, color: 'var(--color-text-muted)' }}>
-              <span className="hero-word" style={{ animationDelay: '680ms'  }}>turning </span>
             </span>
             <span style={{ fontWeight: 700, color: 'var(--color-ink)' }}>
-              <span className="hero-word hero-word--bold">complexity </span>
+              <span className="hero-word hero-word--bold">designer </span>
             </span>
             <span style={{ fontWeight: 300, color: 'var(--color-text-muted)' }}>
+              <span className="hero-word" style={{ animationDelay: '620ms'  }}>turning </span>
+              <span className="hero-word" style={{ animationDelay: '680ms'  }}>complexity </span>
               <span className="hero-word" style={{ animationDelay: '740ms'  }}>into </span>
             </span>
             <span style={{ fontWeight: 700, color: 'var(--color-ink)' }}>
