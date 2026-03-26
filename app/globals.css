@@ -378,22 +378,21 @@ body > * {
    Desktop (md+): floating glass card with blur and radius.
 ----------------------------------------------------------- */
 .nav-card {
-  background: var(--color-canvas);
-  border-bottom: 0.5px solid var(--color-border);
+  background: var(--color-nav-card-bg);
+  backdrop-filter: blur(48px) saturate(180%);
+  -webkit-backdrop-filter: blur(48px) saturate(180%);
+  border-bottom: 0.5px solid var(--color-nav-card-border);
   border-radius: 0;
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.24);
   transition: background 0.5s ease, box-shadow 0.5s ease;
 }
 
 @media (min-width: 768px) {
   .nav-card {
-    background: var(--color-nav-card-bg);
-    backdrop-filter: blur(48px) saturate(180%);
-    -webkit-backdrop-filter: blur(48px) saturate(180%);
     border: 0.5px solid var(--color-nav-card-border);
-    border-bottom: 0.5px solid var(--color-nav-card-border);
     border-radius: 16px;
     box-shadow:
-      0 2px 24px rgba(28, 25, 23, 0.06),
+      0 2px 24px rgba(0, 0, 0, 0.24),
       inset 0 1px 0 var(--glass-border-light);
   }
 
@@ -403,7 +402,7 @@ body > * {
 }
 
 .nav-drawer {
-  border-top: 0.5px solid var(--color-border);
+  border-top: 0.5px solid var(--color-nav-card-border);
   border-radius: 0;
   overflow: hidden;
   animation: drawer-enter 220ms cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -411,7 +410,6 @@ body > * {
 
 @media (min-width: 768px) {
   .nav-drawer {
-    border-top: 0.5px solid var(--color-nav-card-border);
     border-radius: 0 0 16px 16px;
   }
 }
