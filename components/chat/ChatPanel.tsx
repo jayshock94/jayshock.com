@@ -3,8 +3,8 @@
 import { useRef, useEffect } from 'react'
 import type { ChatMessage as ChatMessageType, SuggestionChip as SuggestionChipType } from '@/lib/chatbot/types'
 import ChatMessage from './ChatMessage'
+import CatAvatar from './CatAvatar'
 import ChatInput from './ChatInput'
-import TypingIndicator from './TypingIndicator'
 import SuggestionChip from './SuggestionChip'
 
 interface ChatPanelProps {
@@ -14,7 +14,6 @@ interface ChatPanelProps {
   isWaiting: boolean
   loadingMessage: string | null
   chips: SuggestionChipType[]
-  showChips: boolean
   onSendMessage: (text: string) => void
   onSelectChip: (chip: SuggestionChipType) => void
   onClose: () => void
@@ -26,7 +25,6 @@ export default function ChatPanel({
   isWaiting,
   loadingMessage,
   chips,
-  showChips,
   onSendMessage,
   onSelectChip,
   onClose,
@@ -87,43 +85,8 @@ export default function ChatPanel({
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-component-sm)' }}>
-          {/* Mini Weebo avatar */}
-          <div
-            style={{
-              width: '28px',
-              height: '28px',
-              borderRadius: '8px',
-              background: 'var(--color-button-primary)',
-              position: 'relative',
-              flexShrink: 0,
-            }}
-          >
-            <span
-              className="chat-eye"
-              style={{
-                position: 'absolute',
-                width: '4px',
-                height: '4px',
-                borderRadius: '50%',
-                background: 'var(--color-button-text)',
-                top: '45%',
-                left: '28%',
-              }}
-            />
-            <span
-              className="chat-eye"
-              style={{
-                position: 'absolute',
-                width: '4px',
-                height: '4px',
-                borderRadius: '50%',
-                background: 'var(--color-button-text)',
-                top: '45%',
-                right: '28%',
-                animationDelay: '0.1s',
-              }}
-            />
-          </div>
+          {/* Mini cat avatar */}
+          <CatAvatar size={28} />
           <div>
             <div
               style={{
@@ -211,31 +174,62 @@ export default function ChatPanel({
           />
         ))}
 
-        {/* Loading message (shown during wait, before first token) */}
-        {isWaiting && loadingMessage && (
+        {/* Loading state with Barnaby thinking avatar + message */}
+        {isWaiting && (
           <div
             className="chat-message-enter"
             style={{
-              color: 'var(--color-text-muted)',
-              fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-              fontSize: 'var(--text-body-sm-size)',
-              fontWeight: 'var(--text-body-sm-weight)',
-              fontStyle: 'italic',
-              lineHeight: '1.6',
-              padding: '4px 0',
+              display: 'flex',
+              alignItems: 'flex-start',
+              gap: 'var(--space-component-sm)',
+              padding: '8px 0',
             }}
           >
-            {loadingMessage}
+            {/* Barnaby thinking cat avatar */}
+            <div style={{ marginTop: '2px' }}>
+              <CatAvatar size={24} isThinking />
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              {loadingMessage && (
+                <span
+                  className="chat-loading-pulse"
+                  style={{
+                    color: 'var(--color-text-muted)',
+                    fontFamily: 'var(--font-outfit), system-ui, sans-serif',
+                    fontSize: 'var(--text-body-sm-size)',
+                    fontWeight: 'var(--text-body-sm-weight)',
+                    fontStyle: 'italic',
+                    lineHeight: '1.6',
+                  }}
+                >
+                  {loadingMessage}
+                </span>
+              )}
+              <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
+                {[0, 1, 2].map(i => (
+                  <span
+                    key={i}
+                    className="chat-typing-dot"
+                    style={{
+                      width: '5px',
+                      height: '5px',
+                      borderRadius: '50%',
+                      background: 'var(--color-text-muted)',
+                      animationDelay: `${i * 160}ms`,
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
         )}
-
-        {isWaiting && <TypingIndicator />}
 
         <div ref={messagesEndRef} />
       </div>
 
       {/* --- Suggestion chips --- */}
-      {showChips && chips.length > 0 && (
+      {chips.length > 0 && (
         <div
           style={{
             display: 'flex',

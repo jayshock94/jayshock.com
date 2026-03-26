@@ -1,82 +1,69 @@
 import type { LoadingMessage } from './types'
 
-const messages: LoadingMessage[] = [
-  // Robot sounds (~15%)
-  { id: 'r1', text: 'beep boop bop boop', category: 'robot_sounds' },
-  { id: 'r2', text: 'bzzzt... whirrrr...', category: 'robot_sounds' },
-  { id: 'r3', text: '*robot noises*', category: 'robot_sounds' },
-  { id: 'r4', text: 'beep boop... processing...', category: 'robot_sounds' },
-  { id: 'r5', text: 'brrrring up the files...', category: 'robot_sounds' },
-  { id: 'r6', text: 'boop boop beep \u{1F916}', category: 'robot_sounds' },
-  { id: 'r7', text: '*dial-up modem sounds*', category: 'robot_sounds' },
-
-  // Fun facts (~35%)
-  { id: 'f1', text: "While I get that... did you know Jay is in the top 0.5% of Spotify listeners for Carly Rae Jepsen? She must be really good.", category: 'fun_facts' },
-  { id: 'f2', text: "One sec... fun fact: Jay knows how to saddle and ride a horse.", category: 'fun_facts' },
-  { id: 'f3', text: "Pulling that up... did you know Jay can sing along to every Carly Rae Jepsen song?", category: 'fun_facts' },
-
-  // UX principles (~25%)
-  { id: 'u1', text: "While I get that... did you know one of Jay's favorite UX principles is Tesler's Law? It says complexity can't be removed, only moved \u2014 and the designer's job is to carry it so the user doesn't have to.", category: 'ux_principles' },
-  { id: 'u2', text: "One sec... fun fact: Jay talks about Hick's Law a lot. More choices = longer decisions. He's a big fan of removing options that don't earn their place.", category: 'ux_principles' },
-  { id: 'u3', text: "Pulling that up... did you know Jay thinks about the Aesthetic-Usability Effect on every project? People perceive attractive designs as easier to use, even when they're not.", category: 'ux_principles' },
-  { id: 'u4', text: "Grabbing that... Jay's a firm believer in Jakob's Law \u2014 users spend most of their time on other sites, so your product should work like they already expect.", category: 'ux_principles' },
-  { id: 'u5', text: "While I look that up... one of Jay's design principles is progressive disclosure. Show people only what they need right now. Everything else can wait.", category: 'ux_principles' },
-  { id: 'u6', text: "Hang on... did you know Jay references the Peak-End Rule when designing flows? People judge an experience by its most intense moment and its ending \u2014 not the average.", category: 'ux_principles' },
-  { id: 'u7', text: "One moment... Jay says the best design systems are boring. If your component library is exciting, something probably went wrong.", category: 'ux_principles' },
-  { id: 'u8', text: "Getting that for you... Jay likes to say that whitespace isn't empty \u2014 it's the thing that gives everything else room to breathe.", category: 'ux_principles' },
-  { id: 'u9', text: "Just a sec... one of Jay's rules: if you need a label to explain an icon, just use the label.", category: 'ux_principles' },
-
-  // Fake-outs (~25%)
-  { id: 'j1', text: "Did you know Jay survived an avalanche?! ...Okay I made that up. But he did break his arm snowboarding once.", category: 'fake_outs' },
-  { id: 'j2', text: "While I look that up... Jay used to be able to do a standing backflip. He says he still can, but I've never seen him do it.", category: 'fake_outs' },
-  { id: 'j3', text: "One sec... Jay says he's a great cook. I can't taste food, so I'll take his word for it.", category: 'fake_outs' },
+/** Short cat-themed phrases that rotate during loading. */
+const catPhrases: LoadingMessage[] = [
+  { id: 'c1', text: '*purring*', category: 'cat_sounds' },
+  { id: 'c2', text: '*stretching*', category: 'cat_sounds' },
+  { id: 'c3', text: '*loafing*', category: 'cat_sounds' },
+  { id: 'c4', text: '*making biscuits*', category: 'cat_sounds' },
+  { id: 'c5', text: "*scratching Jay's chair*", category: 'cat_sounds' },
+  { id: 'c6', text: '*knocking things off the desk*', category: 'cat_sounds' },
+  { id: 'c7', text: '*ignoring you on purpose*', category: 'cat_sounds' },
+  { id: 'c8', text: '*staring at a wall*', category: 'cat_sounds' },
+  { id: 'c9', text: '*judging you silently*', category: 'cat_sounds' },
+  { id: 'c10', text: "*sitting on Jay's keyboard*", category: 'cat_sounds' },
+  { id: 'c11', text: '*chasing a cursor*', category: 'cat_sounds' },
+  { id: 'c12', text: '*napping in a sunbeam*', category: 'cat_sounds' },
+  { id: 'c13', text: '*pretending not to care*', category: 'cat_sounds' },
+  { id: 'c14', text: '*grooming aggressively*', category: 'cat_sounds' },
+  { id: 'c15', text: '*slow blinking*', category: 'cat_sounds' },
 ]
 
-/** Category weights for random selection. */
-const CATEGORY_WEIGHTS: Record<LoadingMessage['category'], number> = {
-  robot_sounds: 0.15,
-  fun_facts: 0.35,
-  ux_principles: 0.25,
-  fake_outs: 0.25,
-}
+/** Dry humor Jay facts for persistent "psst" tags above responses. */
+const funFacts: LoadingMessage[] = [
+  { id: 'f1', text: "Jay's top 0.5% on Spotify for Carly Rae Jepsen. Unrelated.", category: 'fun_facts' },
+  { id: 'f2', text: 'Jay claims he can still do a standing backflip. No witnesses.', category: 'fun_facts' },
+  { id: 'f3', text: "Jay says he's a great cook. I can't taste food so sure.", category: 'fun_facts' },
+  { id: 'f4', text: 'Jay can saddle and ride a horse. In Utah that counts as a skill.', category: 'fun_facts' },
+  { id: 'f5', text: 'Jay broke his arm snowboarding once. He tells it better.', category: 'fun_facts' },
+  { id: 'f6', text: 'Jay knows every Carly Rae Jepsen song by heart. Every. One.', category: 'fun_facts' },
+  { id: 'f7', text: 'Jay once redesigned a form so hard the backend team cried.', category: 'fun_facts' },
+  { id: 'f8', text: "Jay has strong opinions about border-radius. Don't ask.", category: 'fun_facts' },
+  { id: 'f9', text: 'Jay thinks 8px grid is a personality trait. He might be right.', category: 'fun_facts' },
+  { id: 'f10', text: "Jay's favorite whitespace is the kind you don't notice.", category: 'fun_facts' },
+  { id: 'f11', text: 'Jay will debate icon-vs-label placement for an unreasonable amount of time.', category: 'fun_facts' },
+  { id: 'f12', text: "Jay has never met a dropdown he didn't want to replace.", category: 'fun_facts' },
+]
 
-const categories = Object.keys(CATEGORY_WEIGHTS) as LoadingMessage['category'][]
+/** All messages combined (for legacy pickLoadingMessage compatibility). */
+const messages: LoadingMessage[] = [...catPhrases, ...funFacts]
 
 /**
- * Pick a loading message that hasn't been shown yet this session.
- * Respects category weights. Resets pool when all messages are exhausted.
+ * Pick a random cat phrase, avoiding recently shown ones.
+ * Resets pool when all are exhausted.
+ */
+export function pickCatPhrase(excludeIds: string[]): LoadingMessage {
+  const available = catPhrases.filter(m => !excludeIds.includes(m.id))
+  const pool = available.length > 0 ? available : catPhrases
+  return pool[Math.floor(Math.random() * pool.length)]
+}
+
+/**
+ * Pick a fun fact only (no cat sounds) for persistent tags above responses.
+ */
+export function pickFactMessage(usedIds: string[]): LoadingMessage {
+  const available = funFacts.filter(m => !usedIds.includes(m.id))
+  const pool = available.length > 0 ? available : funFacts
+  return pool[Math.floor(Math.random() * pool.length)]
+}
+
+/**
+ * Pick any loading message (legacy — used if needed).
  */
 export function pickLoadingMessage(usedIds: string[]): LoadingMessage {
   const available = messages.filter(m => !usedIds.includes(m.id))
-
-  // If all exhausted, reset and pick from full pool
   const pool = available.length > 0 ? available : messages
-
-  // Weighted category selection
-  const roll = Math.random()
-  let cumulative = 0
-  let targetCategory: LoadingMessage['category'] = 'robot_sounds'
-
-  for (const cat of categories) {
-    cumulative += CATEGORY_WEIGHTS[cat]
-    if (roll <= cumulative) {
-      targetCategory = cat
-      break
-    }
-  }
-
-  // Filter pool by selected category
-  let candidates = pool.filter(m => m.category === targetCategory)
-
-  // If no candidates in this category, fall back to any available
-  if (candidates.length === 0) {
-    candidates = pool
-  }
-
-  // Pick random from candidates
-  const index = Math.floor(Math.random() * candidates.length)
-  return candidates[index]
+  return pool[Math.floor(Math.random() * pool.length)]
 }
 
-/** All loading messages for reference. */
 export { messages as allLoadingMessages }

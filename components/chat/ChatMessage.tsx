@@ -49,6 +49,44 @@ export default function ChatMessage({ message, isStreaming }: ChatMessageProps) 
       {isBot ? (
         // Bot message — plain text on glass surface, no background
         <>
+          {/* Persistent fun fact from loading state */}
+          {message.loadingFact && (
+            <div
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '5px',
+                padding: '3px 0',
+                maxWidth: 'var(--chat-bubble-max-width)',
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: 'var(--font-outfit), system-ui, sans-serif',
+                  fontSize: '10px',
+                  fontWeight: 500,
+                  letterSpacing: '0.06em',
+                  textTransform: 'uppercase',
+                  color: 'var(--color-text-placeholder)',
+                  flexShrink: 0,
+                }}
+              >
+                psst:
+              </span>
+              <span
+                style={{
+                  fontFamily: 'var(--font-outfit), system-ui, sans-serif',
+                  fontSize: '11px',
+                  fontWeight: 300,
+                  fontStyle: 'italic',
+                  color: 'var(--color-text-placeholder)',
+                  lineHeight: '1.4',
+                }}
+              >
+                {message.loadingFact}
+              </span>
+            </div>
+          )}
           <div
             style={{
               maxWidth: 'var(--chat-bubble-max-width)',

@@ -5,9 +5,33 @@ import { usePathname } from 'next/navigation'
 import type { ChatMessage, ChatSession, SuggestionChip } from './types'
 import { extractPageContext } from './pageContext'
 import { getChipsForPage } from './suggestionChips'
-import { pickLoadingMessage } from './loadingMessages'
+import { pickCatPhrase, pickFactMessage } from './loadingMessages'
 
 const STORAGE_KEY = 'jayshock-chat'
+const CHIP_DELIMITER = '<<<CHIPS>>>'
+
+/** Parse chip suggestions from the bot response and strip them from display text. */
+function parseChips(text: string): { content: string; chips: SuggestionChip[] } {
+  const idx = text.indexOf(CHIP_DELIMITER)
+  if (idx === -1) return { content: text, chips: [] }
+
+  const content = text.slice(0, idx).trim()
+  const chipBlock = text.slice(idx + CHIP_DELIMITER.length).trim()
+  const chips = chipBlock
+    .split('\n')
+    .filter(Boolean)
+    .slice(0, 4) // max 4 chips
+    .map(line => {
+      const [label, ...rest] = line.split('|')
+      return {
+        label: label.trim(),
+        message: (rest.join('|') || label).trim(),
+      }
+    })
+    .filter(c => c.label.length > 0)
+
+  return { content, chips }
+}
 
 /** Generate a unique ID for messages. */
 function generateId(): string {
@@ -96,9 +120,8 @@ export function useChat() {
   const [isStreaming, setIsStreaming] = useState(false)
   const [isWaiting, setIsWaiting] = useState(false)
   const [loadingMessage, setLoadingMessage] = useState<string | null>(null)
-  const [showChips, setShowChips] = useState(true)
 
-  // Track whether user has interacted (to hide chips after first message)
+  // Track whether user has interacted (to show static vs dynamic chips)
   const hasInteracted = useRef(messages.length > 1)
 
   // Persist to sessionStorage whenever messages change
@@ -106,10 +129,15 @@ export function useChat() {
     saveSession({ messages, usedLoadingIds })
   }, [messages, usedLoadingIds])
 
-  // Get page-aware chips
-  const chips = showChips && !hasInteracted.current
-    ? getChipsForPage(pageContext)
-    : []
+  // Chips: static page chips before first interaction, dynamic from last bot message after
+  const chips: SuggestionChip[] = (() => {
+    if (!hasInteracted.current) {
+      return getChipsForPage(pageContext)
+    }
+    // Find the last assistant message and return its chips
+    const lastBot = [...messages].reverse().find(m => m.role === 'assistant')
+    return lastBot?.chips ?? []
+  })()
 
   const open = useCallback(() => setIsOpen(true), [])
   const close = useCallback(() => setIsOpen(false), [])
@@ -124,21 +152,32 @@ export function useChat() {
         timestamp: new Date().toISOString(),
       }
 
-      // Hide chips after first user interaction
+      // Mark as interacted (switches from static to dynamic chips)
       hasInteracted.current = true
-      setShowChips(false)
 
       setMessages(prev => [...prev, userMessage])
       setIsStreaming(true)
       setIsWaiting(true)
 
-      // Pick a loading message (not on the very first exchange — greeting was instant)
-      const shouldShowLoading = messages.length > 1
-      if (shouldShowLoading) {
-        const picked = pickLoadingMessage(usedLoadingIds)
-        setLoadingMessage(picked.text)
-        setUsedLoadingIds(prev => [...prev, picked.id])
-      }
+      // Always pick a fun fact for the persistent psst tag
+      const fact = pickFactMessage(usedLoadingIds)
+      setUsedLoadingIds(prev => [...prev, fact.id])
+
+      // Show rotating cat phrases while loading
+      const shownPhraseIds: string[] = []
+      const first = pickCatPhrase(shownPhraseIds)
+      shownPhraseIds.push(first.id)
+      setLoadingMessage(first.text)
+
+      const phraseInterval = setInterval(() => {
+        const next = pickCatPhrase(shownPhraseIds)
+        shownPhraseIds.push(next.id)
+        setLoadingMessage(next.text)
+      }, 2500)
+
+      // Minimum time to show the loading message so users can read it
+      const MIN_LOADING_MS = 2000
+      const loadingStart = Date.now()
 
       // Create the assistant message placeholder
       const assistantId = generateId()
@@ -169,10 +208,11 @@ export function useChat() {
           throw new Error(`API error: ${response.status}`)
         }
 
+        // Collect all streamed tokens first
         const reader = response.body.getReader()
         const decoder = new TextDecoder()
         let accumulated = ''
-        let firstToken = true
+        let hasError = false
 
         while (true) {
           const { done, value } = await reader.read()
@@ -182,54 +222,50 @@ export function useChat() {
           const lines = chunk.split('\n\n').filter(line => line.startsWith('data: '))
 
           for (const line of lines) {
-            const data = line.slice(6) // Remove 'data: '
-
+            const data = line.slice(6)
             if (data === '[DONE]') continue
 
             try {
               const parsed = JSON.parse(data)
-
               if (parsed.error) {
                 accumulated = "Something went sideways on my end \u2014 give me a sec and try again? If it keeps happening, Jay's contact info is on the contact page. He's nicer than me anyway."
+                hasError = true
                 break
               }
-
               if (parsed.text) {
-                if (firstToken) {
-                  // First token arrived — hide loading message and typing indicator
-                  setIsWaiting(false)
-                  setLoadingMessage(null)
-                  firstToken = false
-
-                  // Add the assistant message to the list
-                  accumulated = parsed.text
-                  setMessages(prev => [
-                    ...prev,
-                    { ...assistantMessage, content: accumulated },
-                  ])
-                } else {
-                  accumulated += parsed.text
-                  // Update the last message in place
-                  setMessages(prev => {
-                    const updated = [...prev]
-                    const last = updated[updated.length - 1]
-                    if (last && last.id === assistantId) {
-                      updated[updated.length - 1] = { ...last, content: accumulated }
-                    }
-                    return updated
-                  })
-                }
+                accumulated += parsed.text
               }
             } catch {
               // Ignore malformed JSON chunks
             }
           }
+          if (hasError) break
         }
 
-        // If we never got any tokens, show error
-        if (firstToken) {
-          setIsWaiting(false)
-          setLoadingMessage(null)
+        // Wait for minimum loading time so users can read the message
+        const elapsed = Date.now() - loadingStart
+        const remaining = MIN_LOADING_MS - elapsed
+        if (remaining > 0) {
+          await new Promise(r => setTimeout(r, remaining))
+        }
+
+        // Stop rotating cat phrases and show the response
+        if (phraseInterval) clearInterval(phraseInterval)
+        setIsWaiting(false)
+        setLoadingMessage(null)
+
+        if (accumulated) {
+          const parsed = parseChips(accumulated)
+          setMessages(prev => [
+            ...prev,
+            {
+              ...assistantMessage,
+              content: parsed.content,
+              loadingFact: fact.text,
+              chips: parsed.chips.length > 0 ? parsed.chips : undefined,
+            },
+          ])
+        } else {
           setMessages(prev => [
             ...prev,
             {
@@ -239,6 +275,7 @@ export function useChat() {
           ])
         }
       } catch {
+        if (phraseInterval) clearInterval(phraseInterval)
         setIsWaiting(false)
         setLoadingMessage(null)
         setMessages(prev => [
@@ -249,6 +286,7 @@ export function useChat() {
           },
         ])
       } finally {
+        if (phraseInterval) clearInterval(phraseInterval)
         setIsStreaming(false)
         setIsWaiting(false)
         setLoadingMessage(null)
@@ -264,14 +302,16 @@ export function useChat() {
     [sendMessage]
   )
 
+  // Hide chips while waiting for a response
+  const visibleChips = isWaiting || isStreaming ? [] : chips
+
   return {
     messages,
     isOpen,
     isStreaming,
     isWaiting,
     loadingMessage,
-    chips,
-    showChips,
+    chips: visibleChips,
     open,
     close,
     toggle,

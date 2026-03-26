@@ -22,7 +22,6 @@ export default function ChatRoot() {
           isWaiting={chat.isWaiting}
           loadingMessage={chat.loadingMessage}
           chips={chat.chips}
-          showChips={chat.showChips}
           onSendMessage={chat.sendMessage}
           onSelectChip={chat.selectChip}
           onClose={chat.close}

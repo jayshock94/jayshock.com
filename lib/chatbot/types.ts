@@ -8,6 +8,10 @@ export interface ChatMessage {
   content: string
   /** ISO timestamp string */
   timestamp: string
+  /** Fun fact shown while waiting for this response */
+  loadingFact?: string
+  /** Dynamic suggestion chips returned by the bot */
+  chips?: SuggestionChip[]
 }
 
 /** What the client POSTs to /api/chat */
@@ -45,5 +49,5 @@ export interface PageContext {
 export interface LoadingMessage {
   id: string
   text: string
-  category: 'robot_sounds' | 'fun_facts' | 'ux_principles' | 'fake_outs'
+  category: 'cat_sounds' | 'fun_facts' | 'ux_principles' | 'fake_outs'
 }

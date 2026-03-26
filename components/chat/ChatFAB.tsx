@@ -1,6 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
+import CatAvatar from './CatAvatar'
 
 interface ChatFABProps {
   isOpen: boolean
@@ -23,18 +24,19 @@ export default function ChatFAB({ isOpen, isStreaming, onClick }: ChatFABProps) 
         position: 'fixed',
         bottom: 'max(24px, env(safe-area-inset-bottom))',
         right: 'max(24px, env(safe-area-inset-right))',
-        width: 'var(--chat-fab-size)',
-        height: 'var(--chat-fab-size)',
-        borderRadius: 'var(--chat-fab-radius)',
+        // Larger hit area than visual size
+        width: '60px',
+        height: '60px',
         border: 'none',
-        background: 'var(--color-button-primary)',
-        boxShadow: 'var(--shadow-chat-fab)',
+        background: 'transparent',
         cursor: 'pointer',
         zIndex: 60,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        transition: 'transform 200ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 200ms ease',
+        overflow: 'visible',
+        padding: 0,
+        transition: 'transform 200ms cubic-bezier(0.16, 1, 0.3, 1)',
         transform: 'scale(1)',
       }}
       onMouseEnter={e => {
@@ -51,43 +53,32 @@ export default function ChatFAB({ isOpen, isStreaming, onClick }: ChatFABProps) 
       }}
     >
       {isOpen ? (
-        // Close icon (X)
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-          <path
-            d="M5 5L15 15M15 5L5 15"
-            stroke="var(--color-button-text)"
-            strokeWidth="2"
-            strokeLinecap="round"
-          />
-        </svg>
+        // Close icon — shown on a solid pill
+        <div
+          style={{
+            width: 'var(--chat-fab-size)',
+            height: 'var(--chat-fab-size)',
+            borderRadius: 'var(--chat-fab-radius)',
+            background: 'var(--color-button-primary)',
+            boxShadow: 'var(--shadow-chat-fab)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path
+              d="M5 5L15 15M15 5L5 15"
+              stroke="var(--color-button-text)"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+          </svg>
+        </div>
       ) : (
-        // Weebo eyes
-        <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-          <span
-            className={isStreaming ? 'chat-eye--thinking' : 'chat-eye'}
-            style={{
-              position: 'absolute',
-              width: '5px',
-              height: '5px',
-              borderRadius: '50%',
-              background: 'var(--color-button-text)',
-              top: '45%',
-              left: '32%',
-            }}
-          />
-          <span
-            className={isStreaming ? 'chat-eye--thinking' : 'chat-eye'}
-            style={{
-              position: 'absolute',
-              width: '5px',
-              height: '5px',
-              borderRadius: '50%',
-              background: 'var(--color-button-text)',
-              top: '45%',
-              right: '32%',
-              animationDelay: '0.1s',
-            }}
-          />
+        // Cat avatar — same component used everywhere
+        <div style={{ filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.3))' }}>
+          <CatAvatar size={44} isThinking={isStreaming} />
         </div>
       )}
     </button>
