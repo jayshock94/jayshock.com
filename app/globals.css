@@ -716,6 +716,24 @@ body > * {
   animation: chat-fab-breathe 3s ease-in-out 3.5s infinite;
 }
 
+/* Welcome bubble entrance */
+@keyframes chat-bubble-enter {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.chat-bubble-enter {
+  animation: chat-bubble-enter 400ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Welcome bubble exit */
+@keyframes chat-bubble-exit {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(4px); }
+}
+.chat-bubble-exit {
+  animation: chat-bubble-exit 250ms ease-out both;
+}
+
 /* FAB eye blink — fires every ~4s */
 @keyframes chat-fab-blink {
   0%, 90%, 100% { transform: scaleY(1); }
@@ -783,6 +801,17 @@ body > * {
 /* -----------------------------------------------------------
    REDUCED MOTION — respect system preference
 ----------------------------------------------------------- */
+/* -----------------------------------------------------------
+   PROCESS RING — hover & focus for SVG segments
+----------------------------------------------------------- */
+g[role="tab"]:hover .process-ring-hover {
+  fill: rgba(255, 255, 255, 0.04);
+}
+
+g[role="tab"]:focus-visible .process-ring-focus {
+  opacity: 1;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-fade-up,
   .nav-logo-enter,
@@ -823,6 +852,8 @@ body > * {
   .chat-panel-enter { animation: none; opacity: 1; transform: none; }
   .chat-fab-enter   { animation: none; opacity: 1; transform: none; }
   .chat-fab-breathe { animation: none; }
+  .chat-bubble-enter { animation: none; opacity: 1; transform: none; }
+  .chat-bubble-exit  { animation: none; opacity: 0; }
   .chat-eye         { animation: none; }
   .chat-eye--thinking { animation: none; }
   .chat-typing-dot  { animation: none; opacity: 0.5; }
