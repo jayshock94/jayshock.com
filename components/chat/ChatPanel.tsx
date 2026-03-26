@@ -262,20 +262,7 @@ export default function ChatPanel({
         isDisabled={isStreaming || isWaiting}
       />
 
-      {/* Mobile full-screen styles via inline media query workaround */}
-      <style>{`
-        @media (max-width: 768px) {
-          .glass-chat-panel {
-            inset: 0 !important;
-            width: 100vw !important;
-            height: 100dvh !important;
-            border-radius: 0 !important;
-            bottom: 0 !important;
-            right: 0 !important;
-            padding-bottom: env(safe-area-inset-bottom);
-          }
-        }
-      `}</style>
+      {/* Mobile full-screen styles handled in globals.css */}
     </div>
   )
 }

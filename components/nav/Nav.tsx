@@ -143,6 +143,7 @@ export default function Nav() {
               <nav
                 aria-label="Mobile navigation"
                 className="flex flex-col gap-[2px] p-[10px]"
+                style={{ paddingBottom: 'max(10px, env(safe-area-inset-bottom))' }}
               >
                 {NAV_LINKS.map(link => {
                   const isActive = pathname === link.href || pathname.startsWith(link.href + '/')

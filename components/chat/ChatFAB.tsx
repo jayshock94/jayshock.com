@@ -21,8 +21,8 @@ export default function ChatFAB({ isOpen, isStreaming, onClick }: ChatFABProps) 
       className={isOpen ? '' : (hasOpened.current ? '' : 'chat-fab-enter')}
       style={{
         position: 'fixed',
-        bottom: '24px',
-        right: '24px',
+        bottom: 'max(24px, env(safe-area-inset-bottom))',
+        right: 'max(24px, env(safe-area-inset-right))',
         width: 'var(--chat-fab-size)',
         height: 'var(--chat-fab-size)',
         borderRadius: 'var(--chat-fab-radius)',

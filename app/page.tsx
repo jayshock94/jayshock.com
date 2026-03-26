@@ -38,7 +38,7 @@ export default function HomePage() {
             className="hero-fade-up text-center md:text-left"
             style={{
               fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-              fontSize: '18px',
+              fontSize: 'clamp(14px, 3vw, 18px)',
               fontWeight: 300,
               color: 'var(--color-text-muted)',
               marginBottom: '4px',

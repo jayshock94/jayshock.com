@@ -680,6 +680,17 @@ html.theme-transitioning *::after {
     inset 0 1px 0 var(--glass-border-light);
 }
 
+/* Chat panel — full screen on mobile */
+@media (max-width: 768px) {
+  .glass-chat-panel {
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100dvh !important;
+    border-radius: 0 !important;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
 /* Panel entrance */
 @keyframes chat-panel-enter {
   from { opacity: 0; transform: translateY(16px) scale(0.97); }

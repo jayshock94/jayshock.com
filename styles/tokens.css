@@ -363,8 +363,12 @@
 ----------------------------------------------------------- */
 @media (max-width: 768px) {
   :root {
+    --text-h2-size:      24px;
+    --text-h3-size:      19px;
+    --text-h4-size:      16px;
     --text-intro-size:   17px;
     --text-body-lg-size: 16px;
+    --text-body-size:    14px;
   }
 }
 

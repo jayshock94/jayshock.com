@@ -15,7 +15,8 @@ export default function SuggestionChip({ label, onClick, index }: SuggestionChip
       className="chat-chip-enter"
       style={{
         animationDelay: `${index * 60}ms`,
-        padding: '6px 14px',
+        padding: '10px 16px',
+        minHeight: '44px',
         borderRadius: '40px',
         border: '0.5px solid var(--color-border-mid)',
         background: 'transparent',

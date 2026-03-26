@@ -87,7 +87,7 @@ export default function ChatInput({ onSend, isDisabled }: ChatInputProps) {
           fontSize: 'var(--text-body-sm-size)',
           fontWeight: 'var(--text-body-sm-weight)',
           lineHeight: '1.6',
-          padding: '8px 0',
+          padding: '12px 0',
           overflowY: 'auto',
         }}
       />
@@ -101,8 +101,8 @@ export default function ChatInput({ onSend, isDisabled }: ChatInputProps) {
           className="chat-send-enter"
           aria-label="Send message"
           style={{
-            width: '36px',
-            height: '36px',
+            width: '44px',
+            height: '44px',
             borderRadius: '50%',
             border: 'none',
             background: 'var(--color-button-primary)',
