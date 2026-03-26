@@ -33,36 +33,50 @@ export default function HomePage() {
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
 
-          {/* Brand badge — reveals left to right with phase color sweep at 1250ms */}
-          <div className="mb-[32px] flex justify-center md:justify-start">
-            <div className="pill-reveal">
-              <div aria-hidden="true" className="pill-reveal-gradient" />
-              <ThemeToggle />
-            </div>
-          </div>
+          {/* Intro line — tucked tight against headline */}
+          <p
+            className="hero-fade-up text-center md:text-left"
+            style={{
+              fontFamily: 'var(--font-outfit), system-ui, sans-serif',
+              fontSize: '18px',
+              fontWeight: 300,
+              color: 'var(--color-text-muted)',
+              marginBottom: '4px',
+              animationDelay: '300ms',
+            }}
+          >
+            Hi there.
+          </p>
 
-          {/* Headline — word-by-word reveal, phase colors sweep left to right */}
+          {/* Headline — word-by-word reveal, bold words carry the message */}
           <h1
             className="text-display mb-[20px] text-center md:text-left"
             style={{ maxWidth: '900px' }}
           >
             <span style={{ fontWeight: 300, color: 'var(--color-text-muted)' }}>
-              <span className="hero-word hero-word--w0" style={{ animationDelay: '500ms'  }}>I </span>
-              <span className="hero-word hero-word--w1" style={{ animationDelay: '560ms'  }}>make </span>
+              <span className="hero-word" style={{ animationDelay: '400ms'  }}>I&apos;m </span>
             </span>
             <span style={{ fontWeight: 700, color: 'var(--color-ink)' }}>
-              <span className="hero-word hero-word--w2" style={{ animationDelay: '620ms'  }}>complex </span>
-              <span className="hero-word hero-word--w3" style={{ animationDelay: '680ms'  }}>products </span>
+              <span className="hero-word hero-word--bold">Jay </span>
+              <span className="hero-word hero-word--bold">Shock,</span>
+            </span>
+            <br />
+            <span style={{ fontWeight: 300, color: 'var(--color-text-muted)' }}>
+              <span className="hero-word" style={{ animationDelay: '500ms'  }}>a </span>
+              <span className="hero-word" style={{ animationDelay: '560ms'  }}>product </span>
+              <span className="hero-word" style={{ animationDelay: '620ms'  }}>designer </span>
             </span>
             <span style={{ fontWeight: 300, color: 'var(--color-text-muted)' }}>
-              <span className="hero-word hero-word--w4" style={{ animationDelay: '740ms'  }}>feel </span>
-              <span className="hero-word hero-word--w5" style={{ animationDelay: '800ms'  }}>like </span>
-              <span className="hero-word hero-word--w6" style={{ animationDelay: '860ms'  }}>they </span>
-              <span className="hero-word hero-word--w7" style={{ animationDelay: '920ms'  }}>were </span>
-              <span className="hero-word hero-word--w8" style={{ animationDelay: '980ms'  }}>always </span>
+              <span className="hero-word" style={{ animationDelay: '680ms'  }}>turning </span>
             </span>
             <span style={{ fontWeight: 700, color: 'var(--color-ink)' }}>
-              <span className="hero-word hero-word--w9" style={{ animationDelay: '1040ms' }}>simple.</span>
+              <span className="hero-word hero-word--bold">complexity </span>
+            </span>
+            <span style={{ fontWeight: 300, color: 'var(--color-text-muted)' }}>
+              <span className="hero-word" style={{ animationDelay: '740ms'  }}>into </span>
+            </span>
+            <span style={{ fontWeight: 700, color: 'var(--color-ink)' }}>
+              <span className="hero-word hero-word--bold">simplicity.</span>
             </span>
           </h1>
 
@@ -71,13 +85,12 @@ export default function HomePage() {
             className="text-body-lg mb-[36px] text-center md:text-left hero-fade-up"
             style={{
               color:          'var(--color-text-muted)',
-              maxWidth:       '480px',
-              animationDelay: '900ms',  /* arrives as headline finishes */
+              maxWidth:       '520px',
+              animationDelay: '1100ms',
             }}
           >
-            Product designer with 8 plus years in fintech and enterprise SaaS.
-            I work end to end, from research to ship. I care about the problem
-            as much as the pixels.
+            8 years experience. Currently based in Utah, designing financial systems
+            in enterprise SaaS.
           </p>
 
           {/* CTAs */}
