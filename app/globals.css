@@ -434,21 +434,6 @@ body > * {
 }
 
 /* -----------------------------------------------------------
-   THEME TRANSITION
-   Applied momentarily during dark/light mode switch.
-   Smooths token-driven color changes across all elements.
------------------------------------------------------------ */
-html.theme-transitioning,
-html.theme-transitioning *,
-html.theme-transitioning *::before,
-html.theme-transitioning *::after {
-  transition:
-    background-color 0.55s ease,
-    border-color     0.45s ease,
-    color            0.35s ease !important;
-}
-
-/* -----------------------------------------------------------
    HERO ENTRANCE
    Staggered fade-up with a soft blur-clear.
    animation-fill-mode: both —
@@ -680,7 +665,7 @@ html.theme-transitioning *::after {
     inset 0 1px 0 var(--glass-border-light);
 }
 
-/* Chat panel — full screen on mobile */
+/* Chat panel — full screen on mobile, more opaque for readability */
 @media (max-width: 768px) {
   .glass-chat-panel {
     inset: 0 !important;
@@ -688,6 +673,9 @@ html.theme-transitioning *::after {
     height: 100dvh !important;
     border-radius: 0 !important;
     padding-bottom: env(safe-area-inset-bottom);
+    background: rgba(22, 22, 22, 0.92) !important;
+    backdrop-filter: blur(60px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(60px) saturate(180%) !important;
   }
 }
 

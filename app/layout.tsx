@@ -47,8 +47,6 @@ export default function RootLayout({
     <html
       lang="en"
       className={outfit.variable}
-      data-theme="dark"
-      suppressHydrationWarning
     >
       <body className="min-h-screen flex flex-col">
         <BloomScroll />

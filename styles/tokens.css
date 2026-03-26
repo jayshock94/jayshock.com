@@ -5,8 +5,8 @@
 
 :root {
 
-  /* Dark is default; site supports both modes */
-  color-scheme: dark light;
+  /* Dark mode only */
+  color-scheme: dark;
 
   /* -----------------------------------------------------------
      PRIMITIVE SCALE — NEUTRAL
@@ -63,66 +63,66 @@
   /* -----------------------------------------------------------
      SEMANTIC TOKENS — SURFACES
   ----------------------------------------------------------- */
-  --color-canvas:           var(--neutral-50);
-  --color-surface:          #FFFFFF;
-  --color-surface-glass:    var(--glass-regular);
-  --color-surface-elevated: #FFFFFF;
+  --color-canvas:           #161616;
+  --color-surface:          #202020;
+  --color-surface-glass:    var(--glass-dark-regular);
+  --color-surface-elevated: #2A2A2A;
 
   /* -----------------------------------------------------------
      SEMANTIC TOKENS — BORDERS
   ----------------------------------------------------------- */
-  --color-border:        var(--neutral-200);
-  --color-border-mid:    var(--neutral-300);
-  --color-border-strong: var(--neutral-400);
+  --color-border:        rgba(255, 255, 255, 0.10);
+  --color-border-mid:    rgba(255, 255, 255, 0.16);
+  --color-border-strong: rgba(255, 255, 255, 0.24);
 
   /* -----------------------------------------------------------
      SEMANTIC TOKENS — TEXT
   ----------------------------------------------------------- */
-  --color-ink:              var(--neutral-900);
-  --color-text-primary:     var(--neutral-900);
-  --color-text-secondary:   var(--neutral-800);
-  --color-text-muted:       var(--neutral-600);
-  --color-text-placeholder: var(--neutral-400);
+  --color-ink:              #F2F2F2;
+  --color-text-primary:     #F2F2F2;
+  --color-text-secondary:   #BEBEBE;
+  --color-text-muted:       #888888;
+  --color-text-placeholder: #555555;
 
   /* -----------------------------------------------------------
      SEMANTIC TOKENS — ACCENT
      Tertiary role only — not the primary action color.
   ----------------------------------------------------------- */
-  --color-accent:        var(--slate-500);
-  --color-accent-tint:   var(--slate-50);
-  --color-accent-border: var(--slate-200);
-  --color-accent-deep:   var(--slate-700);
+  --color-accent:        #6A94B9;
+  --color-accent-tint:   rgba(74, 116, 153, 0.15);
+  --color-accent-border: rgba(74, 116, 153, 0.30);
+  --color-accent-deep:   #8AAAC8;
 
   /* -----------------------------------------------------------
      SEMANTIC TOKENS — INTERACTIVE (BUTTONS)
      Primary is solid ink — confident, not decorative.
   ----------------------------------------------------------- */
-  --color-button-primary: var(--neutral-900);
-  --color-button-primary-hover: var(--neutral-800);
-  --color-button-text:    var(--neutral-50);
-  --color-button-border:  rgba(255, 255, 255, 0.12);
+  --color-button-primary:       var(--neutral-100);
+  --color-button-primary-hover: #FFFFFF;
+  --color-button-text:          var(--neutral-900);
+  --color-button-border:        rgba(255, 255, 255, 0.12);
 
   /* -----------------------------------------------------------
      SEMANTIC TOKENS — BLOOM GRADIENT
      Used in globals.css for the body background radial gradient.
      Swapped out in dark mode.
   ----------------------------------------------------------- */
-  --color-bloom-center: #F5F5F4;
-  --color-bloom-mid:    #EDEDED;
-  --color-bloom-edge:   #E2E1DF;
+  --color-bloom-center: #1E1E1C;
+  --color-bloom-mid:    #161616;
+  --color-bloom-edge:   #111111;
 
   /* -----------------------------------------------------------
      SEMANTIC TOKENS — SURFACE INTERACTIONS
   ----------------------------------------------------------- */
-  --color-hover-subtle: rgba(0, 0, 0, 0.04);
+  --color-hover-subtle: rgba(255, 255, 255, 0.06);
 
   /* -----------------------------------------------------------
      SEMANTIC TOKENS — SHADOWS
      Token-driven so dark mode can swap to lighter shadows.
   ----------------------------------------------------------- */
-  --shadow-card:       0 1px 4px rgba(28, 25, 23, 0.05);
-  --shadow-card-hover: 0 16px 48px rgba(28, 25, 23, 0.10);
-  --shadow-nav:        0 2px 24px rgba(28, 25, 23, 0.06);
+  --shadow-card:       0 1px 4px rgba(0, 0, 0, 0.20);
+  --shadow-card-hover: 0 16px 48px rgba(0, 0, 0, 0.36);
+  --shadow-nav:        0 2px 24px rgba(0, 0, 0, 0.24);
 
   /* -----------------------------------------------------------
      SEMANTIC TOKENS — SCRIM
@@ -137,22 +137,22 @@
      Base RGB values used by the brand tint algorithm.
      Light mode blends into near-white; dark mode into surface.
   ----------------------------------------------------------- */
-  --card-glass-base-r: 252;
-  --card-glass-base-g: 251;
-  --card-glass-base-b: 250;
-  --card-glass-opacity: 0.80;
+  --card-glass-base-r: 32;
+  --card-glass-base-g: 32;
+  --card-glass-base-b: 32;
+  --card-glass-opacity: 0.85;
 
   /* -----------------------------------------------------------
      SEMANTIC TOKENS — NAV CARD
   ----------------------------------------------------------- */
-  --color-nav-card-bg:     var(--glass-regular);
-  --color-nav-card-border: var(--glass-border-light);
+  --color-nav-card-bg:     var(--glass-dark-regular);
+  --color-nav-card-border: var(--glass-border-dark);
 
   /* -----------------------------------------------------------
      SEMANTIC TOKENS — PILL GLASS (work card CTA)
   ----------------------------------------------------------- */
-  --color-pill-bg:       var(--glass-thin);
-  --color-pill-bg-hover: var(--glass-regular);
+  --color-pill-bg:       var(--glass-dark-thin);
+  --color-pill-bg-hover: var(--glass-dark-regular);
 
   /* -----------------------------------------------------------
      SEMANTIC TOKENS — BADGE (ThemeToggle)
@@ -160,12 +160,12 @@
   ----------------------------------------------------------- */
   --color-badge-bg:      var(--color-ink);
   --color-badge-fg:      var(--color-canvas);
-  --color-badge-divider: rgba(255, 255, 255, 0.20);
+  --color-badge-divider: rgba(0, 0, 0, 0.18);
 
   /* -----------------------------------------------------------
      SEMANTIC TOKENS — STAT BOX (phase section impact metrics)
   ----------------------------------------------------------- */
-  --color-stat-box-bg: rgba(255, 255, 255, 0.55);
+  --color-stat-box-bg: rgba(255, 255, 255, 0.06);
 
   /* -----------------------------------------------------------
      PHASE COLOR TOKENS
@@ -174,44 +174,44 @@
   ----------------------------------------------------------- */
 
   /* Impact — opens the case study, deepest tone */
-  --phase-impact-bg:     #EAE6F5;
-  --phase-impact-glass:  rgba(234, 230, 245, 0.52);
-  --phase-impact-border: #C4BAE8;
-  --phase-impact-label:  #4A3A7A;
-  --phase-impact-text:   #1C1917;
+  --phase-impact-bg:     #1E1A28;
+  --phase-impact-glass:  rgba(30, 26, 40, 0.42);
+  --phase-impact-border: rgba(180, 160, 224, 0.18);
+  --phase-impact-label:  #B4A0E0;
+  --phase-impact-text:   #F2F2F2;
 
   /* Problem — context and constraints, warm neutral */
-  --phase-problem-bg:     #F5F0EB;
-  --phase-problem-glass:  rgba(245, 240, 235, 0.52);
-  --phase-problem-border: #DDD0C0;
-  --phase-problem-label:  #8C6A50;
-  --phase-problem-text:   #1C1917;
+  --phase-problem-bg:     #211D18;
+  --phase-problem-glass:  rgba(33, 29, 24, 0.42);
+  --phase-problem-border: rgba(200, 170, 140, 0.18);
+  --phase-problem-label:  #C8A880;
+  --phase-problem-text:   #F2F2F2;
 
   /* Discovery — research and insights, cool-warm neutral */
-  --phase-discovery-bg:     #EAF0EE;
-  --phase-discovery-glass:  rgba(234, 240, 238, 0.52);
-  --phase-discovery-border: #BACED4;
-  --phase-discovery-label:  #3A7A68;
-  --phase-discovery-text:   #1C1917;
+  --phase-discovery-bg:     #181F1E;
+  --phase-discovery-glass:  rgba(24, 31, 30, 0.42);
+  --phase-discovery-border: rgba(128, 196, 180, 0.18);
+  --phase-discovery-label:  #80C4B4;
+  --phase-discovery-text:   #F2F2F2;
 
   /* Solution — closes with craft, brand slate */
-  --phase-solution-bg:     #E8EEF4;
-  --phase-solution-glass:  rgba(232, 238, 244, 0.52);
-  --phase-solution-border: #B8CCE0;
-  --phase-solution-label:  #2C4A6B;
-  --phase-solution-text:   #1C1917;
+  --phase-solution-bg:     #181D25;
+  --phase-solution-glass:  rgba(24, 29, 37, 0.42);
+  --phase-solution-border: rgba(140, 174, 214, 0.18);
+  --phase-solution-label:  #80A8D4;
+  --phase-solution-text:   #F2F2F2;
 
   /* Phase ambient canvas shifts (subtle — barely perceptible) */
-  --phase-impact-canvas:    #F2EEF8;
-  --phase-problem-canvas:   #F6F2EC;
-  --phase-discovery-canvas: #EEF4F0;
-  --phase-solution-canvas:  #EBF0F6;
+  --phase-impact-canvas:    #1A1822;
+  --phase-problem-canvas:   #1E1B18;
+  --phase-discovery-canvas: #161D1C;
+  --phase-solution-canvas:  #161A21;
 
   /* Phase nav glass tints */
-  --phase-impact-nav:    rgba(242, 238, 248, 0.80);
-  --phase-problem-nav:   rgba(246, 242, 236, 0.80);
-  --phase-discovery-nav: rgba(238, 244, 240, 0.80);
-  --phase-solution-nav:  rgba(235, 240, 246, 0.80);
+  --phase-impact-nav:    rgba(26, 24, 34, 0.88);
+  --phase-problem-nav:   rgba(30, 27, 23, 0.88);
+  --phase-discovery-nav: rgba(22, 29, 28, 0.88);
+  --phase-solution-nav:  rgba(22, 26, 33, 0.88);
 
   /* -----------------------------------------------------------
      CASE STUDY OVERRIDE TOKENS
@@ -219,10 +219,10 @@
      These tokens pick the right variant based on current mode.
      Never used outside the case study hero section.
   ----------------------------------------------------------- */
-  --case-canvas: var(--case-canvas-light, var(--color-canvas));
-  --case-label:  var(--case-label-light,  var(--color-accent));
-  --case-border: var(--case-border-light, var(--color-border));
-  --case-bg:     var(--case-bg-light,     var(--color-canvas));
+  --case-canvas: var(--case-canvas-dark, var(--color-canvas));
+  --case-label:  var(--case-label-dark,  var(--color-accent));
+  --case-border: var(--case-border-dark, var(--color-border));
+  --case-bg:     var(--case-bg-dark,     var(--color-surface));
 
   /* -----------------------------------------------------------
      TYPOGRAPHY TOKENS
@@ -352,8 +352,8 @@
   --chat-panel-radius:     20px;
   --chat-message-radius:   18px;
   --chat-bubble-max-width: 85%;
-  --shadow-chat-fab:       0 4px 24px rgba(28, 25, 23, 0.20);
-  --shadow-chat-panel:     0 8px 40px rgba(28, 25, 23, 0.12);
+  --shadow-chat-fab:       0 4px 24px rgba(0, 0, 0, 0.40);
+  --shadow-chat-panel:     0 8px 40px rgba(0, 0, 0, 0.36);
 }
 
 /* -----------------------------------------------------------
@@ -372,121 +372,6 @@
   }
 }
 
-/* -----------------------------------------------------------
-   DARK MODE
-   Opt-in only — requires data-theme="dark" on <html>.
-   Phase 1 does not expose a toggle; this block is inert.
------------------------------------------------------------ */
-html[data-theme="dark"] {
-  /* Surfaces */
-  --color-canvas:           #161616;
-  --color-surface:          #202020;
-  --color-surface-glass:    var(--glass-dark-regular);
-  --color-surface-elevated: #2A2A2A;
-
-  /* Borders */
-  --color-border:        rgba(255, 255, 255, 0.10);
-  --color-border-mid:    rgba(255, 255, 255, 0.16);
-  --color-border-strong: rgba(255, 255, 255, 0.24);
-
-  /* Text */
-  --color-ink:              #F2F2F2;
-  --color-text-primary:     #F2F2F2;
-  --color-text-secondary:   #BEBEBE;
-  --color-text-muted:       #888888;
-  --color-text-placeholder: #555555;
-
-  /* Accent */
-  --color-accent:        #6A94B9;
-  --color-accent-tint:   rgba(74, 116, 153, 0.15);
-  --color-accent-border: rgba(74, 116, 153, 0.30);
-  --color-accent-deep:   #8AAAC8;
-
-  /* Buttons — solid light pill in dark mode */
-  --color-button-primary:       var(--neutral-100);
-  --color-button-primary-hover: #FFFFFF;
-  --color-button-text:          var(--neutral-900);
-
-  /* Bloom gradient */
-  --color-bloom-center: #1E1E1C;
-  --color-bloom-mid:    #161616;
-  --color-bloom-edge:   #111111;
-
-  /* Surface interactions */
-  --color-hover-subtle: rgba(255, 255, 255, 0.06);
-
-  /* Shadows — lighter in dark mode */
-  --shadow-card:       0 1px 4px rgba(0, 0, 0, 0.20);
-  --shadow-card-hover: 0 16px 48px rgba(0, 0, 0, 0.36);
-  --shadow-nav:        0 2px 24px rgba(0, 0, 0, 0.24);
-
-  /* Card glass base — blends into dark surface in dark mode */
-  --card-glass-base-r: 32;
-  --card-glass-base-g: 32;
-  --card-glass-base-b: 32;
-  --card-glass-opacity: 0.85;
-
-  /* Nav card */
-  --color-nav-card-bg:     var(--glass-dark-regular);
-  --color-nav-card-border: var(--glass-border-dark);
-
-  /* Pill glass */
-  --color-pill-bg:       var(--glass-dark-thin);
-  --color-pill-bg-hover: var(--glass-dark-regular);
-
-  /* Badge — ink becomes light, canvas becomes dark → auto-inverts */
-  --color-badge-divider: rgba(0, 0, 0, 0.18);
-
-  /* Stat box */
-  --color-stat-box-bg: rgba(255, 255, 255, 0.06);
-
-  /* Chat */
-  --shadow-chat-fab:   0 4px 24px rgba(0, 0, 0, 0.40);
-  --shadow-chat-panel: 0 8px 40px rgba(0, 0, 0, 0.36);
-
-  /* Case study hero tokens — dark mode picks dark variants */
-  --case-canvas: var(--case-canvas-dark, var(--color-canvas));
-  --case-label:  var(--case-label-dark,  var(--color-accent));
-  --case-border: var(--case-border-dark, var(--color-border));
-  --case-bg:     var(--case-bg-dark,     var(--color-surface));
-
-  /* Phase section tokens — dark mode */
-  /* Impact — deep purple-black */
-  --phase-impact-bg:     #1E1A28;
-  --phase-impact-glass:  rgba(30, 26, 40, 0.42);
-  --phase-impact-border: rgba(180, 160, 224, 0.18);
-  --phase-impact-label:  #B4A0E0;
-
-  /* Problem — deep warm-brown-black */
-  --phase-problem-bg:     #211D18;
-  --phase-problem-glass:  rgba(33, 29, 24, 0.42);
-  --phase-problem-border: rgba(200, 170, 140, 0.18);
-  --phase-problem-label:  #C8A880;
-
-  /* Discovery — deep teal-black */
-  --phase-discovery-bg:     #181F1E;
-  --phase-discovery-glass:  rgba(24, 31, 30, 0.42);
-  --phase-discovery-border: rgba(128, 196, 180, 0.18);
-  --phase-discovery-label:  #80C4B4;
-
-  /* Solution — deep blue-black */
-  --phase-solution-bg:     #181D25;
-  --phase-solution-glass:  rgba(24, 29, 37, 0.42);
-  --phase-solution-border: rgba(140, 174, 214, 0.18);
-  --phase-solution-label:  #80A8D4;
-
-  /* Phase ambient canvas — barely-tinted dark backgrounds */
-  --phase-impact-canvas:    #1A1822;
-  --phase-problem-canvas:   #1E1B18;
-  --phase-discovery-canvas: #161D1C;
-  --phase-solution-canvas:  #161A21;
-
-  /* Phase nav glass — dark tinted */
-  --phase-impact-nav:    rgba(26, 24, 34, 0.88);
-  --phase-problem-nav:   rgba(30, 27, 23, 0.88);
-  --phase-discovery-nav: rgba(22, 29, 28, 0.88);
-  --phase-solution-nav:  rgba(22, 26, 33, 0.88);
-}
 
 /* -----------------------------------------------------------
    PHASE CSS OVERRIDES
@@ -513,20 +398,3 @@ html[data-theme="dark"] {
   --color-surface-glass: var(--phase-solution-nav);
 }
 
-/* Dark mode phase canvas — must win over the generic [data-phase] rule above */
-html[data-theme="dark"][data-phase="impact"] {
-  --color-canvas:        var(--phase-impact-canvas);
-  --color-surface-glass: var(--phase-impact-nav);
-}
-html[data-theme="dark"][data-phase="problem"] {
-  --color-canvas:        var(--phase-problem-canvas);
-  --color-surface-glass: var(--phase-problem-nav);
-}
-html[data-theme="dark"][data-phase="discovery"] {
-  --color-canvas:        var(--phase-discovery-canvas);
-  --color-surface-glass: var(--phase-discovery-nav);
-}
-html[data-theme="dark"][data-phase="solution"] {
-  --color-canvas:        var(--phase-solution-canvas);
-  --color-surface-glass: var(--phase-solution-nav);
-}

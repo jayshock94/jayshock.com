@@ -45,7 +45,7 @@ Language        TypeScript — strict mode always
 Styling         Tailwind CSS + CSS custom properties for tokens
 Fonts           Outfit (Google Fonts) — single family, weights 300–700
 Color space     oklch for all color algorithm calculations
-State           React context for phase/theme state
+State           React context for phase state
 Auth            NextAuth.js (when Studio is built)
 Database        PostgreSQL + Prisma (when Studio is built)
 Deployment      Vercel
@@ -141,14 +141,14 @@ This section lists the token categories Claude Code must know exist.
 
 ### Color tokens
 ```
---color-canvas            Page background (light: #EDEDED, dark: #161616)
+--color-canvas            Page background (#161616)
 --color-surface           Cards and raised elements
 --color-surface-glass     Nav and interactive glass surfaces
 --color-surface-elevated  Elevated cards
 --color-border            Default borders and dividers
 --color-border-mid        Medium-weight borders
 --color-border-strong     Strong borders and active states
---color-ink               Primary text (#1C1917 light, #F2F2F2 dark)
+--color-ink               Primary text (#F2F2F2)
 --color-text-primary      Headings and primary body
 --color-text-secondary    Supporting body copy
 --color-text-muted        Metadata, labels, captions
@@ -157,8 +157,8 @@ This section lists the token categories Claude Code must know exist.
 --color-accent-tint       Hover backgrounds on accent elements
 --color-accent-border     Accent-tinted borders
 --color-accent-deep       Deep accent for emphasis
---color-button-primary    Solid button background (ink light, light dark)
---color-button-text       Button text (inverts with mode)
+--color-button-primary    Solid button background (light pill on dark)
+--color-button-text       Button text (dark on light pill)
 --color-hover-subtle      Subtle hover background
 ```
 
@@ -236,7 +236,7 @@ Never apply glass to non-interactive surfaces.
 ```
 Nav bar             → glass (contains interactive elements)
 Chat panel          → glass (interactive container — lighter than nav)
-Primary button      → solid ink (dark light mode, light dark mode)
+Primary button      → solid light pill on dark background
 Glass pill          → frosted glass (work card CTAs)
 Secondary button    → outlined, no glass
 Ghost button        → no background, no glass
@@ -291,11 +291,11 @@ The homepage is black and white only. No phase color system. No case study brand
 Think of it as the gallery lobby — neutral, calm, sets the tone before you walk into any room.
 
 ```
-Background          #EDEDED (canvas — clean light gray, not cream)
-All text            #1C1917 (ink) and neutral scale only
+Background          #161616 (canvas — dark)
+All text            #F2F2F2 (ink) and neutral scale only
 Case study cards    Monochromatic — no color thumbnails
 Navigation          Glass, but neutral — no phase tinting on homepage
-Buttons             Smoked dark glass
+Buttons             Light solid pill on dark
 Accent use          None — slate blue does not appear on homepage
 ```
 
@@ -401,7 +401,6 @@ Out of scope (Phase 2):
 │   │   ├── Button.tsx      4 variants: glass, secondary, ghost, solid-white
 │   │   ├── Footer.tsx      Site footer
 │   │   ├── ScrollReveal.tsx IntersectionObserver fade-up wrapper
-│   │   └── ThemeToggle.tsx  Dark/light mode toggle
 │   ├── about/
 │   │   └── HowIWork.tsx    About page section
 │   └── BloomScroll.tsx     Updates --bloom-y CSS var on scroll
