@@ -215,6 +215,12 @@ export function useChat() {
             })
 
             if (!response.ok || !response.body) {
+              // Don't retry client errors (rate limit, bad input)
+              if (response.status === 429 || response.status === 400) {
+                const errBody = await response.json().catch(() => null)
+                accumulated = errBody?.error ?? "Let's slow down a bit. Try again in a minute."
+                break
+              }
               if (attempt < MAX_RETRIES) {
                 await new Promise(r => setTimeout(r, 1000 * (attempt + 1)))
                 continue
