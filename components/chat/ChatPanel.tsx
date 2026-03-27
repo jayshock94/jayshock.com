@@ -73,6 +73,11 @@ export default function ChatPanel({
     }
   }, [messages, isWaiting, lastMessageIsUser, lastMessageIsBot, scrollToBottom])
 
+  // Scroll to bottom on mount so user sees latest message
+  useEffect(() => {
+    scrollToBottom()
+  }, [scrollToBottom])
+
   // Lock body scroll on mobile when panel is open
   useEffect(() => {
     const isMobile = window.innerWidth < 768
