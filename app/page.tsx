@@ -278,7 +278,7 @@ export default function HomePage() {
               <div className="flex flex-col">
                 {[
                   {
-                    role:    'Lead UX Designer',
+                    role:    'Senior UX Designer',
                     company: 'GoldPoint Systems',
                     period:  '2021 — Present',
                     summary: 'UX and product design across a large portfolio of fintech and lending products. End-to-end ownership from research through handoff.',

@@ -19,7 +19,7 @@
 full_name: Jay Duane Shock
 goes_by: Jay
 nickname: JD (only close friends and family use this)
-title: Lead UX Designer
+title: Senior UX Designer
 location: Utah
 remote: true
 availability: Open to remote roles, hybrid if it's a good fit, and consulting
@@ -80,13 +80,13 @@ inconsistencies, the opportunities other people walk past.
 
 ```yaml
 status: employed and open to opportunities, also consulting
-current_role: Lead UX Designer
+current_role: Senior UX Designer
 current_company: GoldPoint Systems
 looking_for:
   - Senior Product Designer roles
   - Lead Product Designer roles
   - Senior UX Designer roles
-  - Lead UX Designer roles
+  - Senior UX Designer roles
   - Remote positions
   - Open to hybrid if it's a good fit
 industries_interested_in:
@@ -100,9 +100,9 @@ open_to_consulting: true
 
 ## Work History
 
-### Lead UX Designer — GoldPoint Systems
+### Senior UX Designer — GoldPoint Systems
 - **Company:** GoldPoint Systems
-- **Title:** Lead UX Designer
+- **Title:** Senior UX Designer
 - **Dates:** 2021 – Present
 - **What you did:** UX and product design across a large portfolio of fintech and lending products. Role varies by project — sometimes end-to-end product design from research through handoff, sometimes updating mocks on individual cards, sometimes running usability tests or visiting client branches for in-person data gathering. Works closely with product owners, stakeholders, and dev teams. Attends dev reviews to verify builds match designs. The Figma project library has 50+ product workspaces, each full of design files and FigJams.
 - **Case study available:** TBD
