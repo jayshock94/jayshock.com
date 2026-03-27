@@ -280,7 +280,7 @@ export default function HowIWork() {
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-[var(--space-component-xs)]">
           {LIFECYCLE.map((item) => {
-            const isLit = item.phases.includes(active)
+            const isLit = (item.phases as readonly number[]).includes(active)
             /* Use the first matching phase's color */
             const matchPhase = isLit ? PHASES[item.phases.find(p => p === active) ?? item.phases[0]] : null
 
