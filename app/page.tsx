@@ -55,9 +55,9 @@ export default function HomePage() {
             <span style={{ fontWeight: 300, color: 'var(--color-text-muted)' }}>
               <span className="hero-word" style={{ animationDelay: '400ms'  }}>I&apos;m </span>
             </span>
-            <span style={{ fontWeight: 300, color: 'var(--color-text-muted)' }}>
-              <span className="hero-word" style={{ animationDelay: '430ms' }}>Jay </span>
-              <span className="hero-word" style={{ animationDelay: '460ms' }}>Shock,</span>
+            <span style={{ fontWeight: 700, color: 'var(--color-ink)' }}>
+              <span className="hero-word hero-word--bold">Jay </span>
+              <span className="hero-word hero-word--bold">Shock,</span>
             </span>
             <br />
             <span style={{ fontWeight: 300, color: 'var(--color-text-muted)' }}>
