@@ -29,7 +29,7 @@ export async function POST(req: Request): Promise<Response> {
     // Create streaming response
     const stream = anthropic.messages.stream({
       model: 'claude-sonnet-4-20250514',
-      max_tokens: 250,
+      max_tokens: 400,
       system: systemPrompt,
       messages: recentMessages.map(m => ({
         role: m.role,
