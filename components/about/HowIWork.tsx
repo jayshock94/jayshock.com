@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 
 /* ------------------------------------------------------------------ */
 /*  Data                                                               */
@@ -79,7 +79,62 @@ export default function HowIWork() {
   const [active, setActive] = useState(0)
   const phase = PHASES[active]
 
+  const containerRef = useRef<HTMLDivElement>(null)
+  const hasAutoPlayed = useRef(false)
+  const isAutoRotating = useRef(false)
+  const rotateTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  /* Auto-rotate through phases when section scrolls into view */
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting || hasAutoPlayed.current) return
+        hasAutoPlayed.current = true
+        isAutoRotating.current = true
+
+        let step = 0
+        const cycle = () => {
+          if (!isAutoRotating.current) return
+          setActive(step)
+          step++
+          if (step < PHASES.length) {
+            rotateTimer.current = setTimeout(cycle, 1500)
+          } else {
+            // Cycle complete — return to first phase
+            rotateTimer.current = setTimeout(() => {
+              if (isAutoRotating.current) {
+                setActive(0)
+                isAutoRotating.current = false
+              }
+            }, 1500)
+          }
+        }
+        cycle()
+      },
+      { threshold: 0.4 }
+    )
+
+    observer.observe(el)
+    return () => {
+      observer.disconnect()
+      if (rotateTimer.current) clearTimeout(rotateTimer.current)
+    }
+  }, [])
+
+  /** Stop auto-rotate when user manually interacts */
+  const stopAutoRotate = useCallback(() => {
+    isAutoRotating.current = false
+    if (rotateTimer.current) {
+      clearTimeout(rotateTimer.current)
+      rotateTimer.current = null
+    }
+  }, [])
+
   const handleKey = useCallback((e: React.KeyboardEvent, i: number) => {
+    stopAutoRotate()
     const n = PHASES.length
     let next = i
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = (i + 1) % n
@@ -87,10 +142,10 @@ export default function HowIWork() {
     else return
     e.preventDefault()
     setActive(next)
-  }, [])
+  }, [stopAutoRotate])
 
   return (
-    <div>
+    <div ref={containerRef}>
       {/* Header */}
       <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)]">
         How I work
@@ -215,7 +270,7 @@ export default function HowIWork() {
                 aria-selected={isActive}
                 aria-controls="how-i-work-panel"
                 tabIndex={isActive ? 0 : -1}
-                onClick={() => setActive(i)}
+                onClick={() => { stopAutoRotate(); setActive(i) }}
                 onKeyDown={(e) => handleKey(e, i)}
                 style={{
                   position: 'absolute',
