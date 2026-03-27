@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useCallback } from 'react'
 import type { ChatMessage as ChatMessageType, SuggestionChip as SuggestionChipType } from '@/lib/chatbot/types'
 import ChatMessage from './ChatMessage'
 import CatAvatar from './CatAvatar'
@@ -36,6 +36,16 @@ export default function ChatPanel({
   const lastMessage = messages[messages.length - 1]
   const lastMessageIsUser = lastMessage?.role === 'user'
 
+  // Reliable scroll-to-bottom that works on mobile Safari
+  const scrollToBottom = useCallback(() => {
+    const container = scrollContainerRef.current
+    if (!container) return
+    // Use requestAnimationFrame to ensure DOM has rendered, then scroll
+    requestAnimationFrame(() => {
+      container.scrollTop = container.scrollHeight
+    })
+  }, [])
+
   // Always scroll to bottom when:
   // - User sends a message (so they see it + the loading state)
   // - Waiting for a response (typing indicator appeared)
@@ -46,7 +56,7 @@ export default function ChatPanel({
 
     if (lastMessageIsUser || isWaiting) {
       // User just sent — always scroll so they see their message + response
-      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+      scrollToBottom()
       return
     }
 
@@ -55,9 +65,9 @@ export default function ChatPanel({
       container.scrollHeight - container.scrollTop - container.clientHeight < 100
 
     if (isNearBottom) {
-      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+      scrollToBottom()
     }
-  }, [messages, isWaiting, lastMessageIsUser])
+  }, [messages, isWaiting, lastMessageIsUser, scrollToBottom])
 
   // Lock body scroll on mobile when panel is open
   useEffect(() => {
