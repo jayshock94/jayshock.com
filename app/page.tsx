@@ -6,6 +6,7 @@ import LendingEngineCardImage from '@/components/work/LendingEngineCardImage'
 import MobileLendingCardImage from '@/components/work/MobileLendingCardImage'
 import CaliberCardImage       from '@/components/work/CaliberCardImage'
 import HowIWork      from '@/components/about/HowIWork'
+import Toolkit       from '@/components/about/Toolkit'
 import AboutText     from '@/components/about/AboutText'
 import ScrollReveal  from '@/components/ui/ScrollReveal'
 import { caseStudies } from '@/data/case-studies'
@@ -232,7 +233,23 @@ export default function HomePage() {
       </section>
 
       {/* =========================================================
-          Section 05 — Experience
+          Section 05 — My Toolkit
+      ========================================================= */}
+      <section
+        className="py-[var(--space-section-md)]"
+        aria-label="My toolkit"
+      >
+        <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
+          <ScrollReveal>
+            <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
+              <Toolkit />
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* =========================================================
+          Section 06 — Experience
       ========================================================= */}
       <section
         className="py-[var(--space-section-md)]"
