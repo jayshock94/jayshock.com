@@ -6,6 +6,7 @@ import LendingEngineCardImage from '@/components/work/LendingEngineCardImage'
 import MobileLendingCardImage from '@/components/work/MobileLendingCardImage'
 import CaliberCardImage       from '@/components/work/CaliberCardImage'
 import HowIWork      from '@/components/about/HowIWork'
+import AboutText     from '@/components/about/AboutText'
 import ScrollReveal  from '@/components/ui/ScrollReveal'
 import { caseStudies } from '@/data/case-studies'
 
@@ -196,20 +197,7 @@ export default function HomePage() {
                     I find the problem before I design the solution.
                   </h2>
 
-                  <div className="flex flex-col gap-[var(--space-stack-sm)] mb-[var(--space-stack-lg)]" style={{ maxWidth: 'var(--space-content-max)' }}>
-                    <p className="text-body text-[var(--color-text-secondary)]">
-                      I am a product designer with 8 years in fintech and enterprise SaaS.
-                      I have spent most of that time inside systems that are too complex
-                      for their own good, making them work for the people who actually use them.
-                    </p>
-                    <p className="text-body text-[var(--color-text-secondary)]">
-                      My brain finds patterns other people walk past. Growing up with
-                      dyslexia and ADHD taught me the value that comes when you truly
-                      take the time to understand people below their surface. That is
-                      the lens I bring to every research session, every stakeholder
-                      meeting, every design decision.
-                    </p>
-                  </div>
+                  <AboutText />
 
                   <div className="flex flex-wrap gap-[var(--space-component-sm)]">
                     <Button variant="glass" href="/about">
