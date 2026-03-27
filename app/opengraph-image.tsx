@@ -14,55 +14,70 @@ export default async function Image() {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          alignItems: 'flex-start',
           backgroundColor: '#161616',
-          padding: '80px',
+          padding: '80px 100px',
         }}
       >
+        {/* Hi there. */}
+        <div
+          style={{
+            fontSize: 20,
+            fontWeight: 300,
+            color: '#737373',
+            marginBottom: '8px',
+          }}
+        >
+          Hi there.
+        </div>
+
+        {/* Headline — matching bold/light pattern */}
         <div
           style={{
             display: 'flex',
             flexDirection: 'column',
-            gap: '16px',
+            gap: '0px',
+            lineHeight: 1.05,
+            letterSpacing: '-0.02em',
           }}
         >
-          <div
-            style={{
-              fontSize: 72,
-              fontWeight: 700,
-              color: '#F2F2F2',
-              letterSpacing: '-0.02em',
-              lineHeight: 1.1,
-            }}
-          >
-            Jay Shock
+          <div style={{ display: 'flex', flexWrap: 'wrap', fontSize: 72 }}>
+            <span style={{ fontWeight: 300, color: '#737373' }}>I&apos;m </span>
+            <span style={{ fontWeight: 700, color: '#F2F2F2' }}>
+              Jay Shock,
+            </span>
           </div>
-          <div
-            style={{
-              fontSize: 32,
-              fontWeight: 300,
-              color: '#A3A3A3',
-              lineHeight: 1.5,
-              maxWidth: '800px',
-            }}
-          >
-            Product Designer — making complex products feel like they were
-            always simple.
+          <div style={{ display: 'flex', flexWrap: 'wrap', fontSize: 72 }}>
+            <span style={{ fontWeight: 300, color: '#737373' }}>
+              a product{' '}
+            </span>
+            <span style={{ fontWeight: 700, color: '#F2F2F2' }}>
+              designer{' '}
+            </span>
+            <span style={{ fontWeight: 300, color: '#737373' }}>turning</span>
+          </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', fontSize: 72 }}>
+            <span style={{ fontWeight: 300, color: '#737373' }}>
+              complexity into{' '}
+            </span>
+            <span style={{ fontWeight: 700, color: '#F2F2F2' }}>
+              simplicity.
+            </span>
           </div>
         </div>
+
+        {/* Subtitle */}
         <div
           style={{
-            position: 'absolute',
-            bottom: '80px',
-            left: '80px',
-            fontSize: 18,
+            fontSize: 24,
             fontWeight: 300,
             color: '#737373',
-            letterSpacing: '0.1em',
-            textTransform: 'uppercase' as const,
+            marginTop: '28px',
+            maxWidth: '600px',
+            lineHeight: 1.6,
           }}
         >
-          jayshock.com
+          8 years experience. Currently based in Utah, designing financial
+          systems in enterprise SaaS.
         </div>
       </div>
     ),
