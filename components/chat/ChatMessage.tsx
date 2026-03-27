@@ -7,6 +7,8 @@ interface ChatMessageProps {
   message: ChatMessageType
   /** True while this message is still being streamed. */
   isStreaming?: boolean
+  /** Close the chat panel (called before navigation). */
+  onClose?: () => void
 }
 
 /** Detect navigation suggestions in bot responses and return a link. */
@@ -29,7 +31,7 @@ function detectNavigation(content: string): { label: string; path: string } | nu
   return null
 }
 
-export default function ChatMessage({ message, isStreaming }: ChatMessageProps) {
+export default function ChatMessage({ message, isStreaming, onClose }: ChatMessageProps) {
   const router = useRouter()
   const isBot = message.role === 'assistant'
 
@@ -119,7 +121,10 @@ export default function ChatMessage({ message, isStreaming }: ChatMessageProps) 
           {navigation && (
             <button
               type="button"
-              onClick={() => router.push(navigation.path)}
+              onClick={() => {
+                onClose?.()
+                router.push(navigation.path)
+              }}
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
