@@ -56,6 +56,7 @@ export async function POST(req: Request): Promise<Response> {
           controller.close()
         } catch (err) {
           const message = err instanceof Error ? err.message : 'Stream error'
+          console.error('[chat] Stream error:', message)
           controller.enqueue(
             encoder.encode(`data: ${JSON.stringify({ error: message })}\n\n`)
           )
@@ -73,6 +74,7 @@ export async function POST(req: Request): Promise<Response> {
     })
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Unknown error'
+    console.error('[chat] Route error:', message)
     return Response.json({ error: message }, { status: 500 })
   }
 }
