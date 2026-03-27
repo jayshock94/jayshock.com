@@ -32,18 +32,32 @@ export default function ChatPanel({
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const scrollContainerRef = useRef<HTMLDivElement>(null)
 
-  // Auto-scroll to bottom on new messages, but only if user is near bottom
+  // Track whether the latest message is from the user (typed or chip)
+  const lastMessage = messages[messages.length - 1]
+  const lastMessageIsUser = lastMessage?.role === 'user'
+
+  // Always scroll to bottom when:
+  // - User sends a message (so they see it + the loading state)
+  // - Waiting for a response (typing indicator appeared)
+  // - Streaming and user is near the bottom
   useEffect(() => {
     const container = scrollContainerRef.current
     if (!container) return
 
+    if (lastMessageIsUser || isWaiting) {
+      // User just sent — always scroll so they see their message + response
+      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+      return
+    }
+
+    // During streaming / new bot messages, only scroll if near bottom
     const isNearBottom =
       container.scrollHeight - container.scrollTop - container.clientHeight < 100
 
     if (isNearBottom) {
       messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
     }
-  }, [messages, isWaiting])
+  }, [messages, isWaiting, lastMessageIsUser])
 
   // Lock body scroll on mobile when panel is open
   useEffect(() => {
