@@ -19,8 +19,8 @@ const virtualBadge: CaseStudy = {
     'A short summary of the impact this project had. What changed and why it mattered.',
   cardImage: '',
 
-  // Warm green — complements the blue and red from the other cards
-  brandColorHex: '#2D8A6E',
+  // Warm solar yellow — Caliber Smart brand vibe
+  brandColorHex: '#D4A017',
 
   impact: {
     headline: 'Reps stopped waiting. They started selling.',

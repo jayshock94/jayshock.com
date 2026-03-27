@@ -2,7 +2,9 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Button        from '@/components/ui/Button'
 import WorkCard      from '@/components/work/WorkCard'
+import LendingEngineCardImage from '@/components/work/LendingEngineCardImage'
 import MobileLendingCardImage from '@/components/work/MobileLendingCardImage'
+import CaliberCardImage       from '@/components/work/CaliberCardImage'
 import HowIWork      from '@/components/about/HowIWork'
 import ScrollReveal  from '@/components/ui/ScrollReveal'
 import { caseStudies } from '@/data/case-studies'
@@ -143,7 +145,12 @@ export default function HomePage() {
               >
                 <WorkCard
                   caseStudy={cs}
-                  cardImageSlot={cs.slug === 'mobile-lending-management' ? <MobileLendingCardImage /> : undefined}
+                  cardImageSlot={
+                    cs.slug === 'lending-engine-service' ? <LendingEngineCardImage /> :
+                    cs.slug === 'mobile-lending-management' ? <MobileLendingCardImage /> :
+                    cs.slug === 'virtual-badge' ? <CaliberCardImage /> :
+                    undefined
+                  }
                 />
               </div>
             ))}
