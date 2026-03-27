@@ -195,51 +195,83 @@ export function useChat() {
           content: m.content,
         }))
 
-        const response = await fetch('/api/chat', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            messages: apiMessages,
-            currentPage: pathname,
-          }),
-        })
-
-        if (!response.ok || !response.body) {
-          throw new Error(`API error: ${response.status}`)
-        }
-
-        // Collect all streamed tokens first
-        const reader = response.body.getReader()
-        const decoder = new TextDecoder()
+        // Retry up to 2 times on transient failures
+        const MAX_RETRIES = 2
         let accumulated = ''
         let hasError = false
 
-        while (true) {
-          const { done, value } = await reader.read()
-          if (done) break
+        for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+          accumulated = ''
+          hasError = false
 
-          const chunk = decoder.decode(value, { stream: true })
-          const lines = chunk.split('\n\n').filter(line => line.startsWith('data: '))
+          try {
+            const response = await fetch('/api/chat', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                messages: apiMessages,
+                currentPage: pathname,
+              }),
+            })
 
-          for (const line of lines) {
-            const data = line.slice(6)
-            if (data === '[DONE]') continue
-
-            try {
-              const parsed = JSON.parse(data)
-              if (parsed.error) {
-                accumulated = "Something went sideways on my end \u2014 give me a sec and try again? If it keeps happening, Jay's contact info is on the contact page. He's nicer than me anyway."
-                hasError = true
-                break
+            if (!response.ok || !response.body) {
+              if (attempt < MAX_RETRIES) {
+                await new Promise(r => setTimeout(r, 1000 * (attempt + 1)))
+                continue
               }
-              if (parsed.text) {
-                accumulated += parsed.text
-              }
-            } catch {
-              // Ignore malformed JSON chunks
+              throw new Error(`API error: ${response.status}`)
             }
+
+            const reader = response.body.getReader()
+            const decoder = new TextDecoder()
+
+            while (true) {
+              const { done, value } = await reader.read()
+              if (done) break
+
+              const chunk = decoder.decode(value, { stream: true })
+              const lines = chunk.split('\n\n').filter(line => line.startsWith('data: '))
+
+              for (const line of lines) {
+                const data = line.slice(6)
+                if (data === '[DONE]') continue
+
+                try {
+                  const parsed = JSON.parse(data)
+                  if (parsed.error) {
+                    hasError = true
+                    break
+                  }
+                  if (parsed.text) {
+                    accumulated += parsed.text
+                  }
+                } catch {
+                  // Ignore malformed JSON chunks
+                }
+              }
+              if (hasError) break
+            }
+
+            // If stream errored but we have retries left, try again
+            if (hasError && attempt < MAX_RETRIES) {
+              await new Promise(r => setTimeout(r, 1000 * (attempt + 1)))
+              continue
+            }
+
+            // Success or final attempt — break out of retry loop
+            break
+          } catch (fetchErr) {
+            if (attempt < MAX_RETRIES) {
+              await new Promise(r => setTimeout(r, 1000 * (attempt + 1)))
+              continue
+            }
+            throw fetchErr
           }
-          if (hasError) break
+        }
+
+        // If still errored after retries, show error message
+        if (hasError) {
+          accumulated = "Something went sideways on my end. Give me a sec and try again? If it keeps happening, Jay's contact info is on the contact page. He's nicer than me anyway."
         }
 
         // Wait for minimum loading time so users can read the message
@@ -270,7 +302,7 @@ export function useChat() {
             ...prev,
             {
               ...assistantMessage,
-              content: "Something went sideways on my end \u2014 give me a sec and try again?",
+              content: "Something went sideways on my end. Give me a sec and try again?",
             },
           ])
         }
@@ -282,7 +314,7 @@ export function useChat() {
           ...prev,
           {
             ...assistantMessage,
-            content: "Something went sideways on my end \u2014 give me a sec and try again? If it keeps happening, Jay's contact info is on the contact page.",
+            content: "Something went sideways on my end. Give me a sec and try again? If it keeps happening, Jay's contact info is on the contact page.",
           },
         ])
       } finally {
