@@ -377,6 +377,12 @@ body > * {
    Mobile: full-width bar with bottom border, no radius.
    Desktop (md+): floating glass card with blur and radius.
 ----------------------------------------------------------- */
+/* Nav link hover — subtle pill highlight */
+.nav-link:hover:not([aria-current="page"]) {
+  background: var(--color-hover-subtle);
+  color: var(--color-ink);
+}
+
 .nav-card {
   background: var(--color-nav-card-bg);
   backdrop-filter: blur(48px) saturate(180%);
@@ -471,12 +477,27 @@ body > * {
 }
 
 /* -----------------------------------------------------------
-   MOBILE DRAWER ENTER
-   Slides down when the drawer opens.
-   Applied directly on .nav-drawer so it plays each open.
+   MOBILE DRAWER ENTER (legacy — kept for compat)
 ----------------------------------------------------------- */
 @keyframes drawer-enter {
   from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+/* -----------------------------------------------------------
+   MOBILE MENU OVERLAY — full-screen nav
+----------------------------------------------------------- */
+@keyframes mobile-menu-enter {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.mobile-menu-item {
+  animation: mobile-menu-item-enter 400ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes mobile-menu-item-enter {
+  from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: translateY(0);    }
 }
 

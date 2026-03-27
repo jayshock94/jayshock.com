@@ -1,5 +1,4 @@
 import Link     from 'next/link'
-import LogoSVG  from '@/components/ui/LogoSVG'
 
 const NAV_LINKS = [
   { label: 'Work',       href: '/work'       },
@@ -38,10 +37,21 @@ export default function Footer() {
         {/* Left — logo */}
         <Link
           href="/"
-          className="block w-[80px] text-[var(--color-ink)] hover:opacity-60 transition-opacity duration-200 shrink-0"
+          className="hover:opacity-60 transition-opacity duration-200 shrink-0"
+          style={{ textDecoration: 'none' }}
           aria-label="Jay Shock — home"
         >
-          <LogoSVG />
+          <span
+            style={{
+              fontFamily: 'var(--font-outfit), system-ui, sans-serif',
+              fontSize: '15px',
+              fontWeight: 500,
+              color: 'var(--color-ink)',
+              letterSpacing: '-0.01em',
+            }}
+          >
+            Jay Shock
+          </span>
         </Link>
 
         {/* Center — nav links */}

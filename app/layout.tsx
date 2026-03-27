@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Outfit } from 'next/font/google'
 import Nav         from '@/components/nav/Nav'
 import Footer      from '@/components/ui/Footer'
@@ -15,6 +15,13 @@ const outfit = Outfit({
   variable: '--font-outfit',
   display:  'swap',
 })
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  interactiveWidget: 'resizes-content',
+}
 
 export const metadata: Metadata = {
   title:       'Jay Shock — Product Designer',

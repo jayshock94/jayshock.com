@@ -1,15 +1,15 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link     from 'next/link'
 import { usePathname } from 'next/navigation'
-import Button   from '@/components/ui/Button'
-import LogoSVG  from '@/components/ui/LogoSVG'
 
 const NAV_LINKS = [
+  { label: 'Home',       href: '/'           },
   { label: 'Work',       href: '/work'       },
   { label: 'About',      href: '/about'      },
   { label: 'Experience', href: '/experience' },
+  { label: 'Contact',    href: '/contact'    },
 ] as const
 
 function HamburgerIcon({ isOpen }: { isOpen: boolean }) {
@@ -31,159 +31,183 @@ function HamburgerIcon({ isOpen }: { isOpen: boolean }) {
   )
 }
 
+function isLinkActive(pathname: string, href: string): boolean {
+  if (href === '/') return pathname === '/'
+  return pathname === href || pathname.startsWith(href + '/')
+}
+
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname()
   const close = () => setIsOpen(false)
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => { document.body.style.overflow = '' }
+  }, [isOpen])
+
   return (
-    <header className="sticky top-0 z-50 md:pt-[12px] md:pb-[8px] md:px-[var(--space-page-margin)]">
-      <div className="md:max-w-layout md:mx-auto">
-
-        {/* Nav card — full-width bar on mobile, floating glass card on desktop */}
-        <div className={`nav-card${isOpen ? ' nav-card--open' : ''}`}>
-          {/* Main nav row — 80px height */}
-          <nav
-            aria-label="Main navigation"
-            className="flex items-center justify-between px-[28px]"
-            style={{ height: '80px' }}
-          >
-            {/* Logo + title */}
-            <Link
-              href="/"
-              className="flex items-center gap-[14px] shrink-0 hover:opacity-70 transition-opacity duration-200"
-              style={{ color: 'var(--color-ink)', textDecoration: 'none' }}
-              onClick={close}
-              aria-label="Jay Shock — home"
+    <>
+      <header className="sticky top-0 z-50 md:pt-[12px] md:pb-[8px] md:px-[var(--space-page-margin)]">
+        <div className="md:max-w-layout md:mx-auto">
+          <div className={`nav-card${isOpen ? ' nav-card--open' : ''}`}>
+            <nav
+              aria-label="Main navigation"
+              className="flex items-center justify-between px-[28px]"
+              style={{ height: '80px' }}
             >
-              <span className="block w-[80px] md:w-[96px]">
-                <LogoSVG />
-              </span>
-
-            </Link>
-
-            {/* Desktop links + CTA */}
-            <div className="hidden md:flex items-center gap-[28px]">
-              {NAV_LINKS.map(link => {
-                const isActive = pathname === link.href || pathname.startsWith(link.href + '/')
-                return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className={`
-                      relative inline-block text-ui-md tracking-[0.02em]
-                      pb-[6px] transition-colors duration-200
-                      ${isActive
-                        ? 'text-[var(--color-ink)]'
-                        : 'text-[var(--color-text-muted)] hover:text-[var(--color-ink)]'
-                      }
-                    `}
-                    aria-current={isActive ? 'page' : undefined}
-                  >
-                    {link.label}
-                    {isActive && (
-                      <span
-                        aria-hidden="true"
-                        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[3px] h-[3px] rounded-full bg-[var(--color-ink)]"
-                      />
-                    )}
-                  </Link>
-                )
-              })}
-
-              {/* Contact — plain link like other nav items */}
-              {(() => {
-                const isActive = pathname === '/contact'
-                return (
-                  <Link
-                    href="/contact"
-                    className={`
-                      relative inline-block text-ui-md tracking-[0.02em]
-                      pb-[6px] transition-colors duration-200
-                      ${isActive
-                        ? 'text-[var(--color-ink)]'
-                        : 'text-[var(--color-text-muted)] hover:text-[var(--color-ink)]'
-                      }
-                    `}
-                    aria-current={isActive ? 'page' : undefined}
-                  >
-                    Contact
-                    {isActive && (
-                      <span
-                        aria-hidden="true"
-                        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[3px] h-[3px] rounded-full bg-[var(--color-ink)]"
-                      />
-                    )}
-                  </Link>
-                )
-              })()}
-            </div>
-
-            {/* Mobile: hamburger */}
-            <div className="flex md:hidden items-center">
-              <button
-                type="button"
-                className="flex items-center justify-center w-[44px] h-[44px] rounded-[8px] text-[var(--color-text-muted)] hover:text-[var(--color-ink)] transition-colors duration-200"
-                onClick={() => setIsOpen(prev => !prev)}
-                aria-expanded={isOpen}
-                aria-controls="mobile-menu"
-                aria-label={isOpen ? 'Close menu' : 'Open menu'}
+              {/* Logo */}
+              <Link
+                href="/"
+                className="flex items-center shrink-0 hover:opacity-70 transition-opacity duration-200"
+                style={{ color: 'var(--color-ink)', textDecoration: 'none' }}
+                onClick={close}
+                aria-label="Jay Shock — home"
               >
-                <HamburgerIcon isOpen={isOpen} />
-              </button>
-            </div>
-          </nav>
+                <span
+                  style={{
+                    fontFamily: 'var(--font-outfit), system-ui, sans-serif',
+                    display: 'flex',
+                    alignItems: 'baseline',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  <span style={{ fontSize: '16px', fontWeight: 500, color: 'var(--color-ink)', letterSpacing: '-0.01em' }}>
+                    Jay Shock
+                  </span>
+                  <span className="hidden sm:inline" style={{ fontSize: '13px', fontWeight: 300, color: 'var(--color-text-muted)', marginLeft: '8px' }}>
+                    <span style={{ color: 'var(--color-text-placeholder)', marginRight: '8px' }}>&mdash;</span>
+                    Product Designer
+                  </span>
+                </span>
+              </Link>
 
-          {/* Mobile drawer — expands inside the card */}
-          {isOpen && (
-            <div
-              id="mobile-menu"
-              className="md:hidden nav-drawer"
-            >
-              <nav
-                aria-label="Mobile navigation"
-                className="flex flex-col gap-[2px] p-[10px]"
-                style={{ paddingBottom: 'max(10px, env(safe-area-inset-bottom))' }}
-              >
+              {/* Desktop links */}
+              <div className="hidden md:flex items-center gap-[4px]">
                 {NAV_LINKS.map(link => {
-                  const isActive = pathname === link.href || pathname.startsWith(link.href + '/')
+                  const active = isLinkActive(pathname, link.href)
                   return (
                     <Link
                       key={link.href}
                       href={link.href}
-                      onClick={close}
-                      className="flex items-center min-h-[48px] px-[12px] rounded-[10px] transition-colors duration-200 text-ui-md"
+                      className="nav-link text-ui-md tracking-[0.02em] transition-all duration-200"
                       style={{
-                        color:      isActive ? 'var(--color-ink)' : 'var(--color-text-secondary)',
-                        background: isActive ? 'var(--color-hover-subtle)' : 'transparent',
+                        padding: '8px 16px',
+                        borderRadius: '999px',
+                        color: active ? 'var(--color-ink)' : 'var(--color-text-muted)',
+                        background: active ? 'var(--color-hover-subtle)' : 'transparent',
+                        border: active ? '0.5px solid var(--glass-border-dark)' : '0.5px solid transparent',
                         textDecoration: 'none',
+                        fontWeight: active ? 500 : 400,
                       }}
-                      aria-current={isActive ? 'page' : undefined}
+                      aria-current={active ? 'page' : undefined}
                     >
                       {link.label}
                     </Link>
                   )
                 })}
+              </div>
 
-                {/* Contact — center aligned, matches nav link style */}
-                <Link
-                  href="/contact"
-                  onClick={close}
-                  className="flex items-center min-h-[48px] px-[12px] rounded-[10px] transition-colors duration-200 text-ui-md"
-                  style={{
-                    color:          pathname === '/contact' ? 'var(--color-ink)' : 'var(--color-text-secondary)',
-                    background:     pathname === '/contact' ? 'var(--color-hover-subtle)' : 'transparent',
-                    textDecoration: 'none',
-                  }}
-                  aria-current={pathname === '/contact' ? 'page' : undefined}
+              {/* Mobile hamburger */}
+              <div className="flex md:hidden items-center">
+                <button
+                  type="button"
+                  className="flex items-center justify-center w-[44px] h-[44px] rounded-[8px] text-[var(--color-text-muted)] hover:text-[var(--color-ink)] transition-colors duration-200"
+                  onClick={() => setIsOpen(prev => !prev)}
+                  aria-expanded={isOpen}
+                  aria-controls="mobile-menu"
+                  aria-label={isOpen ? 'Close menu' : 'Open menu'}
+                  style={{ position: 'relative', zIndex: 61 }}
                 >
-                  Contact
-                </Link>
-              </nav>
-            </div>
-          )}
+                  <HamburgerIcon isOpen={isOpen} />
+                </button>
+              </div>
+            </nav>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+
+      {/* Full-screen mobile menu overlay */}
+      {isOpen && (
+        <div
+          id="mobile-menu"
+          className="md:hidden mobile-menu-overlay"
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 49,
+            background: 'rgba(22, 22, 22, 0.95)',
+            backdropFilter: 'blur(48px) saturate(180%)',
+            WebkitBackdropFilter: 'blur(48px) saturate(180%)',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            paddingLeft: 'var(--space-page-margin)',
+            paddingRight: 'var(--space-page-margin)',
+            paddingBottom: 'env(safe-area-inset-bottom)',
+            animation: 'mobile-menu-enter 300ms cubic-bezier(0.16, 1, 0.3, 1) both',
+          }}
+        >
+          <nav aria-label="Mobile navigation" className="flex flex-col gap-[4px]">
+            {NAV_LINKS.map((link, i) => {
+              const active = isLinkActive(pathname, link.href)
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={close}
+                  className="mobile-menu-item"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    padding: '16px 20px',
+                    borderRadius: '12px',
+                    fontFamily: 'var(--font-outfit), system-ui, sans-serif',
+                    fontSize: '24px',
+                    fontWeight: active ? 600 : 300,
+                    letterSpacing: '-0.01em',
+                    color: active ? 'var(--color-ink)' : 'var(--color-text-muted)',
+                    background: active ? 'var(--color-hover-subtle)' : 'transparent',
+                    border: active ? '0.5px solid var(--glass-border-dark)' : '0.5px solid transparent',
+                    textDecoration: 'none',
+                    transition: 'all 0.2s ease',
+                    animationDelay: `${i * 50}ms`,
+                  }}
+                  aria-current={active ? 'page' : undefined}
+                >
+                  {link.label}
+                </Link>
+              )
+            })}
+          </nav>
+
+          {/* Bottom info */}
+          <div
+            style={{
+              position: 'absolute',
+              bottom: 'max(32px, env(safe-area-inset-bottom))',
+              left: 'var(--space-page-margin)',
+              right: 'var(--space-page-margin)',
+            }}
+          >
+            <p
+              style={{
+                fontFamily: 'var(--font-outfit), system-ui, sans-serif',
+                fontSize: '13px',
+                fontWeight: 300,
+                color: 'var(--color-text-placeholder)',
+              }}
+            >
+              hello@jayshock.com
+            </p>
+          </div>
+        </div>
+      )}
+    </>
   )
 }
