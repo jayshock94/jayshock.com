@@ -10,7 +10,7 @@ const PHASES = [
   {
     id:    'see',
     label: 'See it',
-    desc:  'Dig deeper. What the stakeholder or client says is the problem usually isn\'t the whole picture. This is where I do the research, ask the hard questions, and figure out what success actually looks like so I can really see it.',
+    desc:  'The stated problem is rarely the real one. I dig until I understand what is actually happening before I touch anything.',
     color: 'var(--phase-impact-label)',
     bg:    'rgba(180, 160, 224, 0.12)',
     border:'rgba(180, 160, 224, 0.22)',
@@ -18,7 +18,7 @@ const PHASES = [
   {
     id:    'own',
     label: 'Own it',
-    desc:  'Now that I see it, what is my role? How am I going to contribute? Did a design choice I made before create this problem? Whatever it is, I own it. No excuses, no finger pointing. Just ownership.',
+    desc:  'I figure out my part in it. The win, the miss, the gap. No excuses, no finger pointing. Just ownership.',
     color: 'var(--phase-problem-label)',
     bg:    'rgba(200, 170, 140, 0.12)',
     border:'rgba(200, 170, 140, 0.22)',
@@ -26,7 +26,7 @@ const PHASES = [
   {
     id:    'solve',
     label: 'Solve it',
-    desc:  'Now that I can really see it and I have owned my part in it, this is where the real work happens. Flows, wireframes, prototypes, testing. I explore every angle until the solution actually holds up for the business and the user.',
+    desc:  'Explore every angle. The solution has to hold up for the business and the user, not just look good in a prototype.',
     color: 'var(--phase-discovery-label)',
     bg:    'rgba(128, 196, 180, 0.12)',
     border:'rgba(128, 196, 180, 0.22)',
@@ -34,7 +34,7 @@ const PHASES = [
   {
     id:    'do',
     label: 'Do it',
-    desc:  'Mocks, prototypes, user testing. The problem is solved, so now I go and do it. Sometimes that means I find a new gap, and the cycle starts again. I keep going until it is complete and ready to hand off.',
+    desc:  'Build it, test it, ship it. If a new gap shows up, the cycle starts again. I keep going until it is right.',
     color: 'var(--phase-solution-label)',
     bg:    'rgba(140, 174, 214, 0.12)',
     border:'rgba(140, 174, 214, 0.22)',
@@ -48,8 +48,8 @@ const PHASES = [
 const LIFECYCLE = [
   { step: '01', name: 'Discover',  sub: 'Stakeholder interviews, competitive analysis, user research', phases: [0] },
   { step: '02', name: 'Define',    sub: 'Problem framing, personas, journey maps, requirements',       phases: [0, 1] },
-  { step: '03', name: 'Ideate',    sub: 'User flows, wireframes, concept exploration',                 phases: [2] },
-  { step: '04', name: 'Design',    sub: 'Mocks, prototypes, design systems, interaction design',       phases: [2, 3] },
+  { step: '03', name: 'Ideate',    sub: 'User flows, wireframes, concept exploration',                 phases: [1, 2] },
+  { step: '04', name: 'Design',    sub: 'Mocks, prototypes, design systems, interaction design',       phases: [2] },
   { step: '05', name: 'Test',      sub: 'Usability testing, feedback synthesis, iteration',            phases: [2, 3] },
   { step: '06', name: 'Deliver',   sub: 'Dev handoff, QA review, build verification',                  phases: [3] },
 ] as const
