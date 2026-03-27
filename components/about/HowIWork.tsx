@@ -251,7 +251,7 @@ export default function HowIWork() {
           })}
         </div>
 
-        {/* Description */}
+        {/* Description — fixed height using grid stack so layout doesn't shift */}
         <div
           id="how-i-work-panel"
           role="tabpanel"
@@ -263,9 +263,23 @@ export default function HowIWork() {
             transition: 'border-color 0.3s ease',
           }}
         >
-          <p className="text-body text-[var(--color-text-secondary)]">
-            {phase.desc}
-          </p>
+          {/* Grid stack — all descriptions occupy the same cell, tallest sets height */}
+          <div style={{ display: 'grid' }}>
+            {PHASES.map((p, i) => (
+              <p
+                key={p.id}
+                className="text-body text-[var(--color-text-secondary)]"
+                style={{
+                  gridArea: '1 / 1',
+                  opacity: active === i ? 1 : 0,
+                  transition: 'opacity 0.2s ease',
+                  pointerEvents: active === i ? 'auto' : 'none',
+                }}
+              >
+                {p.desc}
+              </p>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -292,9 +306,11 @@ export default function HowIWork() {
                   borderRadius: '12px',
                   border: isLit
                     ? `1px solid ${matchPhase?.border}`
-                    : '0.5px solid var(--color-border)',
-                  background: isLit ? matchPhase?.bg : 'var(--color-surface)',
+                    : '0.5px solid transparent',
+                  background: isLit ? matchPhase?.bg : 'transparent',
                   transition: 'all 0.3s ease',
+                  cursor: 'default',
+                  userSelect: 'none',
                 }}
               >
                 <span

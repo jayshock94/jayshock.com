@@ -78,7 +78,7 @@ export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
           }}>
             {cardImageSlot ? (
               cardImageSlot
-            ) : (
+            ) : cardImage ? (
               <div style={{
                 position:     'relative',
                 width:        '88%',
@@ -95,6 +95,19 @@ export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
                   style={{ objectFit: 'cover', objectPosition: 'center top' }}
                 />
               </div>
+            ) : (
+              <span
+                style={{
+                  fontFamily: 'var(--font-outfit), system-ui, sans-serif',
+                  fontSize: '13px',
+                  fontWeight: 300,
+                  color: `rgba(${r}, ${g}, ${b}, 0.4)`,
+                  letterSpacing: '0.02em',
+                  textAlign: 'center',
+                }}
+              >
+                Hero image goes here
+              </span>
             )}
           </div>
 

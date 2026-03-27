@@ -18,7 +18,7 @@ const lendingEngineService: CaseStudy = {
   types:        ['Research', 'Systems', 'Enterprise'],
   cardImpactLine:
     'A short summary of the impact this project had. What changed and why it mattered.',
-  cardImage: '/images/work/lending-engine.png',
+  cardImage: '',
 
   // Financial slate blue — processed through color algorithm on the page
   brandColorHex: '#3A6B9E',

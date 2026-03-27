@@ -17,10 +17,10 @@ const virtualBadge: CaseStudy = {
   types:        ['Research', 'Internal Tools', 'Mobile'],
   cardImpactLine:
     'A short summary of the impact this project had. What changed and why it mattered.',
-  cardImage: '/images/work/virtual-badge.png',
+  cardImage: '',
 
-  // Lending Engine navy — extracted from brand image, run through color algorithm
-  brandColorHex: '#1B4B8C',
+  // Warm green — complements the blue and red from the other cards
+  brandColorHex: '#2D8A6E',
 
   impact: {
     headline: 'Reps stopped waiting. They started selling.',
