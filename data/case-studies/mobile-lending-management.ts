@@ -8,15 +8,15 @@ import type { CaseStudy } from '@/data/types'
  */
 const mobileLendingManagement: CaseStudy = {
   slug:         'mobile-lending-management',
-  title:        'Better lending app. Same codebase.',
-  company:      'GoldPoint Systems',
-  industry:     'Fintech',
-  eyebrow:      'Fintech · Mobile · White-label',
-  role:         'Product Designer · End to end',
+  title:        'Case study title goes here',
+  company:      'Company Name',
+  industry:     'Industry',
+  eyebrow:      'Industry · Role type',
+  role:         'Product Designer',
   year:         '2024–2025',
-  types:        ['Mobile', 'White-label', 'Research', 'End to End'],
+  types:        ['Mobile', 'Research', 'End to End'],
   cardImpactLine:
-    'Borrowers stopped calling. The architecture was locked. The experience didn\'t have to be.',
+    'A short summary of the impact this project had. What changed and why it mattered.',
   cardImage: '/images/work/mobile-lending.png',
 
   // Lendmark crimson — extracted from brand image, run through color algorithm

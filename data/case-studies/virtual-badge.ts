@@ -8,15 +8,15 @@ import type { CaseStudy } from '@/data/types'
  */
 const virtualBadge: CaseStudy = {
   slug:         'virtual-badge',
-  title:        'Getting reps on doors weeks sooner',
-  company:      'GoldPoint Systems',
-  industry:     'Field Sales',
-  eyebrow:      'Field Sales · Internal Tools',
-  role:         'UX Designer · Pitched and led',
+  title:        'Case study title goes here',
+  company:      'Company Name',
+  industry:     'Industry',
+  eyebrow:      'Industry · Role type',
+  role:         'UX Designer',
   year:         '2017–2019',
-  types:        ['Research', 'Internal Tools', 'Mobile', 'Initiative'],
+  types:        ['Research', 'Internal Tools', 'Mobile'],
   cardImpactLine:
-    'Identified the problem, pitched the solution, built it. Reps went from waiting 3 weeks to selling immediately.',
+    'A short summary of the impact this project had. What changed and why it mattered.',
   cardImage: '/images/work/virtual-badge.png',
 
   // Lending Engine navy — extracted from brand image, run through color algorithm

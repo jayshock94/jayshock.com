@@ -9,15 +9,15 @@ import type { CaseStudy } from '@/data/types'
  */
 const lendingEngineService: CaseStudy = {
   slug:         'lending-engine-service',
-  title:        'Unifying seven products into one lending engine',
-  company:      'GoldPoint Systems',
-  industry:     'Fintech',
-  eyebrow:      'Fintech · Enterprise SaaS',
-  role:         'Product Designer · End to end',
+  title:        'Case study title goes here',
+  company:      'Company Name',
+  industry:     'Industry',
+  eyebrow:      'Industry · Role type',
+  role:         'Product Designer',
   year:         '2021–2024',
-  types:        ['Research', 'Systems', 'Enterprise', 'White-label'],
+  types:        ['Research', 'Systems', 'Enterprise'],
   cardImpactLine:
-    'Delivered a white-label ready system that works across any brand. Same constraints. Better product.',
+    'A short summary of the impact this project had. What changed and why it mattered.',
   cardImage: '/images/work/lending-engine.png',
 
   // Financial slate blue — processed through color algorithm on the page
