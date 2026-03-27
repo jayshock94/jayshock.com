@@ -46,12 +46,12 @@ const PHASES = [
 /* ------------------------------------------------------------------ */
 
 const LIFECYCLE = [
-  { step: '01', name: 'Discover',  sub: 'Stakeholder interviews, competitive analysis, user research', phases: [0] },
-  { step: '02', name: 'Define',    sub: 'Problem framing, personas, journey maps, requirements',       phases: [0, 1] },
-  { step: '03', name: 'Ideate',    sub: 'User flows, wireframes, concept exploration',                 phases: [1, 2] },
-  { step: '04', name: 'Design',    sub: 'Mocks, prototypes, design systems, interaction design',       phases: [2] },
-  { step: '05', name: 'Test',      sub: 'Usability testing, feedback synthesis, iteration',            phases: [2, 3] },
-  { step: '06', name: 'Deliver',   sub: 'Dev handoff, QA review, build verification',                  phases: [3] },
+  { step: '01', name: 'Discover',  sub: 'Stakeholder interviews, competitive analysis, user research, data analysis, heuristic evaluation, contextual inquiry', phases: [0] },
+  { step: '02', name: 'Define',    sub: 'Problem framing, personas, journey maps, requirements gathering, success metrics, scope alignment, jobs to be done', phases: [0, 1] },
+  { step: '03', name: 'Ideate',    sub: 'User flows, wireframes, concept exploration, design sprints, sketching, information architecture, workshop facilitation', phases: [1, 2] },
+  { step: '04', name: 'Design',    sub: 'High-fidelity mocks, interactive prototypes, design systems, interaction design, responsive layouts, accessibility review', phases: [2] },
+  { step: '05', name: 'Test',      sub: 'Usability testing, A/B testing, feedback synthesis, iteration, cognitive walkthroughs, analytics review, stakeholder demos', phases: [2, 3] },
+  { step: '06', name: 'Deliver',   sub: 'Dev handoff, spec documentation, QA review, build verification, design debt tracking, launch support', phases: [3] },
 ] as const
 
 /* ------------------------------------------------------------------ */
@@ -279,7 +279,7 @@ export default function HowIWork() {
                 aria-selected={isActive}
                 aria-controls="how-i-work-panel"
                 tabIndex={isActive ? 0 : -1}
-                onClick={() => { stopAutoRotate(); setActive(i) }}
+                onClick={() => { stopAutoRotate(); setActive(i); setExpandedStep(null) }}
                 onKeyDown={(e) => handleKey(e, i)}
                 style={{
                   position: 'absolute',
@@ -349,13 +349,6 @@ export default function HowIWork() {
 
       {/* Process timeline — horizontal strip with expandable details */}
       <div style={{ marginTop: 'var(--space-section-sm)' }}>
-        <p
-          className="text-label text-[var(--color-text-muted)]"
-          style={{ marginBottom: 'var(--space-stack-md)' }}
-        >
-          In practice
-        </p>
-
         {/* Timeline strip */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-component-sm)' }}>
           {/* Step buttons in a row with connecting line */}
@@ -490,6 +483,34 @@ export default function HowIWork() {
                         >
                           {panelItem.sub}
                         </span>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            window.dispatchEvent(
+                              new CustomEvent('open-barnaby', {
+                                detail: { message: `Tell me more about Jay's ${panelItem.name.toLowerCase()} process` },
+                              })
+                            )
+                          }}
+                          style={{
+                            display: 'block',
+                            marginTop: 'var(--space-component-sm)',
+                            background: 'none',
+                            border: 'none',
+                            padding: 0,
+                            fontFamily: 'var(--font-outfit), system-ui, sans-serif',
+                            fontSize: '12px',
+                            fontWeight: 400,
+                            color: 'var(--color-text-muted)',
+                            cursor: 'pointer',
+                            letterSpacing: '0.01em',
+                            transition: 'color 0.2s ease',
+                          }}
+                          onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--color-ink)' }}
+                          onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--color-text-muted)' }}
+                        >
+                          Curious? Ask Barnaby →
+                        </button>
                       </div>
                     )}
                   </React.Fragment>

@@ -177,30 +177,17 @@ export default function Toolkit() {
         })}
       </div>
 
-      {/* Content panel — grid stack to prevent layout shift */}
+      {/* Content panel — only render active tab */}
       <div
         id="toolkit-panel"
         role="tabpanel"
         aria-labelledby={`toolkit-tab-${cat.id}`}
-        style={{ display: 'grid' }}
       >
-        {CATEGORIES.map((c, i) => (
-          <div
-            key={c.id}
-            style={{
-              gridArea: '1 / 1',
-              opacity: active === i ? 1 : 0,
-              transition: 'opacity 0.25s ease',
-              pointerEvents: active === i ? 'auto' : 'none',
-            }}
-          >
-            {c.kind === 'chips' ? (
-              <ChipGrid category={c} />
-            ) : (
-              <CardGrid category={c} />
-            )}
-          </div>
-        ))}
+        {cat.kind === 'chips' ? (
+          <ChipGrid category={cat} />
+        ) : (
+          <CardGrid category={cat} />
+        )}
       </div>
     </div>
   )

@@ -8,7 +8,8 @@ import CaliberCardImage       from '@/components/work/CaliberCardImage'
 import HowIWork      from '@/components/about/HowIWork'
 import Toolkit       from '@/components/about/Toolkit'
 import AboutText     from '@/components/about/AboutText'
-import ScrollReveal  from '@/components/ui/ScrollReveal'
+import ScrollReveal    from '@/components/ui/ScrollReveal'
+import SectionTracker  from '@/components/ui/SectionTracker'
 import { caseStudies } from '@/data/case-studies'
 
 export const metadata: Metadata = {
@@ -23,6 +24,8 @@ export default function HomePage() {
 
   return (
     <>
+      <SectionTracker />
+
       {/* =========================================================
           Section 01 — Hero
           Black and white only. No phase color. No accent.
@@ -44,7 +47,7 @@ export default function HomePage() {
               fontSize: 'clamp(14px, 3vw, 18px)',
               fontWeight: 300,
               color: 'var(--color-text-muted)',
-              marginBottom: '4px',
+              marginBottom: 'var(--space-component-xs)',
               animationDelay: '300ms',
             }}
           >
@@ -53,7 +56,7 @@ export default function HomePage() {
 
           {/* Headline — word-by-word reveal, bold words carry the message */}
           <h1
-            className="text-display mb-[20px] text-center md:text-left"
+            className="text-display mb-[var(--space-stack-md)] text-center md:text-left"
             style={{ maxWidth: '900px' }}
           >
             <span style={{ fontWeight: 300, color: 'var(--color-text-muted)' }}>
@@ -83,7 +86,7 @@ export default function HomePage() {
 
           {/* Subline */}
           <p
-            className="text-body-lg mb-[36px] text-center md:text-left hero-fade-up"
+            className="text-body-lg mb-[var(--space-stack-lg)] text-center md:text-left hero-fade-up"
             style={{
               color:          'var(--color-text-muted)',
               maxWidth:       '520px',
@@ -96,7 +99,7 @@ export default function HomePage() {
 
           {/* CTAs */}
           <div
-            className="flex flex-wrap gap-[12px] items-center justify-center md:justify-start hero-fade-up"
+            className="flex flex-wrap gap-[var(--space-component-sm)] items-center justify-center md:justify-start hero-fade-up"
             style={{ animationDelay: '1000ms' }}
           >
             <Button variant="glass" href="/api/resume" download>
@@ -110,6 +113,7 @@ export default function HomePage() {
         </div>
       </section>
 
+
       {/* =========================================================
           Section 02 — Featured Work
       ========================================================= */}
@@ -121,7 +125,7 @@ export default function HomePage() {
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
 
           <p
-            className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-md)] hero-fade-up"
+            className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-lg)] hero-fade-up"
             id="work-eyebrow"
             style={{ animationDelay: '1200ms' }}
           >
@@ -134,8 +138,8 @@ export default function HomePage() {
 
           <div
             className="
-              grid grid-cols-1 gap-[16px] items-stretch
-              md:grid-cols-2 md:gap-[20px]
+              grid grid-cols-1 gap-[var(--space-component-md)] items-stretch
+              md:grid-cols-2 md:gap-[var(--space-component-lg)]
               lg:grid-cols-3
             "
           >
@@ -160,6 +164,7 @@ export default function HomePage() {
 
         </div>
       </section>
+
 
       {/* =========================================================
           Section 03 — About
@@ -194,7 +199,7 @@ export default function HomePage() {
                   <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)]">
                     About
                   </p>
-                  <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-md)]">
+                  <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-sm)]">
                     I find the problem before I design the solution.
                   </h2>
 
@@ -216,6 +221,7 @@ export default function HomePage() {
         </div>
       </section>
 
+
       {/* =========================================================
           Section 04 — How I Work
       ========================================================= */}
@@ -231,6 +237,7 @@ export default function HomePage() {
           </ScrollReveal>
         </div>
       </section>
+
 
       {/* =========================================================
           Section 05 — My Toolkit
@@ -248,6 +255,7 @@ export default function HomePage() {
         </div>
       </section>
 
+
       {/* =========================================================
           Section 06 — Experience
       ========================================================= */}
@@ -260,15 +268,13 @@ export default function HomePage() {
             <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
 
               {/* Header row */}
-              <div className="flex items-baseline justify-between mb-[var(--space-stack-lg)] flex-wrap gap-[var(--space-component-sm)]">
-                <div>
-                  <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)]">
-                    Experience
-                  </p>
-                  <h2 className="text-h2 text-[var(--color-ink)]">
-                    Where I have been.
-                  </h2>
-                </div>
+              <div className="mb-[var(--space-stack-lg)]">
+                <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)]">
+                  Experience
+                </p>
+                <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-sm)]">
+                  Where I have been.
+                </h2>
                 <Button variant="secondary" href="/experience">
                   Full resume
                 </Button>
@@ -343,6 +349,7 @@ export default function HomePage() {
         </div>
       </section>
 
+
       {/* =========================================================
           Section 06 — Contact CTA
       ========================================================= */}
@@ -353,62 +360,57 @@ export default function HomePage() {
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <ScrollReveal>
             <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
-              <div className="flex flex-col gap-[var(--space-stack-lg)] md:flex-row md:items-start md:justify-between">
+              <div className="mb-[var(--space-stack-lg)]">
+                <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)]">
+                  Contact
+                </p>
+                <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-sm)]">
+                  Let&apos;s build something.
+                </h2>
+                <p className="text-body text-[var(--color-text-secondary)] mb-[var(--space-stack-md)]">
+                  I&apos;m always looking for interesting problems and good people to solve them with.
+                </p>
 
-                {/* Left — heading + subtext + tags */}
-                <div className="md:max-w-[520px]">
-                  <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-sm)]" style={{ fontSize: 'clamp(28px, 4vw, 42px)' }}>
-                    Let&apos;s build something.
-                  </h2>
-                  <p className="text-body text-[var(--color-text-secondary)] mb-[var(--space-stack-md)]">
-                    I&apos;m always looking for interesting problems and good people to solve them with.
-                  </p>
-
-                  {/* Status tags */}
-                  <div className="flex flex-wrap gap-[var(--space-component-sm)]">
-                    {['Open to remote', 'Available for consulting', 'Mountain time'].map((tag) => (
-                      <span
-                        key={tag}
-                        style={{
-                          padding: '6px 14px',
-                          borderRadius: '999px',
-                          border: '0.5px solid var(--color-border)',
-                          background: 'var(--color-surface)',
-                          fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-                          fontSize: '12px',
-                          fontWeight: 400,
-                          color: 'var(--color-text-muted)',
-                          letterSpacing: '0.02em',
-                        }}
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                {/* Status tags */}
+                <div className="flex flex-wrap gap-[var(--space-component-sm)]">
+                  {['Open to remote', 'Available for consulting', 'Mountain time'].map((tag) => (
+                    <span
+                      key={tag}
+                      style={{
+                        padding: '6px 14px',
+                        borderRadius: '999px',
+                        border: '0.5px solid var(--color-border)',
+                        background: 'var(--color-surface)',
+                        fontFamily: 'var(--font-outfit), system-ui, sans-serif',
+                        fontSize: '12px',
+                        fontWeight: 400,
+                        color: 'var(--color-text-muted)',
+                        letterSpacing: '0.02em',
+                      }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
                 </div>
-
-                {/* Right — CTAs + contact detail */}
-                <div className="flex flex-col gap-[var(--space-component-md)] md:items-end md:text-right">
-                  <div className="flex flex-wrap gap-[var(--space-component-sm)]">
-                    <Button variant="glass" href="/contact">
-                      Get in touch
-                    </Button>
-                    <Button variant="secondary" href="/api/resume">
-                      Download resume
-                    </Button>
-                  </div>
-                  <p
-                    className="text-body-sm text-[var(--color-text-placeholder)]"
-                  >
-                    hello@jayshock.com
-                  </p>
-                </div>
-
               </div>
+
+              {/* CTAs + contact detail */}
+              <div className="flex flex-wrap items-center gap-[var(--space-component-sm)] mb-[var(--space-stack-sm)]">
+                <Button variant="glass" href="/contact">
+                  Get in touch
+                </Button>
+                <Button variant="secondary" href="/api/resume">
+                  Download resume
+                </Button>
+              </div>
+              <p className="text-body-sm text-[var(--color-text-placeholder)]">
+                hello@jayshock.com
+              </p>
             </div>
           </ScrollReveal>
         </div>
       </section>
+
     </>
   )
 }

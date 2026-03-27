@@ -124,6 +124,18 @@ export function useChat() {
   // Track whether user has interacted (to show static vs dynamic chips)
   const hasInteracted = useRef(messages.length > 1)
 
+  // Track which homepage section is currently in view
+  const [visibleSection, setVisibleSection] = useState<string | null>(null)
+
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent<{ section: string }>).detail
+      setVisibleSection(detail?.section ?? null)
+    }
+    window.addEventListener('section-visible', handler)
+    return () => window.removeEventListener('section-visible', handler)
+  }, [])
+
   // Persist to sessionStorage whenever messages change
   useEffect(() => {
     saveSession({ messages, usedLoadingIds })
@@ -132,7 +144,7 @@ export function useChat() {
   // Chips: static page chips before first interaction, dynamic from last bot message after
   const chips: SuggestionChip[] = (() => {
     if (!hasInteracted.current) {
-      return getChipsForPage(pageContext)
+      return getChipsForPage(pageContext, visibleSection)
     }
     // Find the last assistant message and return its chips
     const lastBot = [...messages].reverse().find(m => m.role === 'assistant')
@@ -339,6 +351,20 @@ export function useChat() {
     },
     [sendMessage]
   )
+
+  // Listen for external "open-barnaby" events (e.g. from lifecycle cards)
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent<{ message?: string }>).detail
+      setIsOpen(true)
+      if (detail?.message) {
+        // Small delay so panel mounts before sending
+        setTimeout(() => sendMessage(detail.message as string), 150)
+      }
+    }
+    window.addEventListener('open-barnaby', handler)
+    return () => window.removeEventListener('open-barnaby', handler)
+  }, [sendMessage])
 
   // Hide chips while waiting for a response
   const visibleChips = isWaiting || isStreaming ? [] : chips

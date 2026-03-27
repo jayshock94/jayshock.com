@@ -48,6 +48,30 @@ and the people using it.
 
 ---
 
+## The Design Compass
+
+Jay's portfolio features a visual tool called the Design Compass in the "How I Work" section. It's an interactive compass with four directions that represent his mindset on every project:
+
+### The four compass points
+- **See it** — The stated problem is rarely the real one. Jay digs until he understands what is actually happening before he touches anything.
+- **Own it** — He figures out his part in it. The win, the miss, the gap. No excuses, no finger pointing. Just ownership.
+- **Solve it** — Explore every angle. The solution has to hold up for the business and the user, not just look good in a prototype.
+- **Do it** — Build it, test it, ship it. If a new gap shows up, the cycle starts again. He keeps going until it is right.
+
+### How the compass maps to the design process
+The compass isn't a replacement for the standard design process — it's the mindset Jay brings to each stage. Each compass point maps to specific lifecycle stages:
+
+- **See it** maps to Discover (stakeholder interviews, competitive analysis, user research, data analysis, heuristic evaluation, contextual inquiry)
+- **See it + Own it** overlap at Define (problem framing, personas, journey maps, requirements gathering, success metrics, scope alignment, jobs to be done)
+- **Own it + Solve it** overlap at Ideate (user flows, wireframes, concept exploration, design sprints, sketching, information architecture, workshop facilitation)
+- **Solve it** maps to Design (high-fidelity mocks, interactive prototypes, design systems, interaction design, responsive layouts, accessibility review)
+- **Solve it + Do it** overlap at Test (usability testing, A/B testing, feedback synthesis, iteration, cognitive walkthroughs, analytics review, stakeholder demos)
+- **Do it** maps to Deliver (dev handoff, spec documentation, QA review, build verification, design debt tracking, launch support)
+
+The compass is not just a framework he talks about — it's literally built into his portfolio site as an interactive element visitors can explore.
+
+---
+
 ## Design Philosophy
 
 My philosophy comes down to a bridge metaphor. The business has goals,
@@ -132,10 +156,10 @@ open_to_consulting: true
 - **Collaboration:** Stakeholder communication, design critiques, developer handoff and review, cross-functional facilitation, product owner partnership, presenting to leadership
 
 ### Tools I use
-Figma, FigJam, Mobbin, Claude AI, Microsoft Azure, Microsoft Teams, Miro, Notion, Jira, Maze, Hotjar, Loom, ChatGPT, Midjourney (for ideation and moodboarding)
+Figma, Sketch, Framer, Miro, FigJam, Jira, Loom, Mobbin, Lucid, Azure, Adobe Creative Suite, Claude, ChatGPT, Cursor
 
 ### Tools I've used but wouldn't list as primary
-Adobe Creative Suite (Photoshop, Illustrator, Premiere Pro, After Effects — from the marketing days), Sketch, InVision
+InVision, Notion, Hotjar, Maze
 
 ---
 
@@ -260,19 +284,11 @@ he does his best work when the problem is real and the constraints are
 interesting.
 
 **Q: How does Jay approach a new project?**
-He follows a framework: See it, Own it, Solve it, Do it.
-
-See it — Take in what the project actually is. The scope, the goals, the
-painpoints, the real problem. He digs deeper here because what people think
-the problem is often isn't the actual problem.
-
-Own it — Define and clarify his role. Whatever the scope is, he's either
-going to contribute to it or hinder it, and he always chooses to contribute.
-This is where he figures out if he's the UX designer, product designer,
-UI designer, or something else for this specific project.
-
-Solve it and Do it — Research both sides (business and users), design the
-bridge, build it, test it, hand it off, and verify the build matches the intent.
+He uses what he calls the Design Compass: See it, Own it, Solve it, Do it.
+You can explore it interactively on the How I Work section of his portfolio.
+Each compass point maps to specific stages of the standard design lifecycle
+(Discover, Define, Ideate, Design, Test, Deliver). See the "The Design Compass"
+section above for the full breakdown.
 
 **Q: What's Jay's design philosophy in one sentence?**
 Business goals and user goals aren't opposing forces — they're two sides
