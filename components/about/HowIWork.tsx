@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback, useEffect, useRef } from 'react'
+import React, { useState, useCallback, useEffect, useRef } from 'react'
 
 /* ------------------------------------------------------------------ */
 /*  Data                                                               */
@@ -77,12 +77,20 @@ function pillPosition(angleDeg: number) {
 
 export default function HowIWork() {
   const [active, setActive] = useState(0)
+  const [expandedStep, setExpandedStep] = useState<number | null>(null)
   const phase = PHASES[active]
 
   const containerRef = useRef<HTMLDivElement>(null)
   const hasAutoPlayed = useRef(false)
   const isAutoRotating = useRef(false)
   const rotateTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const isMounted = useRef(false)
+
+  /* Track mount state to avoid setState during HMR re-render */
+  useEffect(() => {
+    isMounted.current = true
+    return () => { isMounted.current = false }
+  }, [])
 
   /* Auto-rotate through phases when section scrolls into view */
   useEffect(() => {
@@ -91,13 +99,13 @@ export default function HowIWork() {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting || hasAutoPlayed.current) return
+        if (!entry.isIntersecting || hasAutoPlayed.current || !isMounted.current) return
         hasAutoPlayed.current = true
         isAutoRotating.current = true
 
         let step = 0
         const cycle = () => {
-          if (!isAutoRotating.current) return
+          if (!isAutoRotating.current || !isMounted.current) return
           setActive(step)
           step++
           if (step < PHASES.length) {
@@ -105,14 +113,15 @@ export default function HowIWork() {
           } else {
             // Cycle complete — return to first phase
             rotateTimer.current = setTimeout(() => {
-              if (isAutoRotating.current) {
+              if (isAutoRotating.current && isMounted.current) {
                 setActive(0)
                 isAutoRotating.current = false
               }
             }, 1500)
           }
         }
-        cycle()
+        // Defer to next tick to avoid setState during render
+        rotateTimer.current = setTimeout(cycle, 50)
       },
       { threshold: 0.4 }
     )
@@ -338,7 +347,7 @@ export default function HowIWork() {
         </div>
       </div>
 
-      {/* Process infographic — lifecycle stages linked to compass */}
+      {/* Process timeline — horizontal strip with expandable details */}
       <div style={{ marginTop: 'var(--space-section-sm)' }}>
         <p
           className="text-label text-[var(--color-text-muted)]"
@@ -347,69 +356,147 @@ export default function HowIWork() {
           In practice
         </p>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-[var(--space-component-xs)]">
-          {LIFECYCLE.map((item) => {
-            const isLit = (item.phases as readonly number[]).includes(active)
-            /* Use the first matching phase's color */
-            const matchPhase = isLit ? PHASES[item.phases.find(p => p === active) ?? item.phases[0]] : null
+        {/* Timeline strip */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-component-sm)' }}>
+          {/* Step buttons in a row with connecting line */}
+          <div style={{ position: 'relative' }}>
+            {/* Connecting line behind the steps (desktop only) */}
+            <div
+              className="hidden md:block"
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '24px',
+                right: '24px',
+                height: '1px',
+                background: 'var(--color-border)',
+                opacity: 0.3,
+                transform: 'translateY(-50%)',
+                pointerEvents: 'none',
+              }}
+            />
 
-            return (
-              <div
-                key={item.step}
-                style={{
-                  padding: 'var(--space-component-base)',
-                  borderRadius: '12px',
-                  border: isLit
-                    ? `1px solid ${matchPhase?.border}`
-                    : '0.5px solid transparent',
-                  background: isLit ? matchPhase?.bg : 'transparent',
-                  transition: 'all 0.3s ease',
-                  cursor: 'default',
-                  userSelect: 'none',
-                }}
-              >
-                <span
-                  style={{
-                    fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-                    fontSize: '10px',
-                    fontWeight: 400,
-                    color: isLit ? matchPhase?.color : 'var(--color-text-placeholder)',
-                    letterSpacing: '0.06em',
-                    display: 'block',
-                    marginBottom: '6px',
-                    transition: 'color 0.3s ease',
-                  }}
-                >
-                  {item.step}
-                </span>
-                <span
-                  style={{
-                    fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-                    fontSize: '14px',
-                    fontWeight: 500,
-                    color: isLit ? 'var(--color-text-primary)' : 'var(--color-text-muted)',
-                    display: 'block',
-                    marginBottom: '4px',
-                    transition: 'color 0.3s ease',
-                  }}
-                >
-                  {item.name}
-                </span>
-                <span
-                  style={{
-                    fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-                    fontSize: '11px',
-                    fontWeight: 300,
-                    color: isLit ? 'var(--color-text-secondary)' : 'var(--color-text-placeholder)',
-                    lineHeight: 1.4,
-                    transition: 'color 0.3s ease',
-                  }}
-                >
-                  {item.sub}
-                </span>
-              </div>
-            )
-          })}
+            <div
+              className="grid grid-cols-3 md:grid-cols-6 gap-[var(--space-component-xs)]"
+              style={{ position: 'relative' }}
+            >
+              {LIFECYCLE.map((item, idx) => {
+                const isLit = (item.phases as readonly number[]).includes(active)
+                const isExpanded = expandedStep === idx
+                const matchPhase = isLit ? PHASES[item.phases.find(p => p === active) ?? item.phases[0]] : null
+
+                // On mobile (3 cols), insert detail panel after each row of 3
+                // Row ends at index 2 and 5. On desktop (6 cols), row ends at 5.
+                const isEndOfMobileRow = (idx + 1) % 3 === 0
+                const showPanelHere = expandedStep !== null &&
+                  // Mobile: panel goes after the row containing the expanded step
+                  Math.floor(expandedStep / 3) === Math.floor(idx / 3) &&
+                  isEndOfMobileRow
+
+                const panelItem = expandedStep !== null ? LIFECYCLE[expandedStep] : null
+                const panelPhase = panelItem ? PHASES[panelItem.phases.find(p => p === active) ?? panelItem.phases[0]] : null
+
+                return (
+                  <React.Fragment key={item.step}>
+                    <button
+                      type="button"
+                      onClick={() => {
+                      stopAutoRotate()
+                      if (isExpanded) {
+                        setExpandedStep(null)
+                      } else {
+                        setExpandedStep(idx)
+                        // Only move compass if this card is not already lit (grey card)
+                        if (!isLit) {
+                          const firstPhase = (item.phases as readonly number[])[0]
+                          if (firstPhase !== undefined) {
+                            setActive(firstPhase)
+                          }
+                        }
+                      }
+                    }}
+                      className="flex flex-col items-center"
+                      style={{
+                        gap: '8px',
+                        padding: '10px 12px',
+                        borderRadius: '10px',
+                        border: isExpanded
+                          ? `1px solid ${matchPhase?.border ?? 'var(--color-border)'}`
+                          : isLit
+                            ? `0.5px solid ${matchPhase?.border ?? 'var(--color-border)'}`
+                            : '0.5px solid transparent',
+                        background: isExpanded
+                          ? matchPhase?.bg ?? 'var(--color-surface)'
+                          : 'transparent',
+                        cursor: 'pointer',
+                        transition: 'all 0.3s ease',
+                        outline: 'none',
+                      }}
+                    >
+                      <span
+                        style={{
+                          width: '22px',
+                          height: '22px',
+                          borderRadius: '50%',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontFamily: 'var(--font-outfit), system-ui, sans-serif',
+                          fontSize: '9px',
+                          fontWeight: 500,
+                          letterSpacing: '0.04em',
+                          color: isLit ? matchPhase?.color : 'var(--color-text-placeholder)',
+                          background: isLit ? matchPhase?.bg : 'var(--color-surface)',
+                          border: `0.5px solid ${isLit ? matchPhase?.border ?? 'var(--color-border)' : 'var(--color-border)'}`,
+                          transition: 'all 0.3s ease',
+                        }}
+                      >
+                        {item.step}
+                      </span>
+                      <span
+                        style={{
+                          fontFamily: 'var(--font-outfit), system-ui, sans-serif',
+                          fontSize: '12px',
+                          fontWeight: isLit ? 500 : 400,
+                          color: isLit ? 'var(--color-text-primary)' : 'var(--color-text-muted)',
+                          transition: 'color 0.3s ease',
+                          whiteSpace: 'nowrap',
+                        }}
+                      >
+                        {item.name}
+                      </span>
+                    </button>
+
+                    {/* Detail panel — spans full row, inserted after the row containing the active step */}
+                    {showPanelHere && panelItem && (
+                      <div
+                        className="col-span-3 md:col-span-6"
+                        style={{
+                          padding: 'var(--space-component-md)',
+                          borderRadius: '10px',
+                          border: `0.5px solid ${panelPhase?.border ?? 'var(--color-border)'}`,
+                          background: panelPhase?.bg ?? 'var(--color-surface)',
+                          transition: 'all 0.3s ease',
+                        }}
+                      >
+                        <span
+                          style={{
+                            fontFamily: 'var(--font-outfit), system-ui, sans-serif',
+                            fontSize: '13px',
+                            fontWeight: 300,
+                            color: 'var(--color-text-secondary)',
+                            lineHeight: 1.6,
+                          }}
+                        >
+                          {panelItem.sub}
+                        </span>
+                      </div>
+                    )}
+                  </React.Fragment>
+                )
+              })}
+            </div>
+          </div>
         </div>
       </div>
     </div>
