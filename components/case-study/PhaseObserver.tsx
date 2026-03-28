@@ -40,9 +40,9 @@ export default function PhaseObserver({ children }: PhaseObserverProps) {
         }
       },
       {
-        // Fire when 30% of the section is in view, excluding ±20% of viewport edges
-        threshold:  0.3,
-        rootMargin: '-20% 0px -20% 0px',
+        // Fire when 10% of the section is in view — lower threshold for tall sections
+        threshold:  0.1,
+        rootMargin: '-30% 0px -30% 0px',
       },
     )
 
