@@ -121,7 +121,6 @@ export default function HomePage() {
       <section
         id="work"
         className="py-[var(--space-section-sm)]"
-        id="work"
         aria-labelledby="work-heading"
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">

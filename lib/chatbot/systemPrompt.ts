@@ -128,7 +128,7 @@ end every response with a chip block in this exact format:
 Short label|The full message to send when clicked
 Another label|Another full message
 
-include 2-3 chips (max 4). labels are 2-6 words. one goes deeper on the current topic, one nudges toward something new.
+include 2-3 chips. never more than 3. labels are 2-6 words. one goes deeper on the current topic, one nudges toward something new.
 </suggestion_chips>
 
 <examples>
