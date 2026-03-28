@@ -35,6 +35,7 @@ export default function HomePage() {
           paddingTop:    'clamp(80px, 12vw, 140px)',
           paddingBottom: 'clamp(60px, 8vw, 100px)',
         }}
+        id="hero"
         aria-label="Introduction"
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
@@ -120,6 +121,7 @@ export default function HomePage() {
       <section
         id="work"
         className="py-[var(--space-section-sm)]"
+        id="work"
         aria-labelledby="work-heading"
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
@@ -227,6 +229,7 @@ export default function HomePage() {
       ========================================================= */}
       <section
         className="py-[var(--space-section-md)]"
+        id="how-i-work"
         aria-label="How I work"
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
@@ -244,6 +247,7 @@ export default function HomePage() {
       ========================================================= */}
       <section
         className="py-[var(--space-section-md)]"
+        id="toolkit"
         aria-label="My toolkit"
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
@@ -260,6 +264,7 @@ export default function HomePage() {
           Section 06 — Experience
       ========================================================= */}
       <section
+        id="experience"
         className="py-[var(--space-section-md)]"
         aria-label="Experience"
       >
@@ -354,6 +359,7 @@ export default function HomePage() {
           Section 06 — Contact CTA
       ========================================================= */}
       <section
+        id="contact"
         className="py-[var(--space-section-md)]"
         aria-label="Contact"
       >

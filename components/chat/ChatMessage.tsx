@@ -11,10 +11,19 @@ interface ChatMessageProps {
   onClose?: () => void
 }
 
-/** Detect navigation suggestions in bot responses and return a link. */
-function detectNavigation(content: string): { label: string; path: string } | null {
+/** Detect navigation suggestions in bot responses and return a link or scroll target. */
+function detectNavigation(content: string): { label: string; path: string; scroll?: boolean } | null {
   const lower = content.toLowerCase()
 
+  // Section scrolls (same-page anchors)
+  if (lower.includes('how i work') || lower.includes('compass') || lower.includes('see it, own it')) {
+    return { label: 'Go to How I Work', path: '#how-i-work', scroll: true }
+  }
+  if (lower.includes('toolkit') || lower.includes('tools he uses') || lower.includes('what he uses')) {
+    return { label: 'Go to Toolkit', path: '#toolkit', scroll: true }
+  }
+
+  // Page navigations
   if (lower.includes('contact page') || lower.includes('reach out') || lower.includes('ask him directly')) {
     return { label: 'Go to contact page', path: '/contact' }
   }
@@ -26,6 +35,9 @@ function detectNavigation(content: string): { label: string; path: string } | nu
   }
   if (lower.includes('about page')) {
     return { label: 'Go to about page', path: '/about' }
+  }
+  if (lower.includes('experience section')) {
+    return { label: 'Go to Experience', path: '#experience', scroll: true }
   }
 
   return null
@@ -123,6 +135,13 @@ export default function ChatMessage({ message, isStreaming, onClose }: ChatMessa
               type="button"
               onClick={() => {
                 onClose?.()
+                if (navigation.scroll) {
+                  const el = document.querySelector(navigation.path)
+                  if (el) {
+                    el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                    return
+                  }
+                }
                 router.push(navigation.path)
               }}
               style={{

@@ -10,7 +10,12 @@
       "Bash(cp \"C:/Users/jaysh/Desktop/Design Stuff/Branding/Shock design/Product mocks/Exported mocks/tel.png\" \"C:/Users/jaysh/Desktop/claude-code/jayshock-portfolio/public/images/work/virtual-badge.png\")",
       "mcp__claude_ai_Vercel__list_teams",
       "mcp__claude_ai_Vercel__list_projects",
-      "mcp__claude_ai_Vercel__list_deployments"
+      "mcp__claude_ai_Vercel__list_deployments",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(gh api:*)",
+      "WebSearch",
+      "WebFetch(domain:docs.anthropic.com)",
+      "WebFetch(domain:humanornot.so)"
     ]
   }
 }
