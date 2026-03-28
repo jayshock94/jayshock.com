@@ -84,16 +84,16 @@ export default function ChatFAB({ isOpen, isStreaming, onClick, pageType }: Chat
           className={dismissing ? 'chat-bubble-exit' : 'chat-bubble-enter'}
           style={{
             position: 'fixed',
-            bottom: 'max(28px, env(safe-area-inset-bottom))',
-            right: 'calc(max(24px, env(safe-area-inset-right)) + 72px)',
-            maxWidth: '240px',
-            padding: '10px 28px 10px 12px',
-            borderRadius: '14px 14px 4px 14px',
-            background: 'var(--glass-thin)',
-            backdropFilter: 'blur(48px) saturate(180%)',
-            WebkitBackdropFilter: 'blur(48px) saturate(180%)',
+            bottom: 'calc(max(24px, env(safe-area-inset-bottom)) + 70px)',
+            right: 'calc(max(24px, env(safe-area-inset-right)) - 10px)',
+            maxWidth: '200px',
+            padding: 'var(--space-component-md)',
+            borderRadius: '14px',
+            background: 'rgba(30, 30, 28, 0.92)',
+            backdropFilter: 'blur(24px)',
+            WebkitBackdropFilter: 'blur(24px)',
             border: '0.5px solid var(--glass-border-mid)',
-            boxShadow: '0 4px 16px rgba(0, 0, 0, 0.25)',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
             zIndex: 59,
           }}
         >
@@ -107,8 +107,8 @@ export default function ChatFAB({ isOpen, isStreaming, onClick, pageType }: Chat
             aria-label="Dismiss"
             style={{
               position: 'absolute',
-              top: '4px',
-              right: '4px',
+              top: '6px',
+              right: '6px',
               width: '20px',
               height: '20px',
               border: 'none',
@@ -131,19 +131,35 @@ export default function ChatFAB({ isOpen, isStreaming, onClick, pageType }: Chat
             </svg>
           </button>
 
+          {/* Header */}
+          <p
+            style={{
+              margin: '0 0 6px 0',
+              fontFamily: 'var(--font-outfit), system-ui, sans-serif',
+              fontSize: '11px',
+              fontWeight: 500,
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              color: 'var(--color-accent)',
+            }}
+          >
+            Barnaby
+          </p>
+
           {/* Message text */}
           <p
             style={{
               margin: 0,
               fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-              fontSize: '12px',
+              fontSize: '13px',
               fontWeight: 300,
-              lineHeight: '1.5',
+              lineHeight: '1.65',
               color: 'var(--color-text-secondary)',
             }}
           >
             {BUBBLE_MESSAGES[pageType ?? 'home'] ?? BUBBLE_MESSAGES.home}
           </p>
+
         </div>
       )}
 
