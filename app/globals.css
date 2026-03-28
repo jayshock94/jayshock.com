@@ -338,6 +338,7 @@ body > * {
   font-size: var(--text-body-size);
   font-weight: var(--text-body-weight);
   line-height: var(--text-body-line-height);
+  letter-spacing: var(--text-body-tracking, 0);
 }
 
 .text-body-sm {
