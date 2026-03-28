@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 // ── Constants ──────────────────────────────────────────────────────────────
 
@@ -110,33 +110,53 @@ interface PaymentSuccessAnimationProps {
   static?: boolean
   /** Delays the entire animation sequence by this many ms after mount. */
   delayStart?: number
+  /** Override display width (default 130). Height scales proportionally. */
+  displayWidth?: number
 }
 
-export default function PaymentSuccessAnimation({ static: isStatic, delayStart = 0 }: PaymentSuccessAnimationProps) {
+export default function PaymentSuccessAnimation({ static: isStatic, delayStart = 0, displayWidth }: PaymentSuccessAnimationProps) {
+  const dispW = displayWidth ?? DISP_W
+  const dispH = Math.round(dispW * (DISP_H / DISP_W))
+  const scale = dispW / DESIGN_W
   const [phase,    setPhase]    = useState<Phase>(isStatic ? 'success' : 'idle')
   const [confetti, setConfetti] = useState<ConfettiPiece[]>([])
+  const containerRef = useRef<HTMLDivElement>(null)
+  const hasTriggered = useRef(false)
 
   useEffect(() => {
-    if (isStatic) return
+    if (isStatic || hasTriggered.current) return
 
-    let alive = true
-    const timers: ReturnType<typeof setTimeout>[] = []
+    const el = containerRef.current
+    if (!el) return
 
-    function after(fn: () => void, ms: number) {
-      const t = setTimeout(() => { if (alive) fn() }, ms)
-      timers.push(t)
-    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting || hasTriggered.current) return
+        hasTriggered.current = true
+        observer.disconnect()
 
-    // Pulse the button to draw the eye → press → success
-    after(() => setPhase('pulsing'),  delayStart)
-    after(() => setPhase('pressing'), delayStart + 700)
-    after(() => {
-      setPhase('success')
-      setConfetti(makeConfetti(DISP_W / 2, DISP_H * 0.28))
-    }, delayStart + 1200)
+        let alive = true
+        const timers: ReturnType<typeof setTimeout>[] = []
 
-    return () => { alive = false; timers.forEach(clearTimeout) }
-  }, [isStatic, delayStart])
+        function after(fn: () => void, ms: number) {
+          const t = setTimeout(() => { if (alive) fn() }, ms)
+          timers.push(t)
+        }
+
+        // Pulse the button to draw the eye → press → success
+        after(() => setPhase('pulsing'),  delayStart)
+        after(() => setPhase('pressing'), delayStart + 700)
+        after(() => {
+          setPhase('success')
+          setConfetti(makeConfetti(dispW / 2, dispH * 0.28))
+        }, delayStart + 1200)
+      },
+      { threshold: 0.6 },
+    )
+
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [isStatic, delayStart, dispW, dispH])
 
   // Staggered reveal helper — each content element uses this
   const reveal = (delayMs: number, durationMs = 350): React.CSSProperties =>
@@ -148,7 +168,7 @@ export default function PaymentSuccessAnimation({ static: isStatic, delayStart =
     <>
 
       {/* Outer wrapper — no overflow:hidden so confetti escapes phone edges */}
-      <div style={{ width: DISP_W, height: DISP_H, position: 'relative', flexShrink: 0 }}>
+      <div ref={containerRef} style={{ width: dispW, height: dispH, position: 'relative', flexShrink: 0 }}>
 
         {/* ── Confetti — bursts past phone frame ── */}
         {confetti.map(p => (
@@ -177,8 +197,8 @@ export default function PaymentSuccessAnimation({ static: isStatic, delayStart =
           position:     'absolute',
           top:          0,
           left:         0,
-          width:        DISP_W,
-          height:       DISP_H,
+          width:        dispW,
+          height:       dispH,
           overflow:     'hidden',
           borderRadius: '24px',
           boxShadow:    '0 20px 60px rgba(0,0,0,0.35)',
@@ -191,7 +211,7 @@ export default function PaymentSuccessAnimation({ static: isStatic, delayStart =
             position:        'absolute',
             top:             0,
             left:            0,
-            transform:       `scale(${SCALE})`,
+            transform:       `scale(${scale})`,
             transformOrigin: 'top left',
           }}>
 

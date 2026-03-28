@@ -15,7 +15,18 @@
       "Bash(gh api:*)",
       "WebSearch",
       "WebFetch(domain:docs.anthropic.com)",
-      "WebFetch(domain:humanornot.so)"
+      "WebFetch(domain:humanornot.so)",
+      "Bash(rm -rf .next)",
+      "Bash(npm run:*)",
+      "Bash(npx kill-port:*)",
+      "Bash(netstat -ano)",
+      "mcp__mcp-registry__search_mcp_registry",
+      "Bash(cp \"C:/Users/jaysh/Desktop/claude-code/jayshock-portfolio/public/images/Competators/Wells_Fargo_Bank.svg.png\" \"C:/Users/jaysh/Desktop/claude-code/jayshock-portfolio/.claude/worktrees/wizardly-khayyam/public/images/competitors/wells-fargo.png\")",
+      "Bash(cp \"C:/Users/jaysh/Desktop/claude-code/jayshock-portfolio/public/images/Competators/chase-logo-0.png\" \"C:/Users/jaysh/Desktop/claude-code/jayshock-portfolio/.claude/worktrees/wizardly-khayyam/public/images/competitors/chase.png\")",
+      "Bash(cp \"C:/Users/jaysh/Desktop/claude-code/jayshock-portfolio/public/images/Competators/capital one.png\" \"C:/Users/jaysh/Desktop/claude-code/jayshock-portfolio/.claude/worktrees/wizardly-khayyam/public/images/competitors/capital-one.png\")",
+      "Bash(cp \"C:/Users/jaysh/Desktop/claude-code/jayshock-portfolio/public/images/Competators/Ally_Financial.svg.png\" \"C:/Users/jaysh/Desktop/claude-code/jayshock-portfolio/.claude/worktrees/wizardly-khayyam/public/images/competitors/ally.png\")",
+      "Bash(cp \"C:/Users/jaysh/Desktop/claude-code/jayshock-portfolio/public/images/Competators/pnc-bank-logo-0.png\" \"C:/Users/jaysh/Desktop/claude-code/jayshock-portfolio/.claude/worktrees/wizardly-khayyam/public/images/competitors/pnc.png\")",
+      "Bash(identify \"C:/Users/jaysh/Desktop/claude-code/jayshock-portfolio/.claude/worktrees/wizardly-khayyam/public/images/mobile/legacy-accounts.png\")"
     ]
   }
 }

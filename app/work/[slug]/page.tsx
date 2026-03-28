@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound }  from 'next/navigation'
 import Link          from 'next/link'
+import Image         from 'next/image'
 import { getCaseStudy, caseStudySlugs } from '@/data/case-studies'
 import { generateTokens }  from '@/lib/colorAlgorithm'
 import CaseStudyHero       from '@/components/case-study/CaseStudyHero'
@@ -9,8 +10,14 @@ import PhaseSection        from '@/components/case-study/PhaseSection'
 import PhaseObserver       from '@/components/case-study/PhaseObserver'
 import PhaseProgress       from '@/components/case-study/PhaseProgress'
 import PhaseDivider        from '@/components/case-study/PhaseDivider'
-import EraserReveal           from '@/components/case-study/EraserReveal'
 import MobileLendingHeroImage from '@/components/case-study/MobileLendingHeroImage'
+import PainPoints            from '@/components/case-study/PainPoints'
+import Constraints           from '@/components/case-study/Constraints'
+import KeyFindings         from '@/components/case-study/KeyFindings'
+import ResearchMethods     from '@/components/case-study/ResearchMethods'
+import CompetitiveGrid     from '@/components/case-study/CompetitiveGrid'
+import PhoneFrame          from '@/components/case-study/PhoneFrame'
+import PaymentSuccessAnimation from '@/components/case-study/PaymentSuccessAnimation'
 import WorkCard            from '@/components/work/WorkCard'
 import MobileLendingCardImage from '@/components/work/MobileLendingCardImage'
 import ScrollReveal        from '@/components/ui/ScrollReveal'
@@ -33,12 +40,123 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 }
 
+/* ------------------------------------------------------------------ */
+/*  Mobile Lending Management — visual components                     */
+/* ------------------------------------------------------------------ */
+
+const MOBILE_LENDING_ROLE_META = [
+  { label: 'Role', value: 'Lead UX + Product Design' },
+  { label: 'Team', value: '2 supporting designers' },
+  { label: 'Scope', value: 'End to end: research through handoff' },
+]
+
+const MOBILE_LENDING_ROLE_SUMMARY =
+  'Worked across engineering, stakeholders, and product owners to figure out what we could ship within an architecture we couldn\'t rebuild.'
+
+const MOBILE_LENDING_SKILL_CHIPS = [
+  { text: 'User Research', barnabyMessage: 'What kind of user research did Jay do on this project?' },
+  { text: 'Usability Testing', barnabyMessage: 'How did Jay run usability tests on the lending app?' },
+  { text: 'Stakeholder Alignment', barnabyMessage: 'How did Jay align stakeholders on design decisions for this project?' },
+  { text: 'UI Design', barnabyMessage: 'What were Jay\'s biggest UI design decisions on the lending app?' },
+  { text: 'White-label Systems', barnabyMessage: 'How did Jay handle designing for a white-label product used by multiple lenders?' },
+]
+
+const MOBILE_LENDING_TAG_MESSAGES: Record<string, string> = {
+  'Mobile': 'Tell me about Jay\'s mobile design experience on this project.',
+  'Research': 'What kind of research did Jay do for the lending app redesign?',
+  'End to End': 'What does end to end mean for Jay on this project? What did he own?',
+}
+
+const MOBILE_LENDING_COMPETITORS = [
+  { name: 'Wells Fargo', logo: '/images/competitors/wells-fargo.png', category: 'bank' },
+  { name: 'Chase', logo: '/images/competitors/chase.png', category: 'bank' },
+  { name: 'Capital One', logo: '/images/competitors/capital-one.png', category: 'fintech' },
+  { name: 'Ally', logo: '/images/competitors/ally.png', category: 'fintech' },
+  { name: 'PNC', logo: '/images/competitors/pnc.png', category: 'bank' },
+  { name: 'USAA', logo: '/images/competitors/usaa.png', category: 'bank' },
+  { name: 'Zions Bank', logo: '/images/competitors/zions-bank.png', category: 'bank' },
+  { name: 'Mountain America', logo: '/images/competitors/mountain-america.png', category: 'credit-union' },
+  { name: 'Deseret First', logo: '/images/competitors/deseret-first.png', category: 'credit-union' },
+]
+
+const MOBILE_LENDING_CRITERIA = [
+  'dashboard hierarchy',
+  'navigation patterns',
+  'payment flows',
+  'account details',
+]
+
+const MOBILE_LENDING_PAIN_POINTS = [
+  {
+    title: 'Loans listed by number, not name',
+    description: 'Three loans meant three mystery strings of digits. No way to tell which was the car and which was the house.',
+  },
+  {
+    title: 'Autopay buried behind multiple screens',
+    description: 'The flow didn\'t match how people think about paying bills. Most borrowers never found it.',
+  },
+  {
+    title: 'Technical labels instead of task-based',
+    description: 'Borrowers had to learn the system instead of the system meeting them where they were.',
+  },
+  {
+    title: 'Top tasks weren\'t prioritized',
+    description: 'Pay, check balance, see due dates. The things people actually came to do weren\'t surfaced.',
+  },
+]
+
+const MOBILE_LENDING_CONSTRAINTS = [
+  { text: 'No full rebuild', barnabyMessage: 'Why couldn\'t Jay do a full rebuild on the lending app?' },
+  { text: 'Shared architecture across lenders', barnabyMessage: 'How did the shared architecture across lenders constrain the design?' },
+  { text: 'Fixed launch deadlines', barnabyMessage: 'How did launch deadlines affect design decisions on this project?' },
+  { text: 'Every change had to work for all clients', barnabyMessage: 'How did Jay handle designing for multiple lender clients at once?' },
+]
+
+const MOBILE_LENDING_FINDINGS = [
+  {
+    title: 'Survivorship bias in stakeholder assumptions',
+    description: 'Frustrated borrowers mentioned the branch locator when they came in. Stakeholders assumed that was the problem. The real issue was they couldn\'t make payments from the app.',
+  },
+  {
+    title: 'The hierarchy gap, not a feature gap',
+    description: 'Every competitor had the same features. The difference was which apps surfaced what users actually came to do vs. buried it behind system-level thinking.',
+  },
+  {
+    title: 'Payment perception matters more than payment steps',
+    description: 'The flow couldn\'t be shortened. But progress indicators, chunked information, and visual variety changed how long it felt.',
+  },
+  {
+    title: 'Account numbers are meaningless to borrowers',
+    description: 'Three loans listed by number meant three mystery strings. Users don\'t memorize account numbers. They remember "the car" and "the house."',
+  },
+]
+
+const MOBILE_LENDING_METHODS = [
+  {
+    title: 'Competitive analysis',
+    description: '9 apps across banks, credit unions, and fintech lenders. Mapped dashboard hierarchy, navigation, payment flows, and account details.',
+  },
+  {
+    title: 'PO feedback templates',
+    description: 'Built structured templates for product owners visiting client sites. Standardized how we gathered feedback from lender teams.',
+  },
+  {
+    title: 'App store reviews',
+    description: 'Pulled pain points and friction from reviews of competing products. Identified patterns in what borrowers actually complained about.',
+  },
+  {
+    title: 'Usability testing',
+    description: 'Sent prototypes to UserTesting. Participants completed goals while recording sessions. Tracked navigation speed and captured impressions at key steps.',
+  },
+]
+
 export default function CaseStudyPage({ params }: PageProps) {
   const cs = getCaseStudy(params.slug)
   if (!cs) notFound()
 
   const tokens = generateTokens(cs.brandColorHex)
   const nextCS = getCaseStudy(cs.nextSlug)
+  const isMobileLending = cs.slug === 'mobile-lending-management'
 
   return (
     <>
@@ -46,11 +164,17 @@ export default function CaseStudyPage({ params }: PageProps) {
       <CaseStudyHero
         caseStudy={cs}
         tokens={tokens}
-        heroImageSlot={cs.slug === 'mobile-lending-management' ? <MobileLendingHeroImage /> : undefined}
+        heroImageSlot={isMobileLending ? <MobileLendingHeroImage /> : undefined}
+        tagMessages={isMobileLending ? MOBILE_LENDING_TAG_MESSAGES : undefined}
       />
 
       {/* Narrative lede: context + role */}
-      <CaseStudyLede context={cs.context} overview={cs.overview} />
+      <CaseStudyLede
+        context={cs.context}
+        overview={cs.overview}
+        roleMeta={isMobileLending ? MOBILE_LENDING_ROLE_META : undefined}
+        roleSummary={isMobileLending ? MOBILE_LENDING_ROLE_SUMMARY : undefined}
+      />
 
       {/* Phase sections with observer, progress, and dividers */}
       <PhaseObserver>
@@ -62,17 +186,82 @@ export default function CaseStudyPage({ params }: PageProps) {
           content={cs.problem}
           glossary={cs.glossary}
           mediaSlot={
-            cs.slug === 'mobile-lending-management' ? (
-              <div className="max-w-[320px] mx-auto">
-                <EraserReveal
-                  legacySrc="/images/mobile/gac%20legacy.png"
-                  updatedSrc="/images/mobile/gac%20new.png"
-                  alt="Before and after: legacy GoldPoint app vs redesigned Lendmark app"
-                />
-              </div>
+            isMobileLending ? (
+              <>
+                <PainPoints points={MOBILE_LENDING_PAIN_POINTS} />
+                <Constraints constraints={MOBILE_LENDING_CONSTRAINTS} />
+                <ScrollReveal>
+                  <div
+                    style={{
+                      marginTop: 'var(--space-stack-lg)',
+                      marginBottom: 'var(--space-stack-lg)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 'var(--space-stack-md)',
+                      alignItems: 'center',
+                    }}
+                  >
+                    {/* Cropped view: just the loan accounts list */}
+                    <div
+                      style={{
+                        width: '100%',
+                        maxWidth: '300px',
+                        borderRadius: '12px',
+                        overflow: 'hidden',
+                        border: '0.5px solid var(--color-border)',
+                        background: '#f5f0ea',
+                        position: 'relative',
+                      }}
+                    >
+                      <div style={{
+                        width: '100%',
+                        overflow: 'hidden',
+                        position: 'relative',
+                        height: '300px',
+                      }}>
+                        <Image
+                          src="/images/mobile/legacy-accounts.png"
+                          alt="Original app account list — loans identified only by account numbers like 1028-000388-09"
+                          width={960}
+                          height={2747}
+                          style={{
+                            width: '100%',
+                            height: 'auto',
+                            display: 'block',
+                            position: 'absolute',
+                            top: '-90%',
+                          }}
+                        />
+                      </div>
+                    </div>
+                    <p
+                      className="text-body-sm"
+                      style={{
+                        color: 'var(--color-text-muted)',
+                        textAlign: 'center',
+                        margin: 0,
+                        maxWidth: '400px',
+                      }}
+                    >
+                      Loans listed by account number. No names, no icons, no way to tell which is which.
+                    </p>
+
+                    {/* Account detail page in phone frame — cropped to phone height */}
+                    <div style={{ marginTop: 'var(--space-stack-sm)' }}>
+                      <PhoneFrame
+                        src="/images/mobile/legacy-account-detail.png"
+                        alt="Original account detail page — dense information with no visual hierarchy"
+                        caption="The account detail page. Everything a borrower might need, buried in a wall of data."
+                        maxWidth={280}
+                        cropToPhone
+                      />
+                    </div>
+                  </div>
+                </ScrollReveal>
+              </>
             ) : undefined
           }
-          mediaSlotAfterParagraph={cs.slug === 'mobile-lending-management' ? 1 : undefined}
+          mediaSlotAfterParagraph={0}
         />
 
         <PhaseDivider fromPhase="problem" toPhase="discovery" />
@@ -82,6 +271,23 @@ export default function CaseStudyPage({ params }: PageProps) {
           phaseNumber={2}
           content={cs.discovery}
           glossary={cs.glossary}
+          mediaSlot={
+            isMobileLending ? (
+              <>
+                <ResearchMethods methods={MOBILE_LENDING_METHODS} />
+                <CompetitiveGrid
+                  competitors={MOBILE_LENDING_COMPETITORS}
+                  criteria={MOBILE_LENDING_CRITERIA}
+                />
+                <KeyFindings
+                  findings={MOBILE_LENDING_FINDINGS}
+                  accentColor="var(--phase-discovery-label)"
+                  glossary={cs.glossary}
+                />
+              </>
+            ) : undefined
+          }
+          mediaSlotAfterParagraph={isMobileLending ? 1 : undefined}
         />
 
         <PhaseDivider fromPhase="discovery" toPhase="solution" />
@@ -91,6 +297,20 @@ export default function CaseStudyPage({ params }: PageProps) {
           phaseNumber={3}
           content={cs.solution}
           glossary={cs.glossary}
+          mediaSlot={
+            isMobileLending ? (
+              <ScrollReveal>
+                <div style={{ marginTop: 'var(--space-stack-lg)', marginBottom: 'var(--space-stack-lg)' }}>
+                  <PhoneFrame
+                    src="/images/mobile/redesigned-dashboard.png"
+                    alt="Redesigned loan dashboard — each loan showing its name, due date, and amount owed"
+                    caption="Home screen loan dashboard. Everything a borrower needs without a single tap."
+                  />
+                </div>
+              </ScrollReveal>
+            ) : undefined
+          }
+          mediaSlotAfterParagraph={isMobileLending ? 1 : undefined}
         />
 
         <PhaseDivider fromPhase="solution" toPhase="impact" />

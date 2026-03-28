@@ -1,13 +1,16 @@
 import type { CaseStudy } from '@/data/types'
 import type { ColorTokenSet } from '@/lib/colorAlgorithm'
+import HeroTypeTags from './HeroTypeTags'
 
 interface CaseStudyHeroProps {
   caseStudy:      CaseStudy
   tokens:         ColorTokenSet
   heroImageSlot?: React.ReactNode
+  /** Map of type tag text to Barnaby question for interactive tags. */
+  tagMessages?: Record<string, string>
 }
 
-export default function CaseStudyHero({ caseStudy, tokens, heroImageSlot }: CaseStudyHeroProps) {
+export default function CaseStudyHero({ caseStudy, tokens, heroImageSlot, tagMessages }: CaseStudyHeroProps) {
   const { title, role, year, industry, types } = caseStudy
 
   return (
@@ -72,27 +75,9 @@ export default function CaseStudyHero({ caseStudy, tokens, heroImageSlot }: Case
           {role}
         </p>
 
-        {/* Type tags */}
+        {/* Type tags — fully rounded = interactive */}
         {types.length > 0 && (
-          <div
-            className="hero-fade-up flex flex-wrap gap-[var(--space-component-xs)]"
-            style={{ animationDelay: '650ms' }}
-            aria-label="Project type tags"
-          >
-            {types.map(tag => (
-              <span
-                key={tag}
-                className="text-ui-sm px-[12px] py-[5px] rounded-[4px]"
-                style={{
-                  color: 'var(--hero-text-secondary)',
-                  border: '1px solid var(--hero-text-muted)',
-                  backgroundColor: 'rgba(255, 255, 255, 0.08)',
-                }}
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
+          <HeroTypeTags tags={types} barnabyMessages={tagMessages} />
         )}
 
         {/* Hero image slot */}

@@ -1,6 +1,8 @@
 import type { CaseStudyImage, GlossaryTerm, PhaseContent, PhaseKey } from '@/data/types'
 import ScrollReveal from '@/components/ui/ScrollReveal'
 import GlossaryParagraph from './GlossaryParagraph'
+import PhoneFrame from './PhoneFrame'
+import PaymentSuccessAnimation from './PaymentSuccessAnimation'
 
 interface PhaseSectionProps {
   phase:   PhaseKey
@@ -95,7 +97,8 @@ function renderImages(images: CaseStudyImage[], vars: typeof PHASE_VARS.impact) 
   }
 
   if (isSinglePortrait) {
-    // Phase-tinted background well
+    const isConfetti = images[0].src === '__confetti__'
+    // Phase-tinted background well with phone frame or confetti animation
     return (
       <ScrollReveal>
         <div
@@ -107,14 +110,24 @@ function renderImages(images: CaseStudyImage[], vars: typeof PHASE_VARS.impact) 
               className="rounded-[12px] p-[var(--space-component-lg)] flex justify-center"
               style={{ background: vars.glass }}
             >
-              <div
-                className="w-full max-w-[280px] rounded-[8px] border border-[var(--color-border)] flex items-center justify-center p-[var(--space-component-md)]"
-                style={{ background: 'var(--color-surface)', aspectRatio: '9/18' }}
-              >
-                <p className="text-body-sm text-[var(--color-text-muted)] text-center opacity-60">
-                  {images[0].alt}
-                </p>
-              </div>
+              {isConfetti ? (
+                <PaymentSuccessAnimation delayStart={800} displayWidth={280} />
+              ) : images[0].src ? (
+                <PhoneFrame
+                  src={images[0].src}
+                  alt={images[0].alt}
+                  maxWidth={280}
+                />
+              ) : (
+                <div
+                  className="w-full max-w-[280px] rounded-[8px] border border-[var(--color-border)] flex items-center justify-center p-[var(--space-component-md)]"
+                  style={{ background: 'var(--color-surface)', aspectRatio: '9/18' }}
+                >
+                  <p className="text-body-sm text-[var(--color-text-muted)] text-center opacity-60">
+                    {images[0].alt}
+                  </p>
+                </div>
+              )}
             </div>
             {images[0].caption && (
               <figcaption className="mt-[var(--space-stack-sm)] text-body-sm text-[var(--color-text-muted)]">
@@ -140,21 +153,34 @@ function renderImages(images: CaseStudyImage[], vars: typeof PHASE_VARS.impact) 
       >
         {images.map((img, j) => (
           <figure key={j} className="m-0">
-            <div
-              className="w-full rounded-[8px] border border-[var(--color-border)] flex items-center justify-center p-[var(--space-component-md)]"
-              style={{
-                background: 'var(--color-surface)',
-                aspectRatio: img.aspect === 'portrait' ? '9/18' : '16/9',
-              }}
-            >
-              <p className="text-body-sm text-[var(--color-text-muted)] text-center opacity-60">
-                {img.alt}
-              </p>
-            </div>
-            {img.caption && (
-              <figcaption className="mt-[var(--space-stack-sm)] text-body-sm text-[var(--color-text-muted)]">
-                {img.caption}
-              </figcaption>
+            {img.src && img.aspect === 'portrait' ? (
+              <div className="flex justify-center">
+                <PhoneFrame
+                  src={img.src}
+                  alt={img.alt}
+                  caption={img.caption}
+                  maxWidth={240}
+                />
+              </div>
+            ) : (
+              <>
+                <div
+                  className="w-full rounded-[8px] border border-[var(--color-border)] flex items-center justify-center p-[var(--space-component-md)]"
+                  style={{
+                    background: 'var(--color-surface)',
+                    aspectRatio: img.aspect === 'portrait' ? '9/18' : '16/9',
+                  }}
+                >
+                  <p className="text-body-sm text-[var(--color-text-muted)] text-center opacity-60">
+                    {img.alt}
+                  </p>
+                </div>
+                {img.caption && (
+                  <figcaption className="mt-[var(--space-stack-sm)] text-body-sm text-[var(--color-text-muted)]">
+                    {img.caption}
+                  </figcaption>
+                )}
+              </>
             )}
           </figure>
         ))}
@@ -230,14 +256,16 @@ export default function PhaseSection({
         {/* Stats (Impact phase) */}
         {stats && stats.length > 0 && (
           <div
-            className="grid grid-cols-1 md:grid-cols-3 gap-[var(--space-component-md)] mb-[var(--space-section-sm)]"
+            className="grid grid-cols-2 md:grid-cols-3 gap-[var(--space-component-md)] mb-[var(--space-section-sm)]"
             role="list"
             aria-label="Impact metrics"
           >
             {stats.map((stat, i) => (
               <ScrollReveal key={i}>
                 <div
-                  className="bg-[var(--color-stat-box-bg)] border border-[var(--color-border)] rounded-[8px] p-[var(--space-component-lg)]"
+                  className={`bg-[var(--color-stat-box-bg)] border border-[var(--color-border)] rounded-[8px] p-[var(--space-component-lg)]${
+                    stats.length === 3 && i === 2 ? ' col-span-2 md:col-span-1' : ''
+                  }`}
                   role="listitem"
                   style={{ animationDelay: `${i * 100}ms` }}
                 >
