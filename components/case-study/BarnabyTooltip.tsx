@@ -112,11 +112,11 @@ export default function BarnabyTooltip({ term, definition, accentColor }: Barnab
         ...tooltipStyle,
         padding: 'var(--space-component-md)',
         borderRadius: '12px',
-        background: 'var(--glass-thin)',
-        backdropFilter: 'blur(48px) saturate(180%)',
-        WebkitBackdropFilter: 'blur(48px) saturate(180%)',
+        background: 'rgba(30, 30, 28, 0.92)',
+        backdropFilter: 'blur(24px)',
+        WebkitBackdropFilter: 'blur(24px)',
         border: '0.5px solid var(--glass-border-mid)',
-        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
       }}
     >
       <p
