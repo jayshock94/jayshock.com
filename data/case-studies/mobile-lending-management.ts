@@ -39,14 +39,7 @@ const mobileLendingManagement: CaseStudy = {
       { value: '~35%',    label: 'Fewer missed payments',    estimated: true },
       { value: 'New clients', label: 'Purchasing after seeing redesign', estimated: false },
     ],
-    images: [
-      {
-        src:     '',
-        alt:     'Final app composite — finished screens across multiple lender white-label instances showing the design working at scale',
-        caption: 'The same design system working across multiple lender brands.',
-        aspect:  'landscape',
-      },
-    ],
+    images: [],
     quote: {
       text:        'The mobile app is another highlight. Simple, user friendly, and secure. Managing my finances is a breeze.',
       attribution: '— Borrower feedback, relayed through client team',

@@ -25,7 +25,7 @@ export default function MobileLendingHeroImage() {
           style={{
             position:     'relative',
             marginRight:  '-20px',
-            marginBottom: '28px',
+            marginBottom: '0px',
             transform:    'rotate(-4deg)',
             zIndex:       1,
             flexShrink:   0,

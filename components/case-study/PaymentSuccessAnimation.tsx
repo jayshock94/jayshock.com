@@ -73,27 +73,27 @@ function makeConfetti(ox: number, oy: number): ConfettiPiece[] {
 function StatusBar() {
   return (
     <div style={{
-      height:    54,
+      height:    80,
       display:   'flex',
       alignItems: 'flex-end',
       justifyContent: 'space-between',
-      padding:   '0 16px 10px',
+      padding:   '0 24px 14px',
       flexShrink: 0,
     }}>
-      <span style={{ fontFamily: SANS, fontSize: 17, fontWeight: 600, color: ON_SURF }}>9:41</span>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
-        <svg width="17" height="12" viewBox="0 0 17 12" fill={ON_SURF}>
+      <span style={{ fontFamily: SANS, fontSize: 28, fontWeight: 600, color: ON_SURF }}>9:41</span>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+        <svg width="28" height="20" viewBox="0 0 17 12" fill={ON_SURF}>
           <rect x="0"    y="8"  width="3" height="4"  rx="0.5" />
           <rect x="4.5"  y="5"  width="3" height="7"  rx="0.5" />
           <rect x="9"    y="2"  width="3" height="10" rx="0.5" />
           <rect x="13.5" y="0"  width="3" height="12" rx="0.5" opacity="0.3" />
         </svg>
-        <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
+        <svg width="26" height="20" viewBox="0 0 16 12" fill="none">
           <circle cx="8" cy="11" r="1.2" fill={ON_SURF} />
           <path d="M4.8 7.8a4.5 4.5 0 0 1 6.4 0" stroke={ON_SURF} strokeWidth="1.4" strokeLinecap="round" />
           <path d="M2 5a8 8 0 0 1 12 0"          stroke={ON_SURF} strokeWidth="1.4" strokeLinecap="round" opacity="0.5" />
         </svg>
-        <svg width="25" height="12" viewBox="0 0 25 12" fill="none">
+        <svg width="40" height="20" viewBox="0 0 25 12" fill="none">
           <rect x="0.5" y="0.5" width="21"   height="11" rx="3.5" stroke={ON_SURF} strokeOpacity="0.35" />
           <rect x="2"   y="2"   width="17.5" height="8"  rx="2"   fill={ON_SURF} />
           <path d="M23 4.5v3" stroke={ON_SURF} strokeWidth="1.5" strokeLinecap="round" strokeOpacity="0.4" />

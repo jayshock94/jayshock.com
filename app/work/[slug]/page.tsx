@@ -18,6 +18,7 @@ import ResearchMethods     from '@/components/case-study/ResearchMethods'
 import CompetitiveGrid     from '@/components/case-study/CompetitiveGrid'
 import PhoneFrame          from '@/components/case-study/PhoneFrame'
 import PaymentSuccessAnimation from '@/components/case-study/PaymentSuccessAnimation'
+import FinalAppComposite from '@/components/case-study/FinalAppComposite'
 import WorkCard            from '@/components/work/WorkCard'
 import MobileLendingCardImage from '@/components/work/MobileLendingCardImage'
 import ScrollReveal        from '@/components/ui/ScrollReveal'
@@ -320,12 +321,15 @@ export default function CaseStudyPage({ params }: PageProps) {
           phaseNumber={4}
           content={cs.impact}
           glossary={cs.glossary}
+          mediaSlot={isMobileLending ? <FinalAppComposite /> : undefined}
+          mediaSlotAfterParagraph={isMobileLending ? 1 : undefined}
         />
       </PhaseObserver>
 
-      {/* Bottom navigation */}
+      {/* Bottom navigation — force back to true canvas, no phase bleed */}
       <section
-        className="py-[var(--space-section-md)] bg-[var(--color-canvas)]"
+        className="py-[var(--space-section-md)]"
+        style={{ background: '#161616' }}
         aria-label="What to read next"
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
