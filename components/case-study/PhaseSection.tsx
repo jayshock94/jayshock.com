@@ -1,12 +1,18 @@
-import type { CaseStudyImage, PhaseContent, PhaseKey } from '@/data/types'
+import type { CaseStudyImage, GlossaryTerm, PhaseContent, PhaseKey } from '@/data/types'
+import ScrollReveal from '@/components/ui/ScrollReveal'
+import GlossaryParagraph from './GlossaryParagraph'
 
 interface PhaseSectionProps {
   phase:   PhaseKey
   content: PhaseContent
-  /** Custom media node — injected after a specific paragraph instead of image placeholders. */
+  /** Phase number for the eyebrow (1-based). */
+  phaseNumber?: number
+  /** Custom media node injected after a specific paragraph. */
   mediaSlot?: React.ReactNode
   /** Which paragraph index to inject mediaSlot after. Default: last paragraph. */
   mediaSlotAfterParagraph?: number
+  /** Glossary terms to highlight inline with Barnaby tooltips. */
+  glossary?: GlossaryTerm[]
 }
 
 const PHASE_LABELS: Record<PhaseKey, string> = {
@@ -21,44 +27,155 @@ const PHASE_VARS: Record<PhaseKey, {
   border: string
   label:  string
   text:   string
+  glass:  string
 }> = {
   impact: {
     bg:     'var(--phase-impact-glass)',
     border: 'var(--phase-impact-border)',
     label:  'var(--phase-impact-label)',
     text:   'var(--phase-impact-text)',
+    glass:  'var(--phase-impact-glass)',
   },
   problem: {
     bg:     'var(--phase-problem-glass)',
     border: 'var(--phase-problem-border)',
     label:  'var(--phase-problem-label)',
     text:   'var(--phase-problem-text)',
+    glass:  'var(--phase-problem-glass)',
   },
   discovery: {
     bg:     'var(--phase-discovery-glass)',
     border: 'var(--phase-discovery-border)',
     label:  'var(--phase-discovery-label)',
     text:   'var(--phase-discovery-text)',
+    glass:  'var(--phase-discovery-glass)',
   },
   solution: {
     bg:     'var(--phase-solution-glass)',
     border: 'var(--phase-solution-border)',
     label:  'var(--phase-solution-label)',
     text:   'var(--phase-solution-text)',
+    glass:  'var(--phase-solution-glass)',
   },
+}
+
+/** Render images with breakout layouts based on count and aspect. */
+function renderImages(images: CaseStudyImage[], vars: typeof PHASE_VARS.impact) {
+  if (images.length === 0) return null
+
+  const isSingleLandscape = images.length === 1 && images[0].aspect === 'landscape'
+  const isSinglePortrait = images.length === 1 && images[0].aspect === 'portrait'
+
+  if (isSingleLandscape) {
+    // Break out to full layout width
+    return (
+      <ScrollReveal>
+        <div
+          className="max-w-layout mx-auto"
+          style={{ marginTop: 'var(--space-stack-lg)', marginBottom: 'var(--space-stack-md)' }}
+        >
+          <figure className="m-0">
+            <div
+              className="w-full rounded-[8px] border border-[var(--color-border)] flex items-center justify-center p-[var(--space-component-md)]"
+              style={{ background: 'var(--color-surface)', aspectRatio: '16/9' }}
+            >
+              <p className="text-body-sm text-[var(--color-text-muted)] text-center opacity-60">
+                {images[0].alt}
+              </p>
+            </div>
+            {images[0].caption && (
+              <figcaption className="mt-[var(--space-stack-sm)] text-body-sm text-[var(--color-text-muted)] px-[var(--space-page-margin)]">
+                {images[0].caption}
+              </figcaption>
+            )}
+          </figure>
+        </div>
+      </ScrollReveal>
+    )
+  }
+
+  if (isSinglePortrait) {
+    // Phase-tinted background well
+    return (
+      <ScrollReveal>
+        <div
+          className="max-w-content"
+          style={{ marginTop: 'var(--space-stack-lg)', marginBottom: 'var(--space-stack-md)' }}
+        >
+          <figure className="m-0">
+            <div
+              className="rounded-[12px] p-[var(--space-component-lg)] flex justify-center"
+              style={{ background: vars.glass }}
+            >
+              <div
+                className="w-full max-w-[280px] rounded-[8px] border border-[var(--color-border)] flex items-center justify-center p-[var(--space-component-md)]"
+                style={{ background: 'var(--color-surface)', aspectRatio: '9/18' }}
+              >
+                <p className="text-body-sm text-[var(--color-text-muted)] text-center opacity-60">
+                  {images[0].alt}
+                </p>
+              </div>
+            </div>
+            {images[0].caption && (
+              <figcaption className="mt-[var(--space-stack-sm)] text-body-sm text-[var(--color-text-muted)]">
+                {images[0].caption}
+              </figcaption>
+            )}
+          </figure>
+        </div>
+      </ScrollReveal>
+    )
+  }
+
+  // Multiple images: side by side at layout width
+  return (
+    <ScrollReveal>
+      <div
+        className="max-w-layout mx-auto grid gap-[var(--space-component-md)]"
+        style={{
+          gridTemplateColumns: `repeat(${Math.min(images.length, 2)}, 1fr)`,
+          marginTop: 'var(--space-stack-lg)',
+          marginBottom: 'var(--space-stack-md)',
+        }}
+      >
+        {images.map((img, j) => (
+          <figure key={j} className="m-0">
+            <div
+              className="w-full rounded-[8px] border border-[var(--color-border)] flex items-center justify-center p-[var(--space-component-md)]"
+              style={{
+                background: 'var(--color-surface)',
+                aspectRatio: img.aspect === 'portrait' ? '9/18' : '16/9',
+              }}
+            >
+              <p className="text-body-sm text-[var(--color-text-muted)] text-center opacity-60">
+                {img.alt}
+              </p>
+            </div>
+            {img.caption && (
+              <figcaption className="mt-[var(--space-stack-sm)] text-body-sm text-[var(--color-text-muted)]">
+                {img.caption}
+              </figcaption>
+            )}
+          </figure>
+        ))}
+      </div>
+    </ScrollReveal>
+  )
 }
 
 export default function PhaseSection({
   phase,
   content,
+  phaseNumber,
   mediaSlot,
   mediaSlotAfterParagraph,
+  glossary,
 }: PhaseSectionProps) {
   const vars   = PHASE_VARS[phase]
   const label  = PHASE_LABELS[phase]
   const { headline, paragraphs, stats, images, quote, estimatedNote } = content
 
-  // Group images by which paragraph they follow (undefined = after last paragraph)
+  // Group images by which paragraph they follow
   const imagesByPara = (images ?? []).reduce<Record<number, CaseStudyImage[]>>(
     (acc, img) => {
       const key = img.afterParagraph ?? paragraphs.length - 1
@@ -68,71 +185,71 @@ export default function PhaseSection({
     {},
   )
 
+  const phaseNum = phaseNumber ? String(phaseNumber).padStart(2, '0') : undefined
+
   return (
     <section
       id={phase}
       data-phase-section={phase}
-      className="
-        py-[var(--space-section-md)]
-        transition-colors duration-700
-      "
+      className="py-[var(--space-section-md)] transition-colors duration-700"
       style={{
         backgroundColor: vars.bg,
+        backgroundImage: `radial-gradient(ellipse 80% 50% at 50% 20%, ${vars.glass}, transparent 70%)`,
       }}
       aria-labelledby={`phase-heading-${phase}`}
     >
       <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
-        <div
-          className="pl-[var(--space-component-lg)] relative"
-        >
 
-          {/* Short accent bar — sits beside the eyebrow label only */}
-          <div
-            aria-hidden="true"
-            className="absolute left-0 top-0 w-[2.5px] transition-colors duration-500"
-            style={{ height: '16px', background: vars.label }}
-          />
+        {/* Phase eyebrow with number */}
+        <ScrollReveal>
+          <div className="flex items-center gap-[var(--space-component-sm)] mb-[var(--space-stack-sm)]">
+            {phaseNum && (
+              <span
+                className="text-label"
+                style={{ color: 'var(--color-text-placeholder)' }}
+              >
+                {phaseNum}
+              </span>
+            )}
+            <span className="text-label" style={{ color: vars.label }}>
+              {label}
+            </span>
+          </div>
+        </ScrollReveal>
 
-          {/* Phase eyebrow */}
-          <p
-            className="text-ui-sm mb-[var(--space-stack-sm)] max-w-content"
-            style={{ color: vars.label }}
-          >
-            {label}
-          </p>
-
-          {/* Section headline */}
+        {/* Section headline */}
+        <ScrollReveal>
           <h2
             id={`phase-heading-${phase}`}
-            className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-md)] max-w-content"
+            className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-lg)] max-w-content"
           >
             {headline}
           </h2>
+        </ScrollReveal>
 
-          {/* Stats — Impact phase only */}
-          {stats && stats.length > 0 && (
-            <div
-              className="
-                grid grid-cols-1 gap-[var(--space-component-md)]
-                md:grid-cols-3
-                mb-[var(--space-stack-lg)]
-              "
-              role="list"
-              aria-label="Impact metrics"
-            >
-              {stats.map((stat, i) => (
+        {/* Stats (Impact phase) */}
+        {stats && stats.length > 0 && (
+          <div
+            className="grid grid-cols-1 md:grid-cols-3 gap-[var(--space-component-md)] mb-[var(--space-section-sm)]"
+            role="list"
+            aria-label="Impact metrics"
+          >
+            {stats.map((stat, i) => (
+              <ScrollReveal key={i}>
                 <div
-                  key={i}
-                  className="
-                    bg-[var(--color-stat-box-bg)]
-                    border border-[var(--color-border)]
-                    rounded-[8px]
-                    p-[var(--space-component-md)]
-                  "
+                  className="bg-[var(--color-stat-box-bg)] border border-[var(--color-border)] rounded-[8px] p-[var(--space-component-lg)]"
                   role="listitem"
+                  style={{ animationDelay: `${i * 100}ms` }}
                 >
                   <p
-                    className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-xs)]"
+                    style={{
+                      fontFamily: 'var(--font-outfit), system-ui, sans-serif',
+                      fontSize: 'clamp(32px, 5vw, 48px)',
+                      fontWeight: 700,
+                      lineHeight: 1.1,
+                      color: 'var(--color-ink)',
+                      marginBottom: 'var(--space-stack-xs)',
+                    }}
                   >
                     {stat.value}
                     {stat.estimated && (
@@ -148,99 +265,96 @@ export default function PhaseSection({
                     {stat.label}
                   </p>
                 </div>
-              ))}
-            </div>
-          )}
-
-          {/* Body paragraphs — images interleaved after their target paragraph */}
-          <div className="flex flex-col gap-[var(--space-stack-md)]">
-            {paragraphs.map((p, i) => (
-              <>
-                <p
-                  key={`p-${i}`}
-                  className="text-body text-[var(--color-text-secondary)] max-w-content"
-                >
-                  {p}
-                </p>
-
-                {/* mediaSlot — injected after the target paragraph index */}
-                {mediaSlot && (mediaSlotAfterParagraph ?? paragraphs.length - 1) === i && (
-                  <div key={`media-slot-${i}`} className="mt-[var(--space-stack-lg)]">
-                    {mediaSlot}
-                  </div>
-                )}
-
-                {/* Images that follow this paragraph */}
-                {imagesByPara[i] && (
-                  <div
-                    key={`imgs-${i}`}
-                    className={`
-                      grid gap-[var(--space-component-md)] mt-[var(--space-stack-sm)]
-                      ${imagesByPara[i].length >= 2 ? 'grid-cols-2' : 'grid-cols-1'}
-                    `}
-                  >
-                    {imagesByPara[i].map((img, j) => (
-                      <figure key={j} className="m-0">
-                        {/* Placeholder box — replace inner content with <img> when real image exists */}
-                        <div
-                          className="w-full rounded-[8px] border border-[var(--color-border)] flex items-center justify-center p-[var(--space-component-md)]"
-                          style={{
-                            background:  'var(--color-surface)',
-                            aspectRatio: img.aspect === 'landscape' ? '16/9' : '9/18',
-                          }}
-                        >
-                          <p className="text-body-sm text-[var(--color-text-muted)] text-center opacity-60">
-                            {img.alt}
-                          </p>
-                        </div>
-                        {img.caption && (
-                          <figcaption className="mt-[var(--space-stack-sm)] text-body-sm text-[var(--color-text-muted)]">
-                            {img.caption}
-                          </figcaption>
-                        )}
-                      </figure>
-                    ))}
-                  </div>
-                )}
-              </>
+              </ScrollReveal>
             ))}
           </div>
+        )}
 
-          {/* Pull quote — Discovery phase */}
-          {quote && (
+        {/* Body paragraphs with interleaved images and mediaSlot */}
+        <div className="flex flex-col gap-[var(--space-stack-md)] max-w-content">
+          {paragraphs.map((p, i) => (
+            <div key={`block-${i}`}>
+              <ScrollReveal>
+                {glossary && glossary.length > 0 ? (
+                  <GlossaryParagraph
+                    text={p}
+                    glossary={glossary}
+                    accentColor={vars.label}
+                    className={i === 0 ? 'text-intro' : 'text-body'}
+                    style={{
+                      color: i === 0 ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
+                      maxWidth: 'var(--space-content-max)',
+                    }}
+                  />
+                ) : (
+                  <p
+                    className={i === 0 ? 'text-intro' : 'text-body'}
+                    style={{
+                      color: i === 0 ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
+                      maxWidth: 'var(--space-content-max)',
+                    }}
+                  >
+                    {p}
+                  </p>
+                )}
+              </ScrollReveal>
+
+              {/* mediaSlot insertion */}
+              {mediaSlot && (mediaSlotAfterParagraph ?? paragraphs.length - 1) === i && (
+                <ScrollReveal>
+                  <div style={{ marginTop: 'var(--space-stack-lg)' }}>
+                    {mediaSlot}
+                  </div>
+                </ScrollReveal>
+              )}
+
+              {/* Images after this paragraph */}
+              {imagesByPara[i] && renderImages(imagesByPara[i], vars)}
+            </div>
+          ))}
+        </div>
+
+        {/* Pull quote — breaks out of content column */}
+        {quote && (
+          <ScrollReveal>
             <blockquote
-              className="
-                mt-[var(--space-stack-lg)]
-                pl-[var(--space-component-md)]
-                border-l-[2px]
-                max-w-content
-              "
-              style={{ borderColor: vars.border }}
+              className="max-w-layout mx-auto text-center"
+              style={{
+                marginTop: 'var(--space-section-sm)',
+                marginBottom: 'var(--space-stack-lg)',
+                paddingTop: 'var(--space-stack-lg)',
+                paddingBottom: 'var(--space-stack-lg)',
+                borderTop: '0.5px solid var(--color-border)',
+                borderBottom: '0.5px solid var(--color-border)',
+              }}
             >
-              <p className="text-body-lg text-[var(--color-ink)] italic mb-[var(--space-stack-sm)]">
+              <p
+                className="text-h2 italic max-w-content mx-auto"
+                style={{
+                  color: 'var(--color-ink)',
+                  marginBottom: quote.attribution ? 'var(--space-stack-sm)' : undefined,
+                }}
+              >
                 &ldquo;{quote.text}&rdquo;
               </p>
               {quote.attribution && (
-                <cite className="text-body-sm text-[var(--color-text-muted)] not-italic">
+                <cite
+                  className="text-body-sm not-italic"
+                  style={{ color: vars.label }}
+                >
                   {quote.attribution}
                 </cite>
               )}
             </blockquote>
-          )}
+          </ScrollReveal>
+        )}
 
-          {/* Estimated metrics footnote */}
-          {estimatedNote && (
-            <p
-              className="
-                mt-[var(--space-stack-lg)]
-                text-body-sm text-[var(--color-text-muted)]
-              "
-            >
-              <sup aria-hidden="true">*</sup> {estimatedNote}
-            </p>
-          )}
-
-        </div>
+        {/* Estimated metrics footnote */}
+        {estimatedNote && (
+          <p className="mt-[var(--space-stack-lg)] text-body-sm text-[var(--color-text-muted)]">
+            <sup aria-hidden="true">*</sup> {estimatedNote}
+          </p>
+        )}
       </div>
     </section>
   )

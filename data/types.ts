@@ -50,6 +50,13 @@ export interface PhaseContent {
   estimatedNote?: string
 }
 
+export interface GlossaryTerm {
+  /** The exact term as it appears in the text (case-insensitive match). */
+  term: string
+  /** Barnaby-voice definition shown in the tooltip. */
+  definition: string
+}
+
 export interface CaseStudy {
   slug: string
   /** Card title, shown on homepage and work index. */
@@ -95,6 +102,8 @@ export interface CaseStudy {
   problem:    PhaseContent
   discovery:  PhaseContent
   solution:   PhaseContent
+  /** Glossary terms Barnaby can explain inline via tooltip. */
+  glossary?: GlossaryTerm[]
   /** Slug of the next case study (for "Next" navigation at bottom of page). */
   nextSlug: string
 }

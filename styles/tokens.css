@@ -168,6 +168,13 @@
   --color-stat-box-bg: rgba(255, 255, 255, 0.06);
 
   /* -----------------------------------------------------------
+     SEMANTIC TOKENS — CASE STUDY HERO
+  ----------------------------------------------------------- */
+  --hero-text-primary:   #FFFFFF;
+  --hero-text-secondary: rgba(255, 255, 255, 0.75);
+  --hero-text-muted:     rgba(255, 255, 255, 0.50);
+
+  /* -----------------------------------------------------------
      PHASE COLOR TOKENS
      Fixed across all case studies.
      Order: Impact → Problem → Discovery → Solution.

@@ -376,6 +376,7 @@ export function useChat() {
     isWaiting,
     loadingMessage,
     chips: visibleChips,
+    pageType: pageContext.pageType,
     open,
     close,
     toggle,

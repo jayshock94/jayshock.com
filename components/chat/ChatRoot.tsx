@@ -13,6 +13,7 @@ export default function ChatRoot() {
         isOpen={chat.isOpen}
         isStreaming={chat.isStreaming}
         onClick={chat.toggle}
+        pageType={chat.pageType}
       />
 
       {chat.isOpen && (

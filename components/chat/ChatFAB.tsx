@@ -10,9 +10,19 @@ interface ChatFABProps {
   isOpen: boolean
   isStreaming: boolean
   onClick: () => void
+  /** Current page type — changes the bubble message. */
+  pageType?: string
 }
 
-export default function ChatFAB({ isOpen, isStreaming, onClick }: ChatFABProps) {
+const BUBBLE_MESSAGES: Record<string, string> = {
+  'case-study': 'I was there for this one. Ask me anything about it.',
+  home: 'Ask me anything about Jay, or tell me what you\'re looking for.',
+  about: 'Want to know more about Jay? I\'ve got the inside scoop.',
+  experience: 'I can break down any of these roles for you.',
+  contact: 'Any last questions before you reach out?',
+}
+
+export default function ChatFAB({ isOpen, isStreaming, onClick, pageType }: ChatFABProps) {
   // Track if the FAB has been opened at least once — after that, skip entrance animation
   const hasOpened = useRef(false)
   if (isOpen) hasOpened.current = true
@@ -129,7 +139,7 @@ export default function ChatFAB({ isOpen, isStreaming, onClick }: ChatFABProps) 
               color: 'var(--color-text-secondary)',
             }}
           >
-            Ask me anything about Jay, or tell me what you&apos;re looking for.
+            {BUBBLE_MESSAGES[pageType ?? 'home'] ?? BUBBLE_MESSAGES.home}
           </p>
         </div>
       )}

@@ -49,9 +49,9 @@ export function getChipsForPage(context: PageContext, visibleSection?: string | 
 
     case 'case-study':
       return [
-        { label: 'What was hardest about this?', message: `What was the hardest part of the ${context.caseStudyTitle} project?` },
-        { label: "What was Jay's role?", message: `What was Jay's role on the ${context.caseStudyTitle} project?` },
-        { label: 'Show me another project', message: 'Show me a different case study.' },
+        { label: 'What was the hardest constraint?', message: `What was the biggest constraint Jay faced on the ${context.caseStudyTitle} project?` },
+        { label: 'How did he test it?', message: `How did Jay validate his design decisions on this project?` },
+        { label: 'Tell me more about his process', message: `Walk me through how Jay approached the ${context.caseStudyTitle} project step by step.` },
       ]
 
     case 'about':
