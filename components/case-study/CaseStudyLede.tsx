@@ -2,6 +2,7 @@
 
 import { useCallback } from 'react'
 import ScrollReveal from '@/components/ui/ScrollReveal'
+import GlossaryParagraph from '@/components/case-study/GlossaryParagraph'
 
 interface RoleMeta {
   label: string
@@ -13,6 +14,11 @@ interface SkillChip {
   barnabyMessage: string
 }
 
+interface GlossaryEntry {
+  term: string
+  definition: string
+}
+
 interface CaseStudyLedeProps {
   context?: string
   overview?: string
@@ -22,9 +28,13 @@ interface CaseStudyLedeProps {
   roleSummary?: string
   /** Interactive skill chips — fully rounded, open Barnaby on click. */
   skillChips?: SkillChip[]
+  /** Glossary terms for inline Barnaby tooltips. */
+  glossary?: GlossaryEntry[]
+  /** Accent color for glossary term underlines. */
+  accentColor?: string
 }
 
-export default function CaseStudyLede({ context, overview, roleMeta, roleSummary, skillChips }: CaseStudyLedeProps) {
+export default function CaseStudyLede({ context, overview, roleMeta, roleSummary, skillChips, glossary, accentColor }: CaseStudyLedeProps) {
   if (!context && !overview && !roleMeta) return null
 
   const openBarnaby = useCallback((message: string) => {
@@ -59,12 +69,15 @@ export default function CaseStudyLede({ context, overview, roleMeta, roleSummary
         {/* Context as lede paragraph */}
         {context && (
           <ScrollReveal>
-            <p
-              className="text-intro max-w-content"
-              style={{ color: 'var(--color-text-primary)', marginBottom: 'var(--space-stack-lg)' }}
-            >
-              {context}
-            </p>
+            <div className="max-w-content" style={{ marginBottom: 'var(--space-stack-lg)' }}>
+              <GlossaryParagraph
+                text={context}
+                glossary={glossary || []}
+                accentColor={accentColor || 'var(--color-accent)'}
+                className="text-intro"
+                style={{ color: 'var(--color-text-primary)' }}
+              />
+            </div>
           </ScrollReveal>
         )}
 

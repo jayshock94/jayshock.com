@@ -23,7 +23,7 @@ const mobileLendingManagement: CaseStudy = {
   brandColorHex: '#C01C2C',
 
   context:
-    'A white-label mobile app for lending agencies. Each lender rebrands it as their own. The app hadn\'t been updated in years, and it showed.',
+    'A white-label mobile app for lending agencies. The app hadn\'t been updated in years, and it showed.',
 
   // Hero image — composite of key screens across device mockups
   heroImage: 'Hero: app overview — home screen, payment flow, and confirmation screen across device mockups',
@@ -95,6 +95,10 @@ const mobileLendingManagement: CaseStudy = {
   },
 
   glossary: [
+    {
+      term: 'white-label',
+      definition: 'one product that gets rebranded for different companies. like how multiple lenders all use the same app but each one slaps their own logo and colors on it.',
+    },
     {
       term: 'survivorship bias',
       definition: 'judging a situation based only on the survivors. like in WWII, engineers armored where returning planes had bullet holes. but the planes that got hit in other spots never came back. the stakeholders were doing the same thing, focusing on the complaints they could see instead of the problem they couldn\'t.',

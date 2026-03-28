@@ -175,6 +175,8 @@ export default function CaseStudyPage({ params }: PageProps) {
         overview={cs.overview}
         roleMeta={isMobileLending ? MOBILE_LENDING_ROLE_META : undefined}
         roleSummary={isMobileLending ? MOBILE_LENDING_ROLE_SUMMARY : undefined}
+        glossary={cs.glossary}
+        accentColor={tokens.label}
       />
 
       {/* Phase sections with observer, progress, and dividers */}
