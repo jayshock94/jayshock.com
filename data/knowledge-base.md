@@ -95,17 +95,29 @@ Studied at Utah Valley University. Pursued coursework there. Don't say he droppe
 
 ## Personal Stuff
 
-Cereal before milk. Double stuffed Oreos. Whatever the team uses for tabs vs spaces. Dark mode. Mint tea when camping. Night owl. White Monster while designing. Carly Rae Jepsen on repeat.
+Pets: Jay has two cats. Barnaby is a Russian Blue (well, not technically, but he looks just like one except for the eyes). Jay got him from a shelter in San Angelo, Texas. Barnaby always looks like he's judging you but is secretly a sweetheart. Likes to lay on your lap, sleep on Jay's chest, and unlike most cats he's super friendly to new people. The chatbot is named after him. Earnest is a brown tabby with the biggest, most beautiful eyes. Jay loves cats so much he's bottle fed two-day-old kittens whose mother died. They're now grown and healthy.
+
+Food: comfort food is double stuffed Oreos with milk. Specifically with milk. He doesn't crave Oreos by themselves, they have to be with milk or he doesn't want them. Cereal before milk always. Go-to convenience store run is a White Monster and Maverick bonfire food. He'll eat anything but has a weird fear of pure salt or butter. Mint tea when camping. Dark mode. Whatever the team uses for tabs vs spaces.
+
+Movies and TV: favorite movie is Manchester by the Sea. He knows it's boring to most people but he thinks a slice of life film without some crazy happy ending, where it's just about how different people deal with grief, is great because the acting, storytelling, and craft carry the movie, not action or cool visuals. He also watches movies weird. While everyone else follows the plot he's figuring out how the scene was built, why they picked those costumes, what the color grading was. Loves catching continuity errors. Can usually call the twist in the first five minutes. People hate watching movies with him. Favorite YouTube channels are Smarter Every Day (Destin teaches you about everything from nuclear reactors to how disc golf discs work) and Stuff Made Here (an engineer who makes the most random things, Jay likes it because the creator's mind works like his, always thinking and wanting to make stuff just because). Also really likes StarTalk with Neil deGrasse Tyson.
+
+Video games: plays a lot of friend group games. Has a really hard time finishing games. He'll be hyper focused on one for days and then just stop and never finish it. Ghost of Tsushima and The Amazing Spider-Man are probably his favorites.
+
+Music: Carly Rae Jepsen. That's it. Top 0.5% of Spotify listeners. Can sing every song. Refuses to pick a favorite. Could talk about her for an hour without getting bored. People are concerned. He collects Carly Rae Jepsen stuff.
+
+Outdoors: his favorite spot is Robbers Roost by Hanksville, Utah. They rappel in with backpacking packs and then backpack for two days to get out. He once got stuck in Horseshoe Bend and had to be rescued by a boat. They rappelled into it but underestimated how long it would take to float to Lee's Ferry. The winds got crazy and they got stuck in the dark in freezing water. Got rescued. He can rappel down a rope facing forward. Also into hiking, national parks, canyoneering, disc golf.
+
+Collections: lapel pins from all the places he goes, cool rocks he finds while hiking, Carly Rae Jepsen stuff, and disc golf discs.
+
+Makes stuff: sewing, crochet, 3D printing. Can walk on his hands. Making things is kind of the thread that runs through everything.
+
+Sports: loves soccer but is not very good at it.
+
+The clean plate thing: during Thanksgiving or any formal dinner, Jay has a personal competition to see who can have the cleanest plate. He's really good at it. He's had many comments from people wondering if he even ate anything. His secret is the bread roll. The rules (his rules, nobody else plays this game) are you can't use your drink, water, or anything like a cloth or napkin. Just what's at your place setting. It has to be done from where you're sitting.
+
+Random bits: favorite season is fall. He's usually early to meetings, sometimes too early, because he's learned with ADHD to overcompensate. But sometimes the ADHD wins and he's late. Night owl.
 
 His hot take: most designers waste time polishing the 80% that barely moves the needle instead of nailing the 20% that actually matters.
-
-He can walk on his hands. Knows how to sew and crochet. Has a 3D printer.
-
-Movies are a big thing but he watches them weird. While everyone else follows the plot he's figuring out how the scene was built, why they picked those costumes, what the color grading scope was. Loves catching continuity errors. Can usually call the twist in the first five minutes. People hate watching movies with him.
-
-Outdoors are his thing. Hiking, national parks, canyoneering, disc golf. Video games. He makes stuff, sewing, crochet, 3D printing. Making things is kind of the thread that runs through everything.
-
-The Carly Rae Jepsen thing is real. Top 0.5% of Spotify listeners. Can sing every song. Refuses to pick a favorite. People are concerned.
 
 
 ## Contact

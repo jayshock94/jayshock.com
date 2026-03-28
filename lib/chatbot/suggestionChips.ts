@@ -1,19 +1,5 @@
 import type { PageContext, SuggestionChip } from './types'
 
-/** Disarming chips — one is randomly included per page load. */
-const DISARMING_CHIPS: SuggestionChip[] = [
-  { label: 'Cereal or milk first?', message: 'Does Jay pour cereal or milk first?' },
-  { label: 'Single or double stuffed Oreos?', message: 'Single or double stuffed Oreos?' },
-  { label: 'Tabs or spaces?', message: 'Does Jay use tabs or spaces?' },
-  { label: 'Does Jay have a hot take?', message: "What's Jay's hottest design take?" },
-  { label: "What's something random about Jay?", message: 'Tell me something random about Jay.' },
-  { label: 'Light mode or dark mode?', message: 'Does Jay prefer light mode or dark mode?' },
-]
-
-function randomDisarmingChip(): SuggestionChip {
-  return DISARMING_CHIPS[Math.floor(Math.random() * DISARMING_CHIPS.length)]
-}
-
 /** Section-aware chips for homepage — first chip reflects what the user is looking at. */
 const SECTION_CHIPS: Record<string, SuggestionChip> = {
   hero:       { label: 'What kind of work does Jay do?', message: 'What kind of work does Jay do?' },
@@ -25,7 +11,7 @@ const SECTION_CHIPS: Record<string, SuggestionChip> = {
   contact:    { label: 'Is he available?', message: 'Is Jay available for hire right now?' },
 }
 
-/** Returns page-aware suggestion chips. */
+/** Returns page-aware suggestion chips. All work-focused — no personal/disarming chips by default. */
 export function getChipsForPage(context: PageContext, visibleSection?: string | null): SuggestionChip[] {
   switch (context.pageType) {
     case 'home': {
@@ -36,7 +22,6 @@ export function getChipsForPage(context: PageContext, visibleSection?: string | 
         sectionChip,
         { label: 'Is he available right now?', message: 'Is Jay available for hire right now?' },
         { label: 'Show me his best project', message: "What's Jay's strongest case study?" },
-        randomDisarmingChip(),
       ]
     }
 
@@ -59,7 +44,6 @@ export function getChipsForPage(context: PageContext, visibleSection?: string | 
         { label: 'How does Jay approach design?', message: 'How does Jay approach design problems?' },
         { label: "What's his design philosophy?", message: "What's Jay's design philosophy?" },
         { label: 'What makes him different?', message: 'What makes Jay different from other designers?' },
-        randomDisarmingChip(),
       ]
 
     case 'experience':
@@ -80,7 +64,7 @@ export function getChipsForPage(context: PageContext, visibleSection?: string | 
       return [
         { label: 'What does Jay do?', message: 'What kind of work does Jay do?' },
         { label: 'Is he available?', message: 'Is Jay available for hire?' },
-        randomDisarmingChip(),
+        { label: 'Show me his best project', message: "What's Jay's strongest case study?" },
       ]
   }
 }
