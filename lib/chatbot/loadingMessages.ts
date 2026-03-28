@@ -17,6 +17,7 @@ const catPhrases: LoadingMessage[] = [
   { id: 'c13', text: '*pretending not to care*', category: 'cat_sounds' },
   { id: 'c14', text: '*grooming aggressively*', category: 'cat_sounds' },
   { id: 'c15', text: '*slow blinking*', category: 'cat_sounds' },
+  { id: 'c16', text: '*sitting in a box*', category: 'cat_sounds' },
 ]
 
 /** Dry humor Jay facts for persistent "psst" tags above responses. */
