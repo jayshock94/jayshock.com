@@ -1,26 +1,70 @@
 'use client'
 
 import { useState, useRef, useEffect, useCallback } from 'react'
-import CatPaw from './CatPaw'
 
 interface BarnabyTooltipProps {
   term: string
   definition: string
-  /** Phase accent color for the paw and underline. */
+  /** Phase accent color for the icon and underline. */
   accentColor: string
+}
+
+/** Small cat ear icon — two triangles, reads clearly at 10-12px. */
+function CatEars({ size = 12 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 16 14"
+      fill="currentColor"
+      aria-hidden="true"
+      style={{ display: 'inline-block', verticalAlign: 'middle' }}
+    >
+      {/* Left ear */}
+      <path d="M1 12 L4 2 L7 10 Z" />
+      {/* Right ear */}
+      <path d="M9 10 L12 2 L15 12 Z" />
+      {/* Head curve connecting ears */}
+      <ellipse cx="8" cy="12.5" rx="6" ry="2" />
+    </svg>
+  )
 }
 
 export default function BarnabyTooltip({ term, definition, accentColor }: BarnabyTooltipProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [position, setPosition] = useState<'above' | 'below'>('above')
+  const [alignStyle, setAlignStyle] = useState<React.CSSProperties>({})
   const triggerRef = useRef<HTMLSpanElement>(null)
   const tooltipRef = useRef<HTMLSpanElement>(null)
 
-  // Position the tooltip above or below based on available space
+  // Position tooltip and keep it within viewport
   const updatePosition = useCallback(() => {
     if (!triggerRef.current) return
     const rect = triggerRef.current.getBoundingClientRect()
-    setPosition(rect.top > 200 ? 'above' : 'below')
+    const vw = window.innerWidth
+
+    // Above or below
+    setPosition(rect.top > 240 ? 'above' : 'below')
+
+    // Horizontal: default is centered, but clamp to viewport
+    const tooltipWidth = Math.min(300, vw * 0.88)
+    const centerX = rect.left + rect.width / 2
+    const idealLeft = centerX - tooltipWidth / 2
+    const idealRight = centerX + tooltipWidth / 2
+    const pad = 12
+
+    if (idealLeft < pad) {
+      // Would overflow left — align to left edge
+      const offsetPx = (tooltipWidth / 2) - centerX + pad
+      setAlignStyle({ left: '0', transform: `translateX(${-rect.width / 2 + offsetPx}px)` })
+    } else if (idealRight > vw - pad) {
+      // Would overflow right — shift left
+      const offsetPx = idealRight - (vw - pad)
+      setAlignStyle({ left: '50%', transform: `translateX(calc(-50% - ${offsetPx}px))` })
+    } else {
+      // Fits centered
+      setAlignStyle({ left: '50%', transform: 'translateX(-50%)' })
+    }
   }, [])
 
   // Close on click outside
@@ -38,7 +82,6 @@ export default function BarnabyTooltip({ term, definition, accentColor }: Barnab
       if (e.key === 'Escape') setIsOpen(false)
     }
 
-    // Delay so the opening click doesn't immediately trigger close
     const timer = setTimeout(() => {
       document.addEventListener('mousedown', handleClick)
       document.addEventListener('keydown', handleKey)
@@ -58,7 +101,6 @@ export default function BarnabyTooltip({ term, definition, accentColor }: Barnab
 
   return (
     <span style={{ position: 'relative', display: 'inline' }}>
-      {/* Trigger — using span instead of button because this lives inside <p> tags */}
       <span
         ref={triggerRef}
         role="button"
@@ -66,21 +108,21 @@ export default function BarnabyTooltip({ term, definition, accentColor }: Barnab
         onClick={handleClick}
         onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleClick() } }}
         style={{
-          display: 'inline-flex',
-          alignItems: 'baseline',
-          gap: '3px',
+          display: 'inline',
           cursor: 'pointer',
           font: 'inherit',
           color: 'inherit',
-          borderBottom: `1.5px dotted ${accentColor}`,
+          borderBottom: `1.5px solid ${accentColor}40`,
           lineHeight: 'inherit',
-          transition: 'opacity 150ms',
+          transition: 'border-color 150ms',
         }}
         aria-expanded={isOpen}
         aria-label={`Barnaby explains: ${term}`}
       >
-        <span>{term}</span>
-        <CatPaw size={12} className="flex-shrink-0" />
+        {term}
+        <span style={{ marginLeft: '3px', opacity: 0.7, color: accentColor }}>
+          <CatEars size={11} />
+        </span>
       </span>
 
       {isOpen && (
@@ -90,15 +132,14 @@ export default function BarnabyTooltip({ term, definition, accentColor }: Barnab
           className="barnaby-tooltip-enter"
           style={{
             position: 'absolute',
-            left: '50%',
-            transform: 'translateX(-50%)',
+            ...alignStyle,
             ...(position === 'above'
               ? { bottom: 'calc(100% + 12px)' }
               : { top: 'calc(100% + 12px)' }),
             display: 'block',
-            width: 'min(320px, 90vw)',
+            width: 'min(300px, 88vw)',
             padding: 'var(--space-component-md)',
-            borderRadius: '14px',
+            borderRadius: '12px',
             background: 'var(--glass-thin)',
             backdropFilter: 'blur(48px) saturate(180%)',
             WebkitBackdropFilter: 'blur(48px) saturate(180%)',
@@ -107,7 +148,6 @@ export default function BarnabyTooltip({ term, definition, accentColor }: Barnab
             zIndex: 50,
           }}
         >
-          {/* Barnaby label */}
           <span
             style={{
               display: 'block',
@@ -123,7 +163,6 @@ export default function BarnabyTooltip({ term, definition, accentColor }: Barnab
             Barnaby says
           </span>
 
-          {/* Definition */}
           <span
             style={{
               display: 'block',
@@ -136,22 +175,6 @@ export default function BarnabyTooltip({ term, definition, accentColor }: Barnab
           >
             {definition}
           </span>
-
-          {/* Tail / arrow */}
-          <span
-            style={{
-              position: 'absolute',
-              left: '50%',
-              transform: 'translateX(-50%) rotate(45deg)',
-              width: '10px',
-              height: '10px',
-              background: 'var(--glass-thin)',
-              border: '0.5px solid var(--glass-border-mid)',
-              ...(position === 'above'
-                ? { bottom: '-5px', borderTop: 'none', borderLeft: 'none' }
-                : { top: '-5px', borderBottom: 'none', borderRight: 'none' }),
-            }}
-          />
         </span>
       )}
     </span>

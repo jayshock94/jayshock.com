@@ -22,22 +22,21 @@ export default function PhaseProgress() {
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    // Watch data-phase attribute on html
     const html = document.documentElement
-    const observer = new MutationObserver(() => {
+
+    // Watch data-phase attribute changes
+    const updatePhase = () => {
       const phase = html.getAttribute('data-phase') as PhaseKey | null
       setActivePhase(phase)
-    })
-    observer.observe(html, { attributes: true, attributeFilter: ['data-phase'] })
+    }
 
-    // Read initial phase
-    const initialPhase = html.getAttribute('data-phase') as PhaseKey | null
-    if (initialPhase) setActivePhase(initialPhase)
+    const observer = new MutationObserver(updatePhase)
+    observer.observe(html, { attributes: true, attributeFilter: ['data-phase'] })
+    updatePhase()
 
     // Show/hide based on hero visibility
     const heroEl = document.querySelector('[aria-label="Case study overview"]')
     if (heroEl) {
-      // Check if hero is already off-screen on mount
       const heroRect = heroEl.getBoundingClientRect()
       if (heroRect.bottom < 0) setVisible(true)
 
@@ -55,18 +54,23 @@ export default function PhaseProgress() {
     return () => observer.disconnect()
   }, [])
 
+  const handleClick = (key: PhaseKey) => {
+    // Immediately update active state for responsiveness
+    setActivePhase(key)
+  }
+
   return (
     <>
-      {/* Desktop: vertical dots on left */}
+      {/* Desktop: vertical nav on left */}
       <nav
-        className="hidden md:flex"
+        className="hidden lg:flex"
         style={{
           position: 'fixed',
-          left: 'max(20px, calc((100vw - 1200px) / 2 - 40px))',
+          left: 'max(24px, calc((100vw - 1200px) / 2 - 60px))',
           top: '50%',
           transform: 'translateY(-50%)',
           flexDirection: 'column',
-          gap: 'var(--space-component-md)',
+          gap: '20px',
           zIndex: 40,
           opacity: visible ? 1 : 0,
           pointerEvents: visible ? 'auto' : 'none',
@@ -80,20 +84,22 @@ export default function PhaseProgress() {
             <a
               key={key}
               href={`#${key}`}
+              onClick={() => handleClick(key)}
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: 'var(--space-component-sm)',
+                gap: '10px',
                 textDecoration: 'none',
-                transition: 'transform 0.2s ease',
+                transition: 'opacity 0.2s ease',
+                opacity: isActive ? 1 : 0.5,
               }}
-              onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.1)' }}
-              onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)' }}
+              onMouseEnter={e => { e.currentTarget.style.opacity = '1' }}
+              onMouseLeave={e => { if (!isActive) e.currentTarget.style.opacity = '0.5' }}
             >
               <span
                 style={{
-                  width: isActive ? '10px' : '8px',
-                  height: isActive ? '10px' : '8px',
+                  width: isActive ? '8px' : '6px',
+                  height: isActive ? '8px' : '6px',
                   borderRadius: '50%',
                   background: isActive ? PHASE_COLORS[key] : 'var(--color-border)',
                   transition: 'all 0.3s ease',
@@ -103,7 +109,7 @@ export default function PhaseProgress() {
               <span
                 className="text-ui-sm"
                 style={{
-                  color: isActive ? PHASE_COLORS[key] : 'transparent',
+                  color: isActive ? PHASE_COLORS[key] : 'var(--color-text-muted)',
                   transition: 'color 0.3s ease',
                   whiteSpace: 'nowrap',
                 }}
@@ -117,7 +123,7 @@ export default function PhaseProgress() {
 
       {/* Mobile: horizontal dots below nav */}
       <div
-        className="flex md:hidden justify-center"
+        className="flex lg:hidden justify-center"
         style={{
           position: 'fixed',
           top: '60px',
@@ -138,6 +144,7 @@ export default function PhaseProgress() {
             <a
               key={key}
               href={`#${key}`}
+              onClick={() => handleClick(key)}
               style={{
                 width: isActive ? '10px' : '6px',
                 height: isActive ? '10px' : '6px',

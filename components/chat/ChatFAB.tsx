@@ -3,7 +3,7 @@
 import { useRef, useState, useEffect, useCallback } from 'react'
 import CatAvatar from './CatAvatar'
 
-const BUBBLE_DISMISSED_KEY = 'jayshock-chat-bubble-dismissed'
+const BUBBLE_DISMISSED_PREFIX = 'jayshock-chat-bubble-dismissed'
 const AUTO_DISMISS_MS = 10000
 
 interface ChatFABProps {
@@ -23,6 +23,9 @@ const BUBBLE_MESSAGES: Record<string, string> = {
 }
 
 export default function ChatFAB({ isOpen, isStreaming, onClick, pageType }: ChatFABProps) {
+  // Page-specific dismiss key so bubble shows on new page types
+  const dismissKey = `${BUBBLE_DISMISSED_PREFIX}-${pageType ?? 'home'}`
+
   // Track if the FAB has been opened at least once — after that, skip entrance animation
   const hasOpened = useRef(false)
   if (isOpen) hasOpened.current = true
@@ -31,16 +34,17 @@ export default function ChatFAB({ isOpen, isStreaming, onClick, pageType }: Chat
   const [showBubble, setShowBubble] = useState(false)
   const [dismissing, setDismissing] = useState(false)
 
-  // Check if bubble was already dismissed this session
+  // Show bubble if not dismissed for this page type
   useEffect(() => {
     try {
-      if (sessionStorage.getItem(BUBBLE_DISMISSED_KEY)) return
+      if (sessionStorage.getItem(dismissKey)) return
     } catch { /* ignore */ }
 
-    // Show bubble after FAB entrance settles (~4.2s)
-    const showTimer = setTimeout(() => setShowBubble(true), 4200)
+    // On case study pages, show sooner since user is already engaged
+    const delay = pageType === 'case-study' ? 2000 : 4200
+    const showTimer = setTimeout(() => setShowBubble(true), delay)
     return () => clearTimeout(showTimer)
-  }, [])
+  }, [dismissKey, pageType])
 
   // Auto-dismiss after 10s
   useEffect(() => {
@@ -59,14 +63,13 @@ export default function ChatFAB({ isOpen, isStreaming, onClick, pageType }: Chat
   const dismissBubble = useCallback(() => {
     setDismissing(true)
     try {
-      sessionStorage.setItem(BUBBLE_DISMISSED_KEY, '1')
+      sessionStorage.setItem(dismissKey, '1')
     } catch { /* ignore */ }
-    // Remove from DOM after exit animation
     setTimeout(() => {
       setShowBubble(false)
       setDismissing(false)
     }, 250)
-  }, [])
+  }, [dismissKey])
 
   const handleFABClick = useCallback(() => {
     if (showBubble) dismissBubble()
