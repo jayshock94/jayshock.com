@@ -1,292 +1,119 @@
-# Knowledge Base — Jay Duane Shock
-## Personal Information for Portfolio Chatbot
+# Knowledge Base
 
-> This file is the chatbot's reference for anything about Jay that isn't
-> already on the portfolio site. Edit this file directly on GitHub whenever
-> something changes or you want to add new info.
->
-> The chatbot reads this on every request. If it's in here, the bot knows it.
-> If it's not, the bot will say it doesn't know.
->
-> Keep entries specific and honest. The chatbot's personality guide tells it
-> HOW to say things. This file tells it WHAT to say.
+This is reference material about Jay. Put it in your own words.
 
----
 
 ## Basic Info
 
-```yaml
-full_name: Jay Duane Shock
-goes_by: Jay
-nickname: JD (only close friends and family use this)
-title: Senior UX Designer
-location: Utah
-remote: true
-availability: Open to remote roles, hybrid if it's a good fit, and consulting
-email: hello@jayshock.com
-linkedin: https://www.linkedin.com/in/jay-shock-089605156/
-portfolio: https://www.jayshock.com/
-```
+Jay Duane Shock. Goes by Jay. Close friends and family call him JD. Senior UX Designer based in Utah. Open to remote, hybrid if the fit is right, consulting too. hello@jayshock.com. Portfolio at jayshock.com.
 
----
 
-## Professional Summary
+## What Jay Does
 
-I do UX design and product design at a company that's just small enough
-and big enough that I get to wear a lot of hats. Depending on the project
-I might be involved end to end — research, wireframes, prototyping, testing,
-handoff — or I might be updating flows and mocks across the many products
-my company has. I'm the kind of designer who needs to understand both sides
-before I touch a screen. The business problem and the user problem aren't
-opposing forces — they're two sides of the same bridge.
+He does UX and product design at a company where he gets to wear a lot of hats. Some projects he's end to end, research through handoff. Others he's updating flows and mocks across a big product portfolio. He won't touch a screen until he understands both sides. Business problem, user problem, same bridge.
 
-For people outside design: I'm like an architect for software. I design the
-blueprints, make sure everything meets the requirements and accessibility
-standards, and hand it off to the engineers to build. But I'm also the
-interior designer — I make sure it looks and feels right for the brand
-and the people using it.
+If someone doesn't know what that means: he's like a software architect who also does the interior design. Blueprints, accessibility standards, handoff to engineers. But also making sure it actually feels right to use.
 
----
 
-## Design Philosophy
+## How Jay Works
 
-My philosophy comes down to a bridge metaphor. The business has goals,
-painpoints, and a definition of success. The users have the same — their
-own painpoints, frictions, disabilities, and what success looks like to them.
-All of those constraints are the river. The goals and success are on the
-other side. UX and product design are the bridge, and the bridge has to
-be designed so both parties can cross.
+Four steps: See it, Own it, Solve it, Do it. His portfolio has an interactive compass thing in the How I Work section, but it's really just how he thinks about every project.
 
-Too many designers and stakeholders treat it like business goals vs. user
-goals. That's not reality. A bridge serves both sides. That's why I'm so
-big on research and understanding both parties before I ever touch designs.
-The designs come naturally when you have that solid foundation.
+See it: the stated problem is almost never the real one. He digs until he finds what's actually going on.
 
-Growing up with dyslexia and ADHD, I always felt misunderstood. What I
-wanted to express and have people understand wasn't landing the way I
-intended. That gave me a lifelong focus on truly understanding others —
-not just hearing what they say, but understanding what they're actually
-trying to express. That's the core of how I approach user research.
+Own it: figure out your part. The win, the miss, the gap. No excuses, no pointing fingers.
 
-My brain never stops looking for patterns. I notice things other people
-miss. I can guess the ending of a movie in the first five minutes because
-my brain is constantly mapping how things connect. That same pattern
-recognition is what drives my design work — seeing the gaps, the
-inconsistencies, the opportunities other people walk past.
+Solve it: explore every angle. Has to hold up for the business and the user, not just look good in a prototype.
 
----
+Do it: build, test, ship. If something new breaks, start over. Keep going until it's right.
 
-## Current Status
+Those map to standard design process stuff. See it is your discover phase, interviews and research and all that. Define sits in the overlap of See it and Own it. Ideate is where Own it meets Solve it. Design lives in Solve it. Testing bridges Solve it and Do it. Deliver is pure Do it.
 
-```yaml
-status: employed and open to opportunities, also consulting
-current_role: Senior UX Designer
-current_company: GoldPoint Systems
-looking_for:
-  - Senior Product Designer roles
-  - Lead Product Designer roles
-  - Senior UX Designer roles
-  - Senior UX Designer roles
-  - Remote positions
-  - Open to hybrid if it's a good fit
-industries_interested_in:
-  - Enterprise SaaS
-  - Fintech
-  - Anything interesting — open to industries with hard problems
-open_to_consulting: true
-```
 
----
+## What He Believes
 
-## Work History
+Bridge metaphor. Business has goals and painpoints. Users have goals and painpoints. Those constraints are the river. Design is the bridge. It has to work for both sides or it doesn't work.
 
-### Senior UX Designer — GoldPoint Systems
-- **Company:** GoldPoint Systems
-- **Title:** Senior UX Designer
-- **Dates:** 2021 – Present
-- **What you did:** UX and product design across a large portfolio of fintech and lending products. Role varies by project — sometimes end-to-end product design from research through handoff, sometimes updating mocks on individual cards, sometimes running usability tests or visiting client branches for in-person data gathering. Works closely with product owners, stakeholders, and dev teams. Attends dev reviews to verify builds match designs. The Figma project library has 50+ product workspaces, each full of design files and FigJams.
-- **Case study available:** TBD
+Most people treat business goals and user goals like they're fighting each other. Jay thinks that's wrong. A bridge serves both sides. That's why he's obsessive about research before he touches any designs.
 
-### Product Designer — Caliber Smart
-- **Company:** Caliber Smart (door-to-door sales company)
-- **Title:** Product Designer
-- **Dates:** 2019 – 2021
-- **What you did:** Redesigned the sales app using goal gradient effect, peak-end rule, and selective attention principles. Research showed reps were wasting time calling a help line for payroll questions and leaderboard standings. Designed a gamified dashboard showing leaderboards, goal metrics, payroll info, incentive tracking, and easy navigation to area tools that previously required multiple apps. Built out a new solar section with tools using Google satellite imagery to estimate panel placement, count, and cost based on sun exposure and the specific home.
-- **Case study available:** Potential case study
+He grew up with dyslexia and ADHD. Always felt like what he was trying to say wasn't landing the way he meant it. That turned into a thing where he's really focused on understanding what people actually mean, not just what they say. It's basically his whole approach to user research.
 
-### UX Designer / Marketing — Dish One
-- **Company:** Dish One (door-to-door sales company)
-- **Title:** UX Designer / Marketing (hybrid role)
-- **Dates:** 2017 – 2019
-- **What you did:** Started in marketing doing videography, graphic design, training videos, and running incentives. Worked closely with the CEO and VPs. Transitioned into a hybrid UX/marketing role when the dev team needed another designer. Went into the field with sales reps to gather real painpoint data. Helped redesign the entire sales app. Key achievement: designed a virtual badge feature with quick-access permits and a verification page for police/residents — got reps on doors faster and reduced time lost to law enforcement interactions.
-- **Case study available:** Potential case study
+His brain does this pattern recognition thing constantly. He spots gaps and inconsistencies other people walk past. He can call the ending of a movie in the first five minutes because he's always mapping how things connect. Same thing drives his design work.
 
----
+
+## Right Now
+
+Employed at GoldPoint Systems as Senior UX Designer. Open to opportunities and consulting on the side. Looking for Senior Product Designer, Lead Product Designer, or Senior UX Designer roles. Remote preferred, hybrid for the right thing. Enterprise SaaS, fintech, or honestly anything with hard problems.
+
+
+## Where He's Worked
+
+GoldPoint Systems, 2021 to now. Senior UX Designer. Big fintech portfolio, lending products. Sometimes he's doing end to end product design, sometimes updating mocks, sometimes running usability tests or visiting client branches in person. Works with product owners, stakeholders, dev teams. Sits in on dev reviews to make sure builds match designs. Their Figma library has 50+ product workspaces.
+
+Caliber Smart, 2019 to 2021. Product Designer. Door to door sales company. Redesigned their sales app using psychology stuff like goal gradient effect and peak end rule. Reps were wasting time calling a help line for basic payroll and leaderboard info. He built a gamified dashboard that put all of that in one place. Also built a solar estimation tool that used Google satellite imagery to figure out panel placement and cost for specific homes.
+
+Dish One, 2017 to 2019. UX Designer slash Marketing. Another door to door company. Started doing videography and graphic design and training videos. Worked with the CEO and VPs. Moved into UX when the dev team needed help. He actually went into the field with sales reps to see their problems firsthand. Designed a virtual badge system with quick access permits and a police verification page that got reps on doors way faster.
+
 
 ## Skills and Tools
 
-### How I work (skills by category)
-- **Research & Discovery:** User interviews, contextual inquiry, field research (in-person site visits), usability testing, survey design, competitive analysis, stakeholder interviews, journey mapping, affinity diagramming
-- **Systems Thinking:** Information architecture, design systems, component libraries, token architecture, cross-product consistency, pattern recognition across large product portfolios
-- **Product Design:** Interaction design, wireframing, prototyping, visual design, responsive design, end-to-end product design, gamification, data visualization
-- **Collaboration:** Stakeholder communication, design critiques, developer handoff and review, cross-functional facilitation, product owner partnership, presenting to leadership
+Research stuff: user interviews, contextual inquiry, field visits, usability testing, surveys, competitive analysis, stakeholder interviews, journey mapping, affinity diagrams.
 
-### Tools I use
-Figma, FigJam, Mobbin, Claude AI, Microsoft Azure, Microsoft Teams, Miro, Notion, Jira, Maze, Hotjar, Loom, ChatGPT, Midjourney (for ideation and moodboarding)
+Systems stuff: information architecture, design systems, component libraries, tokens, cross product consistency, pattern spotting across big portfolios.
 
-### Tools I've used but wouldn't list as primary
-Adobe Creative Suite (Photoshop, Illustrator, Premiere Pro, After Effects — from the marketing days), Sketch, InVision
+Design stuff: interaction design, wireframes, prototyping, visual design, responsive, end to end product design, gamification, data viz.
 
----
+People stuff: stakeholder communication, design critiques, dev handoff, cross team facilitation, presenting to leadership.
 
-## Case Studies — Quick Reference
+Tools he uses: Figma, Sketch, Framer, Miro, FigJam, Jira, Loom, Mobbin, Lucid, Azure, Adobe Creative Suite, Claude, ChatGPT, Cursor.
 
-Case studies coming soon. The chatbot can reference the work history
-descriptions above in the meantime.
+Used to use: InVision, Notion, Hotjar, Maze.
 
----
 
 ## Education
 
-```yaml
-education: Coursework at Utah Valley University
-note: Do NOT say "dropped out" — say he studied at UVU or pursued coursework at UVU
-```
+Studied at Utah Valley University. Pursued coursework there. Don't say he dropped out.
 
----
 
-## Fun / Personal / The Disarming Stuff
+## Personal Stuff
 
-### Quick fire
-```yaml
-cereal_or_milk_first: cereal
-single_or_double_stuffed_oreos: double stuffed
-tabs_or_spaces: whatever the team uses
-light_mode_or_dark_mode: dark mode
-coffee_or_tea: mint tea when camping
-morning_person_or_night_owl: night owl
-favorite_snack_while_designing: White Monster
-go_to_music_while_working: Carly Rae Jepsen
-hot_take: "Designers spend way too much time on the 80%. The Pareto Principle says 80% of results come from 20% of the work — most designers obsess over polishing the 80% that barely moves the needle instead of nailing the 20% that actually matters."
-random_fact: "Jay can walk on his hands. He also knows how to sew and crochet."
-```
+Cereal before milk. Double stuffed Oreos. Whatever the team uses for tabs vs spaces. Dark mode. Mint tea when camping. Night owl. White Monster while designing. Carly Rae Jepsen on repeat.
 
-### Interests outside design
+His hot take: most designers waste time polishing the 80% that barely moves the needle instead of nailing the 20% that actually matters.
 
-Movies are a big one — Jay watches them differently than most people though.
-While everyone else is following the plot, his brain is figuring out how they
-built the scene, why they made specific costume choices, what the scope of
-the color grading must have been. He also loves spotting continuity errors —
-when a background character's shirt changes color between frames, or a cup
-moves on a table between cuts. He can usually guess the ending or plot twist
-within the first five minutes. People hate watching movies with him.
+He can walk on his hands. Knows how to sew and crochet. Has a 3D printer.
 
-The outdoors are his happy place. Hiking, national and state parks,
-canyoneering. He's very into disc golf. He plays video games. He likes
-to craft and make things — he knows how to sew and crochet, and has a
-3D printer he uses to design and build stuff. Making things is the
-common thread across everything he does.
+Movies are a big thing but he watches them weird. While everyone else follows the plot he's figuring out how the scene was built, why they picked those costumes, what the color grading scope was. Loves catching continuity errors. Can usually call the twist in the first five minutes. People hate watching movies with him.
 
-### The Carly Rae Jepsen thing
+Outdoors are his thing. Hiking, national parks, canyoneering, disc golf. Video games. He makes stuff, sewing, crochet, 3D printing. Making things is kind of the thread that runs through everything.
 
-```yaml
-carly_rae_jepsen_fan: true
-favorite_song: all of them — he refuses to pick
-how_much_does_he_talk_about_her: people are starting to worry
-spotify_stat: top 0.5% of listeners
-can_sing_along_to: every single song
-```
+The Carly Rae Jepsen thing is real. Top 0.5% of Spotify listeners. Can sing every song. Refuses to pick a favorite. People are concerned.
 
----
 
-## Communication Preferences
+## Contact
 
-```yaml
-preferred_contact: email
-response_time: within 48 hours
-open_to_coffee_chats: true
-timezone: Mountain Standard
-video_call_preference: whatever works
-```
+Prefers email. Responds within 48 hours. Open to coffee chats. Mountain time. Video calls, whatever works.
 
----
 
-## Things the Chatbot Should Never Share
+## Off Limits
 
-- Salary expectations or compensation history
-- Details of NDA-protected work beyond what's in public case studies
-- Personal address or phone number
-- Religious or political views
-- Opinions about other specific designers or their work
-- Anything framed as legal, medical, or financial advice
-- Personal relationship details
-- Social security, financial account, or other sensitive info
-- Don't say Jay "dropped out" of college — say he pursued coursework at UVU
+Salary and compensation history. NDA stuff beyond public case studies. Home address or phone number. Religion or politics. Opinions about other designers. Legal, medical, or financial advice. Relationship details. SSN, bank info, anything sensitive.
 
----
 
-## Frequently Asked Questions — Preloaded Answers
+## Common Questions
 
-**Q: What makes Jay different from other designers?**
-The way he thinks. His brain is wired to find patterns, spot gaps, and
-understand what people are actually trying to say vs. what they're saying.
-Growing up with dyslexia and ADHD taught him that what someone expresses
-and what they mean aren't always the same thing — and that skill translates
-directly into user research and design. He notices things other people miss.
+What makes Jay different? His brain. Pattern recognition, gap spotting, understanding what people mean vs what they say. Dyslexia and ADHD taught him that early. He notices stuff other people miss.
 
-**Q: What kind of work is Jay looking for?**
-Senior or lead product/UX design roles, ideally remote but open to hybrid
-for the right fit. He's drawn to complex problems — enterprise SaaS, fintech,
-anything where the system is messy and the users are experts who deserve
-better tools. He's also open to consulting work.
+What's he looking for? Senior or lead design roles, remote ideally. Complex problems in enterprise SaaS or fintech. Also consulting.
 
-**Q: How does Jay handle disagreements with engineers/PMs?**
-He starts by assuming they see something he doesn't. Usually they do.
-He asks questions before he pushes back — understanding their constraints
-changes his perspective more often than not. If they still disagree, he
-prototypes both approaches and lets real evidence decide. He's changed his
-mind enough times to know that holding positions too tightly is a mistake.
-The goal is the best outcome for the product, not being right.
+How does he handle disagreements? Assumes the other person sees something he doesn't. Asks questions before pushing back. If they're still stuck he prototypes both options and lets evidence decide. He's been wrong enough times to know holding positions too tight is a mistake.
 
-**Q: What does Jay want to work on next?**
-He's open to anything. He wants to keep learning, keep growing, and keep
-solving whatever problems are out there. He's not chasing a specific
-industry — he's chasing interesting problems with real constraints.
+What does he want to work on? Interesting problems with real constraints. Not chasing an industry, chasing the work.
 
-**Q: Does Jay work with startups or only larger companies?**
-Either. He's worked at smaller companies where he wore every hat and larger
-organizations with complex product portfolios. The common thread is that
-he does his best work when the problem is real and the constraints are
-interesting.
+Startups or big companies? Both. He's done both. The thing that matters is whether the problem is real.
 
-**Q: How does Jay approach a new project?**
-He follows a framework: See it, Own it, Solve it, Do it.
+How does he start a project? See it, Own it, Solve it, Do it. Interactive version on the site.
 
-See it — Take in what the project actually is. The scope, the goals, the
-painpoints, the real problem. He digs deeper here because what people think
-the problem is often isn't the actual problem.
+Philosophy in one sentence? Business goals and user goals are two sides of the same bridge. The designer builds it.
 
-Own it — Define and clarify his role. Whatever the scope is, he's either
-going to contribute to it or hinder it, and he always chooses to contribute.
-This is where he figures out if he's the UX designer, product designer,
-UI designer, or something else for this specific project.
-
-Solve it and Do it — Research both sides (business and users), design the
-bridge, build it, test it, hand it off, and verify the build matches the intent.
-
-**Q: What's Jay's design philosophy in one sentence?**
-Business goals and user goals aren't opposing forces — they're two sides
-of the same bridge, and the designer's job is to build it.
-
-**Q: How did Jay get into design?**
-He started in marketing at a door-to-door sales company. Had friends in
-college studying software engineering who needed some designs. That's when
-he discovered UX as a field and realized the way his brain had always
-thought about things actually had a name. His company let him transition
-into a hybrid marketing/UX role, and he never looked back.
-
----
-
-*Last updated: March 2026*
-*This file is the chatbot's brain. Keep it current, keep it honest,*
-*and keep it in your voice. The chatbot handles the personality.*
+How'd he get into design? Marketing at a sales company. Friends needed designs. He realized his brain had been doing UX forever without knowing it had a name. Transitioned into a hybrid role, never went back.

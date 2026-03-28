@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import React, { useState, useCallback, useEffect, useRef } from 'react'
 
 /* ------------------------------------------------------------------ */
 /*  Data                                                               */
@@ -10,7 +10,7 @@ const PHASES = [
   {
     id:    'see',
     label: 'See it',
-    desc:  'Dig deeper. What the stakeholder or client says is the problem usually isn\'t the whole picture. This is where I do the research, ask the hard questions, and figure out what success actually looks like so I can really see it.',
+    desc:  'The stated problem is rarely the real one. I dig until I understand what is actually happening before I touch anything.',
     color: 'var(--phase-impact-label)',
     bg:    'rgba(180, 160, 224, 0.12)',
     border:'rgba(180, 160, 224, 0.22)',
@@ -18,7 +18,7 @@ const PHASES = [
   {
     id:    'own',
     label: 'Own it',
-    desc:  'Now that I see it, what is my role? How am I going to contribute? Did a design choice I made before create this problem? Whatever it is, I own it. No excuses, no finger pointing. Just ownership.',
+    desc:  'I figure out my part in it. The win, the miss, the gap. No excuses, no finger pointing. Just ownership.',
     color: 'var(--phase-problem-label)',
     bg:    'rgba(200, 170, 140, 0.12)',
     border:'rgba(200, 170, 140, 0.22)',
@@ -26,7 +26,7 @@ const PHASES = [
   {
     id:    'solve',
     label: 'Solve it',
-    desc:  'Now that I can really see it and I have owned my part in it, this is where the real work happens. Flows, wireframes, prototypes, testing. I explore every angle until the solution actually holds up for the business and the user.',
+    desc:  'Explore every angle. The solution has to hold up for the business and the user, not just look good in a prototype.',
     color: 'var(--phase-discovery-label)',
     bg:    'rgba(128, 196, 180, 0.12)',
     border:'rgba(128, 196, 180, 0.22)',
@@ -34,7 +34,7 @@ const PHASES = [
   {
     id:    'do',
     label: 'Do it',
-    desc:  'Mocks, prototypes, user testing. The problem is solved, so now I go and do it. Sometimes that means I find a new gap, and the cycle starts again. I keep going until it is complete and ready to hand off.',
+    desc:  'Build it, test it, ship it. If a new gap shows up, the cycle starts again. I keep going until it is right.',
     color: 'var(--phase-solution-label)',
     bg:    'rgba(140, 174, 214, 0.12)',
     border:'rgba(140, 174, 214, 0.22)',
@@ -46,12 +46,12 @@ const PHASES = [
 /* ------------------------------------------------------------------ */
 
 const LIFECYCLE = [
-  { step: '01', name: 'Discover',  sub: 'Stakeholder interviews, competitive analysis, user research', phases: [0] },
-  { step: '02', name: 'Define',    sub: 'Problem framing, personas, journey maps, requirements',       phases: [0, 1] },
-  { step: '03', name: 'Ideate',    sub: 'User flows, wireframes, concept exploration',                 phases: [2] },
-  { step: '04', name: 'Design',    sub: 'Mocks, prototypes, design systems, interaction design',       phases: [2, 3] },
-  { step: '05', name: 'Test',      sub: 'Usability testing, feedback synthesis, iteration',            phases: [2, 3] },
-  { step: '06', name: 'Deliver',   sub: 'Dev handoff, QA review, build verification',                  phases: [3] },
+  { step: '01', name: 'Discover',  sub: 'Stakeholder interviews, competitive analysis, user research, data analysis, heuristic evaluation, contextual inquiry', phases: [0] },
+  { step: '02', name: 'Define',    sub: 'Problem framing, personas, journey maps, requirements gathering, success metrics, scope alignment, jobs to be done', phases: [0, 1] },
+  { step: '03', name: 'Ideate',    sub: 'User flows, wireframes, concept exploration, design sprints, sketching, information architecture, workshop facilitation', phases: [1, 2] },
+  { step: '04', name: 'Design',    sub: 'High-fidelity mocks, interactive prototypes, design systems, interaction design, responsive layouts, accessibility review', phases: [2] },
+  { step: '05', name: 'Test',      sub: 'Usability testing, A/B testing, feedback synthesis, iteration, cognitive walkthroughs, analytics review, stakeholder demos', phases: [2, 3] },
+  { step: '06', name: 'Deliver',   sub: 'Dev handoff, spec documentation, QA review, build verification, design debt tracking, launch support', phases: [3] },
 ] as const
 
 /* ------------------------------------------------------------------ */
@@ -77,9 +77,73 @@ function pillPosition(angleDeg: number) {
 
 export default function HowIWork() {
   const [active, setActive] = useState(0)
+  const [expandedStep, setExpandedStep] = useState<number | null>(null)
   const phase = PHASES[active]
 
+  const containerRef = useRef<HTMLDivElement>(null)
+  const hasAutoPlayed = useRef(false)
+  const isAutoRotating = useRef(false)
+  const rotateTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const isMounted = useRef(false)
+
+  /* Track mount state to avoid setState during HMR re-render */
+  useEffect(() => {
+    isMounted.current = true
+    return () => { isMounted.current = false }
+  }, [])
+
+  /* Auto-rotate through phases when section scrolls into view */
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting || hasAutoPlayed.current || !isMounted.current) return
+        hasAutoPlayed.current = true
+        isAutoRotating.current = true
+
+        let step = 0
+        const cycle = () => {
+          if (!isAutoRotating.current || !isMounted.current) return
+          setActive(step)
+          step++
+          if (step < PHASES.length) {
+            rotateTimer.current = setTimeout(cycle, 1500)
+          } else {
+            // Cycle complete — return to first phase
+            rotateTimer.current = setTimeout(() => {
+              if (isAutoRotating.current && isMounted.current) {
+                setActive(0)
+                isAutoRotating.current = false
+              }
+            }, 1500)
+          }
+        }
+        // Defer to next tick to avoid setState during render
+        rotateTimer.current = setTimeout(cycle, 50)
+      },
+      { threshold: 0.4 }
+    )
+
+    observer.observe(el)
+    return () => {
+      observer.disconnect()
+      if (rotateTimer.current) clearTimeout(rotateTimer.current)
+    }
+  }, [])
+
+  /** Stop auto-rotate when user manually interacts */
+  const stopAutoRotate = useCallback(() => {
+    isAutoRotating.current = false
+    if (rotateTimer.current) {
+      clearTimeout(rotateTimer.current)
+      rotateTimer.current = null
+    }
+  }, [])
+
   const handleKey = useCallback((e: React.KeyboardEvent, i: number) => {
+    stopAutoRotate()
     const n = PHASES.length
     let next = i
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = (i + 1) % n
@@ -87,10 +151,10 @@ export default function HowIWork() {
     else return
     e.preventDefault()
     setActive(next)
-  }, [])
+  }, [stopAutoRotate])
 
   return (
-    <div>
+    <div ref={containerRef}>
       {/* Header */}
       <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)]">
         How I work
@@ -215,7 +279,7 @@ export default function HowIWork() {
                 aria-selected={isActive}
                 aria-controls="how-i-work-panel"
                 tabIndex={isActive ? 0 : -1}
-                onClick={() => setActive(i)}
+                onClick={() => { stopAutoRotate(); setActive(i); setExpandedStep(null) }}
                 onKeyDown={(e) => handleKey(e, i)}
                 style={{
                   position: 'absolute',
@@ -283,78 +347,177 @@ export default function HowIWork() {
         </div>
       </div>
 
-      {/* Process infographic — lifecycle stages linked to compass */}
+      {/* Process timeline — horizontal strip with expandable details */}
       <div style={{ marginTop: 'var(--space-section-sm)' }}>
-        <p
-          className="text-label text-[var(--color-text-muted)]"
-          style={{ marginBottom: 'var(--space-stack-md)' }}
-        >
-          In practice
-        </p>
+        {/* Timeline strip */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-component-sm)' }}>
+          {/* Step buttons in a row with connecting line */}
+          <div style={{ position: 'relative' }}>
+            {/* Connecting line behind the steps (desktop only) */}
+            <div
+              className="hidden md:block"
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '24px',
+                right: '24px',
+                height: '1px',
+                background: 'var(--color-border)',
+                opacity: 0.3,
+                transform: 'translateY(-50%)',
+                pointerEvents: 'none',
+              }}
+            />
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-[var(--space-component-xs)]">
-          {LIFECYCLE.map((item) => {
-            const isLit = (item.phases as readonly number[]).includes(active)
-            /* Use the first matching phase's color */
-            const matchPhase = isLit ? PHASES[item.phases.find(p => p === active) ?? item.phases[0]] : null
+            <div
+              className="grid grid-cols-3 md:grid-cols-6 gap-[var(--space-component-xs)]"
+              style={{ position: 'relative' }}
+            >
+              {LIFECYCLE.map((item, idx) => {
+                const isLit = (item.phases as readonly number[]).includes(active)
+                const isExpanded = expandedStep === idx
+                const matchPhase = isLit ? PHASES[item.phases.find(p => p === active) ?? item.phases[0]] : null
 
-            return (
-              <div
-                key={item.step}
-                style={{
-                  padding: 'var(--space-component-base)',
-                  borderRadius: '12px',
-                  border: isLit
-                    ? `1px solid ${matchPhase?.border}`
-                    : '0.5px solid transparent',
-                  background: isLit ? matchPhase?.bg : 'transparent',
-                  transition: 'all 0.3s ease',
-                  cursor: 'default',
-                  userSelect: 'none',
-                }}
-              >
-                <span
-                  style={{
-                    fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-                    fontSize: '10px',
-                    fontWeight: 400,
-                    color: isLit ? matchPhase?.color : 'var(--color-text-placeholder)',
-                    letterSpacing: '0.06em',
-                    display: 'block',
-                    marginBottom: '6px',
-                    transition: 'color 0.3s ease',
-                  }}
-                >
-                  {item.step}
-                </span>
-                <span
-                  style={{
-                    fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-                    fontSize: '14px',
-                    fontWeight: 500,
-                    color: isLit ? 'var(--color-text-primary)' : 'var(--color-text-muted)',
-                    display: 'block',
-                    marginBottom: '4px',
-                    transition: 'color 0.3s ease',
-                  }}
-                >
-                  {item.name}
-                </span>
-                <span
-                  style={{
-                    fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-                    fontSize: '11px',
-                    fontWeight: 300,
-                    color: isLit ? 'var(--color-text-secondary)' : 'var(--color-text-placeholder)',
-                    lineHeight: 1.4,
-                    transition: 'color 0.3s ease',
-                  }}
-                >
-                  {item.sub}
-                </span>
-              </div>
-            )
-          })}
+                // On mobile (3 cols), insert detail panel after each row of 3
+                // Row ends at index 2 and 5. On desktop (6 cols), row ends at 5.
+                const isEndOfMobileRow = (idx + 1) % 3 === 0
+                const showPanelHere = expandedStep !== null &&
+                  // Mobile: panel goes after the row containing the expanded step
+                  Math.floor(expandedStep / 3) === Math.floor(idx / 3) &&
+                  isEndOfMobileRow
+
+                const panelItem = expandedStep !== null ? LIFECYCLE[expandedStep] : null
+                const panelPhase = panelItem ? PHASES[panelItem.phases.find(p => p === active) ?? panelItem.phases[0]] : null
+
+                return (
+                  <React.Fragment key={item.step}>
+                    <button
+                      type="button"
+                      onClick={() => {
+                      stopAutoRotate()
+                      if (isExpanded) {
+                        setExpandedStep(null)
+                      } else {
+                        setExpandedStep(idx)
+                        // Only move compass if this card is not already lit (grey card)
+                        if (!isLit) {
+                          const firstPhase = (item.phases as readonly number[])[0]
+                          if (firstPhase !== undefined) {
+                            setActive(firstPhase)
+                          }
+                        }
+                      }
+                    }}
+                      className="flex flex-col items-center"
+                      style={{
+                        gap: '8px',
+                        padding: '10px 12px',
+                        borderRadius: '10px',
+                        border: isExpanded
+                          ? `1px solid ${matchPhase?.border ?? 'var(--color-border)'}`
+                          : isLit
+                            ? `0.5px solid ${matchPhase?.border ?? 'var(--color-border)'}`
+                            : '0.5px solid transparent',
+                        background: isExpanded
+                          ? matchPhase?.bg ?? 'var(--color-surface)'
+                          : 'transparent',
+                        cursor: 'pointer',
+                        transition: 'all 0.3s ease',
+                        outline: 'none',
+                      }}
+                    >
+                      <span
+                        style={{
+                          width: '22px',
+                          height: '22px',
+                          borderRadius: '50%',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontFamily: 'var(--font-outfit), system-ui, sans-serif',
+                          fontSize: '9px',
+                          fontWeight: 500,
+                          letterSpacing: '0.04em',
+                          color: isLit ? matchPhase?.color : 'var(--color-text-placeholder)',
+                          background: isLit ? matchPhase?.bg : 'var(--color-surface)',
+                          border: `0.5px solid ${isLit ? matchPhase?.border ?? 'var(--color-border)' : 'var(--color-border)'}`,
+                          transition: 'all 0.3s ease',
+                        }}
+                      >
+                        {item.step}
+                      </span>
+                      <span
+                        style={{
+                          fontFamily: 'var(--font-outfit), system-ui, sans-serif',
+                          fontSize: '12px',
+                          fontWeight: isLit ? 500 : 400,
+                          color: isLit ? 'var(--color-text-primary)' : 'var(--color-text-muted)',
+                          transition: 'color 0.3s ease',
+                          whiteSpace: 'nowrap',
+                        }}
+                      >
+                        {item.name}
+                      </span>
+                    </button>
+
+                    {/* Detail panel — spans full row, inserted after the row containing the active step */}
+                    {showPanelHere && panelItem && (
+                      <div
+                        className="col-span-3 md:col-span-6"
+                        style={{
+                          padding: 'var(--space-component-md)',
+                          borderRadius: '10px',
+                          border: `0.5px solid ${panelPhase?.border ?? 'var(--color-border)'}`,
+                          background: panelPhase?.bg ?? 'var(--color-surface)',
+                          transition: 'all 0.3s ease',
+                        }}
+                      >
+                        <span
+                          style={{
+                            fontFamily: 'var(--font-outfit), system-ui, sans-serif',
+                            fontSize: '13px',
+                            fontWeight: 300,
+                            color: 'var(--color-text-secondary)',
+                            lineHeight: 1.6,
+                          }}
+                        >
+                          {panelItem.sub}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            window.dispatchEvent(
+                              new CustomEvent('open-barnaby', {
+                                detail: { message: `Tell me more about Jay's ${panelItem.name.toLowerCase()} process` },
+                              })
+                            )
+                          }}
+                          style={{
+                            display: 'block',
+                            marginTop: 'var(--space-component-sm)',
+                            background: 'none',
+                            border: 'none',
+                            padding: 0,
+                            fontFamily: 'var(--font-outfit), system-ui, sans-serif',
+                            fontSize: '12px',
+                            fontWeight: 400,
+                            color: 'var(--color-text-muted)',
+                            cursor: 'pointer',
+                            letterSpacing: '0.01em',
+                            transition: 'color 0.2s ease',
+                          }}
+                          onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--color-ink)' }}
+                          onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--color-text-muted)' }}
+                        >
+                          Curious? Ask Barnaby →
+                        </button>
+                      </div>
+                    )}
+                  </React.Fragment>
+                )
+              })}
+            </div>
+          </div>
         </div>
       </div>
     </div>

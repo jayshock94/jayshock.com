@@ -14,16 +14,31 @@ function randomDisarmingChip(): SuggestionChip {
   return DISARMING_CHIPS[Math.floor(Math.random() * DISARMING_CHIPS.length)]
 }
 
+/** Section-aware chips for homepage — first chip reflects what the user is looking at. */
+const SECTION_CHIPS: Record<string, SuggestionChip> = {
+  hero:       { label: 'What kind of work does Jay do?', message: 'What kind of work does Jay do?' },
+  work:       { label: 'Tell me about these projects', message: "What are Jay's case studies about?" },
+  about:      { label: 'What makes Jay different?', message: 'What makes Jay different from other designers?' },
+  'how-i-work': { label: 'What is the compass?', message: "What is Jay's design compass and how does he use it?" },
+  toolkit:    { label: 'What tools does Jay use?', message: 'What are Jay\'s go-to design tools?' },
+  experience: { label: 'Tell me about his experience', message: "Walk me through Jay's career history." },
+  contact:    { label: 'Is he available?', message: 'Is Jay available for hire right now?' },
+}
+
 /** Returns page-aware suggestion chips. */
-export function getChipsForPage(context: PageContext): SuggestionChip[] {
+export function getChipsForPage(context: PageContext, visibleSection?: string | null): SuggestionChip[] {
   switch (context.pageType) {
-    case 'home':
+    case 'home': {
+      const sectionChip = visibleSection && SECTION_CHIPS[visibleSection]
+        ? SECTION_CHIPS[visibleSection]
+        : SECTION_CHIPS.hero
       return [
-        { label: 'What kind of work does Jay do?', message: 'What kind of work does Jay do?' },
+        sectionChip,
         { label: 'Is he available right now?', message: 'Is Jay available for hire right now?' },
         { label: 'Show me his best project', message: "What's Jay's strongest case study?" },
         randomDisarmingChip(),
       ]
+    }
 
     case 'work-index':
       return [
