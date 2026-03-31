@@ -17,19 +17,20 @@ export default function CaseStudyHero({ caseStudy, tokens, heroImageSlot, tagMes
     <section
       style={{
         background: tokens.heroZone,
+        ['--case-hero-bg' as string]: tokens.heroZone,
         position: 'relative',
         overflow: 'visible',
-        minHeight: '70vh',
+        minHeight: heroImageSlot ? 'auto' : '70vh',
         display: 'flex',
         alignItems: 'center',
-      }}
+      } as React.CSSProperties}
       aria-label="Case study overview"
     >
       <div
         className="max-w-layout mx-auto px-[var(--space-page-margin)] w-full"
         style={{
           paddingTop: 'clamp(100px, 14vw, 160px)',
-          paddingBottom: heroImageSlot ? 'clamp(80px, 10vw, 120px)' : 'var(--space-section-md)',
+          paddingBottom: heroImageSlot ? '0' : 'var(--space-section-md)',
         }}
       >
         {/* Eyebrow */}
@@ -80,12 +81,13 @@ export default function CaseStudyHero({ caseStudy, tokens, heroImageSlot, tagMes
           <HeroTypeTags tags={types} barnabyMessages={tagMessages} />
         )}
 
-        {/* Hero image slot */}
+        {/* Hero image slot — flush to bottom of hero */}
         {heroImageSlot && (
           <div
             className="hero-fade-up"
             style={{
               marginTop: 'var(--space-section-sm)',
+              marginBottom: '0',
               animationDelay: '750ms',
               display: 'flex',
               justifyContent: 'center',

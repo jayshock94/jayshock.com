@@ -7,13 +7,15 @@ interface Method {
 
 interface ResearchMethodsProps {
   methods: Method[]
+  accentColor?: string
 }
 
 /**
- * Research methods grid — shows what research activities were done.
- * Clean cards, no icons. Structured text only.
+ * Research methods as a horizontal numbered list.
+ * Minimal chrome, no cards — just structured steps with a connecting line.
+ * Visually distinct from PainPoints (cards) and KeyFindings (accent-top cards).
  */
-export default function ResearchMethods({ methods }: ResearchMethodsProps) {
+export default function ResearchMethods({ methods, accentColor = 'var(--phase-discovery-label)' }: ResearchMethodsProps) {
   return (
     <div
       className="max-w-content"
@@ -30,19 +32,38 @@ export default function ResearchMethods({ methods }: ResearchMethodsProps) {
       </p>
 
       <div
-        className="grid grid-cols-1 sm:grid-cols-2 gap-[var(--space-component-sm)]"
+        className="grid grid-cols-1 md:grid-cols-4 gap-[var(--space-component-md)]"
       >
         {methods.map((method, i) => (
           <ScrollReveal key={i}>
             <div
               style={{
-                padding: 'var(--space-component-lg)',
-                borderRadius: '8px',
-                background: 'var(--color-surface)',
-                border: '0.5px solid var(--color-border)',
                 height: '100%',
+                position: 'relative',
               }}
             >
+              {/* Step number with accent underline */}
+              <div
+                style={{
+                  marginBottom: 'var(--space-component-sm)',
+                  paddingBottom: 'var(--space-component-sm)',
+                  borderBottom: `2px solid ${accentColor}`,
+                  display: 'inline-block',
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: 'var(--font-outfit), system-ui, sans-serif',
+                    fontSize: '12px',
+                    fontWeight: 600,
+                    color: accentColor,
+                    letterSpacing: '0.05em',
+                  }}
+                >
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+              </div>
+
               <p
                 className="text-body"
                 style={{

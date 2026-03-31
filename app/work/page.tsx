@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import WorkCard from '@/components/work/WorkCard'
+import AimCardImage           from '@/components/work/AimCardImage'
 import MobileLendingCardImage from '@/components/work/MobileLendingCardImage'
 import { caseStudies } from '@/data/case-studies'
 
@@ -39,7 +40,11 @@ export default function WorkPage() {
             <WorkCard
               key={cs.slug}
               caseStudy={cs}
-              cardImageSlot={cs.slug === 'mobile-lending-management' ? <MobileLendingCardImage /> : undefined}
+              cardImageSlot={
+                cs.slug === 'aim' ? <AimCardImage /> :
+                cs.slug === 'mobile-lending-management' ? <MobileLendingCardImage /> :
+                undefined
+              }
             />
           ))}
         </div>

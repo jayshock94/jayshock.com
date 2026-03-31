@@ -63,8 +63,8 @@ function GlossaryText({
 }
 
 /**
- * Scannable key findings — bold statement + one-line explanation.
- * Breaks up long discovery/solution paragraphs into digestible insights.
+ * Key findings with filled number badges, larger titles, and accent top border.
+ * These are the most important insights — they should punch hardest visually.
  */
 export default function KeyFindings({ findings, accentColor = 'var(--color-accent)', glossary }: KeyFindingsProps) {
   return (
@@ -82,58 +82,65 @@ export default function KeyFindings({ findings, accentColor = 'var(--color-accen
         Key findings
       </p>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-component-sm)' }}>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-[var(--space-component-sm)]">
         {findings.map((finding, i) => (
           <ScrollReveal key={i}>
             <div
               style={{
-                padding: 'var(--space-component-md) var(--space-component-lg)',
+                padding: 'var(--space-component-lg)',
                 borderRadius: '8px',
                 background: 'var(--color-surface)',
                 border: '0.5px solid var(--color-border)',
+                borderTop: `3px solid ${accentColor}`,
+                height: '100%',
               }}
             >
-              <div style={{ display: 'flex', gap: 'var(--space-component-md)', alignItems: 'baseline' }}>
-                <span
-                  className="text-label"
-                  style={{
-                    color: accentColor,
-                    flexShrink: 0,
-                    minWidth: '20px',
-                  }}
-                >
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <div>
-                  <p
-                    className="text-body"
-                    style={{
-                      color: 'var(--color-ink)',
-                      fontWeight: 500,
-                      margin: 0,
-                    }}
-                  >
-                    {glossary && glossary.length > 0 ? (
-                      <GlossaryText text={finding.title} glossary={glossary} accentColor={accentColor} />
-                    ) : (
-                      finding.title
-                    )}
-                  </p>
-                  <p
-                    className="text-body-sm"
-                    style={{
-                      color: 'var(--color-text-secondary)',
-                      margin: '4px 0 0 0',
-                    }}
-                  >
-                    {glossary && glossary.length > 0 ? (
-                      <GlossaryText text={finding.description} glossary={glossary} accentColor={accentColor} />
-                    ) : (
-                      finding.description
-                    )}
-                  </p>
-                </div>
-              </div>
+              {/* Filled circle badge */}
+              <span
+                style={{
+                  width: '28px',
+                  height: '28px',
+                  borderRadius: '50%',
+                  background: accentColor,
+                  color: 'var(--color-canvas)',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontFamily: 'var(--font-outfit), system-ui, sans-serif',
+                  fontSize: '12px',
+                  fontWeight: 600,
+                  marginBottom: 'var(--space-component-sm)',
+                }}
+              >
+                {i + 1}
+              </span>
+
+              <p
+                className="text-h4"
+                style={{
+                  color: 'var(--color-ink)',
+                  margin: '0 0 8px 0',
+                }}
+              >
+                {glossary && glossary.length > 0 ? (
+                  <GlossaryText text={finding.title} glossary={glossary} accentColor={accentColor} />
+                ) : (
+                  finding.title
+                )}
+              </p>
+              <p
+                className="text-body-sm"
+                style={{
+                  color: 'var(--color-text-secondary)',
+                  margin: 0,
+                }}
+              >
+                {glossary && glossary.length > 0 ? (
+                  <GlossaryText text={finding.description} glossary={glossary} accentColor={accentColor} />
+                ) : (
+                  finding.description
+                )}
+              </p>
             </div>
           </ScrollReveal>
         ))}

@@ -71,7 +71,7 @@ const virtualBadge: CaseStudy = {
     ],
   },
 
-  nextSlug: 'lending-engine-service',
+  nextSlug: 'aim',
 }
 
 export default virtualBadge

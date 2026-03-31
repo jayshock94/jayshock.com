@@ -95,7 +95,7 @@ export default function CaseStudyLede({ context, overview, roleMeta, roleSummary
                 My role
               </p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-[var(--space-component-sm)]">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-[var(--space-component-sm)]">
                 {roleMeta.map((meta) => (
                   <div
                     key={meta.label}

@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import type { CaseStudyImage, GlossaryTerm, PhaseContent, PhaseKey } from '@/data/types'
 import ScrollReveal from '@/components/ui/ScrollReveal'
 import GlossaryParagraph from './GlossaryParagraph'
@@ -77,14 +78,29 @@ function renderImages(images: CaseStudyImage[], vars: typeof PHASE_VARS.impact) 
           style={{ marginTop: 'var(--space-stack-lg)', marginBottom: 'var(--space-stack-md)' }}
         >
           <figure className="m-0">
-            <div
-              className="w-full rounded-[8px] border border-[var(--color-border)] flex items-center justify-center p-[var(--space-component-md)]"
-              style={{ background: 'var(--color-surface)', aspectRatio: '16/9' }}
-            >
-              <p className="text-body-sm text-[var(--color-text-muted)] text-center opacity-60">
-                {images[0].alt}
-              </p>
-            </div>
+            {images[0].src ? (
+              <div
+                className="relative w-full rounded-[8px] overflow-hidden border border-[var(--color-border)]"
+                style={{ aspectRatio: '16/9' }}
+              >
+                <Image
+                  src={images[0].src}
+                  alt={images[0].alt}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 1200px"
+                  style={{ objectFit: 'cover', objectPosition: 'top' }}
+                />
+              </div>
+            ) : (
+              <div
+                className="w-full rounded-[8px] border border-[var(--color-border)] flex items-center justify-center p-[var(--space-component-md)]"
+                style={{ background: 'var(--color-surface)', aspectRatio: '16/9' }}
+              >
+                <p className="text-body-sm text-[var(--color-text-muted)] text-center opacity-60">
+                  {images[0].alt}
+                </p>
+              </div>
+            )}
             {images[0].caption && (
               <figcaption className="mt-[var(--space-stack-sm)] text-body-sm text-[var(--color-text-muted)] px-[var(--space-page-margin)]">
                 {images[0].caption}
@@ -162,6 +178,26 @@ function renderImages(images: CaseStudyImage[], vars: typeof PHASE_VARS.impact) 
                   maxWidth={240}
                 />
               </div>
+            ) : img.src ? (
+              <>
+                <div
+                  className="relative w-full rounded-[8px] overflow-hidden border border-[var(--color-border)]"
+                  style={{ aspectRatio: img.aspect === 'portrait' ? '9/18' : '16/9' }}
+                >
+                  <Image
+                    src={img.src}
+                    alt={img.alt}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 600px"
+                    style={{ objectFit: 'cover', objectPosition: 'top' }}
+                  />
+                </div>
+                {img.caption && (
+                  <figcaption className="mt-[var(--space-stack-sm)] text-body-sm text-[var(--color-text-muted)]">
+                    {img.caption}
+                  </figcaption>
+                )}
+              </>
             ) : (
               <>
                 <div
@@ -370,7 +406,7 @@ export default function PhaseSection({
                   className="text-body-sm not-italic"
                   style={{ color: vars.label }}
                 >
-                  {quote.attribution}
+                  – {quote.attribution}
                 </cite>
               )}
             </blockquote>

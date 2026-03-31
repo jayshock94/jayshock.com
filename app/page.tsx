@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Button        from '@/components/ui/Button'
 import WorkCard      from '@/components/work/WorkCard'
-import LendingEngineCardImage from '@/components/work/LendingEngineCardImage'
+import AimCardImage           from '@/components/work/AimCardImage'
 import MobileLendingCardImage from '@/components/work/MobileLendingCardImage'
 import CaliberCardImage       from '@/components/work/CaliberCardImage'
 import HowIWork      from '@/components/about/HowIWork'
@@ -153,7 +153,7 @@ export default function HomePage() {
                 <WorkCard
                   caseStudy={cs}
                   cardImageSlot={
-                    cs.slug === 'lending-engine-service' ? <LendingEngineCardImage /> :
+                    cs.slug === 'aim' ? <AimCardImage /> :
                     cs.slug === 'mobile-lending-management' ? <MobileLendingCardImage /> :
                     cs.slug === 'virtual-badge' ? <CaliberCardImage /> :
                     undefined
@@ -288,11 +288,11 @@ export default function HomePage() {
               <div className="flex flex-col">
                 {[
                   {
-                    role:    'Senior UX Designer',
+                    role:    'Co-Lead UX Product Designer',
                     company: 'GoldPoint Systems',
                     period:  '2021 — Present',
                     summary: 'UX and product design across a large portfolio of fintech and lending products. End-to-end ownership from research through handoff.',
-                    slug:    'lending-engine-service',
+                    slug:    'aim',
                   },
                   {
                     role:    'Product Designer',

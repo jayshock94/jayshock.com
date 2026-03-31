@@ -205,8 +205,8 @@ export function generateTokens(inputHex: string): ColorTokenSet {
     darkLabelHex = oklchToHex(darkLabelL, CONSTRAINTS.dark.label.chroma, hue)
   }
 
-  // Hero zone — vivid brand color for full-bleed hero background
-  const heroZone = oklchToHex(0.46, 0.20, hue)
+  // Hero zone — deep brand color for full-bleed hero background
+  const heroZone = oklchToHex(0.30, 0.08, hue)
 
   return {
     bg,

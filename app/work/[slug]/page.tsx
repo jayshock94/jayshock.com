@@ -10,6 +10,7 @@ import PhaseSection        from '@/components/case-study/PhaseSection'
 import PhaseObserver       from '@/components/case-study/PhaseObserver'
 import PhaseProgress       from '@/components/case-study/PhaseProgress'
 import PhaseDivider        from '@/components/case-study/PhaseDivider'
+import AimHeroImage           from '@/components/case-study/AimHeroImage'
 import MobileLendingHeroImage from '@/components/case-study/MobileLendingHeroImage'
 import PainPoints            from '@/components/case-study/PainPoints'
 import Constraints           from '@/components/case-study/Constraints'
@@ -20,6 +21,7 @@ import PhoneFrame          from '@/components/case-study/PhoneFrame'
 import PaymentSuccessAnimation from '@/components/case-study/PaymentSuccessAnimation'
 import FinalAppComposite from '@/components/case-study/FinalAppComposite'
 import WorkCard            from '@/components/work/WorkCard'
+import AimCardImage           from '@/components/work/AimCardImage'
 import MobileLendingCardImage from '@/components/work/MobileLendingCardImage'
 import ScrollReveal        from '@/components/ui/ScrollReveal'
 import Button              from '@/components/ui/Button'
@@ -63,9 +65,11 @@ const MOBILE_LENDING_SKILL_CHIPS = [
 ]
 
 const MOBILE_LENDING_TAG_MESSAGES: Record<string, string> = {
-  'Mobile': 'Tell me about Jay\'s mobile design experience on this project.',
-  'Research': 'What kind of research did Jay do for the lending app redesign?',
-  'End to End': 'What does end to end mean for Jay on this project? What did he own?',
+  'White-Label App': 'What does white-label mean and how did it constrain the mobile lending redesign?',
+  '9 App Audit': 'Tell me about the competitive analysis Jay did across 9 lending apps.',
+  'Payment Redesign': 'How did Jay redesign the payment flow without changing the architecture?',
+  'Usability Tested': 'How did Jay validate the mobile lending redesign with usability testing?',
+  'Confetti Moment': 'What is the confetti moment and why did it get so much feedback?',
 }
 
 const MOBILE_LENDING_COMPETITORS = [
@@ -151,6 +155,91 @@ const MOBILE_LENDING_METHODS = [
   },
 ]
 
+/* ------------------------------------------------------------------ */
+/*  AIM — visual components                                           */
+/* ------------------------------------------------------------------ */
+
+const AIM_ROLE_META = [
+  { label: 'Role', value: 'Co-Lead UX Product Designer' },
+  { label: 'Team', value: '3 designers, 4+ dev teams' },
+  { label: 'Scope', value: 'Dashboards, settings, queue logic, integrations' },
+]
+
+const AIM_ROLE_SUMMARY =
+  'Worked under the Lead UX Designer\'s direction with direct access to lenders, tellers, and branch managers across multiple client organizations.'
+
+const AIM_TAG_MESSAGES: Record<string, string> = {
+  'Legacy Replacement': 'What was the legacy system AIM replaced and why was it failing?',
+  'Field Research': 'What kind of field research did Jay do for AIM? How did he work with lenders?',
+  '12 Modules': 'What were the 12 modules Jay designed for AIM?',
+  '$10M Impact': 'How did AIM land a $10M contract? What was the business impact?',
+  'AI Integration': 'Tell me about the AI Account Summary Jay designed for AIM.',
+}
+
+const AIM_PAIN_POINTS = [
+  {
+    title: 'Five or more tabs open at all times',
+    description: 'Lenders managed loans across separate tools, spreadsheets, and browser tabs. Context was scattered. Errors compounded.',
+  },
+  {
+    title: 'Cross-team handoffs broke constantly',
+    description: 'Different teams used different products for each phase of the loan process. Handing work from one team to the next meant switching systems and losing context.',
+  },
+  {
+    title: 'Managers spent hours triaging queues',
+    description: 'Leaders came in early just to figure out who should work on what. Sticky notes, spreadsheets, and manual assignment consumed their mornings.',
+  },
+  {
+    title: 'New employees took months to learn SIM',
+    description: 'The legacy system had years of Frankenstein add-ons. Experienced people built workarounds. New people had no chance.',
+  },
+]
+
+const AIM_CONSTRAINTS = [
+  { text: 'Stakeholders worked backwards from solutions', barnabyMessage: 'How did Jay handle stakeholders who came with solutions instead of problems on AIM?' },
+  { text: 'Multi-client product, single-client funding', barnabyMessage: 'How did Jay balance building for one paying client vs. designing for all future clients?' },
+  { text: 'GAIN conference deadlines', barnabyMessage: 'What was the GAIN conference and how did it affect the AIM timeline?' },
+  { text: 'Competitor systems locked down', barnabyMessage: 'How did Jay research competitors when their systems were locked down?' },
+]
+
+const AIM_METHODS = [
+  {
+    title: 'Branch visits',
+    description: 'Visited branches. Sat with tellers, lenders, and managers while they worked. Studied their workarounds firsthand.',
+  },
+  {
+    title: 'Stakeholder interviews',
+    description: 'Interviewed financial leads, branch managers, and POs across multiple products to understand the full lending ecosystem.',
+  },
+  {
+    title: 'Workflow mapping',
+    description: 'Documented every tool, spreadsheet, and sticky-note system that lenders used to fill the gaps in existing products.',
+  },
+  {
+    title: 'Product demos',
+    description: 'Got demos from similar products. Studied dashboards and data-heavy tools across fintech to identify mental models.',
+  },
+]
+
+const AIM_FINDINGS = [
+  {
+    title: 'A hub, not a replacement',
+    description: 'Lenders used different products at every phase. They didn\'t need those replaced. They needed one surface that connected into all of them.',
+  },
+  {
+    title: 'The real problem was queue management',
+    description: 'It wasn\'t just about seeing loans in one place. Managers were drowning in figuring out who should work on what. That cognitive load was the bottleneck.',
+  },
+  {
+    title: 'Settings had to be foolproof',
+    description: 'Every lender, every branch, did things a little differently. The system needed to be deeply customizable without letting anyone break it.',
+  },
+  {
+    title: 'Cross-team context was the missing layer',
+    description: 'Loans move through multiple teams. Notes, comments, and history had to travel with the loan so the next person never started cold.',
+  },
+]
+
 export default function CaseStudyPage({ params }: PageProps) {
   const cs = getCaseStudy(params.slug)
   if (!cs) notFound()
@@ -158,6 +247,7 @@ export default function CaseStudyPage({ params }: PageProps) {
   const tokens = generateTokens(cs.brandColorHex)
   const nextCS = getCaseStudy(cs.nextSlug)
   const isMobileLending = cs.slug === 'mobile-lending-management'
+  const isAim = cs.slug === 'aim'
 
   return (
     <>
@@ -165,16 +255,20 @@ export default function CaseStudyPage({ params }: PageProps) {
       <CaseStudyHero
         caseStudy={cs}
         tokens={tokens}
-        heroImageSlot={isMobileLending ? <MobileLendingHeroImage /> : undefined}
-        tagMessages={isMobileLending ? MOBILE_LENDING_TAG_MESSAGES : undefined}
+        heroImageSlot={
+          cs.slug === 'aim' ? <AimHeroImage /> :
+          isMobileLending ? <MobileLendingHeroImage /> :
+          undefined
+        }
+        tagMessages={isAim ? AIM_TAG_MESSAGES : isMobileLending ? MOBILE_LENDING_TAG_MESSAGES : undefined}
       />
 
       {/* Narrative lede: context + role */}
       <CaseStudyLede
         context={cs.context}
         overview={cs.overview}
-        roleMeta={isMobileLending ? MOBILE_LENDING_ROLE_META : undefined}
-        roleSummary={isMobileLending ? MOBILE_LENDING_ROLE_SUMMARY : undefined}
+        roleMeta={isAim ? AIM_ROLE_META : isMobileLending ? MOBILE_LENDING_ROLE_META : undefined}
+        roleSummary={isAim ? AIM_ROLE_SUMMARY : isMobileLending ? MOBILE_LENDING_ROLE_SUMMARY : undefined}
         glossary={cs.glossary}
         accentColor={tokens.label}
       />
@@ -189,7 +283,12 @@ export default function CaseStudyPage({ params }: PageProps) {
           content={cs.problem}
           glossary={cs.glossary}
           mediaSlot={
-            isMobileLending ? (
+            isAim ? (
+              <>
+                <PainPoints points={AIM_PAIN_POINTS} />
+                <Constraints constraints={AIM_CONSTRAINTS} />
+              </>
+            ) : isMobileLending ? (
               <>
                 <PainPoints points={MOBILE_LENDING_PAIN_POINTS} />
                 <Constraints constraints={MOBILE_LENDING_CONSTRAINTS} />
@@ -275,7 +374,16 @@ export default function CaseStudyPage({ params }: PageProps) {
           content={cs.discovery}
           glossary={cs.glossary}
           mediaSlot={
-            isMobileLending ? (
+            isAim ? (
+              <>
+                <ResearchMethods methods={AIM_METHODS} />
+                <KeyFindings
+                  findings={AIM_FINDINGS}
+                  accentColor="var(--phase-discovery-label)"
+                  glossary={cs.glossary}
+                />
+              </>
+            ) : isMobileLending ? (
               <>
                 <ResearchMethods methods={MOBILE_LENDING_METHODS} />
                 <CompetitiveGrid
@@ -290,7 +398,7 @@ export default function CaseStudyPage({ params }: PageProps) {
               </>
             ) : undefined
           }
-          mediaSlotAfterParagraph={isMobileLending ? 1 : undefined}
+          mediaSlotAfterParagraph={(isAim || isMobileLending) ? 1 : undefined}
         />
 
         <PhaseDivider fromPhase="discovery" toPhase="solution" />
@@ -346,7 +454,11 @@ export default function CaseStudyPage({ params }: PageProps) {
               <div className="max-w-[480px] mb-[var(--space-section-sm)]">
                 <WorkCard
                   caseStudy={nextCS}
-                  cardImageSlot={nextCS.slug === 'mobile-lending-management' ? <MobileLendingCardImage /> : undefined}
+                  cardImageSlot={
+                    nextCS.slug === 'aim' ? <AimCardImage /> :
+                    nextCS.slug === 'mobile-lending-management' ? <MobileLendingCardImage /> :
+                    undefined
+                  }
                 />
               </div>
             )}
