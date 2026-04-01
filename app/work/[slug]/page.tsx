@@ -27,6 +27,7 @@ import CaliberDashboard       from '@/components/case-study/caliber/CaliberDashb
 import CaliberIncentives      from '@/components/case-study/caliber/CaliberIncentives'
 import CaliberSolarEstimator  from '@/components/case-study/caliber/CaliberSolarEstimator'
 import CaliberTechBooking     from '@/components/case-study/caliber/CaliberTechBooking'
+import ScaledMockup           from '@/components/case-study/caliber/ScaledMockup'
 import ScrollReveal        from '@/components/ui/ScrollReveal'
 import Button              from '@/components/ui/Button'
 
@@ -612,7 +613,7 @@ export default function CaseStudyPage({ params }: PageProps) {
               <>
                 <ScrollReveal>
                   <div style={{ marginTop: 'var(--space-section-sm)', marginBottom: 'var(--space-section-sm)' }}>
-                    <CaliberDashboard />
+                    <ScaledMockup><CaliberDashboard /></ScaledMockup>
                     <p className="text-body-sm" style={{ color: 'var(--color-text-muted)', textAlign: 'center', marginTop: 'var(--space-stack-sm)', maxWidth: '400px', marginLeft: 'auto', marginRight: 'auto' }}>
                       The dashboard. Leaderboard position, key metrics, and estimated pay. Everything a rep checks first.
                     </p>
@@ -620,7 +621,7 @@ export default function CaseStudyPage({ params }: PageProps) {
                 </ScrollReveal>
                 <ScrollReveal>
                   <div style={{ marginTop: 'var(--space-section-sm)', marginBottom: 'var(--space-section-sm)' }}>
-                    <CaliberIncentives />
+                    <ScaledMockup designWidth={860}><CaliberIncentives /></ScaledMockup>
                     <p className="text-body-sm" style={{ color: 'var(--color-text-muted)', textAlign: 'center', marginTop: 'var(--space-stack-sm)', maxWidth: '400px', marginLeft: 'auto', marginRight: 'auto' }}>
                       Incentives. Progress bars replaced social media screenshots and guesswork.
                     </p>
@@ -658,7 +659,7 @@ export default function CaseStudyPage({ params }: PageProps) {
                 </ScrollReveal>
                 <ScrollReveal>
                   <div style={{ marginTop: 'var(--space-section-sm)', marginBottom: 'var(--space-section-sm)' }}>
-                    <CaliberTechBooking />
+                    <ScaledMockup designWidth={860}><CaliberTechBooking /></ScaledMockup>
                     <p className="text-body-sm" style={{ color: 'var(--color-text-muted)', textAlign: 'center', marginTop: 'var(--space-stack-sm)', maxWidth: '400px', marginLeft: 'auto', marginRight: 'auto' }}>
                       Tech booking. Ratings, availability, and a face. Trust before the tech even shows up.
                     </p>
