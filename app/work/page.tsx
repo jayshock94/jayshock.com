@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import WorkCard from '@/components/work/WorkCard'
+import AimCardImage           from '@/components/work/AimCardImage'
 import MobileLendingCardImage from '@/components/work/MobileLendingCardImage'
 import { caseStudies } from '@/data/case-studies'
 
@@ -31,15 +32,17 @@ export default function WorkPage() {
         <div
           className="
             grid grid-cols-1 gap-[var(--space-component-lg)]
-            md:grid-cols-2
-            lg:grid-cols-3
           "
         >
           {caseStudies.map(cs => (
             <WorkCard
               key={cs.slug}
               caseStudy={cs}
-              cardImageSlot={cs.slug === 'mobile-lending-management' ? <MobileLendingCardImage /> : undefined}
+              cardImageSlot={
+                cs.slug === 'aim' ? <AimCardImage /> :
+                cs.slug === 'mobile-lending-management' ? <MobileLendingCardImage /> :
+                undefined
+              }
             />
           ))}
         </div>

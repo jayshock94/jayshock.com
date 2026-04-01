@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import type { CaseStudyImage, GlossaryTerm, PhaseContent, PhaseKey } from '@/data/types'
 import ScrollReveal from '@/components/ui/ScrollReveal'
 import GlossaryParagraph from './GlossaryParagraph'
@@ -77,14 +78,29 @@ function renderImages(images: CaseStudyImage[], vars: typeof PHASE_VARS.impact) 
           style={{ marginTop: 'var(--space-stack-lg)', marginBottom: 'var(--space-stack-md)' }}
         >
           <figure className="m-0">
-            <div
-              className="w-full rounded-[8px] border border-[var(--color-border)] flex items-center justify-center p-[var(--space-component-md)]"
-              style={{ background: 'var(--color-surface)', aspectRatio: '16/9' }}
-            >
-              <p className="text-body-sm text-[var(--color-text-muted)] text-center opacity-60">
-                {images[0].alt}
-              </p>
-            </div>
+            {images[0].src ? (
+              <div
+                className="relative w-full rounded-[8px] overflow-hidden border border-[var(--color-border)]"
+                style={{ aspectRatio: '16/9' }}
+              >
+                <Image
+                  src={images[0].src}
+                  alt={images[0].alt}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 1200px"
+                  style={{ objectFit: 'cover', objectPosition: 'top' }}
+                />
+              </div>
+            ) : (
+              <div
+                className="w-full rounded-[8px] border border-[var(--color-border)] flex items-center justify-center p-[var(--space-component-md)]"
+                style={{ background: 'var(--color-surface)', aspectRatio: '16/9' }}
+              >
+                <p className="text-body-sm text-[var(--color-text-muted)] text-center opacity-60">
+                  {images[0].alt}
+                </p>
+              </div>
+            )}
             {images[0].caption && (
               <figcaption className="mt-[var(--space-stack-sm)] text-body-sm text-[var(--color-text-muted)] px-[var(--space-page-margin)]">
                 {images[0].caption}
@@ -162,6 +178,26 @@ function renderImages(images: CaseStudyImage[], vars: typeof PHASE_VARS.impact) 
                   maxWidth={240}
                 />
               </div>
+            ) : img.src ? (
+              <>
+                <div
+                  className="relative w-full rounded-[8px] overflow-hidden border border-[var(--color-border)]"
+                  style={{ aspectRatio: img.aspect === 'portrait' ? '9/18' : '16/9' }}
+                >
+                  <Image
+                    src={img.src}
+                    alt={img.alt}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 600px"
+                    style={{ objectFit: 'cover', objectPosition: 'top' }}
+                  />
+                </div>
+                {img.caption && (
+                  <figcaption className="mt-[var(--space-stack-sm)] text-body-sm text-[var(--color-text-muted)]">
+                    {img.caption}
+                  </figcaption>
+                )}
+              </>
             ) : (
               <>
                 <div
@@ -217,7 +253,7 @@ export default function PhaseSection({
     <section
       id={phase}
       data-phase-section={phase}
-      className="py-[var(--space-section-md)] transition-colors duration-700"
+      className="py-[var(--space-section-lg)] transition-colors duration-700"
       style={{
         backgroundColor: vars.bg,
         backgroundImage: `radial-gradient(ellipse 80% 50% at 50% 20%, ${vars.glass}, transparent 70%)`,
@@ -256,7 +292,7 @@ export default function PhaseSection({
         {/* Stats (Impact phase) */}
         {stats && stats.length > 0 && (
           <div
-            className="grid grid-cols-2 md:grid-cols-3 gap-[var(--space-component-md)] mb-[var(--space-section-sm)]"
+            className="grid grid-cols-2 md:grid-cols-3 gap-[var(--space-component-md)] mb-[var(--space-section-md)]"
             role="list"
             aria-label="Impact metrics"
           >
@@ -299,7 +335,7 @@ export default function PhaseSection({
         )}
 
         {/* Body paragraphs with interleaved images and mediaSlot */}
-        <div className="flex flex-col gap-[var(--space-stack-md)] max-w-content">
+        <div className="flex flex-col gap-[var(--space-stack-md)]">
           {paragraphs.map((p, i) => (
             <div key={`block-${i}`}>
               <ScrollReveal>
@@ -327,10 +363,10 @@ export default function PhaseSection({
                 )}
               </ScrollReveal>
 
-              {/* mediaSlot insertion */}
+              {/* mediaSlot insertion — renders at full width outside content max */}
               {mediaSlot && (mediaSlotAfterParagraph ?? paragraphs.length - 1) === i && (
                 <ScrollReveal>
-                  <div style={{ marginTop: 'var(--space-stack-lg)' }}>
+                  <div style={{ marginTop: 'var(--space-section-sm)' }}>
                     {mediaSlot}
                   </div>
                 </ScrollReveal>
@@ -348,7 +384,7 @@ export default function PhaseSection({
             <blockquote
               className="max-w-layout mx-auto text-center"
               style={{
-                marginTop: 'var(--space-section-sm)',
+                marginTop: 'var(--space-section-md)',
                 marginBottom: 'var(--space-stack-lg)',
                 paddingTop: 'var(--space-stack-lg)',
                 paddingBottom: 'var(--space-stack-lg)',
@@ -370,7 +406,7 @@ export default function PhaseSection({
                   className="text-body-sm not-italic"
                   style={{ color: vars.label }}
                 >
-                  {quote.attribution}
+                  – {quote.attribution}
                 </cite>
               )}
             </blockquote>

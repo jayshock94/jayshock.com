@@ -2,7 +2,7 @@ import type { PageContext } from './types'
 
 /** Map of case study slugs to their titles for system prompt context. */
 const CASE_STUDY_TITLES: Record<string, string> = {
-  'lending-engine-service': 'Unifying seven products into one lending engine',
+  'aim': 'Account & Information Management — replacing legacy lending tools with a unified workspace',
   'mobile-lending-management': 'From support calls to self-service',
   'virtual-badge': 'Getting reps on doors weeks sooner',
 }

@@ -14,7 +14,7 @@ const mobileLendingManagement: CaseStudy = {
   eyebrow:      'Fintech · 2024–2025',
   role:         'Product Designer',
   year:         '2024–2025',
-  types:        ['Mobile', 'Research', 'End to End'],
+  types:        ['White-Label App', '9 App Audit', 'Payment Redesign', 'Usability Tested', 'Confetti Moment'],
   cardImpactLine:
     'It was easier to call support than use the app. Payments got missed, borrowers got frustrated, and the interface hadn\'t been updated in years.',
   cardImage: '/images/work/mobile-lending.png',

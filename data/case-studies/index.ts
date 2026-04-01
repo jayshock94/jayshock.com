@@ -1,11 +1,11 @@
 import type { CaseStudy } from '@/data/types'
-import lendingEngineService   from './lending-engine-service'
+import aim                     from './aim'
 import mobileLendingManagement from './mobile-lending-management'
-import virtualBadge           from './virtual-badge'
+import virtualBadge            from './virtual-badge'
 
 /** Ordered list — strongest first, per site-content.md. */
 export const caseStudies: CaseStudy[] = [
-  lendingEngineService,
+  aim,
   mobileLendingManagement,
   virtualBadge,
 ]
