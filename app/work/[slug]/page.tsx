@@ -628,7 +628,29 @@ export default function CaseStudyPage({ params }: PageProps) {
                 </ScrollReveal>
                 <ScrollReveal>
                   <div style={{ marginTop: 'var(--space-section-sm)', marginBottom: 'var(--space-section-sm)' }}>
-                    <CaliberSolarEstimator />
+                    <div style={{
+                      background: 'var(--color-surface)',
+                      border: '1px solid var(--color-border)',
+                      borderRadius: '20px',
+                      padding: 'var(--space-section-sm) var(--space-component-lg)',
+                      maxWidth: '860px',
+                      margin: '0 auto',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      gap: 'var(--space-stack-sm)',
+                    }}>
+                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.5 }}>
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                        <path d="M7 11V7a5 5 0 0110 0v4" />
+                      </svg>
+                      <p className="text-body-sm" style={{ color: 'var(--color-text-muted)', margin: 0, fontWeight: 500 }}>
+                        Solar Estimator
+                      </p>
+                      <p className="text-body-sm" style={{ color: 'var(--color-text-muted)', margin: 0, opacity: 0.7, textAlign: 'center' }}>
+                        This screen is under NDA and cannot be shown publicly.
+                      </p>
+                    </div>
                     <p className="text-body-sm" style={{ color: 'var(--color-text-muted)', textAlign: 'center', marginTop: 'var(--space-stack-sm)', maxWidth: '600px', marginLeft: 'auto', marginRight: 'auto' }}>
                       The solar estimator. Satellite imagery, panel count, and savings. All at the door.
                     </p>
