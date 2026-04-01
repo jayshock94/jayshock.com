@@ -65,7 +65,7 @@ const aim: CaseStudy = {
   solution: {
     headline: 'Twelve modules. One surface.',
     paragraphs: [
-      'Every loan attached to a person, visible in one view. The loan detail screen puts people, payments, documents, and history on a single surface. No more hunting across systems.',
+      'Twelve modules. Every loan attached to a person, visible in one view. The loan detail screen puts people, payments, documents, and history on a single surface. No more hunting across systems.',
       'The queue system was the backbone. Auto-assign logic routes work by configurable rules. Managers set it once. The system handles distribution. A teller sees drawer management. A branch manager sees team workload. Same product, different jobs.',
       'Settings was the hardest design problem. Role-based access, security roles, global and dashboard-level configurations. All deeply customizable. One bad permission could lock a team out of critical workflow. I made the most dangerous settings require the most deliberate actions.',
       'Later we added an AI Account Summary. Loan history and customer context synthesized into a readable brief. When a loan landed on someone\'s desk with no context, they had everything they needed. Every module connected to Decision Engine, GTO, CAM, and Document Engine. The hub the research pointed to from day one.',
@@ -118,6 +118,13 @@ const aim: CaseStudy = {
       },
     ],
   },
+
+  glossary: [
+    {
+      term: 'Twelve modules',
+      definition: 'customer management, loan servicing, payment processing, document management, queue/task management, settings & configuration, reporting, collections/delinquency, accounting, security & roles, AI account summary, and decision engine integration. all in one surface.',
+    },
+  ],
 
   nextSlug: 'mobile-lending-management',
 }
