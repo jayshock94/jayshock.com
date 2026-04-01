@@ -9,7 +9,6 @@ import CaseStudyLede       from '@/components/case-study/CaseStudyLede'
 import PhaseSection        from '@/components/case-study/PhaseSection'
 import PhaseObserver       from '@/components/case-study/PhaseObserver'
 import PhaseProgress       from '@/components/case-study/PhaseProgress'
-import PhaseDivider        from '@/components/case-study/PhaseDivider'
 import AimHeroImage           from '@/components/case-study/AimHeroImage'
 import MobileLendingHeroImage from '@/components/case-study/MobileLendingHeroImage'
 import PainPoints            from '@/components/case-study/PainPoints'
@@ -23,6 +22,11 @@ import FinalAppComposite from '@/components/case-study/FinalAppComposite'
 import WorkCard            from '@/components/work/WorkCard'
 import AimCardImage           from '@/components/work/AimCardImage'
 import MobileLendingCardImage from '@/components/work/MobileLendingCardImage'
+import CaliberCardImage       from '@/components/work/CaliberCardImage'
+import CaliberDashboard       from '@/components/case-study/caliber/CaliberDashboard'
+import CaliberIncentives      from '@/components/case-study/caliber/CaliberIncentives'
+import CaliberSolarEstimator  from '@/components/case-study/caliber/CaliberSolarEstimator'
+import CaliberTechBooking     from '@/components/case-study/caliber/CaliberTechBooking'
 import ScrollReveal        from '@/components/ui/ScrollReveal'
 import Button              from '@/components/ui/Button'
 
@@ -48,13 +52,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 /* ------------------------------------------------------------------ */
 
 const MOBILE_LENDING_ROLE_META = [
-  { label: 'Role', value: 'Lead UX + Product Design' },
-  { label: 'Team', value: '2 supporting designers' },
-  { label: 'Scope', value: 'End to end: research through handoff' },
+  { label: 'Role', value: 'Lead Product Designer' },
+  { label: 'Team', value: 'Led 2 supporting designers' },
+  { label: 'Scope', value: 'Full redesign: audit, research, design, testing, handoff' },
 ]
 
 const MOBILE_LENDING_ROLE_SUMMARY =
-  'Worked across engineering, stakeholders, and product owners to figure out what we could ship within an architecture we couldn\'t rebuild.'
+  'Led the design direction and built every screen. Two supporting designers helped with payment flow models, test sessions, and competitor research. Worked across engineering, stakeholders, and POs.'
 
 const MOBILE_LENDING_SKILL_CHIPS = [
   { text: 'User Research', barnabyMessage: 'What kind of user research did Jay do on this project?' },
@@ -156,24 +160,122 @@ const MOBILE_LENDING_METHODS = [
 ]
 
 /* ------------------------------------------------------------------ */
+/*  Caliber Smart — visual components                                 */
+/* ------------------------------------------------------------------ */
+
+const CALIBER_ROLE_META = [
+  { label: 'Role', value: 'Product Designer (solo)' },
+  { label: 'Team', value: 'Solo designer, cross-functional partners' },
+  { label: 'Scope', value: 'Full app rebuild: dashboard, sales flows, solar tools, support' },
+]
+
+const CALIBER_ROLE_SUMMARY =
+  'Worked with VPs, finance, sales support, marketing, payroll, and reps directly. Research through handoff, every screen.'
+
+const CALIBER_TAG_MESSAGES: Record<string, string> = {
+  'D2D Sales': 'What is door-to-door sales and how did it shape the design of the Caliber app?',
+  'Gamification': 'How did Jay use gamification to drive rep performance at Caliber Smart?',
+  'Solar': 'Tell me about the solar estimation tool Jay designed for Caliber Smart.',
+  'Solo Designer': 'What was it like being the only designer on a project this big?',
+}
+
+const CALIBER_PAIN_POINTS = [
+  {
+    title: 'Leaderboard updates came through Vimeo',
+    description: 'Leaders sent weekly video links. Reps had to watch a recording just to find out where they stood. No way to check in real time.',
+  },
+  {
+    title: 'Incentives lived on social media',
+    description: 'Reps saved screenshots of Instagram posts to track incentive criteria. Manual tracking led to disputes, angry calls, and wasted time.',
+  },
+  {
+    title: 'Payroll day was a warzone',
+    description: 'Every two weeks, support lines got slammed. Reps calling about pay discrepancies that were usually their own fault. Wrong direct deposit, missed chargebacks.',
+  },
+  {
+    title: 'Permits were a guessing game',
+    description: 'Reps didn\'t know if they needed to visit city hall or apply online. Expired permits sidelined reps for days. Legal fees added up.',
+  },
+  {
+    title: 'Area assignments were verbal',
+    description: 'Territories were decided in morning meetings and forgotten by lunch. No map, no record, no way to verify who was assigned where.',
+  },
+  {
+    title: 'Solar estimation was a shot in the dark',
+    description: 'Reps had no way to accurately estimate panel count or savings at the door. They were guessing, and bad estimates killed trust.',
+  },
+]
+
+const CALIBER_CONSTRAINTS = [
+  { text: 'Multi-product platform', barnabyMessage: 'How did Jay design one app that worked for solar, TV, internet, and pest control sales?' },
+  { text: 'Field-first usage', barnabyMessage: 'How did the fact that reps used this app while literally walking door-to-door affect the design?' },
+  { text: 'Recruiting advantage', barnabyMessage: 'How was the app used as a tool to recruit top sales reps from competing companies?' },
+]
+
+const CALIBER_METHODS = [
+  {
+    title: 'Sales support interviews',
+    description: 'Worked closest with the support department. Their complaints mirrored the reps\' complaints. Every call they took was a design failure.',
+  },
+  {
+    title: 'Rep surveys',
+    description: 'Sent surveys to the sales force asking for pain points and friction. Asked what other companies they\'d worked for did better.',
+  },
+  {
+    title: 'Department interviews',
+    description: 'Sat down with payroll, finance, marketing, VPs, regional managers, area managers, and the head of the tech department. Each had a different angle on the same problems.',
+  },
+  {
+    title: 'Pattern analysis',
+    description: 'Gathered everything and mapped patterns, friction points, and gaps across departments. The leaderboard insight came from this.',
+  },
+]
+
+const CALIBER_FINDINGS = [
+  {
+    title: 'The leaderboard was the engine, not the scoreboard',
+    description: 'Incentives were tied to leaderboard position. Resort trips, gear, bonuses. Reps checked it more than anything else. It wasn\'t vanity. It was how they planned their week.',
+  },
+  {
+    title: 'Bad days needed to feel recoverable',
+    description: 'A rep having a slow morning shouldn\'t see a zero and give up. The dashboard needed to show potential, not just current state.',
+  },
+  {
+    title: 'Every department was solving the same problem differently',
+    description: 'Support, payroll, marketing, and management were all dealing with information that should have been in one place. The app was the fix for all of them.',
+  },
+  {
+    title: 'Solar needed trust at the door',
+    description: 'Reps couldn\'t close solar without accurate estimates. Customers needed to see the numbers, and reps needed confidence in what they were selling.',
+  },
+]
+
+const CALIBER_SKILL_CHIPS = [
+  { text: 'User Research', barnabyMessage: 'What kind of user research did Jay do for the Caliber Smart app?' },
+  { text: 'Gamification Design', barnabyMessage: 'How did Jay apply gamification principles to the Caliber sales dashboard?' },
+  { text: 'UI Design', barnabyMessage: 'What were Jay\'s biggest UI decisions on the Caliber Smart app?' },
+  { text: 'Cross-functional Collaboration', barnabyMessage: 'How did Jay work across departments as a solo designer at Caliber?' },
+  { text: 'Information Architecture', barnabyMessage: 'How did Jay organize a multi-product sales app with this many features?' },
+]
+
+/* ------------------------------------------------------------------ */
 /*  AIM — visual components                                           */
 /* ------------------------------------------------------------------ */
 
 const AIM_ROLE_META = [
-  { label: 'Role', value: 'Co-Lead UX Product Designer' },
-  { label: 'Team', value: '3 designers, 4+ dev teams' },
-  { label: 'Scope', value: 'Dashboards, settings, queue logic, integrations' },
+  { label: 'Role', value: 'Senior UX Designer' },
+  { label: 'Team', value: '2 designers, 4+ dev teams' },
+  { label: 'Scope', value: 'Settings, navigation, queue tiles, comments, integrations' },
 ]
 
 const AIM_ROLE_SUMMARY =
-  'Worked under the Lead UX Designer\'s direction with direct access to lenders, tellers, and branch managers across multiple client organizations.'
+  'Worked alongside the Lead UX Designer, splitting modules and owning full pages from research through handoff. Direct access to lenders, tellers, and branch managers.'
 
 const AIM_TAG_MESSAGES: Record<string, string> = {
   'Legacy Replacement': 'What was the legacy system AIM replaced and why was it failing?',
   'Field Research': 'What kind of field research did Jay do for AIM? How did he work with lenders?',
   '12 Modules': 'What were the 12 modules Jay designed for AIM?',
   '$10M Impact': 'How did AIM land a $10M contract? What was the business impact?',
-  'AI Integration': 'Tell me about the AI Account Summary Jay designed for AIM.',
 }
 
 const AIM_PAIN_POINTS = [
@@ -196,7 +298,6 @@ const AIM_PAIN_POINTS = [
 ]
 
 const AIM_CONSTRAINTS = [
-  { text: 'Stakeholders worked backwards from solutions', barnabyMessage: 'How did Jay handle stakeholders who came with solutions instead of problems on AIM?' },
   { text: 'Multi-client product, single-client funding', barnabyMessage: 'How did Jay balance building for one paying client vs. designing for all future clients?' },
   { text: 'GAIN conference deadlines', barnabyMessage: 'What was the GAIN conference and how did it affect the AIM timeline?' },
   { text: 'Competitor systems locked down', barnabyMessage: 'How did Jay research competitors when their systems were locked down?' },
@@ -248,6 +349,7 @@ export default function CaseStudyPage({ params }: PageProps) {
   const nextCS = getCaseStudy(cs.nextSlug)
   const isMobileLending = cs.slug === 'mobile-lending-management'
   const isAim = cs.slug === 'aim'
+  const isCaliber = cs.slug === 'caliber-smart'
 
   return (
     <>
@@ -258,17 +360,22 @@ export default function CaseStudyPage({ params }: PageProps) {
         heroImageSlot={
           cs.slug === 'aim' ? <AimHeroImage /> :
           isMobileLending ? <MobileLendingHeroImage /> :
+          isCaliber ? (
+            <div style={{ position: 'relative', width: '100%', maxWidth: '900px', margin: '0 auto', height: 'clamp(300px, 38vw, 420px)' }}>
+              <CaliberCardImage />
+            </div>
+          ) :
           undefined
         }
-        tagMessages={isAim ? AIM_TAG_MESSAGES : isMobileLending ? MOBILE_LENDING_TAG_MESSAGES : undefined}
+        tagMessages={isAim ? AIM_TAG_MESSAGES : isMobileLending ? MOBILE_LENDING_TAG_MESSAGES : isCaliber ? CALIBER_TAG_MESSAGES : undefined}
       />
 
       {/* Narrative lede: context + role */}
       <CaseStudyLede
         context={cs.context}
         overview={cs.overview}
-        roleMeta={isAim ? AIM_ROLE_META : isMobileLending ? MOBILE_LENDING_ROLE_META : undefined}
-        roleSummary={isAim ? AIM_ROLE_SUMMARY : isMobileLending ? MOBILE_LENDING_ROLE_SUMMARY : undefined}
+        roleMeta={isAim ? AIM_ROLE_META : isMobileLending ? MOBILE_LENDING_ROLE_META : isCaliber ? CALIBER_ROLE_META : undefined}
+        roleSummary={isAim ? AIM_ROLE_SUMMARY : isMobileLending ? MOBILE_LENDING_ROLE_SUMMARY : isCaliber ? CALIBER_ROLE_SUMMARY : undefined}
         glossary={cs.glossary}
         accentColor={tokens.label}
       />
@@ -287,6 +394,11 @@ export default function CaseStudyPage({ params }: PageProps) {
               <>
                 <PainPoints points={AIM_PAIN_POINTS} />
                 <Constraints constraints={AIM_CONSTRAINTS} />
+              </>
+            ) : isCaliber ? (
+              <>
+                <PainPoints points={CALIBER_PAIN_POINTS} />
+                <Constraints constraints={CALIBER_CONSTRAINTS} />
               </>
             ) : isMobileLending ? (
               <>
@@ -366,7 +478,6 @@ export default function CaseStudyPage({ params }: PageProps) {
           mediaSlotAfterParagraph={0}
         />
 
-        <PhaseDivider fromPhase="problem" toPhase="discovery" />
 
         <PhaseSection
           phase="discovery"
@@ -377,8 +488,57 @@ export default function CaseStudyPage({ params }: PageProps) {
             isAim ? (
               <>
                 <ResearchMethods methods={AIM_METHODS} />
+
+                {/* Process artifacts — Figma screenshots */}
+                <ScrollReveal>
+                  <div style={{ marginTop: 'var(--space-section-sm)', marginBottom: 'var(--space-section-sm)' }}>
+                    <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-sm)]">
+                      FROM THE FIGMA FILES
+                    </p>
+                    <div className="grid md:grid-cols-2 gap-[var(--space-component-lg)]">
+                      <div>
+                        <div style={{ borderRadius: '8px', overflow: 'hidden', border: '1px solid var(--color-border)' }}>
+                          <Image
+                            src="/images/figjam screenshots/AIM/Screenshot 2026-04-01 005615.png"
+                            alt="Market research board — competitor dashboard screenshots and analysis"
+                            width={1200}
+                            height={700}
+                            style={{ width: '100%', height: 'auto', display: 'block' }}
+                          />
+                        </div>
+                        <p className="text-body-sm text-[var(--color-text-muted)] mt-[var(--space-stack-xs)]">
+                          Market research. Every competitor dashboard side by side.
+                        </p>
+                      </div>
+                      <div>
+                        <div style={{ borderRadius: '8px', overflow: 'hidden', border: '1px solid var(--color-border)' }}>
+                          <Image
+                            src="/images/figjam screenshots/AIM/Screenshot 2026-04-01 005709.png"
+                            alt="Collections flow chart and wireframes — user flow mapping"
+                            width={1200}
+                            height={700}
+                            style={{ width: '100%', height: 'auto', display: 'block' }}
+                          />
+                        </div>
+                        <p className="text-body-sm text-[var(--color-text-muted)] mt-[var(--space-stack-xs)]">
+                          Collections flow. Every path mapped before a single pixel.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </ScrollReveal>
+
                 <KeyFindings
                   findings={AIM_FINDINGS}
+                  accentColor="var(--phase-discovery-label)"
+                  glossary={cs.glossary}
+                />
+              </>
+            ) : isCaliber ? (
+              <>
+                <ResearchMethods methods={CALIBER_METHODS} />
+                <KeyFindings
+                  findings={CALIBER_FINDINGS}
                   accentColor="var(--phase-discovery-label)"
                   glossary={cs.glossary}
                 />
@@ -390,6 +550,46 @@ export default function CaseStudyPage({ params }: PageProps) {
                   competitors={MOBILE_LENDING_COMPETITORS}
                   criteria={MOBILE_LENDING_CRITERIA}
                 />
+
+                {/* Process artifacts — Figma screenshots */}
+                <ScrollReveal>
+                  <div style={{ marginTop: 'var(--space-section-sm)', marginBottom: 'var(--space-section-sm)' }}>
+                    <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-sm)]">
+                      FROM THE FIGMA FILES
+                    </p>
+                    <div className="grid md:grid-cols-2 gap-[var(--space-component-lg)]">
+                      <div>
+                        <div style={{ borderRadius: '8px', overflow: 'hidden', border: '1px solid var(--color-border)' }}>
+                          <Image
+                            src="/images/figjam screenshots/mobile loan app/Dashboard.png"
+                            alt="Competitor audit board — 9 lending apps analyzed for hierarchy, navigation, and payment flows"
+                            width={1200}
+                            height={1600}
+                            style={{ width: '100%', height: 'auto', display: 'block' }}
+                          />
+                        </div>
+                        <p className="text-body-sm text-[var(--color-text-muted)] mt-[var(--space-stack-xs)]">
+                          Competitor audit. Nine apps torn apart to find what borrowers expected.
+                        </p>
+                      </div>
+                      <div>
+                        <div style={{ borderRadius: '8px', overflow: 'hidden', border: '1px solid var(--color-border)' }}>
+                          <Image
+                            src="/images/figjam screenshots/mobile loan app/Screenshot 2026-04-01 004906.png"
+                            alt="Current vs proposed user flow — flow chart comparison showing simplified navigation paths"
+                            width={1200}
+                            height={700}
+                            style={{ width: '100%', height: 'auto', display: 'block' }}
+                          />
+                        </div>
+                        <p className="text-body-sm text-[var(--color-text-muted)] mt-[var(--space-stack-xs)]">
+                          Current flow vs proposed. Mapping every path before redesigning a single screen.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </ScrollReveal>
+
                 <KeyFindings
                   findings={MOBILE_LENDING_FINDINGS}
                   accentColor="var(--phase-discovery-label)"
@@ -398,10 +598,9 @@ export default function CaseStudyPage({ params }: PageProps) {
               </>
             ) : undefined
           }
-          mediaSlotAfterParagraph={(isAim || isMobileLending) ? 1 : undefined}
+          mediaSlotAfterParagraph={(isAim || isMobileLending || isCaliber) ? 1 : undefined}
         />
 
-        <PhaseDivider fromPhase="discovery" toPhase="solution" />
 
         <PhaseSection
           phase="solution"
@@ -409,7 +608,42 @@ export default function CaseStudyPage({ params }: PageProps) {
           content={cs.solution}
           glossary={cs.glossary}
           mediaSlot={
-            isMobileLending ? (
+            isCaliber ? (
+              <>
+                <ScrollReveal>
+                  <div style={{ marginTop: 'var(--space-section-sm)', marginBottom: 'var(--space-section-sm)' }}>
+                    <CaliberDashboard />
+                    <p className="text-body-sm" style={{ color: 'var(--color-text-muted)', textAlign: 'center', marginTop: 'var(--space-stack-sm)', maxWidth: '400px', marginLeft: 'auto', marginRight: 'auto' }}>
+                      The dashboard. Leaderboard position, key metrics, and estimated pay. Everything a rep checks first.
+                    </p>
+                  </div>
+                </ScrollReveal>
+                <ScrollReveal>
+                  <div style={{ marginTop: 'var(--space-section-sm)', marginBottom: 'var(--space-section-sm)' }}>
+                    <CaliberIncentives />
+                    <p className="text-body-sm" style={{ color: 'var(--color-text-muted)', textAlign: 'center', marginTop: 'var(--space-stack-sm)', maxWidth: '400px', marginLeft: 'auto', marginRight: 'auto' }}>
+                      Incentives. Progress bars replaced social media screenshots and guesswork.
+                    </p>
+                  </div>
+                </ScrollReveal>
+                <ScrollReveal>
+                  <div style={{ marginTop: 'var(--space-section-sm)', marginBottom: 'var(--space-section-sm)' }}>
+                    <CaliberSolarEstimator />
+                    <p className="text-body-sm" style={{ color: 'var(--color-text-muted)', textAlign: 'center', marginTop: 'var(--space-stack-sm)', maxWidth: '600px', marginLeft: 'auto', marginRight: 'auto' }}>
+                      The solar estimator. Satellite imagery, panel count, and savings. All at the door.
+                    </p>
+                  </div>
+                </ScrollReveal>
+                <ScrollReveal>
+                  <div style={{ marginTop: 'var(--space-section-sm)', marginBottom: 'var(--space-section-sm)' }}>
+                    <CaliberTechBooking />
+                    <p className="text-body-sm" style={{ color: 'var(--color-text-muted)', textAlign: 'center', marginTop: 'var(--space-stack-sm)', maxWidth: '400px', marginLeft: 'auto', marginRight: 'auto' }}>
+                      Tech booking. Ratings, availability, and a face. Trust before the tech even shows up.
+                    </p>
+                  </div>
+                </ScrollReveal>
+              </>
+            ) : isMobileLending ? (
               <ScrollReveal>
                 <div style={{ marginTop: 'var(--space-stack-lg)', marginBottom: 'var(--space-stack-lg)' }}>
                   <PhoneFrame
@@ -421,10 +655,9 @@ export default function CaseStudyPage({ params }: PageProps) {
               </ScrollReveal>
             ) : undefined
           }
-          mediaSlotAfterParagraph={isMobileLending ? 1 : undefined}
+          mediaSlotAfterParagraph={isCaliber ? 1 : isMobileLending ? 1 : undefined}
         />
 
-        <PhaseDivider fromPhase="solution" toPhase="impact" />
 
         <PhaseSection
           phase="impact"
@@ -435,6 +668,114 @@ export default function CaseStudyPage({ params }: PageProps) {
           mediaSlotAfterParagraph={isMobileLending ? 1 : undefined}
         />
       </PhaseObserver>
+
+      {/* ── Explorations — directions tried and killed ── */}
+      {cs.explorations && cs.explorations.length > 0 && (
+        <section
+          className="py-[var(--space-section-md)]"
+          style={{ background: '#161616' }}
+          aria-label="Design explorations"
+        >
+          <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
+            <ScrollReveal>
+              <div className="max-w-content">
+                <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-sm)]">
+                  WHAT I EXPLORED
+                </p>
+                <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-md)]">
+                  Directions I tried and killed.
+                </h2>
+                <p className="text-body text-[var(--color-text-secondary)] mb-[var(--space-section-sm)]">
+                  Not everything shipped. These are the ideas I invested in, tested, and
+                  ultimately cut because something better emerged from the research.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            <div className="grid md:grid-cols-3 gap-[var(--space-component-lg)] max-w-layout">
+              {cs.explorations.map((exp, i) => (
+                <ScrollReveal key={exp.title} className="md:h-full">
+                  <div
+                    className="rounded-[var(--space-component-sm)] p-[var(--space-component-lg)] md:h-full"
+                    style={{
+                      background: 'var(--color-surface)',
+                      border: '1px solid var(--color-border)',
+                    }}
+                  >
+                    <div
+                      className="text-ui-md mb-[var(--space-stack-sm)]"
+                      style={{
+                        color: 'var(--color-text-muted)',
+                        fontVariantNumeric: 'tabular-nums',
+                      }}
+                    >
+                      {String(i + 1).padStart(2, '0')}
+                    </div>
+                    <h3 className="text-h4 text-[var(--color-ink)] mb-[var(--space-stack-sm)]">
+                      {exp.title}
+                    </h3>
+                    <p className="text-body-sm text-[var(--color-text-secondary)]">
+                      {exp.description}
+                    </p>
+                  </div>
+                </ScrollReveal>
+              ))}
+            </div>
+
+            {/* Exploration images — rendered below the cards, matching phase image sizing */}
+            {cs.explorations.filter(exp => exp.image?.src).map((exp) => (
+              <ScrollReveal key={`exp-img-${exp.title}`}>
+                <div
+                  className="max-w-layout mx-auto"
+                  style={{ marginTop: 'var(--space-stack-lg)', marginBottom: 'var(--space-stack-md)' }}
+                >
+                  <figure className="m-0">
+                    <div
+                      className="relative w-full rounded-[8px] overflow-hidden border border-[var(--color-border)]"
+                      style={{ aspectRatio: exp.image!.aspect === 'portrait' ? '9/18' : '16/9' }}
+                    >
+                      <Image
+                        src={exp.image!.src}
+                        alt={exp.image!.alt}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 1200px"
+                        style={{ objectFit: 'cover', objectPosition: 'top' }}
+                      />
+                    </div>
+                    {exp.image!.caption && (
+                      <figcaption className="mt-[var(--space-component-sm)] text-body-sm text-[var(--color-text-muted)] text-center">
+                        {exp.image!.caption}
+                      </figcaption>
+                    )}
+                  </figure>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* ── Learnings — what the project taught me ── */}
+      {cs.learnings && (
+        <section
+          className="py-[var(--space-section-sm)]"
+          style={{ background: '#161616' }}
+          aria-label="What I learned"
+        >
+          <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
+            <ScrollReveal>
+              <div className="max-w-content">
+                <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-sm)]">
+                  WHAT I LEARNED
+                </p>
+                <p className="text-intro text-[var(--color-text-secondary)]">
+                  {cs.learnings}
+                </p>
+              </div>
+            </ScrollReveal>
+          </div>
+        </section>
+      )}
 
       {/* Bottom navigation — force back to true canvas, no phase bleed */}
       <section
@@ -457,6 +798,7 @@ export default function CaseStudyPage({ params }: PageProps) {
                   cardImageSlot={
                     nextCS.slug === 'aim' ? <AimCardImage /> :
                     nextCS.slug === 'mobile-lending-management' ? <MobileLendingCardImage /> :
+                    nextCS.slug === 'caliber-smart' ? <CaliberCardImage /> :
                     undefined
                   }
                 />

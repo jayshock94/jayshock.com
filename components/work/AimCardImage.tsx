@@ -71,27 +71,31 @@ export default function AimCardImage() {
             </div>
           </div>
 
-          {/* AI Summary */}
+          {/* Recent Activity */}
           <div style={{ marginBottom: '18px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
-              <svg width="14" height="14" viewBox="0 0 12 12" fill="none">
-                <path d="M6 1L7.5 4.5L11 6L7.5 7.5L6 11L4.5 7.5L1 6L4.5 4.5L6 1Z" fill="rgba(100,170,255,0.7)" />
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                <circle cx="8" cy="8" r="7" stroke="rgba(100,170,255,0.5)" strokeWidth="1.5" fill="none" />
+                <path d="M8 4V8.5L11 10" stroke="rgba(100,170,255,0.7)" strokeWidth="1.5" strokeLinecap="round" />
               </svg>
               <span style={{ fontFamily: 'var(--font-outfit)', fontSize: '11px', fontWeight: 500, color: 'rgba(100,170,255,0.8)', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
-                AI Account Summary
+                Recent Activity
               </span>
             </div>
-            <div
-              style={{
-                padding: '12px 16px',
-                background: 'rgba(255,255,255,0.025)',
-                borderRadius: '8px',
-                border: '0.5px solid rgba(255,255,255,0.06)',
-              }}
-            >
-              <p style={{ fontFamily: 'var(--font-outfit)', fontSize: '12px', fontWeight: 300, color: 'rgba(255,255,255,0.55)', margin: 0, lineHeight: 1.7 }}>
-                Healthy profile. Consistent on-time payments across all active accounts. Current balance at normal levels with strong payment history.
-              </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+              {[
+                { action: 'Payment received', detail: '$2,840.00', color: 'rgba(80,200,140,0.7)' },
+                { action: 'Document uploaded', detail: 'Insurance', color: 'rgba(100,170,255,0.6)' },
+                { action: 'Queue reassigned', detail: 'Follow-up', color: 'rgba(255,200,100,0.6)' },
+              ].map((item) => (
+                <div key={item.action} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 14px', background: 'rgba(255,255,255,0.025)', borderRadius: '6px', border: '0.5px solid rgba(255,255,255,0.06)' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: item.color }} />
+                    <span style={{ fontFamily: 'var(--font-outfit)', fontSize: '11px', fontWeight: 400, color: 'rgba(255,255,255,0.7)' }}>{item.action}</span>
+                  </div>
+                  <span style={{ fontFamily: 'var(--font-outfit)', fontSize: '10px', fontWeight: 300, color: 'rgba(255,255,255,0.4)' }}>{item.detail}</span>
+                </div>
+              ))}
             </div>
           </div>
 
@@ -245,19 +249,27 @@ export default function AimCardImage() {
             </div>
           </div>
 
-          {/* AI label + summary */}
+          {/* Loan list */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '5px', marginBottom: '6px' }}>
-            <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
-              <path d="M6 1L7.5 4.5L11 6L7.5 7.5L6 11L4.5 7.5L1 6L4.5 4.5L6 1Z" fill="rgba(100,170,255,0.7)" />
+            <svg width="11" height="11" viewBox="0 0 16 16" fill="none">
+              <rect x="2" y="3" width="12" height="2" rx="1" fill="rgba(100,170,255,0.5)" />
+              <rect x="2" y="7" width="12" height="2" rx="1" fill="rgba(100,170,255,0.3)" />
+              <rect x="2" y="11" width="8" height="2" rx="1" fill="rgba(100,170,255,0.2)" />
             </svg>
             <span style={{ fontFamily: 'var(--font-outfit)', fontSize: '9px', fontWeight: 500, color: 'rgba(100,170,255,0.8)', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
-              AI Account Summary
+              Active Loans
             </span>
           </div>
-          <div style={{ padding: '8px 12px', background: 'rgba(255,255,255,0.025)', borderRadius: '6px', border: '0.5px solid rgba(255,255,255,0.05)' }}>
-            <p style={{ fontFamily: 'var(--font-outfit)', fontSize: '10px', fontWeight: 300, color: 'rgba(255,255,255,0.5)', margin: 0, lineHeight: 1.6 }}>
-              Healthy profile. Consistent on-time payments. No flags in 12 months.
-            </p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+            {[
+              { name: 'Auto Loan', amount: '$18,240' },
+              { name: 'Mortgage', amount: '$342,600' },
+            ].map((loan) => (
+              <div key={loan.name} style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 12px', background: 'rgba(255,255,255,0.025)', borderRadius: '6px', border: '0.5px solid rgba(255,255,255,0.05)' }}>
+                <span style={{ fontFamily: 'var(--font-outfit)', fontSize: '10px', fontWeight: 400, color: 'rgba(255,255,255,0.6)' }}>{loan.name}</span>
+                <span style={{ fontFamily: 'var(--font-outfit)', fontSize: '10px', fontWeight: 500, color: 'rgba(255,255,255,0.5)' }}>{loan.amount}</span>
+              </div>
+            ))}
           </div>
         </div>
 
