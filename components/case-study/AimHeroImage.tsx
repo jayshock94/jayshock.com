@@ -105,27 +105,31 @@ export default function AimHeroImage() {
           </div>
         </div>
 
-        {/* AI Summary */}
+        {/* Recent Activity */}
         <div style={{ marginBottom: 'clamp(16px, 2.5vw, 28px)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
-            <svg width="16" height="16" viewBox="0 0 12 12" fill="none">
-              <path d="M6 1L7.5 4.5L11 6L7.5 7.5L6 11L4.5 7.5L1 6L4.5 4.5L6 1Z" fill="rgba(100,170,255,0.7)" />
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <circle cx="8" cy="8" r="7" stroke="rgba(100,170,255,0.5)" strokeWidth="1.5" fill="none" />
+              <path d="M8 4V8.5L11 10" stroke="rgba(100,170,255,0.7)" strokeWidth="1.5" strokeLinecap="round" />
             </svg>
             <span style={{ fontFamily: 'var(--font-outfit)', fontSize: 'clamp(11px, 1.2vw, 13px)', fontWeight: 500, color: 'rgba(100,170,255,0.8)', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
-              AI Account Summary
+              Recent Activity
             </span>
           </div>
-          <div
-            style={{
-              padding: 'clamp(12px, 1.5vw, 18px) clamp(14px, 1.8vw, 22px)',
-              background: 'rgba(255,255,255,0.025)',
-              borderRadius: '10px',
-              border: '0.5px solid rgba(255,255,255,0.06)',
-            }}
-          >
-            <p style={{ fontFamily: 'var(--font-outfit)', fontSize: 'clamp(12px, 1.3vw, 15px)', fontWeight: 300, color: 'rgba(255,255,255,0.55)', margin: 0, lineHeight: 1.7 }}>
-              Healthy profile. Consistent on-time payments across all active accounts. Current balance at normal levels with strong payment history. No flags or escalations in the last 12 months.
-            </p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+            {[
+              { action: 'Payment received', detail: '$2,840.00 · Mar 15', color: 'rgba(80,200,140,0.7)' },
+              { action: 'Document uploaded', detail: 'Insurance verification', color: 'rgba(100,170,255,0.6)' },
+              { action: 'Queue reassigned', detail: 'Moved to follow-up', color: 'rgba(255,200,100,0.6)' },
+            ].map((item) => (
+              <div key={item.action} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'clamp(8px, 1vw, 12px) clamp(14px, 1.8vw, 22px)', background: 'rgba(255,255,255,0.025)', borderRadius: '8px', border: '0.5px solid rgba(255,255,255,0.06)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: item.color }} />
+                  <span style={{ fontFamily: 'var(--font-outfit)', fontSize: 'clamp(12px, 1.3vw, 14px)', fontWeight: 400, color: 'rgba(255,255,255,0.7)' }}>{item.action}</span>
+                </div>
+                <span style={{ fontFamily: 'var(--font-outfit)', fontSize: 'clamp(11px, 1.1vw, 13px)', fontWeight: 300, color: 'rgba(255,255,255,0.4)' }}>{item.detail}</span>
+              </div>
+            ))}
           </div>
         </div>
 

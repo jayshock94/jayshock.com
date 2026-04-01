@@ -12,7 +12,7 @@ const mobileLendingManagement: CaseStudy = {
   company:      'GoldPoint Systems',
   industry:     'Fintech',
   eyebrow:      'Fintech · 2024–2025',
-  role:         'Product Designer',
+  role:         'Lead Product Designer',
   year:         '2024–2025',
   types:        ['White-Label App', '9 App Audit', 'Payment Redesign', 'Usability Tested', 'Confetti Moment'],
   cardImpactLine:
@@ -24,6 +24,9 @@ const mobileLendingManagement: CaseStudy = {
 
   context:
     'A white-label mobile app for lending agencies. The app hadn\'t been updated in years, and it showed.',
+
+  overview:
+    'Led the redesign of a white-label mobile lending app used by borrowers across multiple financial institutions. Two supporting designers helped with payment flow models, usability test sessions, and competitor research. I owned the full design direction, built every screen, and drove decisions from audit through handoff.',
 
   // Hero image — composite of key screens across device mockups
   heroImage: 'Hero: app overview — home screen, payment flow, and confirmation screen across device mockups',
@@ -136,16 +139,30 @@ const mobileLendingManagement: CaseStudy = {
       definition: 'breaking a wall of info into smaller groups so your brain can process it. instead of 20 random items, you get 4 groups of 5 related things. way easier to scan.',
     },
     {
-      term: 'white-label',
-      definition: 'one product that gets rebranded for different companies. like how multiple lenders all use the same app but each one slaps their own logo and colors on it.',
-    },
-    {
       term: 'usability testing',
       definition: 'watching real people try to use your design to see where they get stuck. way more useful than guessing. Jay sent prototypes to a testing service where users recorded themselves completing tasks.',
     },
   ],
 
-  nextSlug: 'virtual-badge',
+  explorations: [
+    {
+      title: 'Stacked cards vs flat list for account tiles',
+      description: 'Early designs used stacked cards to show multiple accounts. It looked clean with two accounts but fell apart at four or five. Borrowers with multiple loans couldn\'t scan the list fast enough. Flat tiles with loan-type icons and nicknames tested better because they let users identify accounts at a glance without expanding anything.',
+    },
+    {
+      title: 'Bold branded account detail header',
+      description: 'One direction used a large, bold-colored header on the account detail page to match each lender\'s brand. It looked strong in isolation but competed with the payment CTA for attention. We pulled it back to a subtle brand accent so the primary action stayed dominant.',
+    },
+    {
+      title: 'Redesigned payment flow from scratch',
+      description: 'I prototyped a simplified three-step payment flow that cut two screens. Engineering couldn\'t support it without rebuilding the backend payment processor. So I kept the same screens and focused on perceived speed instead. Progress indicators, chunked fields, and the confetti ending made the same number of steps feel like fewer.',
+    },
+  ],
+
+  learnings:
+    'This project taught me the difference between what users say and what they actually need. Stakeholders were convinced the branch locator was the problem because that\'s what they heard complaints about. The real issue was upstream. It also taught me how much endings matter. The confetti screen was a small investment that changed how borrowers felt about the entire payment experience.',
+
+  nextSlug: 'caliber-smart',
 }
 
 export default mobileLendingManagement

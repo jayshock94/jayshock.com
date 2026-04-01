@@ -1,181 +1,202 @@
 /**
- * Fake Caliber Smart sales dashboard for the work card hero.
- * Two overlapping phone screens: leaderboard/metrics dashboard (front)
- * and a solar panel estimator view (behind).
- * All CSS — no external images.
+ * Caliber Smart work card — composed marketing-style image.
+ * Dark mode with contrast-safe gold accents. Tablet-first.
+ *
+ * Contrast on #1C1917: #D4A017 gold, rgba(255,255,255,0.6) secondary,
+ * rgba(255,255,255,0.4) muted, #22C55E green
  */
 export default function CaliberCardImage() {
-  const brand = '#D4A017'
-  const brandLight = '#F5E6B8'
-  const brandDark = '#8B6914'
-  const bg = '#1A1A1A'
-  const surface = '#242424'
-  const border = '#333'
-  const textPrimary = '#F2F2F2'
-  const textMuted = '#888'
+  const f = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+
+  const gold     = '#D4A017'
+  const goldBg   = '#D4A017'
+  const green    = '#22C55E'
+  const muted    = 'rgba(255,255,255,0.4)'
+  const secondary = 'rgba(255,255,255,0.6)'
+  const ink      = '#F2F2F2'
 
   return (
-    <div
-      style={{
-        position: 'relative',
-        display: 'flex',
-        alignItems: 'flex-start',
-        justifyContent: 'center',
-        width: '100%',
-        height: '100%',
-        paddingTop: '24px',
-      }}
-    >
-      {/* Back phone — Solar estimator */}
-      <div
-        style={{
-          position: 'relative',
-          width: 'clamp(90px, 30vw, 120px)',
-          height: 'clamp(195px, 65vw, 260px)',
-          borderRadius: '18px',
-          overflow: 'hidden',
-          flexShrink: 0,
-          marginRight: '-16px',
-          marginTop: '24px',
-          transform: 'rotate(-5deg)',
-          boxShadow: '0 16px 48px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.08)',
-          zIndex: 1,
-          background: bg,
-          fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-        }}
-      >
-        {/* Status bar */}
-        <div style={{ height: '24px', background: surface, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <span style={{ fontSize: '7px', color: textMuted }}>9:41</span>
-        </div>
-        {/* Header */}
-        <div style={{ padding: '8px 10px 6px', borderBottom: `0.5px solid ${border}` }}>
-          <span style={{ fontSize: '8px', color: brand, fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase' as const }}>Solar estimate</span>
-        </div>
-        {/* Fake roof view */}
-        <div style={{ margin: '8px', height: '60px', borderRadius: '6px', background: '#2A2A2A', position: 'relative', overflow: 'hidden' }}>
-          {/* Roof shape */}
-          <div style={{ position: 'absolute', top: '12px', left: '15%', width: '70%', height: '36px', background: '#333', transform: 'perspective(80px) rotateX(8deg)', borderRadius: '2px' }} />
-          {/* Solar panels */}
-          {[0, 1, 2, 3, 4, 5].map(i => (
-            <div key={i} style={{
-              position: 'absolute',
-              top: `${16 + Math.floor(i / 3) * 14}px`,
-              left: `${20 + (i % 3) * 22}%`,
-              width: '18%',
-              height: '10px',
-              background: brand,
-              opacity: 0.7,
-              borderRadius: '1px',
-            }} />
-          ))}
-        </div>
-        {/* Stats */}
-        <div style={{ padding: '6px 10px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
-            <span style={{ fontSize: '6px', color: textMuted }}>Panels</span>
-            <span style={{ fontSize: '7px', color: textPrimary, fontWeight: 500 }}>24</span>
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
-            <span style={{ fontSize: '6px', color: textMuted }}>kW output</span>
-            <span style={{ fontSize: '7px', color: textPrimary, fontWeight: 500 }}>8.4</span>
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <span style={{ fontSize: '6px', color: textMuted }}>Est. savings</span>
-            <span style={{ fontSize: '7px', color: brand, fontWeight: 600 }}>$142/mo</span>
-          </div>
-        </div>
-      </div>
+    <>
+      {/* ── Desktop composition ── */}
+      <div className="hidden md:block" style={{ position: 'absolute', inset: 0 }}>
+        <div style={{
+          position: 'absolute', top: '10%', left: '15%', width: '70%', height: '70%',
+          background: 'radial-gradient(ellipse, rgba(212,160,23,0.08) 0%, transparent 65%)',
+          pointerEvents: 'none',
+        }} />
 
-      {/* Front phone — Sales Dashboard */}
-      <div
-        style={{
-          position: 'relative',
-          width: 'clamp(105px, 35vw, 140px)',
-          height: 'clamp(225px, 75vw, 300px)',
-          borderRadius: '20px',
-          overflow: 'hidden',
-          flexShrink: 0,
-          transform: 'rotate(2deg)',
-          boxShadow: '0 20px 56px rgba(0,0,0,0.40), 0 0 0 1px rgba(255,255,255,0.10)',
-          zIndex: 2,
-          background: bg,
-          fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-        }}
-      >
-        {/* Status bar */}
-        <div style={{ height: '28px', background: surface, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <span style={{ fontSize: '8px', color: textMuted }}>9:41</span>
-        </div>
-
-        {/* Header */}
-        <div style={{ padding: '10px 12px 8px' }}>
-          <span style={{ fontSize: '7px', color: textMuted, letterSpacing: '0.06em', textTransform: 'uppercase' as const }}>Welcome back</span>
-          <div style={{ fontSize: '11px', color: textPrimary, fontWeight: 600, marginTop: '2px' }}>Your Dashboard</div>
-        </div>
-
-        {/* Goal progress */}
-        <div style={{ margin: '0 12px', padding: '8px 10px', background: surface, borderRadius: '8px', marginBottom: '8px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-            <span style={{ fontSize: '7px', color: textMuted }}>Weekly goal</span>
-            <span style={{ fontSize: '8px', color: brand, fontWeight: 600 }}>78%</span>
-          </div>
-          {/* Progress bar */}
-          <div style={{ height: '4px', background: '#333', borderRadius: '2px', overflow: 'hidden' }}>
-            <div style={{ width: '78%', height: '100%', background: `linear-gradient(90deg, ${brandDark}, ${brand})`, borderRadius: '2px' }} />
-          </div>
-        </div>
-
-        {/* Leaderboard */}
-        <div style={{ margin: '0 12px', marginBottom: '8px' }}>
-          <span style={{ fontSize: '7px', color: textMuted, letterSpacing: '0.05em', textTransform: 'uppercase' as const }}>Leaderboard</span>
-          {[
-            { rank: 1, name: 'M. Torres', sales: 47, highlight: true },
-            { rank: 2, name: 'You', sales: 42, highlight: false },
-            { rank: 3, name: 'K. Chen', sales: 38, highlight: false },
-          ].map(rep => (
-            <div
-              key={rep.rank}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-                padding: '5px 8px',
-                marginTop: '3px',
-                borderRadius: '6px',
-                background: rep.rank === 2 ? `${brand}18` : 'transparent',
-                border: rep.rank === 2 ? `0.5px solid ${brand}33` : '0.5px solid transparent',
-              }}
-            >
-              <span style={{ fontSize: '8px', fontWeight: 600, color: rep.rank === 1 ? brand : textMuted, width: '10px' }}>
-                {rep.rank}
-              </span>
-              <span style={{ fontSize: '8px', color: rep.rank === 2 ? textPrimary : textMuted, fontWeight: rep.rank === 2 ? 500 : 400, flex: 1 }}>
-                {rep.name}
-              </span>
-              <span style={{ fontSize: '8px', color: textPrimary, fontWeight: 500 }}>{rep.sales}</span>
-            </div>
-          ))}
-        </div>
-
-        {/* Payroll quick stat */}
-        <div style={{ margin: '0 12px', padding: '8px 10px', background: surface, borderRadius: '8px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        {/* Main card: Dashboard */}
+        <div style={{
+          position: 'absolute', top: '4%', left: '4%', right: '-6%', bottom: '20%',
+          background: '#1C1917', borderRadius: '16px',
+          border: '1px solid rgba(255,255,255,0.10)',
+          boxShadow: '0 8px 40px rgba(0,0,0,0.4)',
+          overflow: 'hidden', zIndex: 2, padding: '18px 20px', fontFamily: f, color: ink,
+        }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
             <div>
-              <span style={{ fontSize: '6px', color: textMuted, display: 'block' }}>This period</span>
-              <span style={{ fontSize: '10px', color: textPrimary, fontWeight: 600 }}>$3,240</span>
+              <p style={{ fontSize: '10px', color: secondary, margin: 0, fontFamily: f }}>Good morning</p>
+              <p style={{ fontSize: '16px', fontWeight: 700, color: ink, margin: '2px 0 0', fontFamily: f }}>Marcus J.</p>
             </div>
             <div style={{
-              padding: '3px 8px',
-              borderRadius: '999px',
-              background: `${brand}22`,
-              border: `0.5px solid ${brand}44`,
-            }}>
-              <span style={{ fontSize: '7px', color: brand, fontWeight: 500 }}>+12%</span>
+              width: '30px', height: '30px', borderRadius: '50%',
+              background: `linear-gradient(135deg, ${goldBg}, #8B6914)`,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontSize: '11px', fontWeight: 700, color: '#fff', fontFamily: f,
+            }}>MJ</div>
+          </div>
+
+          <div style={{ display: 'flex', gap: '4px', marginBottom: '12px' }}>
+            {['Solar', 'T-Mobile', 'Dish'].map((p, i) => (
+              <div key={p} style={{
+                padding: '3px 10px', borderRadius: '999px',
+                background: i === 0 ? 'rgba(212,160,23,0.10)' : '#292524',
+                border: `1px solid ${i === 0 ? 'rgba(212,160,23,0.25)' : 'rgba(255,255,255,0.06)'}`,
+                fontSize: '9px', fontWeight: i === 0 ? 600 : 400,
+                color: i === 0 ? gold : secondary, fontFamily: f,
+              }}>{p}</div>
+            ))}
+          </div>
+
+          <div style={{
+            background: 'rgba(212,160,23,0.08)', border: '1px solid rgba(212,160,23,0.15)',
+            borderRadius: '10px', padding: '10px 12px', marginBottom: '10px',
+          }}>
+            <p style={{ fontSize: '8px', fontWeight: 600, color: gold, textTransform: 'uppercase', letterSpacing: '0.06em', margin: 0, fontFamily: f }}>LEADERBOARD</p>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px', marginTop: '2px' }}>
+              <span style={{ fontSize: '24px', fontWeight: 800, color: gold, fontFamily: f }}>#7</span>
+              <span style={{ fontSize: '9px', color: secondary, fontFamily: f }}>of 142 reps</span>
+            </div>
+            <div style={{ marginTop: '6px', background: 'rgba(255,255,255,0.03)', borderRadius: '6px', padding: '6px 8px' }}>
+              <p style={{ fontSize: '9px', color: secondary, margin: '0 0 4px', fontFamily: f }}>3 more installs to qualify</p>
+              <div style={{ height: '4px', background: 'rgba(255,255,255,0.08)', borderRadius: '999px', overflow: 'hidden' }}>
+                <div style={{ width: '78%', height: '100%', background: `linear-gradient(90deg, #8B6914, ${goldBg})`, borderRadius: '999px' }} />
+              </div>
+            </div>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px' }}>
+            {[
+              { label: 'Total Sales', value: '34', change: '+6' },
+              { label: 'Est. Pay', value: '$4,280', change: '' },
+            ].map((m) => (
+              <div key={m.label} style={{
+                background: '#292524', border: '1px solid rgba(255,255,255,0.08)',
+                borderRadius: '8px', padding: '8px 10px',
+              }}>
+                <p style={{ fontSize: '8px', color: muted, margin: 0, fontFamily: f }}>{m.label}</p>
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px', marginTop: '2px' }}>
+                  <span style={{ fontSize: '16px', fontWeight: 700, color: m.label === 'Est. Pay' ? green : ink, fontFamily: f }}>{m.value}</span>
+                  {m.change && <span style={{ fontSize: '8px', fontWeight: 600, color: green, fontFamily: f }}>{m.change}</span>}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Floating: Incentive progress */}
+        <div style={{
+          position: 'absolute', bottom: '6%', left: '-2%', width: '55%',
+          background: '#1C1917', borderRadius: '10px',
+          border: '1px solid rgba(212,160,23,0.18)',
+          boxShadow: '0 8px 30px rgba(0,0,0,0.4)',
+          padding: '10px 12px', zIndex: 4, transform: 'rotate(-1.5deg)', fontFamily: f, color: ink,
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '6px' }}>
+            <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: goldBg, boxShadow: `0 0 6px rgba(212,160,23,0.3)` }} />
+            <p style={{ fontSize: '11px', fontWeight: 700, color: ink, margin: 0, fontFamily: f }}>Cancun Trip</p>
+            <span style={{ fontSize: '8px', color: muted, marginLeft: 'auto', fontFamily: f }}>12d left</span>
+          </div>
+          <div style={{ height: '4px', background: 'rgba(255,255,255,0.08)', borderRadius: '999px', overflow: 'hidden', marginBottom: '3px' }}>
+            <div style={{ width: '78%', height: '100%', background: `linear-gradient(90deg, #8B6914, ${goldBg})`, borderRadius: '999px' }} />
+          </div>
+          <p style={{ fontSize: '8px', color: muted, margin: 0, textAlign: 'right', fontFamily: f }}>18 / 23 installs</p>
+        </div>
+
+        {/* Floating: Pay card */}
+        <div style={{
+          position: 'absolute', bottom: '4%', right: '4%', width: '38%',
+          background: '#1C1917', borderRadius: '10px',
+          border: '1px solid rgba(34,197,94,0.15)',
+          boxShadow: '0 8px 30px rgba(0,0,0,0.4)',
+          padding: '8px 10px', zIndex: 3, transform: 'rotate(1deg)', fontFamily: f, color: ink,
+        }}>
+          <p style={{ fontSize: '8px', color: muted, textTransform: 'uppercase', letterSpacing: '0.06em', margin: 0, fontFamily: f }}>EST. PAY</p>
+          <p style={{ fontSize: '20px', fontWeight: 800, color: green, margin: '2px 0 0', fontFamily: f }}>$4,280</p>
+          <p style={{ fontSize: '8px', color: secondary, margin: '1px 0 0', fontFamily: f }}>Potential: $5,840</p>
+        </div>
+      </div>
+
+      {/* ── Mobile composition ── */}
+      <div className="md:hidden" style={{ position: 'absolute', inset: 0 }}>
+        <div style={{
+          position: 'absolute', inset: '5%',
+          background: 'radial-gradient(ellipse, rgba(212,160,23,0.08) 0%, transparent 65%)',
+          pointerEvents: 'none',
+        }} />
+
+        <div style={{
+          position: 'absolute', top: '2%', left: '4%', right: '4%', bottom: '28%',
+          background: '#1C1917', borderRadius: '14px',
+          border: '1px solid rgba(255,255,255,0.10)',
+          boxShadow: '0 6px 24px rgba(0,0,0,0.4)',
+          overflow: 'hidden', zIndex: 2, padding: '14px 16px', fontFamily: f, color: ink,
+        }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+            <div>
+              <p style={{ fontSize: '9px', color: secondary, margin: 0, fontFamily: f }}>Good morning</p>
+              <p style={{ fontSize: '14px', fontWeight: 700, color: ink, margin: '1px 0 0', fontFamily: f }}>Marcus J.</p>
+            </div>
+            <div style={{
+              width: '26px', height: '26px', borderRadius: '50%',
+              background: `linear-gradient(135deg, ${goldBg}, #8B6914)`,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontSize: '9px', fontWeight: 700, color: '#fff', fontFamily: f,
+            }}>MJ</div>
+          </div>
+
+          <div style={{
+            background: 'rgba(212,160,23,0.08)', border: '1px solid rgba(212,160,23,0.15)',
+            borderRadius: '8px', padding: '8px 10px',
+          }}>
+            <p style={{ fontSize: '7px', color: gold, textTransform: 'uppercase', margin: 0, fontFamily: f }}>LEADERBOARD</p>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: '3px', marginTop: '1px' }}>
+              <span style={{ fontSize: '20px', fontWeight: 800, color: gold, fontFamily: f }}>#7</span>
+              <span style={{ fontSize: '8px', color: secondary, fontFamily: f }}>of 142</span>
+            </div>
+            <div style={{ marginTop: '4px', height: '3px', background: 'rgba(255,255,255,0.08)', borderRadius: '999px', overflow: 'hidden' }}>
+              <div style={{ width: '78%', height: '100%', background: `linear-gradient(90deg, #8B6914, ${goldBg})`, borderRadius: '999px' }} />
             </div>
           </div>
         </div>
+
+        <div style={{
+          position: 'absolute', bottom: '8%', left: '6%', width: '55%',
+          background: '#1C1917', borderRadius: '8px',
+          border: '1px solid rgba(212,160,23,0.18)',
+          boxShadow: '0 4px 20px rgba(0,0,0,0.4)',
+          padding: '8px 10px', zIndex: 3, transform: 'rotate(-1deg)', fontFamily: f, color: ink,
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: goldBg }} />
+            <p style={{ fontSize: '9px', fontWeight: 700, color: ink, margin: 0, fontFamily: f }}>Cancun Trip</p>
+          </div>
+          <div style={{ marginTop: '4px', height: '3px', background: 'rgba(255,255,255,0.08)', borderRadius: '999px', overflow: 'hidden' }}>
+            <div style={{ width: '78%', height: '100%', background: goldBg, borderRadius: '999px' }} />
+          </div>
+        </div>
+
+        <div style={{
+          position: 'absolute', bottom: '6%', right: '8%', width: '38%',
+          background: '#1C1917', borderRadius: '8px',
+          border: '1px solid rgba(34,197,94,0.15)',
+          boxShadow: '0 4px 20px rgba(0,0,0,0.4)',
+          padding: '6px 8px', zIndex: 4, transform: 'rotate(1.5deg)', fontFamily: f, color: ink,
+        }}>
+          <p style={{ fontSize: '7px', color: muted, textTransform: 'uppercase', margin: 0, fontFamily: f }}>EST. PAY</p>
+          <p style={{ fontSize: '16px', fontWeight: 800, color: green, margin: '1px 0 0', fontFamily: f }}>$4,280</p>
+        </div>
       </div>
-    </div>
+    </>
   )
 }

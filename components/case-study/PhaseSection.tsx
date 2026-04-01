@@ -102,7 +102,7 @@ function renderImages(images: CaseStudyImage[], vars: typeof PHASE_VARS.impact) 
               </div>
             )}
             {images[0].caption && (
-              <figcaption className="mt-[var(--space-stack-sm)] text-body-sm text-[var(--color-text-muted)] px-[var(--space-page-margin)]">
+              <figcaption className="mt-[var(--space-component-sm)] text-body-sm text-[var(--color-text-muted)] text-center">
                 {images[0].caption}
               </figcaption>
             )}
@@ -146,7 +146,7 @@ function renderImages(images: CaseStudyImage[], vars: typeof PHASE_VARS.impact) 
               )}
             </div>
             {images[0].caption && (
-              <figcaption className="mt-[var(--space-stack-sm)] text-body-sm text-[var(--color-text-muted)]">
+              <figcaption className="mt-[var(--space-component-sm)] text-body-sm text-[var(--color-text-muted)] text-center">
                 {images[0].caption}
               </figcaption>
             )}
@@ -192,7 +192,7 @@ function renderImages(images: CaseStudyImage[], vars: typeof PHASE_VARS.impact) 
                   />
                 </div>
                 {img.caption && (
-                  <figcaption className="mt-[var(--space-stack-sm)] text-body-sm text-[var(--color-text-muted)]">
+                  <figcaption className="mt-[var(--space-component-sm)] text-body-sm text-[var(--color-text-muted)] text-center">
                     {img.caption}
                   </figcaption>
                 )}
@@ -211,7 +211,7 @@ function renderImages(images: CaseStudyImage[], vars: typeof PHASE_VARS.impact) 
                   </p>
                 </div>
                 {img.caption && (
-                  <figcaption className="mt-[var(--space-stack-sm)] text-body-sm text-[var(--color-text-muted)]">
+                  <figcaption className="mt-[var(--space-component-sm)] text-body-sm text-[var(--color-text-muted)] text-center">
                     {img.caption}
                   </figcaption>
                 )}

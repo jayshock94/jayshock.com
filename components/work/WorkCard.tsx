@@ -14,13 +14,12 @@ interface WorkCardProps {
 export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
   const [hovered, setHovered] = useState(false)
 
-  const { slug, title, company, cardImage, cardImpactLine, brandColorHex, types } = caseStudy
+  const { slug, title, company, cardImage, cardImpactLine, brandColorHex, types, comingSoon } = caseStudy
   const tokens = generateTokens(brandColorHex)
 
   const hasImage = !!(cardImageSlot || cardImage)
 
-  return (
-    <Link href={`/work/${slug}`} className="block" style={{ textDecoration: 'none' }}>
+  const cardContent = (
       <article
         className="work-card"
         onMouseEnter={() => setHovered(true)}
@@ -30,12 +29,12 @@ export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
           borderRadius:          '16px',
           overflow:              'hidden',
           background:            tokens.heroZone,
-          border:                `0.5px solid ${hovered ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.06)'}`,
-          boxShadow: hovered
+          border:                `0.5px solid ${hovered && !comingSoon ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.06)'}`,
+          boxShadow: hovered && !comingSoon
             ? '0 12px 48px rgba(0,0,0,0.3)'
             : '0 4px 24px rgba(0,0,0,0.15)',
-          transform:             hovered ? 'translateY(-3px)' : 'translateY(0)',
-          cursor:                'pointer',
+          transform:             hovered && !comingSoon ? 'translateY(-3px)' : 'translateY(0)',
+          cursor:                comingSoon ? 'default' : 'pointer',
           transition:            'transform 0.25s cubic-bezier(0.16,1,0.3,1), box-shadow 0.2s ease, border-color 0.2s ease',
         }}
       >
@@ -152,10 +151,12 @@ export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
               ...(hovered ? { gap: 'var(--space-component-sm)' } : {}),
             }}
           >
-            View case study
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-              <path d="M5.25 3.5L8.75 7L5.25 10.5" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            {comingSoon ? 'Coming soon' : 'View case study'}
+            {!comingSoon && (
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M5.25 3.5L8.75 7L5.25 10.5" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            )}
           </span>
         </div>
 
@@ -184,6 +185,15 @@ export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
           </div>
         )}
       </article>
+  )
+
+  if (comingSoon) {
+    return <div className="block" style={{ textDecoration: 'none' }}>{cardContent}</div>
+  }
+
+  return (
+    <Link href={`/work/${slug}`} className="block" style={{ textDecoration: 'none' }}>
+      {cardContent}
     </Link>
   )
 }

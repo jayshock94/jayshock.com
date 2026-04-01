@@ -104,6 +104,23 @@ export interface CaseStudy {
   solution:   PhaseContent
   /** Glossary terms Barnaby can explain inline via tooltip. */
   glossary?: GlossaryTerm[]
+  /**
+   * Directions explored but not shipped. Shown after solution phase.
+   * Each item: what was tried, why it was killed.
+   */
+  explorations?: {
+    title: string
+    description: string
+    /** Optional image to show alongside the exploration. */
+    image?: CaseStudyImage
+  }[]
+  /**
+   * What the designer learned from this project. 2–3 sentences.
+   * Shown at the end of the impact phase.
+   */
+  learnings?: string
+  /** If true, card shows as coming soon and doesn't link to a case study page. */
+  comingSoon?: boolean
   /** Slug of the next case study (for "Next" navigation at bottom of page). */
   nextSlug: string
 }

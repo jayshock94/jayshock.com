@@ -13,7 +13,7 @@ const aim: CaseStudy = {
   company:      'GoldPoint Systems',
   industry:     'Fintech',
   eyebrow:      'Fintech · Enterprise SaaS',
-  role:         'Co-Lead UX Product Designer',
+  role:         'Senior UX Designer',
   year:         '2022–2024',
   types:        ['Fintech', 'Enterprise', '$10M Impact'],
   cardImpactLine:
@@ -27,10 +27,10 @@ const aim: CaseStudy = {
     'GoldPoint builds lending software for financial institutions across the US. Their legacy system was losing clients to competitors.',
 
   overview:
-    'Co-lead product designer on a three-year effort to replace the legacy workflow. I owned end-to-end design across dashboards, settings, queue logic, and integrations. Worked under the Lead UX Designer\'s direction with direct access to lenders, tellers, and branch managers.',
+    'Senior UX designer on a three-year effort to replace the legacy workflow. I owned settings, navigation, queue tiles, comments, and integrations end to end. Worked alongside the Lead UX Designer, who used this project to mentor me into a lead role. We split modules between us and I led full pages from research through handoff. Direct access to lenders, tellers, and branch managers throughout.',
 
   heroImage:
-    'Hero: AIM customer dashboard with AI summary, loan list, and quick actions',
+    'Hero: AIM customer dashboard with loan list and quick actions',
 
   problem: {
     headline: 'Five tabs, a spreadsheet, and a sticky note.',
@@ -62,13 +62,16 @@ const aim: CaseStudy = {
     },
   },
 
+  /* ── Process artifacts shown in discovery ── */
+  // These are referenced in the page template's discovery mediaSlot
+
   solution: {
     headline: 'Twelve modules. One surface.',
     paragraphs: [
       'Twelve modules. Every loan attached to a person, visible in one view. The loan detail screen puts people, payments, documents, and history on a single surface. No more hunting across systems.',
       'The queue system was the backbone. Auto-assign logic routes work by configurable rules. Managers set it once. The system handles distribution. A teller sees drawer management. A branch manager sees team workload. Same product, different jobs.',
       'Settings was the hardest design problem. Role-based access, security roles, global and dashboard-level configurations. All deeply customizable. One bad permission could lock a team out of critical workflow. I made the most dangerous settings require the most deliberate actions.',
-      'Later we added an AI Account Summary. Loan history and customer context synthesized into a readable brief. When a loan landed on someone\'s desk with no context, they had everything they needed. Every module connected to Decision Engine, GTO, CAM, and Document Engine. The hub the research pointed to from day one.',
+      'Every module connected to Decision Engine, GTO, CAM, and Document Engine. The hub the research pointed to from day one.',
     ],
     images: [
       {
@@ -86,18 +89,11 @@ const aim: CaseStudy = {
         afterParagraph: 0,
       },
       {
-        src:            '/images/AIM/Other Transaction.png',
+        src:            '/images/AIM/settings-other-transaction.png',
         alt:            'Role access settings modal with field-level view and edit toggles per security role',
         caption:        'The settings system. Customizable but designed to be hard to break.',
         aspect:         'landscape',
         afterParagraph: 2,
-      },
-      {
-        src:            '/images/AIM/ai summary.png',
-        alt:            'AI Account Summary with synthesized loan history and customer context',
-        caption:        'AI summary. Context for every handoff, without the digging.',
-        aspect:         'landscape',
-        afterParagraph: 3,
       },
     ],
   },
@@ -117,9 +113,9 @@ const aim: CaseStudy = {
       'Handoff improvement estimated from client team reports. Formal analytics were not tracked at launch.',
     images: [
       {
-        src:            '/images/AIM/customer-dashboard-ai-summary.png',
-        alt:            'Customer dashboard with AI summary, the hub that replaced five separate tools',
-        caption:        'Queues, tasks, loan details, AI context. All connected. No more hunting across five systems.',
+        src:            '/images/AIM/customer details real 2.png',
+        alt:            'Customer dashboard — the hub that replaced five separate tools',
+        caption:        'One surface replaced an entire workflow. That was the point.',
         aspect:         'landscape',
         afterParagraph: 1,
       },
@@ -129,7 +125,7 @@ const aim: CaseStudy = {
   glossary: [
     {
       term: 'Twelve modules',
-      definition: 'customer management, loan servicing, payment processing, document management, queue/task management, settings & configuration, reporting, collections/delinquency, accounting, security & roles, AI account summary, and decision engine integration. all in one surface.',
+      definition: 'customer management, loan servicing, payment processing, document management, queue/task management, settings & configuration, reporting, collections/delinquency, accounting, security & roles, and decision engine integration. all in one surface.',
     },
     {
       term: 'SIM',
@@ -156,6 +152,30 @@ const aim: CaseStudy = {
       definition: 'rules that automatically route work to the right person. instead of a manager manually handing out tasks every morning, the system distributes based on role, workload, branch, or whatever rules the manager sets up.',
     },
   ],
+
+  explorations: [
+    {
+      title: 'Hamburger nav vs tab bar vs sidebar',
+      description: 'Early prototypes tested three navigation patterns. Hamburger hid too much from power users who needed everything visible. Tab bar couldn\'t scale to twelve modules. We landed on a persistent sidebar with collapsible groups so lenders could see the full system at a glance.',
+    },
+{
+      title: 'Bold summary banner vs inline stats',
+      description: 'We tested a large hero banner showing key numbers at the top of the dashboard. It looked great in mockups but took up too much vertical space on the 1366x768 monitors most branches used. The final design moved stats into compact tiles so users could see their queue immediately.',
+    },
+    {
+      title: 'AI Account Summary',
+      description: 'I pushed hard for an AI-powered account summary that would synthesize loan history and customer context into a readable brief. When a loan landed on someone\'s desk with no context, they had to dig through multiple screens to piece the story together. The AI summary would solve that cold-start problem instantly. I designed the full feature and prototyped it, but the team decided not to build it. Still think it was the right idea at the wrong time.',
+      image: {
+        src:     '/images/AIM/ai summary 2.png',
+        alt:     'AI Account Summary prototype — synthesized loan history and customer context in a readable brief',
+        caption: 'The AI summary I designed and prototyped. Killed before launch.',
+        aspect:  'landscape',
+      },
+    },
+  ],
+
+  learnings:
+    'This project taught me how to design for the highest-stakes version of a user. One wrong setting could lock an entire branch out of their workflow. It forced me to think about progressive disclosure, confirmation patterns, and how to make dangerous actions feel deliberate. It also taught me how to work with a lead who gave me room to own full pages while I watched how he approached the ones he kept.',
 
   nextSlug: 'mobile-lending-management',
 }
