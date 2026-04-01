@@ -160,9 +160,8 @@ function renderImages(images: CaseStudyImage[], vars: typeof PHASE_VARS.impact) 
   return (
     <ScrollReveal>
       <div
-        className="max-w-layout mx-auto grid gap-[var(--space-component-md)]"
+        className="max-w-layout mx-auto grid grid-cols-1 md:grid-cols-2 gap-[var(--space-component-md)]"
         style={{
-          gridTemplateColumns: `repeat(${Math.min(images.length, 2)}, 1fr)`,
           marginTop: 'var(--space-stack-lg)',
           marginBottom: 'var(--space-stack-md)',
         }}

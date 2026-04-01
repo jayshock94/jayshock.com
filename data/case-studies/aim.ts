@@ -79,6 +79,13 @@ const aim: CaseStudy = {
         afterParagraph: 0,
       },
       {
+        src:            '/images/AIM/Other Transaction v2.png',
+        alt:            'Loan details with other transactions view',
+        caption:        'Other transactions. Everything attached to the loan in one place.',
+        aspect:         'landscape',
+        afterParagraph: 0,
+      },
+      {
         src:            '/images/AIM/Other Transaction.png',
         alt:            'Role access settings modal with field-level view and edit toggles per security role',
         caption:        'The settings system. Customizable but designed to be hard to break.',
@@ -112,7 +119,7 @@ const aim: CaseStudy = {
       {
         src:            '/images/AIM/customer-dashboard-ai-summary.png',
         alt:            'Customer dashboard with AI summary, the hub that replaced five separate tools',
-        caption:        'One screen replaced an entire workflow. That was the point.',
+        caption:        'Queues, tasks, loan details, AI context. All connected. No more hunting across five systems.',
         aspect:         'landscape',
         afterParagraph: 1,
       },
@@ -123,6 +130,30 @@ const aim: CaseStudy = {
     {
       term: 'Twelve modules',
       definition: 'customer management, loan servicing, payment processing, document management, queue/task management, settings & configuration, reporting, collections/delinquency, accounting, security & roles, AI account summary, and decision engine integration. all in one surface.',
+    },
+    {
+      term: 'SIM',
+      definition: 'the legacy system AIM replaced. stood for "System Information Management." built in the early 2000s and held together with duct tape and institutional knowledge for two decades.',
+    },
+    {
+      term: 'GAIN conference',
+      definition: 'GoldPoint\'s annual client conference. this is where new features get demoed to lenders and credit unions. if your work isn\'t ready to show here, it might not get funded. the whole product roadmap orbits this event.',
+    },
+    {
+      term: 'Decision Engine',
+      definition: 'the system that automates loan approval decisions. runs the borrower\'s info through underwriting rules and spits out approve, deny, or review. AIM connects to it so lenders don\'t have to leave the workspace.',
+    },
+    {
+      term: 'cognitive load',
+      definition: 'how much your brain has to work to use something. the more you make someone think, the more likely they are to give up and call support instead.',
+    },
+    {
+      term: 'drawer management',
+      definition: 'a teller\'s personal queue of work. think of it like a physical desk drawer full of tasks — loans to process, payments to verify, documents to follow up on. each teller only sees their own.',
+    },
+    {
+      term: 'auto-assign logic',
+      definition: 'rules that automatically route work to the right person. instead of a manager manually handing out tasks every morning, the system distributes based on role, workload, branch, or whatever rules the manager sets up.',
     },
   ],
 

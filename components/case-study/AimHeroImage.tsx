@@ -23,7 +23,7 @@ export default function AimHeroImage() {
         width: '100%',
         maxWidth: '900px',
         margin: '0 auto',
-        height: 'clamp(340px, 45vw, 500px)',
+        height: 'clamp(300px, 38vw, 420px)',
         opacity: visible ? 1 : 0,
         transition: 'opacity 0.8s ease',
       }}
@@ -46,9 +46,9 @@ export default function AimHeroImage() {
         style={{
           position: 'absolute',
           top: '0',
-          left: '6%',
-          right: '6%',
-          bottom: '24%',
+          left: '8%',
+          right: '-4%',
+          bottom: '22%',
           padding: 'clamp(20px, 3vw, 32px) clamp(24px, 3.5vw, 36px)',
           background: 'rgba(10,20,38,0.92)',
           borderRadius: '14px',
@@ -164,8 +164,8 @@ export default function AimHeroImage() {
       <div
         style={{
           position: 'absolute',
-          bottom: '4%',
-          left: '-2%',
+          bottom: '8%',
+          left: '-3%',
           padding: 'clamp(14px, 1.8vw, 20px) clamp(18px, 2.2vw, 28px)',
           background: 'rgba(10,20,38,0.95)',
           borderRadius: '12px',
@@ -188,12 +188,41 @@ export default function AimHeroImage() {
         </p>
       </div>
 
+      {/* ─── Floating payoff quote (desktop only) ─── */}
+      <div
+        className="hidden md:block"
+        style={{
+          position: 'absolute',
+          bottom: '2%',
+          left: '22%',
+          padding: 'clamp(12px, 1.5vw, 18px) clamp(16px, 2vw, 24px)',
+          background: 'rgba(10,20,38,0.95)',
+          borderRadius: '12px',
+          border: '0.5px solid rgba(255,255,255,0.08)',
+          boxShadow: '0 12px 36px rgba(0,0,0,0.45)',
+          zIndex: 3,
+          transform: 'rotate(0.5deg)',
+          opacity: visible ? 1 : 0,
+          transition: 'opacity 0.6s ease 0.5s',
+        }}
+      >
+        <p style={{ fontFamily: 'var(--font-outfit)', fontSize: 'clamp(9px, 1vw, 11px)', fontWeight: 400, color: 'rgba(255,255,255,0.35)', margin: 0, marginBottom: '4px', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+          Payoff Quote
+        </p>
+        <p style={{ fontFamily: 'var(--font-outfit)', fontSize: 'clamp(18px, 2.2vw, 26px)', fontWeight: 600, color: 'rgba(255,255,255,0.95)', margin: 0, letterSpacing: '-0.01em' }}>
+          $35,000
+        </p>
+        <p style={{ fontFamily: 'var(--font-outfit)', fontSize: 'clamp(9px, 1vw, 11px)', fontWeight: 400, color: 'rgba(255,255,255,0.35)', margin: 0, marginTop: '3px' }}>
+          Valid through May 1
+        </p>
+      </div>
+
       {/* ─── Floating task queue (behind balance) ─── */}
       <div
         style={{
           position: 'absolute',
-          bottom: '1%',
-          right: '4%',
+          bottom: '5%',
+          right: '2%',
           width: 'clamp(180px, 32vw, 300px)',
           padding: 'clamp(12px, 1.5vw, 18px) clamp(14px, 1.8vw, 20px)',
           background: 'rgba(10,20,38,0.92)',
@@ -232,20 +261,6 @@ export default function AimHeroImage() {
           </div>
         ))}
       </div>
-
-      {/* Bottom fade */}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          height: '15%',
-          background: 'linear-gradient(to top, var(--case-hero-bg, #0D355C), transparent)',
-          pointerEvents: 'none',
-          zIndex: 5,
-        }}
-      />
     </div>
   )
 }
