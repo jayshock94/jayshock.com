@@ -49,7 +49,7 @@ const aim: CaseStudy = {
     ],
     images: [
       {
-        src:            '/images/AIM/task-board.png',
+        src:            '/images/AIM/task-board new.png',
         alt:            'Task board with queue management for lending teams',
         caption:        'The task board. Born from watching what managers actually spent their time doing.',
         aspect:         'landscape',
@@ -79,14 +79,14 @@ const aim: CaseStudy = {
         afterParagraph: 0,
       },
       {
-        src:            '/images/AIM/settings-global-tile-role-access.png',
+        src:            '/images/AIM/Other Transaction.png',
         alt:            'Role access settings modal with field-level view and edit toggles per security role',
         caption:        'The settings system. Customizable but designed to be hard to break.',
         aspect:         'landscape',
         afterParagraph: 2,
       },
       {
-        src:            '/images/AIM/customer-dashboard-ai-summary.png',
+        src:            '/images/AIM/ai summary.png',
         alt:            'AI Account Summary with synthesized loan history and customer context',
         caption:        'AI summary. Context for every handoff, without the digging.',
         aspect:         'landscape',
