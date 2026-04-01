@@ -86,7 +86,7 @@ export default function CaseStudyHero({ caseStudy, tokens, heroImageSlot, tagMes
           <div
             className="hero-fade-up"
             style={{
-              marginTop: 'var(--space-section-sm)',
+              marginTop: 'var(--space-section-md)',
               marginBottom: '0',
               animationDelay: '750ms',
               display: 'flex',

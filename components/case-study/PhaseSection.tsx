@@ -253,7 +253,7 @@ export default function PhaseSection({
     <section
       id={phase}
       data-phase-section={phase}
-      className="py-[var(--space-section-md)] transition-colors duration-700"
+      className="py-[var(--space-section-lg)] transition-colors duration-700"
       style={{
         backgroundColor: vars.bg,
         backgroundImage: `radial-gradient(ellipse 80% 50% at 50% 20%, ${vars.glass}, transparent 70%)`,
@@ -292,7 +292,7 @@ export default function PhaseSection({
         {/* Stats (Impact phase) */}
         {stats && stats.length > 0 && (
           <div
-            className="grid grid-cols-2 md:grid-cols-3 gap-[var(--space-component-md)] mb-[var(--space-section-sm)]"
+            className="grid grid-cols-2 md:grid-cols-3 gap-[var(--space-component-md)] mb-[var(--space-section-md)]"
             role="list"
             aria-label="Impact metrics"
           >
@@ -335,7 +335,7 @@ export default function PhaseSection({
         )}
 
         {/* Body paragraphs with interleaved images and mediaSlot */}
-        <div className="flex flex-col gap-[var(--space-stack-md)] max-w-content">
+        <div className="flex flex-col gap-[var(--space-stack-md)]">
           {paragraphs.map((p, i) => (
             <div key={`block-${i}`}>
               <ScrollReveal>
@@ -363,10 +363,10 @@ export default function PhaseSection({
                 )}
               </ScrollReveal>
 
-              {/* mediaSlot insertion */}
+              {/* mediaSlot insertion — renders at full width outside content max */}
               {mediaSlot && (mediaSlotAfterParagraph ?? paragraphs.length - 1) === i && (
                 <ScrollReveal>
-                  <div style={{ marginTop: 'var(--space-stack-lg)' }}>
+                  <div style={{ marginTop: 'var(--space-section-sm)' }}>
                     {mediaSlot}
                   </div>
                 </ScrollReveal>
@@ -384,7 +384,7 @@ export default function PhaseSection({
             <blockquote
               className="max-w-layout mx-auto text-center"
               style={{
-                marginTop: 'var(--space-section-sm)',
+                marginTop: 'var(--space-section-md)',
                 marginBottom: 'var(--space-stack-lg)',
                 paddingTop: 'var(--space-stack-lg)',
                 paddingBottom: 'var(--space-stack-lg)',

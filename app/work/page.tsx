@@ -32,8 +32,6 @@ export default function WorkPage() {
         <div
           className="
             grid grid-cols-1 gap-[var(--space-component-lg)]
-            md:grid-cols-2
-            lg:grid-cols-3
           "
         >
           {caseStudies.map(cs => (

@@ -15,9 +15,9 @@ const aim: CaseStudy = {
   eyebrow:      'Fintech · Enterprise SaaS',
   role:         'Co-Lead UX Product Designer',
   year:         '2022–2024',
-  types:        ['Legacy Replacement', 'Field Research', '12 Modules', '$10M Impact', 'AI Integration'],
+  types:        ['Fintech', 'Enterprise', '$10M Impact'],
   cardImpactLine:
-    'Replaced a legacy lending system that was losing clients. Landed a $10M contract and brought back customers who had already left.',
+    'Unified 5 legacy tools into one lending workspace. Landed a $10M contract.',
   cardImage:    '',
 
   // Deep navy — processed through color algorithm on the page
@@ -72,7 +72,7 @@ const aim: CaseStudy = {
     ],
     images: [
       {
-        src:            '/images/AIM/customer-loan-details-other-transactions.png',
+        src:            '/images/AIM/loan details.png',
         alt:            'Loan detail view with payment form and customer sidebar',
         caption:        'Loan details. One surface instead of five tabs.',
         aspect:         'landscape',

@@ -139,9 +139,7 @@ export default function HomePage() {
 
           <div
             className="
-              grid grid-cols-1 gap-[var(--space-component-md)] items-stretch
-              md:grid-cols-2 md:gap-[var(--space-component-lg)]
-              lg:grid-cols-3
+              grid grid-cols-1 gap-[var(--space-component-lg)] items-stretch
             "
           >
             {featured.map((cs, i) => (
