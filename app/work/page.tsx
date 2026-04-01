@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import WorkCard from '@/components/work/WorkCard'
 import AimCardImage           from '@/components/work/AimCardImage'
 import MobileLendingCardImage from '@/components/work/MobileLendingCardImage'
-import { caseStudies } from '@/data/case-studies'
+import CaliberCardImage       from '@/components/work/CaliberCardImage'
+import { caseStudies, additionalCaseStudies } from '@/data/case-studies'
 
 export const metadata: Metadata = {
   title:       'Work — Jay Shock, Product Designer',
@@ -41,8 +42,16 @@ export default function WorkPage() {
               cardImageSlot={
                 cs.slug === 'aim' ? <AimCardImage /> :
                 cs.slug === 'mobile-lending-management' ? <MobileLendingCardImage /> :
+                cs.slug === 'caliber-smart' ? <CaliberCardImage /> :
                 undefined
               }
+            />
+          ))}
+
+          {additionalCaseStudies.map(cs => (
+            <WorkCard
+              key={cs.slug}
+              caseStudy={cs}
             />
           ))}
         </div>

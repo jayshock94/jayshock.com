@@ -1,0 +1,119 @@
+/*
+ * Caliber Smart — App Design System
+ * ===================================
+ * Used ONLY for rendering Caliber Smart app screen mockups
+ * inside the portfolio case study. Not part of the portfolio design system.
+ *
+ * Brand DNA: Clean, competitive, professional. Gold accents from solar.
+ * Light mode tablet-first design — reps used tablets in the field.
+ * 2019–2020 era.
+ *
+ * Contrast targets (on #FFFFFF):
+ *   --cal-accent-text  #7B5B0D  → 5.5:1 (AAA small text)
+ *   --cal-text-secondary  #525252  → 7.1:1 (AAA)
+ *   --cal-text-muted  #6B6B6B  → 4.9:1 (AA)
+ *   --cal-success-text  #15803D  → 4.7:1 (AA)
+ */
+
+.caliber-screen {
+  /* ── Surfaces ── */
+  --cal-bg:               #FFFFFF;
+  --cal-surface:          #F5F5F5;
+  --cal-surface-elevated: #FFFFFF;
+  --cal-surface-card:     #FFFFFF;
+  --cal-surface-input:    #F0F0F0;
+
+  /* ── Borders ── */
+  --cal-border:           rgba(0, 0, 0, 0.10);
+  --cal-border-mid:       rgba(0, 0, 0, 0.15);
+  --cal-border-accent:    rgba(123, 91, 13, 0.25);
+
+  /* ── Text ── */
+  --cal-text-primary:     #1A1A1A;
+  --cal-text-secondary:   #525252;
+  --cal-text-muted:       #6B6B6B;
+  --cal-text-label:       #5C5C5C;
+
+  /* ── Accent — Solar Gold ── */
+  --cal-accent:           #8B6914;
+  --cal-accent-text:      #7B5B0D;
+  --cal-accent-bg:        #D4A017;
+  --cal-accent-muted:     rgba(139, 105, 20, 0.10);
+  --cal-accent-glow:      rgba(139, 105, 20, 0.06);
+
+  /* ── Semantic ── */
+  --cal-success:          #15803D;
+  --cal-success-muted:    rgba(21, 128, 61, 0.08);
+  --cal-danger:           #DC2626;
+  --cal-danger-muted:     rgba(220, 38, 38, 0.08);
+  --cal-info:             #1D4ED8;
+  --cal-info-muted:       rgba(29, 78, 216, 0.08);
+
+  /* ── Rank tiers ── */
+  --cal-rank-gold:        #8B6914;
+  --cal-rank-silver:      #475569;
+  --cal-rank-bronze:      #92400E;
+
+  /* ── Typography ── */
+  --cal-font:             -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --cal-font-display:     -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* ── Radii ── */
+  --cal-radius-sm:        6px;
+  --cal-radius-md:        10px;
+  --cal-radius-lg:        14px;
+  --cal-radius-xl:        18px;
+  --cal-radius-full:      999px;
+
+  /* ── Spacing ── */
+  --cal-space-xs:         4px;
+  --cal-space-sm:         8px;
+  --cal-space-md:         12px;
+  --cal-space-lg:         16px;
+  --cal-space-xl:         20px;
+  --cal-space-2xl:        24px;
+
+  /* ── Shared styles ── */
+  font-family: var(--cal-font);
+  color: var(--cal-text-primary);
+  background: var(--cal-bg);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.4;
+}
+
+/* ── Common card surface ── */
+.caliber-card {
+  background: var(--cal-surface-card);
+  border: 1px solid var(--cal-border);
+  border-radius: var(--cal-radius-lg);
+  padding: var(--cal-space-lg);
+}
+
+/* ── Accent-tinted card ── */
+.caliber-card--accent {
+  background: var(--cal-accent-glow);
+  border-color: var(--cal-border-accent);
+}
+
+/* ── Progress bar ── */
+.caliber-progress {
+  height: 6px;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: var(--cal-radius-full);
+  overflow: hidden;
+}
+
+.caliber-progress__fill {
+  height: 100%;
+  border-radius: var(--cal-radius-full);
+  background: var(--cal-accent-bg);
+  transition: width 0.3s ease;
+}
+
+.caliber-progress__fill--success {
+  background: var(--cal-success);
+}
+
+.caliber-progress__fill--danger {
+  background: var(--cal-danger);
+}
