@@ -4,7 +4,7 @@ import Button        from '@/components/ui/Button'
 import WorkCard      from '@/components/work/WorkCard'
 import AimCardImage           from '@/components/work/AimCardImage'
 import MobileLendingCardImage from '@/components/work/MobileLendingCardImage'
-import CaliberCardImage       from '@/components/work/CaliberCardImage'
+import CaliberCardImage from '@/components/work/CaliberCardImage'
 import HowIWork      from '@/components/about/HowIWork'
 import Toolkit       from '@/components/about/Toolkit'
 import AboutText     from '@/components/about/AboutText'
@@ -64,8 +64,7 @@ export default function HomePage() {
               <span className="hero-word" style={{ animationDelay: '400ms'  }}>I&apos;m </span>
             </span>
             <span style={{ fontWeight: 700, color: 'var(--color-ink)' }}>
-              <span className="hero-word hero-word--bold">Jay </span>
-              <span className="hero-word hero-word--bold">Shock,</span>
+              <span className="hero-word hero-word--bold">Jay,</span>
             </span>
             <br />
             <span style={{ fontWeight: 300, color: 'var(--color-text-muted)' }}>
@@ -153,7 +152,7 @@ export default function HomePage() {
                   cardImageSlot={
                     cs.slug === 'aim' ? <AimCardImage /> :
                     cs.slug === 'mobile-lending-management' ? <MobileLendingCardImage /> :
-                    cs.slug === 'virtual-badge' ? <CaliberCardImage /> :
+                    cs.slug === 'caliber-smart' ? <CaliberCardImage /> :
                     undefined
                   }
                 />
@@ -295,16 +294,9 @@ export default function HomePage() {
                   {
                     role:    'Product Designer',
                     company: 'Caliber Smart',
-                    period:  '2019 — 2021',
-                    summary: 'Redesigned the sales app using goal gradient effect and gamification. Built tools leveraging satellite imagery for solar panel estimation.',
-                    slug:    'mobile-lending-management',
-                  },
-                  {
-                    role:    'UX Designer',
-                    company: 'Dish One',
-                    period:  '2017 — 2019',
-                    summary: 'Went into the field with sales reps to gather real data. Designed a virtual badge system that got reps on doors weeks sooner.',
-                    slug:    'virtual-badge',
+                    period:  '2019 — 2020',
+                    summary: 'Solo designer on a full app rebuild for a D2D sales force. Gamified dashboards, solar estimation tools, and every system reps used to run their day.',
+                    slug:    'caliber-smart',
                   },
                 ].map((job, i) => (
                   <div

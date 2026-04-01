@@ -102,7 +102,7 @@ function renderImages(images: CaseStudyImage[], vars: typeof PHASE_VARS.impact) 
               </div>
             )}
             {images[0].caption && (
-              <figcaption className="mt-[var(--space-stack-sm)] text-body-sm text-[var(--color-text-muted)] px-[var(--space-page-margin)]">
+              <figcaption className="mt-[var(--space-component-sm)] text-body-sm text-[var(--color-text-muted)] text-center">
                 {images[0].caption}
               </figcaption>
             )}
@@ -146,7 +146,7 @@ function renderImages(images: CaseStudyImage[], vars: typeof PHASE_VARS.impact) 
               )}
             </div>
             {images[0].caption && (
-              <figcaption className="mt-[var(--space-stack-sm)] text-body-sm text-[var(--color-text-muted)]">
+              <figcaption className="mt-[var(--space-component-sm)] text-body-sm text-[var(--color-text-muted)] text-center">
                 {images[0].caption}
               </figcaption>
             )}
@@ -160,9 +160,8 @@ function renderImages(images: CaseStudyImage[], vars: typeof PHASE_VARS.impact) 
   return (
     <ScrollReveal>
       <div
-        className="max-w-layout mx-auto grid gap-[var(--space-component-md)]"
+        className="max-w-layout mx-auto grid grid-cols-1 md:grid-cols-2 gap-[var(--space-component-md)]"
         style={{
-          gridTemplateColumns: `repeat(${Math.min(images.length, 2)}, 1fr)`,
           marginTop: 'var(--space-stack-lg)',
           marginBottom: 'var(--space-stack-md)',
         }}
@@ -193,7 +192,7 @@ function renderImages(images: CaseStudyImage[], vars: typeof PHASE_VARS.impact) 
                   />
                 </div>
                 {img.caption && (
-                  <figcaption className="mt-[var(--space-stack-sm)] text-body-sm text-[var(--color-text-muted)]">
+                  <figcaption className="mt-[var(--space-component-sm)] text-body-sm text-[var(--color-text-muted)] text-center">
                     {img.caption}
                   </figcaption>
                 )}
@@ -212,7 +211,7 @@ function renderImages(images: CaseStudyImage[], vars: typeof PHASE_VARS.impact) 
                   </p>
                 </div>
                 {img.caption && (
-                  <figcaption className="mt-[var(--space-stack-sm)] text-body-sm text-[var(--color-text-muted)]">
+                  <figcaption className="mt-[var(--space-component-sm)] text-body-sm text-[var(--color-text-muted)] text-center">
                     {img.caption}
                   </figcaption>
                 )}

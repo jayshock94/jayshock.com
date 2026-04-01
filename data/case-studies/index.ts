@@ -1,19 +1,33 @@
 import type { CaseStudy } from '@/data/types'
 import aim                     from './aim'
 import mobileLendingManagement from './mobile-lending-management'
-import virtualBadge            from './virtual-badge'
+import caliberSmart            from './caliber-smart'
+import goldpointLes            from './goldpoint-les'
 
-/** Ordered list — strongest first, per site-content.md. */
+/** Featured three — homepage and top of /work page. */
 export const caseStudies: CaseStudy[] = [
   aim,
   mobileLendingManagement,
-  virtualBadge,
+  caliberSmart,
 ]
 
-/** Lookup by slug. Returns undefined if not found. */
+/** Additional case studies shown only on /work page. */
+export const additionalCaseStudies: CaseStudy[] = [
+  goldpointLes,
+]
+
+/** All case studies including coming soon — for /work page. */
+export const allCaseStudies: CaseStudy[] = [
+  ...caseStudies,
+  ...additionalCaseStudies,
+]
+
+/** Lookup by slug across all case studies. Returns undefined if not found. */
 export function getCaseStudy(slug: string): CaseStudy | undefined {
-  return caseStudies.find(cs => cs.slug === slug)
+  return allCaseStudies.find(cs => cs.slug === slug)
 }
 
-/** All valid slugs — used for generateStaticParams. */
-export const caseStudySlugs = caseStudies.map(cs => cs.slug)
+/** All valid slugs — used for generateStaticParams. Excludes coming soon. */
+export const caseStudySlugs = allCaseStudies
+  .filter(cs => !cs.comingSoon)
+  .map(cs => cs.slug)

@@ -4,7 +4,7 @@ import type { PageContext } from './types'
 const CASE_STUDY_TITLES: Record<string, string> = {
   'aim': 'Account & Information Management — replacing legacy lending tools with a unified workspace',
   'mobile-lending-management': 'From support calls to self-service',
-  'virtual-badge': 'Getting reps on doors weeks sooner',
+  'caliber-smart': 'Rebuilding a D2D sales app around how reps actually worked',
 }
 
 /**
