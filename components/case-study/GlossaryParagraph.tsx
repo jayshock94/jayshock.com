@@ -23,7 +23,8 @@ export default function GlossaryParagraph({ text, glossary, accentColor, classNa
   // Sort by length descending so longer terms match first
   const sorted = [...glossary].sort((a, b) => b.term.length - a.term.length)
   const escaped = sorted.map(g => g.term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
-  const pattern = new RegExp(`(${escaped.join('|')})`, 'gi')
+  // Match glossary terms plus optional common English suffixes so "chargebacks" matches "chargeback"
+  const pattern = new RegExp(`((?:${escaped.join('|')})(?:s|es|ed|ing)?)`, 'gi')
 
   // Track which terms we've already highlighted to only do first occurrence
   const used = new Set<string>()
@@ -33,10 +34,11 @@ export default function GlossaryParagraph({ text, glossary, accentColor, classNa
     <p className={className} style={style}>
       {parts.map((part, i) => {
         const termLower = part.toLowerCase()
-        const match = sorted.find(g => g.term.toLowerCase() === termLower)
+        const match = sorted.find(g => termLower.startsWith(g.term.toLowerCase()))
 
-        if (match && !used.has(termLower)) {
-          used.add(termLower)
+        const baseTerm = match?.term.toLowerCase()
+        if (match && baseTerm && !used.has(baseTerm)) {
+          used.add(baseTerm)
           return (
             <BarnabyTooltip
               key={i}

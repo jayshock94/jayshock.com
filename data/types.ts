@@ -25,6 +25,8 @@ export interface CaseStudyImage {
   src: string
   /** Optional caption rendered below the image. */
   caption?: string
+  /** If provided, a clickable Barnaby "note" label is appended to the caption. */
+  captionNote?: string
   /**
    * Aspect ratio hint for the placeholder box.
    * 'portrait'  → 9/18  (phone screenshots)
