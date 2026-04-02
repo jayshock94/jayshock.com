@@ -5,6 +5,12 @@
 
 export type PhaseKey = 'impact' | 'problem' | 'discovery' | 'solution'
 
+/** Rich content block for phase sections. */
+export type ContentBlock =
+  | { type: 'paragraph'; text: string }
+  | { type: 'subheader'; text: string }
+  | { type: 'list'; items: string[]; lead?: string }
+
 export interface Stat {
   value: string
   label: string
@@ -26,20 +32,20 @@ export interface CaseStudyImage {
    */
   aspect?: 'portrait' | 'landscape'
   /**
-   * Insert this image after paragraph N (0-indexed).
-   * If omitted, image renders after all paragraphs.
+   * Insert this image after content block N (0-indexed).
+   * If omitted, image renders after all content blocks.
    */
-  afterParagraph?: number
+  afterBlock?: number
 }
 
 export interface PhaseContent {
   /** Section headline — under 10 words, plain language. */
   headline: string
-  /** Body paragraphs — 2–4 sentences each, max 5. */
-  paragraphs: string[]
+  /** Rich content blocks — paragraphs, subheaders, and bullet lists. */
+  content: ContentBlock[]
   /** Impact phase only: stat blocks. */
   stats?: Stat[]
-  /** Optional images — can be placed after specific paragraphs via afterParagraph. */
+  /** Optional images — can be placed after specific content blocks via afterBlock. */
   images?: CaseStudyImage[]
   /** Optional pull-quote for Discovery phase. */
   quote?: {
@@ -73,8 +79,10 @@ export interface CaseStudy {
   year: string
   /** Tags shown in the hero header. */
   types: string[]
-  /** One-line impact summary shown on homepage/work index cards. */
+  /** One-line impact summary — kept for SEO/meta, no longer rendered on cards. */
   cardImpactLine: string
+  /** Hero metric shown large on work cards. */
+  cardStat?: { value: string; label: string }
   /** Image shown in the work card. Path relative to /public. */
   cardImage: string
   /**

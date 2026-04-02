@@ -504,10 +504,8 @@ export default function HowIWork() {
                             color: 'var(--color-text-muted)',
                             cursor: 'pointer',
                             letterSpacing: '0.01em',
-                            transition: 'color 0.2s ease',
                           }}
-                          onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--color-ink)' }}
-                          onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--color-text-muted)' }}
+                          className="hover-ink"
                         >
                           Curious? Ask Barnaby →
                         </button>

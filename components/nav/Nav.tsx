@@ -88,7 +88,7 @@ export default function Nav() {
               </Link>
 
               {/* Desktop links */}
-              <div className="hidden md:flex items-center gap-[4px]">
+              <div className="hidden md:flex items-center gap-[var(--space-component-xs)]">
                 {NAV_LINKS.map(link => {
                   const active = isLinkActive(pathname, link.href)
                   return (
@@ -153,7 +153,7 @@ export default function Nav() {
             animation: 'mobile-menu-enter 300ms cubic-bezier(0.16, 1, 0.3, 1) both',
           }}
         >
-          <nav aria-label="Mobile navigation" className="flex flex-col gap-[4px]">
+          <nav aria-label="Mobile navigation" className="flex flex-col gap-[var(--space-component-xs)]">
             {NAV_LINKS.map((link, i) => {
               const active = isLinkActive(pathname, link.href)
               return (

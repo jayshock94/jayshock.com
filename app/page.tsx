@@ -285,7 +285,7 @@ export default function HomePage() {
               <div className="flex flex-col">
                 {[
                   {
-                    role:    'Co-Lead UX Product Designer',
+                    role:    'Senior UX Designer',
                     company: 'GoldPoint Systems',
                     period:  '2021 — Present',
                     summary: 'UX and product design across a large portfolio of fintech and lending products. End-to-end ownership from research through handoff.',
@@ -294,9 +294,16 @@ export default function HomePage() {
                   {
                     role:    'Product Designer',
                     company: 'Caliber Smart',
-                    period:  '2019 — 2020',
+                    period:  '2019 — 2021',
                     summary: 'Solo designer on a full app rebuild for a D2D sales force. Gamified dashboards, solar estimation tools, and every system reps used to run their day.',
                     slug:    'caliber-smart',
+                  },
+                  {
+                    role:    'UX Designer',
+                    company: 'Dish One',
+                    period:  '2017 — 2019',
+                    summary: 'Identified a gap nobody had named. Pitched and built a virtual badge system that got reps on doors weeks sooner.',
+                    slug:    '',
                   },
                 ].map((job, i) => (
                   <div
@@ -321,16 +328,22 @@ export default function HomePage() {
                         <p className="text-body text-[var(--color-text-secondary)] mb-[var(--space-component-xs)]">
                           {job.summary}
                         </p>
-                        <Link
-                          href={`/work/${job.slug}`}
-                          className="
-                            text-ui-md text-[var(--color-text-muted)]
-                            hover:text-[var(--color-ink)]
-                            transition-colors duration-200
-                          "
-                        >
-                          View case study &rarr;
-                        </Link>
+                        {job.slug ? (
+                          <Link
+                            href={`/work/${job.slug}`}
+                            className="
+                              text-ui-md text-[var(--color-text-muted)]
+                              hover:text-[var(--color-ink)]
+                              transition-colors duration-200
+                            "
+                          >
+                            View case study &rarr;
+                          </Link>
+                        ) : (
+                          <span className="text-ui-md text-[var(--color-text-placeholder)]">
+                            Case study coming soon
+                          </span>
+                        )}
                       </div>
 
                     </div>

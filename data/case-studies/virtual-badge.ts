@@ -18,10 +18,13 @@ const virtualBadge: CaseStudy = {
   types:        ['Mobile', 'Field Sales', 'Self-Initiated'],
   cardImpactLine:
     'Nobody asked me to solve this. Reps were losing 3 weeks before they could sell. I pitched it, designed it, built it.',
+  cardStat: { value: 'Day 1', label: 'Reps selling on hire date' },
   cardImage: '',
 
   // Dish Network red
   brandColorHex: '#EC1C24',
+
+  comingSoon: true,
 
   context:
     'Dish One is a door-to-door sales arm of Dish Network. Reps sell TV, internet, and smart home packages in the field. I was a UX designer on the internal tools team.',
@@ -31,9 +34,9 @@ const virtualBadge: CaseStudy = {
 
   impact: {
     headline: 'Reps stopped waiting. They started selling.',
-    paragraphs: [
-      'Three weeks. That\'s how long new reps sat idle waiting for a physical badge. Not training, not ramping up. Just waiting on a piece of plastic.',
-      'After launch, reps had credentials on their phone before their first shift. Community friction with law enforcement dropped. The company stopped losing selling days to a logistics problem nobody thought to fix.',
+    content: [
+      { type: 'paragraph', text: 'Three weeks. That\'s how long new reps sat idle waiting for a physical badge. Not training, not ramping up. Just waiting on a piece of plastic.' },
+      { type: 'paragraph', text: 'After launch, reps had credentials on their phone before their first shift. Community friction with law enforcement dropped. The company stopped losing selling days to a logistics problem nobody thought to fix.' },
     ],
     stats: [
       { value: '3 wks',  label: 'Wait time eliminated',      estimated: false },
@@ -46,21 +49,22 @@ const virtualBadge: CaseStudy = {
 
   problem: {
     headline: 'Three weeks of nothing.',
-    paragraphs: [
-      'New reps at Dish One couldn\'t knock on a single door until they had a physical badge and their permits sorted. Badges took up to three weeks to arrive. Permits were worse.',
-      'Without credentials, reps had nothing to show at the door. Nothing for law enforcement. Some got turned away. Some got reported. The company was bleeding selling days and burning community trust.',
-      'Nobody had flagged this as a design problem. Everyone treated it like a logistics issue. Something you just dealt with.',
-      'I saw it differently. I owned it from observation through pitch, design, and build.',
+    content: [
+      { type: 'paragraph', text: 'New reps at Dish One couldn\'t knock on a single door until they had a physical badge and their permits sorted. Badges took up to three weeks to arrive. Permits were worse.' },
+      { type: 'paragraph', text: 'Without credentials, reps had nothing to show at the door. Nothing for law enforcement. Some got turned away. Some got reported. The company was bleeding selling days and burning community trust.' },
+      { type: 'paragraph', text: 'Nobody had flagged this as a design problem. Everyone treated it like a logistics issue. Something you just dealt with.' },
+      { type: 'paragraph', text: 'I saw it differently. I owned it from observation through pitch, design, and build.' },
     ],
   },
 
   discovery: {
     headline: 'The answer was already in their pockets.',
-    paragraphs: [
-      'I talked to reps, field managers, and one local authority who had actually flagged a rep. The pattern was clear. People didn\'t doubt whether the rep worked for Dish One. They just had nothing to verify it with.',
-      'Every rep already carried a smartphone. A digital credential that could be shown, verified at a glance, and issued instantly was possible without any new hardware.',
-      'The permit piece came from the same conversations. Reps were managing permit paperwork in folders, in their cars, sometimes not at all. One expired permit could sideline a rep for days.',
-      'Credentialing and permit access were the same problem. One app could solve both.',
+    content: [
+      { type: 'paragraph', text: 'I talked to reps, field managers, and one local authority who had actually flagged a rep. The pattern was clear. People didn\'t doubt whether the rep worked for Dish One. They just had nothing to verify it with.' },
+      { type: 'paragraph', text: 'Every rep already carried a smartphone. A digital credential that could be shown, verified at a glance, and issued instantly was possible without any new hardware.' },
+      { type: 'subheader', text: 'Two problems, same root' },
+      { type: 'paragraph', text: 'The permit piece came from the same conversations. Reps were managing permit paperwork in folders, in their cars, sometimes not at all. One expired permit could sideline a rep for days.' },
+      { type: 'paragraph', text: 'Credentialing and permit access were the same problem. One app could solve both.' },
     ],
     quote: {
       text:        'I had a guy call the cops on me my second week. I didn\'t even have my badge yet. I just had a polo shirt and a clipboard.',
@@ -70,11 +74,13 @@ const virtualBadge: CaseStudy = {
 
   solution: {
     headline: 'Two problems. One focused tool.',
-    paragraphs: [
-      'The virtual badge showed the rep\'s photo, name, employee ID, and company verification in a format that felt official and was hard to fake. It also stored permit status by territory so reps could pull it up at the door.',
-      'The bigger decision was what to leave out. I rejected a full onboarding app concept in favor of a tool that did two things well. Scope creep would have pushed the build out by months.',
-      'The tradeoff was a lightweight auth approach. The team flagged it as imperfect from a security standpoint. We accepted it because the threat model was low and the urgency was high. I documented the tradeoff clearly.',
-      'I\'d do the authentication differently now. At the time, it was the right call. Ship something that works over something theoretically better that might never ship.',
+    content: [
+      { type: 'paragraph', text: 'The virtual badge showed the rep\'s photo, name, employee ID, and company verification in a format that felt official and was hard to fake. It also stored permit status by territory so reps could pull it up at the door.' },
+      { type: 'subheader', text: 'What I left out' },
+      { type: 'paragraph', text: 'The bigger decision was what to leave out. I rejected a full onboarding app concept in favor of a tool that did two things well. Scope creep would have pushed the build out by months.' },
+      { type: 'subheader', text: 'The auth tradeoff' },
+      { type: 'paragraph', text: 'The tradeoff was a lightweight auth approach. The team flagged it as imperfect from a security standpoint. We accepted it because the threat model was low and the urgency was high. I documented the tradeoff clearly.' },
+      { type: 'paragraph', text: 'I\'d do the authentication differently now. At the time, it was the right call. Ship something that works over something theoretically better that might never ship.' },
     ],
   },
 

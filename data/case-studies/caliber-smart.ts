@@ -19,6 +19,7 @@ const caliberSmart: CaseStudy = {
   types:        ['D2D Sales', 'Gamification', 'Solar', 'Solo Designer'],
   cardImpactLine:
     'Reps were running their business from Vimeo links, social media posts, and phone calls to payroll. I rebuilt the entire app around how they actually worked.',
+  cardStat: { value: '400-600', label: 'Reps using platform daily' },
   cardImage: '',
 
   // Solar gold — processed through color algorithm on the page
@@ -35,9 +36,9 @@ const caliberSmart: CaseStudy = {
 
   impact: {
     headline: 'Reps stopped calling the office. They just sold.',
-    paragraphs: [
-      'After launch, most reps shifted to solar. The sales flow made it easier to close than any other product, and the money was better. That shift is what the company wanted. The app made it happen.',
-      'Support lines went quiet. Payroll calls dropped. The incentives department stopped working after hours because reps could track their own progress instead of calling in to argue. Legal fees went down because reps actually got their permits. Management had time to focus on training and area strategy instead of putting out fires all day.',
+    content: [
+      { type: 'paragraph', text: 'After launch, most reps shifted to solar. The sales flow made it easier to close than any other product, and the money was better. That shift is what the company wanted. The app made it happen.' },
+      { type: 'paragraph', text: 'Support lines went quiet. Payroll calls dropped. The incentives department stopped working after hours because reps could track their own progress instead of calling in to argue. Legal fees went down because reps actually got their permits. Management had time to focus on training and area strategy instead of putting out fires all day.' },
     ],
     stats: [
       { value: '~30%',    label: 'Reps shifted to solar after launch', estimated: true },
@@ -54,21 +55,30 @@ const caliberSmart: CaseStudy = {
 
   problem: {
     headline: 'Everything lived somewhere else.',
-    paragraphs: [
-      'The app could make a sale. That was about it. Everything else a rep needed to do their job lived in a different tool, a different person, or a different platform.',
-      'Leaderboard updates came through Vimeo links their leaders sent out each week. Incentive details were posted on the company\'s social media. Payroll questions meant calling in. Permits meant calling rep services. Area assignments were verbal, decided in morning meetings and forgotten by lunch.',
-      'Every two weeks, payroll day turned the support lines into a warzone. Reps calling in angry about pay, most of the time over things they could have checked themselves. Wrong direct deposit info. Customers who charged back. Hours lost to problems that didn\'t need a human to solve.',
-      'The company was shifting hard into solar. They needed better tools to recruit top reps from competitors. The app was the pitch, and the pitch was weak.',
+    content: [
+      { type: 'paragraph', text: 'The app could make a sale. That was about it. Everything else a rep needed to do their job lived in a different tool, a different person, or a different platform.' },
+      { type: 'paragraph', text: 'Leaderboard updates came through Vimeo links their leaders sent out each week. Incentive details were posted on the company\'s social media. Payroll questions meant calling in. Permits meant calling rep services. Area assignments were verbal, decided in morning meetings and forgotten by lunch.' },
+      { type: 'paragraph', text: 'Every two weeks, payroll day turned the support lines into a warzone. Reps calling in angry about pay, most of the time over things they could have checked themselves. Wrong direct deposit info. Customers who charged back. Hours lost to problems that didn\'t need a human to solve.' },
+      { type: 'paragraph', text: 'The company was shifting hard into solar. They needed better tools to recruit top reps from competitors. The app was the pitch, and the pitch was weak.' },
     ],
   },
 
   discovery: {
     headline: 'The leaderboard wasn\'t vanity. It was the engine.',
-    paragraphs: [
-      'I worked closest with the sales support department. They dealt with every rep complaint, every permit request, every payroll question. Their pain was a mirror of the reps\' pain.',
-      'I sent surveys to reps. Interviewed VPs, regional managers, and area managers. Sat down with payroll and finance. Talked to the marketing team about which incentives performed and why. Met with the head of the tech department to understand their friction with sales reps. Asked reps what other companies they had worked for did better.',
-      'The biggest surprise was the leaderboard. I assumed it was ego. It wasn\'t. Incentives were tied directly to leaderboard position. Resort trips, snowboards, Segways. Reps checked the leaderboard more than anything else in the app. It wasn\'t a scoreboard. It was how they planned their week.',
-      'That changed my whole approach. The dashboard couldn\'t just show stats. It had to show reps exactly what they needed to do next to climb.',
+    content: [
+      { type: 'paragraph', text: 'I worked closest with the sales support department. They dealt with every rep complaint, every permit request, every payroll question. Their pain was a mirror of the reps\' pain.' },
+      { type: 'subheader', text: 'Who I talked to' },
+      { type: 'list', items: [
+        'Sent surveys to field reps across multiple offices',
+        'Interviewed VPs, regional managers, and area managers',
+        'Sat down with payroll and finance',
+        'Talked to marketing about which incentives actually performed',
+        'Met with the head of tech to understand their friction with sales reps',
+        'Asked reps what other companies they\'d worked for did better',
+      ] },
+      { type: 'subheader', text: 'The leaderboard surprise' },
+      { type: 'paragraph', text: 'I assumed the leaderboard was ego. It wasn\'t. Incentives were tied directly to position. Resort trips, snowboards, Segways. Reps checked the leaderboard more than anything else in the app. It wasn\'t a scoreboard. It was how they planned their week.' },
+      { type: 'paragraph', text: 'That changed my whole approach. The dashboard couldn\'t just show stats. It had to show reps exactly what they needed to do next to climb.' },
     ],
     quote: {
       text:        'I check the leaderboard before I check my texts. If I\'m three sales out from the ski trip, that\'s all I\'m thinking about.',
@@ -78,14 +88,20 @@ const caliberSmart: CaseStudy = {
 
   solution: {
     headline: 'Every tool a rep needed. Nothing they didn\'t.',
-    paragraphs: [
-      'The dashboard was the center of everything. Reps could switch between products and see key metrics tied to their goals. I used the goal gradient effect to gamify progress. Show a rep they\'re three sales away from an incentive and watch what happens. The estimated pay number updated in real time as metrics moved. As sales went up, so did the number. Reps could feel the momentum.',
-      'I didn\'t want a bad day to feel like a dead end. If estimated pay was zero, a second estimator showed what they\'d make if they hit the remaining indicators for the pay period. There was always a number worth chasing. Negative indicators showed up too. Cancelations and chargebacks hit the pay estimate so reps could see exactly what went wrong instead of finding out two weeks later on a phone call with payroll.',
-      'The incentives page killed the social media scavenger hunt. Upcoming incentives, progress bars, criteria. All in one place. The training section held pitch documents, practice openers, and company videos. Easy to filter, easy to search. No more hunting through Vimeo links.',
-      'Sales support got a messaging system. Permit requests, payroll questions, badge replacements. Reps could send a request, check the response, and move on. Settings let them update their own direct deposit, phone number, and address. No more calling in to verify.',
-      'For solar, I added a roof estimator that used Google Maps satellite imagery. Reps could look at a customer\'s roof on the spot and get an estimate on panel count, savings projections, and key numbers needed to close. When they booked a tech, the customer could see the tech\'s rating, photo, and availability. It built trust at the door.',
-      'The task board managed appointments, follow-ups, and route planning. Reps could challenge each other directly. And the swag store let them spend earned points on gear. Every piece fed back into the loop. Sell more, earn more, see it immediately.',
-      'If I could go back, I\'d focus more on the internal tools for the sales support team. That was a different project scope at the time. But knowing what I know now, I missed things I didn\'t even know to look for yet.',
+    content: [
+      { type: 'subheader', text: 'The gamified dashboard' },
+      { type: 'paragraph', text: 'The dashboard was the center of everything. Reps could switch between products and see key metrics tied to their goals. I used the goal gradient effect to gamify progress. Show a rep they\'re three sales away from an incentive and watch what happens. The estimated pay number updated in real time. As sales went up, so did the number.' },
+      { type: 'paragraph', text: 'I didn\'t want a bad day to feel like a dead end. If estimated pay was zero, a second estimator showed what they\'d make if they hit the remaining indicators for the pay period. There was always a number worth chasing. Cancelations and chargebacks hit the pay estimate too, so reps could see exactly what went wrong instead of finding out two weeks later on a phone call with payroll.' },
+      { type: 'subheader', text: 'Incentives and training' },
+      { type: 'paragraph', text: 'The incentives page killed the social media scavenger hunt. Upcoming incentives, progress bars, criteria. All in one place. The training section held pitch documents, practice openers, and company videos. Easy to filter, easy to search.' },
+      { type: 'subheader', text: 'Support tools and self-service' },
+      { type: 'paragraph', text: 'Sales support got a messaging system. Permit requests, payroll questions, badge replacements. Reps could send a request, check the response, and move on. Settings let them update their own direct deposit, phone number, and address. No more calling in.' },
+      { type: 'subheader', text: 'Solar tools' },
+      { type: 'paragraph', text: 'I added a roof estimator that used Google Maps satellite imagery. Reps could look at a customer\'s roof on the spot and get panel count, savings projections, and the key numbers needed to close. When they booked a tech, the customer could see the tech\'s rating, photo, and availability. Trust before the tech even shows up.' },
+      { type: 'subheader', text: 'Everything else' },
+      { type: 'paragraph', text: 'The task board managed appointments, follow-ups, and route planning. Reps could challenge each other directly. The swag store let them spend earned points on gear. Every piece fed back into the loop.' },
+      { type: 'subheader', text: 'What I\'d do differently' },
+      { type: 'paragraph', text: 'I\'d focus more on the internal tools for the sales support team. That was a different project scope at the time. But knowing what I know now, I missed things I didn\'t even know to look for yet.' },
     ],
     // Images rendered as React components via mediaSlot in the case study page
   },

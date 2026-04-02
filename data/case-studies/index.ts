@@ -3,6 +3,7 @@ import aim                     from './aim'
 import mobileLendingManagement from './mobile-lending-management'
 import caliberSmart            from './caliber-smart'
 import goldpointLes            from './goldpoint-les'
+import virtualBadge            from './virtual-badge'
 
 /** Featured three — homepage and top of /work page. */
 export const caseStudies: CaseStudy[] = [
@@ -13,6 +14,7 @@ export const caseStudies: CaseStudy[] = [
 
 /** Additional case studies shown only on /work page. */
 export const additionalCaseStudies: CaseStudy[] = [
+  virtualBadge,
   goldpointLes,
 ]
 

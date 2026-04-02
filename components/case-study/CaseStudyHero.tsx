@@ -29,7 +29,7 @@ export default function CaseStudyHero({ caseStudy, tokens, heroImageSlot, tagMes
       <div
         className="max-w-layout mx-auto px-[var(--space-page-margin)] w-full"
         style={{
-          paddingTop: 'clamp(100px, 14vw, 160px)',
+          paddingTop: 'clamp(80px, 10vw, 120px)',
           paddingBottom: heroImageSlot ? '0' : 'var(--space-section-md)',
         }}
       >
@@ -47,13 +47,8 @@ export default function CaseStudyHero({ caseStudy, tokens, heroImageSlot, tagMes
 
         {/* Title */}
         <h1
-          className="hero-fade-up"
+          className="hero-fade-up text-hero-title"
           style={{
-            fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-            fontSize: 'clamp(36px, 6vw, 64px)',
-            fontWeight: 700,
-            lineHeight: 1.08,
-            letterSpacing: '-0.02em',
             color: 'var(--hero-text-primary)',
             marginBottom: 'var(--space-stack-md)',
             maxWidth: '720px',

@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import type { CaseStudyImage, GlossaryTerm, PhaseContent, PhaseKey } from '@/data/types'
+import type { CaseStudyImage, ContentBlock, GlossaryTerm, PhaseContent, PhaseKey } from '@/data/types'
 import ScrollReveal from '@/components/ui/ScrollReveal'
 import GlossaryParagraph from './GlossaryParagraph'
 import PhoneFrame from './PhoneFrame'
@@ -10,10 +10,10 @@ interface PhaseSectionProps {
   content: PhaseContent
   /** Phase number for the eyebrow (1-based). */
   phaseNumber?: number
-  /** Custom media node injected after a specific paragraph. */
+  /** Custom media node injected after a specific content block. */
   mediaSlot?: React.ReactNode
-  /** Which paragraph index to inject mediaSlot after. Default: last paragraph. */
-  mediaSlotAfterParagraph?: number
+  /** Which content block index to inject mediaSlot after. Default: last block. */
+  mediaSlotAfterBlock?: number
   /** Glossary terms to highlight inline with Barnaby tooltips. */
   glossary?: GlossaryTerm[]
 }
@@ -226,20 +226,20 @@ function renderImages(images: CaseStudyImage[], vars: typeof PHASE_VARS.impact) 
 
 export default function PhaseSection({
   phase,
-  content,
+  content: phaseContent,
   phaseNumber,
   mediaSlot,
-  mediaSlotAfterParagraph,
+  mediaSlotAfterBlock,
   glossary,
 }: PhaseSectionProps) {
   const vars   = PHASE_VARS[phase]
   const label  = PHASE_LABELS[phase]
-  const { headline, paragraphs, stats, images, quote, estimatedNote } = content
+  const { headline, content, stats, images, quote, estimatedNote } = phaseContent
 
-  // Group images by which paragraph they follow
-  const imagesByPara = (images ?? []).reduce<Record<number, CaseStudyImage[]>>(
+  // Group images by which content block they follow
+  const imagesByBlock = (images ?? []).reduce<Record<number, CaseStudyImage[]>>(
     (acc, img) => {
-      const key = img.afterParagraph ?? paragraphs.length - 1
+      const key = img.afterBlock ?? content.length - 1
       acc[key] = [...(acc[key] ?? []), img]
       return acc
     },
@@ -247,6 +247,9 @@ export default function PhaseSection({
   )
 
   const phaseNum = phaseNumber ? String(phaseNumber).padStart(2, '0') : undefined
+
+  // Track paragraph count to apply text-intro only to the first paragraph block
+  let paragraphCount = 0
 
   return (
     <section
@@ -302,14 +305,11 @@ export default function PhaseSection({
                     stats.length === 3 && i === 2 ? ' col-span-2 md:col-span-1' : ''
                   }`}
                   role="listitem"
-                  style={{ animationDelay: `${i * 100}ms` }}
+                  style={{ animationDelay: `${i * 80}ms` }}
                 >
                   <p
+                    className="text-stat-lg"
                     style={{
-                      fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-                      fontSize: 'clamp(32px, 5vw, 48px)',
-                      fontWeight: 700,
-                      lineHeight: 1.1,
                       color: 'var(--color-ink)',
                       marginBottom: 'var(--space-stack-xs)',
                     }}
@@ -333,48 +333,108 @@ export default function PhaseSection({
           </div>
         )}
 
-        {/* Body paragraphs with interleaved images and mediaSlot */}
+        {/* Content blocks with interleaved images and mediaSlot */}
         <div className="flex flex-col gap-[var(--space-stack-md)]">
-          {paragraphs.map((p, i) => (
-            <div key={`block-${i}`}>
-              <ScrollReveal>
-                {glossary && glossary.length > 0 ? (
-                  <GlossaryParagraph
-                    text={p}
-                    glossary={glossary}
-                    accentColor={vars.label}
-                    className={i === 0 ? 'text-intro' : 'text-body'}
-                    style={{
-                      color: i === 0 ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
-                      maxWidth: 'var(--space-content-max)',
-                    }}
-                  />
-                ) : (
-                  <p
-                    className={i === 0 ? 'text-intro' : 'text-body'}
-                    style={{
-                      color: i === 0 ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
-                      maxWidth: 'var(--space-content-max)',
-                    }}
-                  >
-                    {p}
-                  </p>
+          {content.map((block, i) => {
+            const isFirstParagraph = block.type === 'paragraph' && paragraphCount === 0
+            if (block.type === 'paragraph') paragraphCount++
+
+            return (
+              <div key={`block-${i}`}>
+                {/* ── Paragraph block ── */}
+                {block.type === 'paragraph' && (
+                  <ScrollReveal>
+                    {glossary && glossary.length > 0 ? (
+                      <GlossaryParagraph
+                        text={block.text}
+                        glossary={glossary}
+                        accentColor={vars.label}
+                        className={isFirstParagraph ? 'text-intro' : 'text-body'}
+                        style={{
+                          color: isFirstParagraph ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
+                          maxWidth: 'var(--space-content-max)',
+                        }}
+                      />
+                    ) : (
+                      <p
+                        className={isFirstParagraph ? 'text-intro' : 'text-body'}
+                        style={{
+                          color: isFirstParagraph ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
+                          maxWidth: 'var(--space-content-max)',
+                        }}
+                      >
+                        {block.text}
+                      </p>
+                    )}
+                  </ScrollReveal>
                 )}
-              </ScrollReveal>
 
-              {/* mediaSlot insertion — renders at full width outside content max */}
-              {mediaSlot && (mediaSlotAfterParagraph ?? paragraphs.length - 1) === i && (
-                <ScrollReveal>
-                  <div style={{ marginTop: 'var(--space-section-sm)' }}>
-                    {mediaSlot}
-                  </div>
-                </ScrollReveal>
-              )}
+                {/* ── Subheader block ── */}
+                {block.type === 'subheader' && (
+                  <ScrollReveal>
+                    <h3
+                      className="text-h4 text-[var(--color-ink)] max-w-content"
+                      style={{
+                        marginTop: i > 0 ? 'var(--space-stack-lg)' : undefined,
+                      }}
+                    >
+                      {block.text}
+                    </h3>
+                  </ScrollReveal>
+                )}
 
-              {/* Images after this paragraph */}
-              {imagesByPara[i] && renderImages(imagesByPara[i], vars)}
-            </div>
-          ))}
+                {/* ── List block ── */}
+                {block.type === 'list' && (
+                  <ScrollReveal>
+                    <div style={{ maxWidth: 'var(--space-content-max)' }}>
+                      {block.lead && (
+                        <p
+                          className="text-body"
+                          style={{
+                            color: 'var(--color-text-secondary)',
+                            marginBottom: 'var(--space-stack-sm)',
+                          }}
+                        >
+                          {block.lead}
+                        </p>
+                      )}
+                      <ul
+                        className="flex flex-col gap-[var(--space-stack-xs)]"
+                        style={{ paddingLeft: 'var(--space-component-md)' }}
+                      >
+                        {block.items.map((item, j) => (
+                          <li
+                            key={j}
+                            className="text-body phase-list-item"
+                            style={{ color: 'var(--color-text-secondary)' }}
+                          >
+                            <span
+                              className="phase-list-bullet"
+                              style={{ backgroundColor: vars.label }}
+                              aria-hidden="true"
+                            />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </ScrollReveal>
+                )}
+
+                {/* mediaSlot insertion */}
+                {mediaSlot && (mediaSlotAfterBlock ?? content.length - 1) === i && (
+                  <ScrollReveal>
+                    <div style={{ marginTop: 'var(--space-section-sm)' }}>
+                      {mediaSlot}
+                    </div>
+                  </ScrollReveal>
+                )}
+
+                {/* Images after this content block */}
+                {imagesByBlock[i] && renderImages(imagesByBlock[i], vars)}
+              </div>
+            )
+          })}
         </div>
 
         {/* Pull quote — breaks out of content column */}
