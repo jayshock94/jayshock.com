@@ -25,9 +25,9 @@ const lendingEngineService: CaseStudy = {
 
   impact: {
     headline: '[PLACEHOLDER] What changed for the people using it',
-    paragraphs: [
-      '[PLACEHOLDER] Replace this with the opening impact statement. Lead with the result in plain language. State what changed.',
-      '[PLACEHOLDER] Context sentence: scale of the product and your involvement.',
+    content: [
+      { type: 'paragraph', text: '[PLACEHOLDER] Replace this with the opening impact statement. Lead with the result in plain language. State what changed.' },
+      { type: 'paragraph', text: '[PLACEHOLDER] Context sentence: scale of the product and your involvement.' },
     ],
     stats: [
       { value: '[X]',   label: '[Metric label]',   estimated: false },
@@ -40,21 +40,21 @@ const lendingEngineService: CaseStudy = {
 
   problem: {
     headline: '[PLACEHOLDER] What was hard and why it mattered',
-    paragraphs: [
-      '[PLACEHOLDER] Business goal: what the organization needed.',
-      '[PLACEHOLDER] User reality: what people actually experienced — and why it was different from the business goal.',
-      '[PLACEHOLDER] Your role and scope: what you owned, what the team owned.',
-      '[PLACEHOLDER] Constraints: time, technical, organizational.',
+    content: [
+      { type: 'paragraph', text: '[PLACEHOLDER] Business goal: what the organization needed.' },
+      { type: 'paragraph', text: '[PLACEHOLDER] User reality: what people actually experienced and why it was different from the business goal.' },
+      { type: 'paragraph', text: '[PLACEHOLDER] Your role and scope: what you owned, what the team owned.' },
+      { type: 'paragraph', text: '[PLACEHOLDER] Constraints: time, technical, organizational.' },
     ],
   },
 
   discovery: {
     headline: '[PLACEHOLDER] What you learned and how',
-    paragraphs: [
-      '[PLACEHOLDER] Research methods: brief list of what you did and why.',
-      '[PLACEHOLDER] Key finding 1.',
-      '[PLACEHOLDER] Key finding 2.',
-      '[PLACEHOLDER] The pivot insight — the one thing that changed your direction.',
+    content: [
+      { type: 'paragraph', text: '[PLACEHOLDER] Research methods: brief list of what you did and why.' },
+      { type: 'paragraph', text: '[PLACEHOLDER] Key finding 1.' },
+      { type: 'paragraph', text: '[PLACEHOLDER] Key finding 2.' },
+      { type: 'paragraph', text: '[PLACEHOLDER] The pivot insight, the one thing that changed your direction.' },
     ],
     quote: {
       text:        '[PLACEHOLDER] A real quote from someone who used the product every day.',
@@ -64,11 +64,11 @@ const lendingEngineService: CaseStudy = {
 
   solution: {
     headline: '[PLACEHOLDER] What you made and the decisions behind it',
-    paragraphs: [
-      '[PLACEHOLDER] Key decision 1: what you chose and what you rejected.',
-      '[PLACEHOLDER] Key decision 2: a tradeoff you made and the reasoning.',
-      '[PLACEHOLDER] Key decision 3: something you would do differently. This shows maturity.',
-      '[PLACEHOLDER] Handoff note: how you worked with engineering to ship it.',
+    content: [
+      { type: 'paragraph', text: '[PLACEHOLDER] Key decision 1: what you chose and what you rejected.' },
+      { type: 'paragraph', text: '[PLACEHOLDER] Key decision 2: a tradeoff you made and the reasoning.' },
+      { type: 'paragraph', text: '[PLACEHOLDER] Key decision 3: something you would do differently. This shows maturity.' },
+      { type: 'paragraph', text: '[PLACEHOLDER] Handoff note: how you worked with engineering to ship it.' },
     ],
   },
 

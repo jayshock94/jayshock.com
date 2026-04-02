@@ -29,8 +29,8 @@ export default function Footer() {
         className="
           max-w-layout mx-auto
           px-[var(--space-page-margin)]
-          py-[28px]
-          flex flex-col gap-[20px]
+          py-[var(--space-component-lg)]
+          flex flex-col gap-[var(--space-component-lg)]
           md:flex-row md:items-center md:justify-between
         "
       >
@@ -44,7 +44,7 @@ export default function Footer() {
           <span
             style={{
               fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-              fontSize: '15px',
+              fontSize: '16px',
               fontWeight: 500,
               color: 'var(--color-ink)',
               letterSpacing: '-0.01em',

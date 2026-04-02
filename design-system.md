@@ -643,14 +643,25 @@ Padding:        0 --space-page-margin
 Transition:     background 0.7s ease
 ```
 
-### Work Card (Homepage — Monochromatic)
+### Work Card (Infographic Style)
 ```
-Background:     --color-surface
-Border:         0.5px solid --color-border
-Border radius:  10px
-Padding:        --space-component-lg
-No color        Homepage cards are black and white only
-Hover:          border-color --color-border-mid, subtle lift
+Background:     tokens.heroZone (brand color)
+Border:         0.5px solid rgba(255,255,255,0.06), brightens on hover
+Border radius:  16px
+Padding:        clamp(24px, 4vw, 40px)
+Min height:     clamp(280px, 30vw, 360px)
+
+Layout (top to bottom):
+  Industry (left) + Year (right)    --text-label, rgba(255,255,255,0.4)
+  Hero stat value                   clamp(28px, 4vw, 40px), weight 700, white
+  Hero stat label                   --text-body-sm, rgba(255,255,255,0.55)
+  Title                             clamp(20px, 2.5vw, 28px), weight 600, white
+  Role · Company                    --text-body-sm, rgba(255,255,255,0.45)
+  Type tags                         pill style, rgba(255,255,255,0.12) border
+  CTA                               "View case study" with arrow
+
+Image:          48% width on right (desktop), 220px bottom bleed (mobile)
+Hover:          border brightens, lift -3px, shadow deepens
 ```
 
 ### Case Study Hero
@@ -675,6 +686,23 @@ Phase label:    --text-ui-sm, --phase-[name]-label
 Heading:        --text-h3, --color-ink
 Body:           --text-body, --color-text-secondary
 Transition:     background 0.7s ease, border-color 0.5s ease
+
+Content blocks (ContentBlock union type):
+  paragraph     Standard body text. First paragraph uses --text-intro.
+  subheader     h3 element, --text-h4, extra top margin (--space-stack-lg)
+  list          Optional lead paragraph + ul with phase-colored bullet dots
+                Bullet: 5px circle in --phase-[name]-label color
+```
+
+### Content Writing Guidelines
+```
+Never use em dashes for emphasis (only in quote attributions)
+Vary sentence length: mix 3-word punches with longer descriptors
+Add subheaders to any phase with 3+ content blocks
+Convert findings and decisions to bullet lists when scannable
+Keep paragraphs to 2-3 sentences max
+Write image captions that tell the story independently
+Use first person, show judgment, acknowledge tradeoffs
 ```
 
 ---

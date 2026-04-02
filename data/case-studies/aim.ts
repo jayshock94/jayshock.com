@@ -18,6 +18,7 @@ const aim: CaseStudy = {
   types:        ['Fintech', 'Enterprise', '$10M Impact'],
   cardImpactLine:
     'Unified 5 legacy tools into one lending workspace. Landed a $10M contract.',
+  cardStat: { value: '$10M+', label: 'Annual contract secured' },
   cardImage:    '',
 
   // Deep navy — processed through color algorithm on the page
@@ -34,18 +35,20 @@ const aim: CaseStudy = {
 
   problem: {
     headline: 'Five tabs, a spreadsheet, and a sticky note.',
-    paragraphs: [
-      'SIM started as a decision tree in the early 2000s. Two decades of features bolted on without rethinking the whole. Nobody set out to make it bad. It just grew that way.',
-      'Every year the GAIN conference set an immovable deadline. If prototypes weren\'t ready to show clients and secure funding, the work might not get built at all.',
+    content: [
+      { type: 'paragraph', text: 'SIM started as a decision tree in the early 2000s. Two decades of features got bolted on without anyone rethinking the whole. Nobody set out to make it bad. It just grew that way.' },
+      { type: 'subheader', text: 'The GAIN deadline' },
+      { type: 'paragraph', text: 'Every year the GAIN conference set an immovable deadline. If prototypes weren\'t ready to show clients and secure funding, the work might not get built at all. That pressure shaped every decision we made.' },
     ],
   },
 
   discovery: {
     headline: 'It didn\'t need to replace everything. It needed to connect everything.',
-    paragraphs: [
-      'I visited branches, sat with lenders, and studied every workaround they built around the product\'s gaps.',
-      'Competitor systems were locked down. But the workarounds told the real story. Lenders didn\'t need a better SIM. They needed a hub that connected the tools they already used.',
-      'That reframe changed everything. AIM would not be a loan viewer. It would be a workspace built around how managers ran their teams, not just how individual lenders processed loans.',
+    content: [
+      { type: 'paragraph', text: 'I visited branches, sat with lenders, and watched every workaround they had built around the product\'s gaps. Sticky notes on monitors. Spreadsheets tracking what the system should have tracked. Browser tabs open to three different tools just to process one loan.' },
+      { type: 'subheader', text: 'The workarounds told the real story' },
+      { type: 'paragraph', text: 'Competitor systems were locked down, so we couldn\'t study them directly. But the workarounds told us more than any competitor demo would have. Lenders didn\'t need a better SIM. They needed a hub that connected the tools they already used.' },
+      { type: 'paragraph', text: 'That reframe changed everything. AIM would not be a loan viewer. It would be a workspace built around how managers ran their teams, not just how individual lenders processed loans.' },
     ],
     images: [
       {
@@ -53,7 +56,7 @@ const aim: CaseStudy = {
         alt:            'Task board with queue management for lending teams',
         caption:        'The task board. Born from watching what managers actually spent their time doing.',
         aspect:         'landscape',
-        afterParagraph: 2,
+        afterBlock: 3,
       },
     ],
     quote: {
@@ -67,11 +70,14 @@ const aim: CaseStudy = {
 
   solution: {
     headline: 'Twelve modules. One surface.',
-    paragraphs: [
-      'Twelve modules. Every loan attached to a person, visible in one view. The loan detail screen puts people, payments, documents, and history on a single surface. No more hunting across systems.',
-      'The queue system was the backbone. Auto-assign logic routes work by configurable rules. Managers set it once. The system handles distribution. A teller sees drawer management. A branch manager sees team workload. Same product, different jobs.',
-      'Settings was the hardest design problem. Role-based access, security roles, global and dashboard-level configurations. All deeply customizable. One bad permission could lock a team out of critical workflow. I made the most dangerous settings require the most deliberate actions.',
-      'Every module connected to Decision Engine, GTO, CAM, and Document Engine. The hub the research pointed to from day one.',
+    content: [
+      { type: 'paragraph', text: 'Twelve modules. Every loan attached to a person, visible in one view. The loan detail screen puts people, payments, documents, and history on a single surface. No more hunting across systems.' },
+      { type: 'subheader', text: 'The queue system' },
+      { type: 'paragraph', text: 'This was the backbone of AIM. Auto-assign logic routes work by configurable rules. Managers set it once. The system handles distribution from there. A teller sees their drawer. A branch manager sees team workload. Same product, completely different jobs.' },
+      { type: 'subheader', text: 'Settings: the hardest design problem' },
+      { type: 'paragraph', text: 'Role-based access, security roles, global and dashboard-level configurations. All deeply customizable. One bad permission could lock an entire branch out of critical workflow. I designed the most dangerous settings to require the most deliberate actions.' },
+      { type: 'subheader', text: 'The hub it was always meant to be' },
+      { type: 'paragraph', text: 'Every module connected to Decision Engine, GTO, CAM, and Document Engine. The hub the research pointed to from day one.' },
     ],
     images: [
       {
@@ -79,30 +85,30 @@ const aim: CaseStudy = {
         alt:            'Loan detail view with payment form and customer sidebar',
         caption:        'Loan details. One surface instead of five tabs.',
         aspect:         'landscape',
-        afterParagraph: 0,
+        afterBlock: 0,
       },
       {
         src:            '/images/AIM/Other Transaction v2.png',
         alt:            'Loan details with other transactions view',
         caption:        'Other transactions. Everything attached to the loan in one place.',
         aspect:         'landscape',
-        afterParagraph: 0,
+        afterBlock: 0,
       },
       {
         src:            '/images/AIM/settings-other-transaction.png',
         alt:            'Role access settings modal with field-level view and edit toggles per security role',
         caption:        'The settings system. Customizable but designed to be hard to break.',
         aspect:         'landscape',
-        afterParagraph: 2,
+        afterBlock: 4,
       },
     ],
   },
 
   impact: {
     headline: 'Clients stopped leaving. Some came back.',
-    paragraphs: [
-      'AIM saved clients who were actively signing with competitors. It brought back clients who had already left. One contract alone was worth ten million dollars a year. A client the VP team had never been able to close.',
-      'But the number that mattered most was cognitive load. Every level of employee reported less stress, fewer errors, and faster handoffs. Productivity increased across the board.',
+    content: [
+      { type: 'paragraph', text: 'AIM saved clients who were actively signing with competitors. It brought back clients who had already left. One contract alone was worth ten million dollars a year. A client the VP team had never been able to close.' },
+      { type: 'paragraph', text: 'But the number that mattered most was cognitive load. Every level of employee reported less stress, fewer errors, and faster handoffs. Productivity increased across the board.' },
     ],
     stats: [
       { value: '$10M+',  label: 'Annual contract secured',    estimated: false },
@@ -117,7 +123,7 @@ const aim: CaseStudy = {
         alt:            'Customer dashboard — the hub that replaced five separate tools',
         caption:        'One surface replaced an entire workflow. That was the point.',
         aspect:         'landscape',
-        afterParagraph: 1,
+        afterBlock: 1,
       },
     ],
   },

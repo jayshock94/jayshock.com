@@ -5,7 +5,7 @@ This is reference material about Jay. Put it in your own words.
 
 ## Basic Info
 
-Jay Duane Shock. Goes by Jay. Close friends and family call him JD. Senior UX Designer based in Utah. Open to remote, hybrid if the fit is right, consulting too. hello@jayshock.com. Portfolio at jayshock.com.
+Jay Duane Shock. Goes by Jay. Close friends and family call him JD. Product Designer based in Utah. 8 years in fintech and enterprise SaaS. Open to remote, hybrid if the fit is right, consulting too. hello@jayshock.com. Portfolio at jayshock.com. Phone: 435-851-9377.
 
 
 ## What Jay Does
@@ -48,7 +48,7 @@ Employed at GoldPoint Systems as Senior UX Designer. Open to opportunities and c
 
 ## Where He's Worked
 
-GoldPoint Systems, 2021 to now. Senior UX Designer. Big fintech portfolio, lending products. Sometimes he's doing end to end product design, sometimes updating mocks, sometimes running usability tests or visiting client branches in person. Works with product owners, stakeholders, dev teams. Sits in on dev reviews to make sure builds match designs. Their Figma library has 50+ product workspaces.
+GoldPoint Systems, 2021 to now. Senior UX Designer. Big fintech portfolio, lending products. Grew the design team from 3 to 4 designers. Sometimes he's doing end to end product design, sometimes updating mocks, sometimes running usability tests or visiting client branches in person. Works with product owners, stakeholders, dev teams. Sits in on dev reviews to make sure builds match designs. Their Figma library has 50+ product workspaces.
 
 The mobile lending app redesign (case study: "From support calls to self-service") is his biggest recent project. It's a white-label mobile app for lending agencies. Borrowers use it to manage loans, make payments, set up autopay. Each lender rebrands it as their own. The app hadn't been updated in years and borrowers were calling support because the app was harder to use than picking up the phone.
 
@@ -68,6 +68,8 @@ Tessler's law (complexity can't be destroyed, only moved) sums up the project. T
 
 Results: 3 lenders live on platform, roughly 35% fewer missed payments (estimated from client reports), new clients purchasing after seeing the redesign. One client now wants to extend it to credit cards. The redesign is live with select lender branches testing with real customers. It hasn't been released publicly to app stores yet. Some newer clients like Lendmark are still being onboarded, so if someone looks up their app it'll show the old version, not Jay's redesign. That's normal for enterprise white-label products, rollouts happen in stages.
 
+The AIM project (Account and Information Management) is another major case study. A three year initiative replacing a legacy lending workflow (SIM) with a unified workspace. Twelve modules. Every loan attached to a person, visible in one view. Jay owned settings, navigation, queue tiles, comments, and integrations end to end. Worked alongside the Lead UX Designer who used the project to mentor him into a lead role. He visited branches, sat with lenders, and studied every workaround they built around the product's gaps. The key insight was that lenders didn't need a better SIM, they needed a hub that connected the tools they already used. AIM saved clients who were actively signing with competitors. Brought back clients who had already left. One contract alone was worth ten million dollars a year. The GAIN conference set an immovable annual deadline, so if prototypes weren't ready to show clients and secure funding, the work might not get built at all. That pressure shaped every decision.
+
 Caliber Smart, 2019 to 2021. Product Designer. Door to door sales company. Redesigned their sales app using psychology stuff like goal gradient effect and peak end rule. Reps were wasting time calling a help line for basic payroll and leaderboard info. He built a gamified dashboard that put all of that in one place. Also built a solar estimation tool that used Google satellite imagery to figure out panel placement and cost for specific homes.
 
 Dish One, 2017 to 2019. UX Designer slash Marketing. Another door to door company. Started doing videography and graphic design and training videos. Worked with the CEO and VPs. Moved into UX when the dev team needed help. He actually went into the field with sales reps to see their problems firsthand. Designed a virtual badge system with quick access permits and a police verification page that got reps on doors way faster.
@@ -83,14 +85,16 @@ Design stuff: interaction design, wireframes, prototyping, visual design, respon
 
 People stuff: stakeholder communication, design critiques, dev handoff, cross team facilitation, presenting to leadership.
 
-Tools he uses: Figma, Sketch, Framer, Miro, FigJam, Jira, Loom, Mobbin, Lucid, Azure, Adobe Creative Suite, Claude, ChatGPT, Cursor.
+Tools he uses: Figma, Sketch, Miro, FigJam, Jira, Loom, Mobbin, Lucid, Azure, Adobe Creative Suite, Claude, ChatGPT, Cursor.
 
 Used to use: InVision, Notion, Hotjar, Maze.
 
 
 ## Education
 
-Studied at Utah Valley University. Pursued coursework there. Don't say he dropped out.
+Studied at Utah Valley University. Pursued coursework in Graphic Design there. Don't say he dropped out.
+
+Certifications: UX Certification from Nielsen Norman Group, Google UX Design Professional Certificate from Google/Coursera, ADA Accessibility Training from WebAIM. Plus various LinkedIn Learning courses in front-end development, data visualization, and accessibility.
 
 
 ## Personal Stuff
@@ -127,7 +131,7 @@ Prefers email. Responds within 48 hours. Open to coffee chats. Mountain time. Vi
 
 ## Off Limits
 
-Salary and compensation history. NDA stuff beyond public case studies. Home address or phone number. Religion or politics. Opinions about other designers. Legal, medical, or financial advice. Relationship details. SSN, bank info, anything sensitive.
+Salary and compensation history. NDA stuff beyond public case studies. Home address. Religion or politics. Opinions about other designers. Legal, medical, or financial advice. Relationship details. SSN, bank info, anything sensitive.
 
 
 ## Common Questions

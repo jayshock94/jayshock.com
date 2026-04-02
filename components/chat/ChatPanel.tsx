@@ -165,6 +165,7 @@ export default function ChatPanel({
           type="button"
           onClick={onClose}
           aria-label="Close chat"
+          className="hover-close"
           style={{
             width: '32px',
             height: '32px',
@@ -176,15 +177,6 @@ export default function ChatPanel({
             alignItems: 'center',
             justifyContent: 'center',
             color: 'var(--color-text-muted)',
-            transition: 'color 150ms ease, background 150ms ease',
-          }}
-          onMouseEnter={e => {
-            e.currentTarget.style.color = 'var(--color-text-primary)'
-            e.currentTarget.style.background = 'var(--color-hover-subtle)'
-          }}
-          onMouseLeave={e => {
-            e.currentTarget.style.color = 'var(--color-text-muted)'
-            e.currentTarget.style.background = 'transparent'
           }}
         >
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -271,30 +263,30 @@ export default function ChatPanel({
           </div>
         )}
 
+        {/* --- Suggestion chips (inside scroll, under last message) --- */}
+        {chips.length > 0 && (
+          <div
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: 'var(--space-component-xs)',
+              paddingTop: 'var(--space-component-xs)',
+              paddingLeft: '32px',
+            }}
+          >
+            {chips.map((chip, i) => (
+              <SuggestionChip
+                key={chip.label}
+                label={chip.label}
+                onClick={() => onSelectChip(chip)}
+                index={i}
+              />
+            ))}
+          </div>
+        )}
+
         <div ref={messagesEndRef} />
       </div>
-
-      {/* --- Suggestion chips --- */}
-      {chips.length > 0 && (
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: 'var(--space-component-xs)',
-            padding: '0 var(--space-component-md) var(--space-component-sm)',
-            flexShrink: 0,
-          }}
-        >
-          {chips.map((chip, i) => (
-            <SuggestionChip
-              key={chip.label}
-              label={chip.label}
-              onClick={() => onSelectChip(chip)}
-              index={i}
-            />
-          ))}
-        </div>
-      )}
 
       {/* --- Input --- */}
       <ChatInput

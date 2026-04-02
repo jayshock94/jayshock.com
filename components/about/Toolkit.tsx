@@ -1,6 +1,8 @@
 'use client'
 
 import { useState, useCallback } from 'react'
+import { TOOLKIT_TOOLS, TOOLKIT_SKILLS, EDUCATION, CERTIFICATIONS } from '@/data/resume'
+// CERTIFICATIONS includes all certs (primary + LinkedIn courses)
 
 /* ------------------------------------------------------------------ */
 /*  Data                                                               */
@@ -36,12 +38,7 @@ const CATEGORIES: Category[] = [
     bg: 'rgba(180, 160, 224, 0.12)',
     border: 'rgba(180, 160, 224, 0.22)',
     kind: 'chips',
-    items: [
-      'Figma', 'Sketch', 'Framer', 'Miro', 'FigJam',
-      'Jira', 'Loom', 'Mobbin', 'Lucid',
-      'Azure', 'Adobe Creative Suite',
-      'Claude', 'ChatGPT', 'Cursor',
-    ],
+    items: [...TOOLKIT_TOOLS],
   },
   {
     id: 'skills',
@@ -50,14 +47,7 @@ const CATEGORIES: Category[] = [
     bg: 'rgba(200, 170, 140, 0.12)',
     border: 'rgba(200, 170, 140, 0.22)',
     kind: 'chips',
-    items: [
-      'User Research', 'Interaction Design', 'Design Systems',
-      'Prototyping', 'Usability Testing', 'Wireframing',
-      'Information Architecture', 'Stakeholder Management',
-      'Cross-functional Leadership', 'Accessibility (WCAG)',
-      'Data-driven Design', 'Workshop Facilitation',
-      'AI-assisted Design', 'Prompt Engineering',
-    ],
+    items: [...TOOLKIT_SKILLS],
   },
   {
     id: 'education',
@@ -66,10 +56,7 @@ const CATEGORIES: Category[] = [
     bg: 'rgba(128, 196, 180, 0.12)',
     border: 'rgba(128, 196, 180, 0.22)',
     kind: 'cards',
-    items: [
-      { title: 'Course Studies, Graphic Design', subtitle: 'Utah Valley University' },
-      { title: 'UX Design Certificate', subtitle: 'Google / Coursera' },
-    ],
+    items: EDUCATION.map(e => ({ title: e.label, subtitle: e.institution })),
   },
   {
     id: 'certs',
@@ -78,21 +65,7 @@ const CATEGORIES: Category[] = [
     bg: 'rgba(140, 174, 214, 0.12)',
     border: 'rgba(140, 174, 214, 0.22)',
     kind: 'cards',
-    items: [
-      { title: 'Google UX Design Professional Certificate', subtitle: 'Google / Coursera' },
-      { title: 'ADA Accessibility Training', subtitle: 'WebAIM' },
-      { title: 'Data Visualization: Best Practices', subtitle: 'LinkedIn' },
-      { title: 'User Experience for Web Design', subtitle: 'LinkedIn' },
-      { title: 'Sass Essential Training', subtitle: 'LinkedIn' },
-      { title: 'Bootstrap 4 Essential Training', subtitle: 'LinkedIn' },
-      { title: 'Responsive Layout', subtitle: 'LinkedIn' },
-      { title: 'CSS Essential Training', subtitle: 'LinkedIn' },
-      { title: 'HTML Essential Training', subtitle: 'LinkedIn' },
-      { title: 'Web Programming Foundations', subtitle: 'LinkedIn' },
-      { title: 'UX Foundations: Accessibility', subtitle: 'LinkedIn' },
-      { title: 'Become a Front-End Web Developer', subtitle: 'LinkedIn' },
-      { title: 'JavaScript Essential Training', subtitle: 'LinkedIn' },
-    ],
+    items: CERTIFICATIONS.map(c => ({ title: c.title, subtitle: c.institution })),
   },
 ]
 
@@ -204,14 +177,14 @@ function ChipGrid({ category }: { category: ChipCategory }) {
         <span
           key={item}
           style={{
-            padding: '6px 14px',
-            borderRadius: '6px',
-            borderLeft: `2px solid ${category.border}`,
-            background: 'transparent',
+            padding: '10px 18px',
+            borderRadius: '10px',
+            border: `0.5px solid ${category.border}`,
+            background: category.bg,
             fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-            fontSize: '13px',
-            fontWeight: 300,
-            color: 'var(--color-text-secondary)',
+            fontSize: '14px',
+            fontWeight: 400,
+            color: 'var(--color-text-primary)',
             letterSpacing: '0.01em',
             whiteSpace: 'nowrap',
           }}
@@ -242,7 +215,7 @@ function CardGrid({ category }: { category: CardCategory }) {
             key={item.title}
             style={{
               padding: 'var(--space-component-md) var(--space-component-lg)',
-              borderRadius: '12px',
+              borderRadius: '10px',
               border: `0.5px solid ${category.border}`,
               background: category.bg,
             }}

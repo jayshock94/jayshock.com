@@ -48,7 +48,7 @@ export default function CaseStudyLede({ context, overview, roleMeta, roleSummary
       className="bg-[var(--color-canvas)]"
       style={{
         paddingTop: 'var(--space-section-md)',
-        paddingBottom: 'var(--space-section-sm)',
+        paddingBottom: 'var(--space-section-md)',
       }}
       aria-label="Project context"
     >
@@ -152,7 +152,7 @@ export default function CaseStudyLede({ context, overview, roleMeta, roleSummary
                       key={chip.text}
                       type="button"
                       onClick={() => openBarnaby(chip.barnabyMessage)}
-                      className="text-body-sm"
+                      className="text-body-sm hover-surface"
                       style={{
                         padding: '6px 14px',
                         borderRadius: '999px',
@@ -160,15 +160,6 @@ export default function CaseStudyLede({ context, overview, roleMeta, roleSummary
                         border: '0.5px solid var(--color-border)',
                         color: 'var(--color-text-secondary)',
                         cursor: 'pointer',
-                        transition: 'background 150ms, border-color 150ms',
-                      }}
-                      onMouseEnter={e => {
-                        e.currentTarget.style.background = 'var(--color-surface-elevated)'
-                        e.currentTarget.style.borderColor = 'var(--color-border-mid)'
-                      }}
-                      onMouseLeave={e => {
-                        e.currentTarget.style.background = 'var(--color-surface)'
-                        e.currentTarget.style.borderColor = 'var(--color-border)'
                       }}
                     >
                       {chip.text}

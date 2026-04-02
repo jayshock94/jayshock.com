@@ -14,7 +14,10 @@ interface WorkCardProps {
 export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
   const [hovered, setHovered] = useState(false)
 
-  const { slug, title, company, cardImage, cardImpactLine, brandColorHex, types, comingSoon } = caseStudy
+  const {
+    slug, title, company, cardImage, brandColorHex,
+    types, comingSoon, industry, year, role, cardStat,
+  } = caseStudy
   const tokens = generateTokens(brandColorHex)
 
   const hasImage = !!(cardImageSlot || cardImage)
@@ -31,11 +34,11 @@ export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
           background:            tokens.heroZone,
           border:                `0.5px solid ${hovered && !comingSoon ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.06)'}`,
           boxShadow: hovered && !comingSoon
-            ? '0 12px 48px rgba(0,0,0,0.3)'
-            : '0 4px 24px rgba(0,0,0,0.15)',
+            ? 'var(--shadow-card-hover)'
+            : 'var(--shadow-card)',
           transform:             hovered && !comingSoon ? 'translateY(-3px)' : 'translateY(0)',
           cursor:                comingSoon ? 'default' : 'pointer',
-          transition:            'transform 0.25s cubic-bezier(0.16,1,0.3,1), box-shadow 0.2s ease, border-color 0.2s ease',
+          transition:            'transform var(--transition-smooth), box-shadow var(--transition-base), border-color var(--transition-base)',
         }}
       >
         {/* ── Desktop: image layer on right side ── */}
@@ -64,7 +67,7 @@ export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
           </div>
         )}
 
-        {/* ── Content: text + mobile image + CTA ── */}
+        {/* ── Content: infographic layout ── */}
         <div
           className={hasImage ? 'md:w-[52%]' : ''}
           style={{
@@ -77,41 +80,80 @@ export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
             minHeight:      'clamp(280px, 30vw, 360px)',
           }}
         >
-          <span
-            className="text-label"
+          {/* Top row: industry + year */}
+          <div
             style={{
-              color:        'rgba(255,255,255,0.5)',
-              marginBottom: 'var(--space-stack-sm)',
+              display:        'flex',
+              justifyContent: 'space-between',
+              alignItems:     'center',
+              marginBottom:   'var(--space-stack-md)',
             }}
           >
-            {company}
-          </span>
+            <span
+              className="text-label"
+              style={{ color: 'rgba(255,255,255,0.4)' }}
+            >
+              {industry}
+            </span>
+            <span
+              className="text-label"
+              style={{ color: 'rgba(255,255,255,0.35)' }}
+            >
+              {year}
+            </span>
+          </div>
 
+          {/* Hero stat */}
+          {cardStat && (
+            <div style={{ marginBottom: 'var(--space-stack-md)' }}>
+              <p
+                className="text-stat"
+                style={{
+                  color:  'var(--hero-text-primary)',
+                  margin: 0,
+                }}
+              >
+                {cardStat.value}
+              </p>
+              <p
+                className="text-body-sm"
+                style={{
+                  color:      'rgba(255,255,255,0.55)',
+                  margin:     0,
+                  marginTop:  '4px',
+                }}
+              >
+                {cardStat.label}
+              </p>
+            </div>
+          )}
+
+          {/* Title */}
           <h3
+            className="text-h3"
             style={{
-              fontFamily:    'var(--font-outfit), system-ui, sans-serif',
-              fontSize:      'clamp(22px, 3vw, 32px)',
               fontWeight:    600,
-              lineHeight:    1.15,
-              letterSpacing: '-0.01em',
-              color:         '#fff',
-              marginBottom:  'var(--space-stack-sm)',
+              color:         'var(--hero-text-primary)',
+              marginBottom:  'var(--space-stack-xs)',
             }}
           >
             {title}
           </h3>
 
+          {/* Role + company */}
           <p
             className="text-body-sm"
             style={{
-              color:        'rgba(255,255,255,0.6)',
-              lineHeight:   1.65,
+              color:        'rgba(255,255,255,0.45)',
+              lineHeight:   1.5,
+              margin:       0,
               marginBottom: 'var(--space-stack-sm)',
             }}
           >
-            {cardImpactLine}
+            {role} · {company}
           </p>
 
+          {/* Tags */}
           <div
             style={{
               display:  'flex',
@@ -139,15 +181,16 @@ export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
             ))}
           </div>
 
+          {/* CTA */}
           <span
             className="text-ui-md"
             style={{
-              color:      '#fff',
+              color:      'var(--hero-text-primary)',
               display:    'inline-flex',
               alignItems: 'center',
               gap:        'var(--space-component-xs)',
               marginTop:  'var(--space-component-lg)',
-              transition: 'gap 0.2s ease',
+              transition: 'gap var(--transition-base)',
               ...(hovered ? { gap: 'var(--space-component-sm)' } : {}),
             }}
           >

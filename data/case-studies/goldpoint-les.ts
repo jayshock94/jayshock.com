@@ -10,7 +10,7 @@ const goldpointLes: CaseStudy = {
   company:      'GoldPoint Systems',
   industry:     'Fintech',
   eyebrow:      'Fintech · Enterprise SaaS',
-  role:         'Co-Lead UX Product Designer',
+  role:         'Senior UX Designer',
   year:         '2022–2024',
   types:        ['Fintech', 'Enterprise', 'NDA Protected'],
   cardImpactLine:
@@ -23,23 +23,23 @@ const goldpointLes: CaseStudy = {
 
   impact: {
     headline: 'Coming soon',
-    paragraphs: [],
+    content: [],
     stats: [],
   },
 
   problem: {
     headline: 'Coming soon',
-    paragraphs: [],
+    content: [],
   },
 
   discovery: {
     headline: 'Coming soon',
-    paragraphs: [],
+    content: [],
   },
 
   solution: {
     headline: 'Coming soon',
-    paragraphs: [],
+    content: [],
   },
 
   nextSlug: 'aim',

@@ -476,7 +476,7 @@ export default function CaseStudyPage({ params }: PageProps) {
               </>
             ) : undefined
           }
-          mediaSlotAfterParagraph={0}
+          mediaSlotAfterBlock={0}
         />
 
 
@@ -599,7 +599,7 @@ export default function CaseStudyPage({ params }: PageProps) {
               </>
             ) : undefined
           }
-          mediaSlotAfterParagraph={(isAim || isMobileLending || isCaliber) ? 1 : undefined}
+          mediaSlotAfterBlock={(isAim || isMobileLending || isCaliber) ? 0 : undefined}
         />
 
 
@@ -678,7 +678,7 @@ export default function CaseStudyPage({ params }: PageProps) {
               </ScrollReveal>
             ) : undefined
           }
-          mediaSlotAfterParagraph={isCaliber ? 1 : isMobileLending ? 1 : undefined}
+          mediaSlotAfterBlock={isCaliber ? 1 : isMobileLending ? 0 : undefined}
         />
 
 
@@ -688,7 +688,7 @@ export default function CaseStudyPage({ params }: PageProps) {
           content={cs.impact}
           glossary={cs.glossary}
           mediaSlot={isMobileLending ? <FinalAppComposite /> : undefined}
-          mediaSlotAfterParagraph={isMobileLending ? 1 : undefined}
+          mediaSlotAfterBlock={isMobileLending ? 1 : undefined}
         />
       </PhaseObserver>
 

@@ -21,7 +21,7 @@ const FIELD_CLASS = `
   rounded-[6px]
   text-ui-md text-[var(--color-ink)]
   placeholder:text-[var(--color-text-placeholder)]
-  focus:outline-none focus:border-[var(--color-border-mid)]
+  focus:outline-none focus:border-[var(--color-border-mid)] focus:ring-1 focus:ring-[var(--color-border-mid)]
   transition-colors duration-200
 `
 
