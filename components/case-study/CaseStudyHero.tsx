@@ -35,7 +35,7 @@ export default function CaseStudyHero({ caseStudy, tokens, heroImageSlot, tagMes
       >
         {/* Eyebrow */}
         <p
-          className="hero-fade-up text-label"
+          className="hero-fade-up text-label text-center"
           style={{
             color: 'var(--hero-text-muted)',
             marginBottom: 'var(--space-stack-md)',
@@ -47,7 +47,7 @@ export default function CaseStudyHero({ caseStudy, tokens, heroImageSlot, tagMes
 
         {/* Title */}
         <h1
-          className="hero-fade-up text-hero-title"
+          className="hero-fade-up text-hero-title text-center mx-auto"
           style={{
             color: 'var(--hero-text-primary)',
             marginBottom: 'var(--space-stack-md)',
@@ -60,7 +60,7 @@ export default function CaseStudyHero({ caseStudy, tokens, heroImageSlot, tagMes
 
         {/* Role as subtitle */}
         <p
-          className="hero-fade-up text-intro"
+          className="hero-fade-up text-intro text-center mx-auto"
           style={{
             color: 'var(--hero-text-secondary)',
             marginBottom: 'var(--space-stack-lg)',

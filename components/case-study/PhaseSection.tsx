@@ -285,7 +285,7 @@ export default function PhaseSection({
 
         {/* Phase eyebrow with number */}
         <ScrollReveal>
-          <div className="flex items-center gap-[var(--space-component-sm)] mb-[var(--space-stack-sm)]">
+          <div className="flex items-center justify-center gap-[var(--space-component-sm)] mb-[var(--space-stack-sm)]">
             {phaseNum && (
               <span
                 className="text-label"
@@ -304,7 +304,7 @@ export default function PhaseSection({
         <ScrollReveal>
           <h2
             id={`phase-heading-${phase}`}
-            className="text-h2 text-[var(--color-ink)] max-w-content mb-[var(--space-stack-lg)]"
+            className="text-h2 text-[var(--color-ink)] max-w-content mx-auto text-center mb-[var(--space-stack-lg)]"
           >
             {headline}
           </h2>
@@ -372,6 +372,7 @@ export default function PhaseSection({
                         style={{
                           color: isFirstParagraph ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
                           maxWidth: 'var(--space-content-max)',
+                          margin: '0 auto',
                         }}
                       />
                     ) : (
@@ -380,6 +381,7 @@ export default function PhaseSection({
                         style={{
                           color: isFirstParagraph ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
                           maxWidth: 'var(--space-content-max)',
+                          margin: '0 auto',
                         }}
                       >
                         {block.text}
@@ -396,7 +398,7 @@ export default function PhaseSection({
                       style={{
                         color: 'var(--color-text-muted)',
                         maxWidth: 'var(--space-content-max)',
-                        marginTop: 'var(--space-stack-sm)',
+                        margin: 'var(--space-stack-sm) auto 0',
                       }}
                     >
                       <BarnabyTooltip
@@ -412,7 +414,7 @@ export default function PhaseSection({
                 {block.type === 'subheader' && (
                   <ScrollReveal>
                     <h3
-                      className="text-h4 text-[var(--color-ink)] max-w-content"
+                      className="text-h4 text-[var(--color-ink)] max-w-content mx-auto"
                       style={{
                         marginTop: i > 0 ? 'var(--space-stack-lg)' : undefined,
                       }}
@@ -425,7 +427,7 @@ export default function PhaseSection({
                 {/* ── List block ── */}
                 {block.type === 'list' && (
                   <ScrollReveal>
-                    <div style={{ maxWidth: 'var(--space-content-max)' }}>
+                    <div style={{ maxWidth: 'var(--space-content-max)', margin: '0 auto' }}>
                       {block.lead && (
                         <p
                           className="text-body"
@@ -513,7 +515,7 @@ export default function PhaseSection({
 
         {/* Estimated metrics footnote */}
         {estimatedNote && (
-          <p className="mt-[var(--space-stack-lg)] text-body-sm text-[var(--color-text-muted)]">
+          <p className="mt-[var(--space-stack-lg)] text-body-sm text-[var(--color-text-muted)] max-w-content mx-auto text-center">
             <sup aria-hidden="true">*</sup> {estimatedNote}
           </p>
         )}

@@ -21,19 +21,19 @@ export default function ExperiencePage() {
       <section aria-label="Experience overview">
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <ScrollReveal>
-            <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)]">
+            <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)] text-center">
               Experience
             </p>
-            <h1 className="text-h1 text-[var(--color-ink)] mb-[var(--space-stack-sm)]">
+            <h1 className="text-h1 text-[var(--color-ink)] mb-[var(--space-stack-sm)] text-center">
               Jay Shock
             </h1>
-            <p className="text-body-lg text-[var(--color-text-secondary)] mb-[var(--space-stack-xs)]">
+            <p className="text-body-lg text-[var(--color-text-secondary)] mb-[var(--space-stack-xs)] text-center">
               Product Designer
             </p>
-            <p className="text-body-sm text-[var(--color-text-muted)] mb-[var(--space-stack-lg)]">
+            <p className="text-body-sm text-[var(--color-text-muted)] mb-[var(--space-stack-lg)] text-center">
               Currently employed. Open to the right senior role or consulting engagement. Remote first, open to hybrid.
             </p>
-            <div className="flex flex-wrap gap-[var(--space-component-sm)]">
+            <div className="flex flex-wrap justify-center gap-[var(--space-component-sm)]">
               <Button variant="glass" href="/api/resume">
                 Download resume
               </Button>
@@ -56,10 +56,10 @@ export default function ExperiencePage() {
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
             <ScrollReveal>
-              <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)]">
+              <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)] text-center">
                 Skills
               </p>
-              <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-lg)]">
+              <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-lg)] text-center">
                 What I bring.
               </h2>
             </ScrollReveal>
@@ -107,10 +107,10 @@ export default function ExperiencePage() {
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
             <ScrollReveal>
-              <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)]">
+              <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)] text-center">
                 Tools
               </p>
-              <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-lg)]">
+              <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-lg)] text-center">
                 What I use.
               </h2>
             </ScrollReveal>
@@ -177,10 +177,10 @@ export default function ExperiencePage() {
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
             <ScrollReveal>
-              <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)]">
+              <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)] text-center">
                 Timeline
               </p>
-              <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-lg)]">
+              <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-lg)] text-center">
                 Where I have been.
               </h2>
             </ScrollReveal>
@@ -246,7 +246,7 @@ export default function ExperiencePage() {
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
             <ScrollReveal>
-              <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)]">
+              <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)] text-center">
                 Education
               </p>
               <div className="flex flex-col gap-[var(--space-stack-md)]">
@@ -277,12 +277,14 @@ export default function ExperiencePage() {
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
             <ScrollReveal>
-              <p className="text-body-lg text-[var(--color-text-secondary)] mb-[var(--space-stack-lg)]">
+              <p className="text-body-lg text-[var(--color-text-secondary)] mb-[var(--space-stack-lg)] text-center">
                 Want the full picture in one document?
               </p>
-              <Button variant="glass" href="/api/resume">
-                Download resume
-              </Button>
+              <div className="text-center">
+                <Button variant="glass" href="/api/resume">
+                  Download resume
+                </Button>
+              </div>
             </ScrollReveal>
           </div>
         </div>

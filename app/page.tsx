@@ -43,7 +43,7 @@ export default function HomePage() {
 
           {/* Intro line — tucked tight against headline */}
           <p
-            className="hero-fade-up text-center md:text-left"
+            className="hero-fade-up text-center"
             style={{
               fontFamily: 'var(--font-outfit), system-ui, sans-serif',
               fontSize: 'clamp(14px, 3vw, 18px)',
@@ -58,7 +58,7 @@ export default function HomePage() {
 
           {/* Headline — word-by-word reveal, bold words carry the message */}
           <h1
-            className="text-display mb-[var(--space-stack-md)] text-center md:text-left"
+            className="text-display mb-[var(--space-stack-md)] text-center mx-auto"
             style={{ maxWidth: '900px' }}
           >
             <span style={{ fontWeight: 300, color: 'var(--color-text-muted)' }}>
@@ -81,7 +81,7 @@ export default function HomePage() {
 
           {/* Status chips */}
           <div
-            className="flex flex-wrap gap-[var(--space-component-sm)] mb-[var(--space-stack-lg)] justify-center md:justify-start hero-fade-up"
+            className="flex flex-wrap gap-[var(--space-component-sm)] mb-[var(--space-stack-lg)] justify-center hero-fade-up"
             style={{ animationDelay: '900ms' }}
           >
             <span className="chip">
@@ -105,7 +105,7 @@ export default function HomePage() {
 
           {/* CTAs */}
           <div
-            className="flex flex-wrap gap-[var(--space-component-sm)] items-center justify-center md:justify-start hero-fade-up"
+            className="flex flex-wrap gap-[var(--space-component-sm)] items-center justify-center hero-fade-up"
             style={{ animationDelay: '1000ms' }}
           >
             <Button variant="glass" href="/api/resume" download>
@@ -131,7 +131,7 @@ export default function HomePage() {
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
 
           <p
-            className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-lg)] hero-fade-up"
+            className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-lg)] text-center hero-fade-up"
             id="work-eyebrow"
             style={{ animationDelay: '1200ms' }}
           >
@@ -275,7 +275,7 @@ export default function HomePage() {
             <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
 
               {/* Header row */}
-              <div className="mb-[var(--space-stack-lg)]">
+              <div className="mb-[var(--space-stack-lg)] text-center">
                 <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)]">
                   Experience
                 </p>
@@ -374,10 +374,10 @@ export default function HomePage() {
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <div className="border-t border-[var(--color-border)] pt-[var(--space-section-md)]">
 
-            <div className="flex flex-col md:flex-row gap-[var(--space-section-sm)]">
+            <div className="flex flex-col gap-[var(--space-section-sm)]">
 
-              {/* Left — headline + context */}
-              <div className="md:w-[360px] flex-shrink-0">
+              {/* Header — centered */}
+              <div className="text-center">
                 <ScrollReveal>
                   <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)]">
                     What&apos;s next
@@ -385,27 +385,27 @@ export default function HomePage() {
                   <h2 className="text-h1 text-[var(--color-ink)] mb-[var(--space-stack-md)]">
                     Let&apos;s make it simple.
                   </h2>
-                  <p className="text-body text-[var(--color-text-secondary)] mb-[var(--space-stack-md)]">
+                  <p className="text-body text-[var(--color-text-secondary)] mb-[var(--space-stack-md)] max-w-content mx-auto">
                     If you are building something complex and need someone who will own the problem with you, I want to hear about it.
                   </p>
-                  <a
-                    href="mailto:hello@jayshock.com"
-                    className="text-body hover-ink"
-                    style={{
-                      color: 'var(--color-ink)',
-                      textDecoration: 'none',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: 'var(--space-component-sm)',
-                    }}
-                  >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ opacity: 0.6 }}>
-                      <rect x="2" y="4" width="20" height="16" rx="2" />
-                      <path d="M22 4L12 13L2 4" />
-                    </svg>
-                    hello@jayshock.com
-                  </a>
-                  <div className="mt-[var(--space-stack-md)]">
+                  <div className="flex items-center justify-center gap-[var(--space-component-md)]">
+                    <a
+                      href="mailto:hello@jayshock.com"
+                      className="text-body hover-ink"
+                      style={{
+                        color: 'var(--color-ink)',
+                        textDecoration: 'none',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: 'var(--space-component-sm)',
+                      }}
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ opacity: 0.6 }}>
+                        <rect x="2" y="4" width="20" height="16" rx="2" />
+                        <path d="M22 4L12 13L2 4" />
+                      </svg>
+                      hello@jayshock.com
+                    </a>
                     <Button variant="secondary" href="/api/resume">
                       Download resume
                     </Button>
@@ -413,8 +413,8 @@ export default function HomePage() {
                 </ScrollReveal>
               </div>
 
-              {/* Right — form */}
-              <div className="flex-1">
+              {/* Form — centered column */}
+              <div className="max-w-content mx-auto w-full">
                 <ScrollReveal>
                   <ContactForm />
                 </ScrollReveal>

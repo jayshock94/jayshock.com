@@ -156,14 +156,14 @@ export default function HowIWork() {
   return (
     <div ref={containerRef}>
       {/* Header */}
-      <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)]">
+      <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)] text-center">
         How I work
       </p>
-      <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-sm)]">
+      <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-sm)] text-center">
         No matter the project.
       </h2>
       <p
-        className="text-body text-[var(--color-text-secondary)] mb-[var(--space-stack-lg)]"
+        className="text-body text-[var(--color-text-secondary)] mb-[var(--space-stack-lg)] text-center mx-auto"
         style={{ maxWidth: 'var(--space-content-max)' }}
       >
         Whether it is a full product redesign or a single flow. Scopes change,
@@ -171,7 +171,7 @@ export default function HowIWork() {
       </p>
 
       {/* Ring + description */}
-      <div className="flex flex-col items-center gap-[var(--space-component-lg)] md:flex-row md:items-center md:justify-start md:gap-[var(--space-7)]">
+      <div className="flex flex-col items-center gap-[var(--space-component-lg)] md:flex-row md:items-center md:justify-center md:gap-[var(--space-7)]">
 
         {/* Ring */}
         <div

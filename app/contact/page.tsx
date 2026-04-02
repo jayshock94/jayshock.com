@@ -11,9 +11,9 @@ export default function ContactPage() {
   return (
     <div className="pt-[var(--space-section-md)] pb-[var(--space-section-lg)]">
       <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
-        <div className="max-w-content">
+        <div className="max-w-content mx-auto">
 
-          <header className="mb-[var(--space-section-sm)]">
+          <header className="mb-[var(--space-section-sm)] text-center">
             <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-sm)]">
               Contact
             </p>
