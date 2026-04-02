@@ -28,6 +28,7 @@ import CaliberIncentives      from '@/components/case-study/caliber/CaliberIncen
 import CaliberSolarEstimator  from '@/components/case-study/caliber/CaliberSolarEstimator'
 import CaliberTechBooking     from '@/components/case-study/caliber/CaliberTechBooking'
 import ScaledMockup           from '@/components/case-study/caliber/ScaledMockup'
+import BarnabyTooltip      from '@/components/case-study/BarnabyTooltip'
 import ScrollReveal        from '@/components/ui/ScrollReveal'
 import Button              from '@/components/ui/Button'
 
@@ -179,6 +180,15 @@ const CALIBER_TAG_MESSAGES: Record<string, string> = {
   'Solar': 'Tell me about the solar estimation tool Jay designed for Caliber Smart.',
   'Solo Designer': 'What was it like being the only designer on a project this big?',
 }
+
+const CALIBER_HEADER_NOTE = {
+  text: '* Visuals recreated for portfolio.',
+  barnabyTerm: '* Visuals recreated for portfolio.',
+  barnabyDefinition: 'Jay no longer has access to the original design files from this project. the screens you see here are reconstructed from memory to show the thinking and decisions behind the work. the story, the research, and the outcomes are all real.',
+}
+
+const CALIBER_CAPTION_NOTE =
+  'this screen was recreated from memory for this case study. Jay no longer has the original files but the design decisions and layout shown here reflect what was actually built and shipped.'
 
 const CALIBER_PAIN_POINTS = [
   {
@@ -484,6 +494,7 @@ export default function CaseStudyPage({ params }: PageProps) {
           phaseNumber={2}
           content={cs.discovery}
           glossary={cs.glossary}
+          headerNote={isCaliber ? CALIBER_HEADER_NOTE : undefined}
           mediaSlot={
             isAim ? (
               <>
@@ -614,7 +625,7 @@ export default function CaseStudyPage({ params }: PageProps) {
                   <div style={{ marginTop: 'var(--space-section-sm)', marginBottom: 'var(--space-section-sm)' }}>
                     <ScaledMockup><CaliberDashboard /></ScaledMockup>
                     <p className="text-body-sm" style={{ color: 'var(--color-text-muted)', textAlign: 'center', marginTop: 'var(--space-stack-sm)', maxWidth: '400px', marginLeft: 'auto', marginRight: 'auto' }}>
-                      The dashboard. Leaderboard position, key metrics, and estimated pay. Everything a rep checks first.
+                      The dashboard. Leaderboard position, key metrics, and estimated pay. Everything a rep checks first. <BarnabyTooltip term="Recreated" definition={CALIBER_CAPTION_NOTE} accentColor={tokens.label} />
                     </p>
                   </div>
                 </ScrollReveal>
@@ -622,37 +633,15 @@ export default function CaseStudyPage({ params }: PageProps) {
                   <div style={{ marginTop: 'var(--space-section-sm)', marginBottom: 'var(--space-section-sm)' }}>
                     <ScaledMockup designWidth={860}><CaliberIncentives /></ScaledMockup>
                     <p className="text-body-sm" style={{ color: 'var(--color-text-muted)', textAlign: 'center', marginTop: 'var(--space-stack-sm)', maxWidth: '400px', marginLeft: 'auto', marginRight: 'auto' }}>
-                      Incentives. Progress bars replaced social media screenshots and guesswork.
+                      Incentives. Progress bars replaced social media screenshots and guesswork. <BarnabyTooltip term="Recreated" definition={CALIBER_CAPTION_NOTE} accentColor={tokens.label} />
                     </p>
                   </div>
                 </ScrollReveal>
                 <ScrollReveal>
                   <div style={{ marginTop: 'var(--space-section-sm)', marginBottom: 'var(--space-section-sm)' }}>
-                    <div style={{
-                      background: 'var(--color-surface)',
-                      border: '1px solid var(--color-border)',
-                      borderRadius: '20px',
-                      padding: 'var(--space-section-sm) var(--space-component-lg)',
-                      maxWidth: '860px',
-                      margin: '0 auto',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      gap: 'var(--space-stack-sm)',
-                    }}>
-                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.5 }}>
-                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                        <path d="M7 11V7a5 5 0 0110 0v4" />
-                      </svg>
-                      <p className="text-body-sm" style={{ color: 'var(--color-text-muted)', margin: 0, fontWeight: 500 }}>
-                        Solar Estimator
-                      </p>
-                      <p className="text-body-sm" style={{ color: 'var(--color-text-muted)', margin: 0, opacity: 0.7, textAlign: 'center' }}>
-                        This screen is under NDA and cannot be shown publicly.
-                      </p>
-                    </div>
+                    <ScaledMockup designWidth={860}><CaliberSolarEstimator /></ScaledMockup>
                     <p className="text-body-sm" style={{ color: 'var(--color-text-muted)', textAlign: 'center', marginTop: 'var(--space-stack-sm)', maxWidth: '600px', marginLeft: 'auto', marginRight: 'auto' }}>
-                      The solar estimator. Satellite imagery, panel count, and savings. All at the door.
+                      The solar estimator. Satellite imagery, panel count, and savings. All at the door. <BarnabyTooltip term="Recreated" definition={CALIBER_CAPTION_NOTE} accentColor={tokens.label} />
                     </p>
                   </div>
                 </ScrollReveal>
@@ -660,7 +649,7 @@ export default function CaseStudyPage({ params }: PageProps) {
                   <div style={{ marginTop: 'var(--space-section-sm)', marginBottom: 'var(--space-section-sm)' }}>
                     <ScaledMockup designWidth={860}><CaliberTechBooking /></ScaledMockup>
                     <p className="text-body-sm" style={{ color: 'var(--color-text-muted)', textAlign: 'center', marginTop: 'var(--space-stack-sm)', maxWidth: '400px', marginLeft: 'auto', marginRight: 'auto' }}>
-                      Tech booking. Ratings, availability, and a face. Trust before the tech even shows up.
+                      Tech booking. Ratings, availability, and a face. Trust before the tech even shows up. <BarnabyTooltip term="Recreated" definition={CALIBER_CAPTION_NOTE} accentColor={tokens.label} />
                     </p>
                   </div>
                 </ScrollReveal>
