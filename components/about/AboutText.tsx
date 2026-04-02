@@ -3,8 +3,8 @@
 import { useState } from 'react'
 
 const paragraphs = [
-  `I am a product designer with 8 years in fintech and enterprise SaaS. I have spent most of that time inside systems that are too complex for their own good, making them work for the people who actually use them.`,
-  `My brain finds patterns other people walk past. Growing up with dyslexia and ADHD taught me the value that comes when you truly take the time to understand people below their surface. That is the lens I bring to every research session, every stakeholder meeting, every design decision.`,
+  `I started with video and graphic design, fell into UX through friends who needed help with their software projects, and never looked back. Eight years later I am still inside complex systems, making them work for the people who actually use them.`,
+  `I grew up with dyslexia and ADHD. That taught me to pay attention to what people mean, not just what they say. It is basically my whole approach to research, and the reason I spot gaps other people walk past.`,
 ]
 
 export default function AboutText() {

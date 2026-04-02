@@ -29,14 +29,14 @@ export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
         onMouseLeave={() => setHovered(false)}
         style={{
           position:              'relative',
-          borderRadius:          '16px',
+          borderRadius:          'var(--radius-lg)',
           overflow:              'hidden',
           background:            tokens.heroZone,
           border:                `0.5px solid ${hovered && !comingSoon ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.06)'}`,
           boxShadow: hovered && !comingSoon
             ? 'var(--shadow-card-hover)'
             : 'var(--shadow-card)',
-          transform:             hovered && !comingSoon ? 'translateY(-3px)' : 'translateY(0)',
+          transform:             hovered && !comingSoon ? 'translateY(-2px)' : 'translateY(0)',
           cursor:                comingSoon ? 'default' : 'pointer',
           transition:            'transform var(--transition-smooth), box-shadow var(--transition-base), border-color var(--transition-base)',
         }}
@@ -196,7 +196,7 @@ export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
           >
             {comingSoon ? 'Coming soon' : 'View case study'}
             {!comingSoon && (
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <svg className="work-card-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                 <path d="M5.25 3.5L8.75 7L5.25 10.5" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             )}

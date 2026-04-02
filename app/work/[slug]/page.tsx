@@ -8,7 +8,7 @@ import CaseStudyHero       from '@/components/case-study/CaseStudyHero'
 import CaseStudyLede       from '@/components/case-study/CaseStudyLede'
 import PhaseSection        from '@/components/case-study/PhaseSection'
 import PhaseObserver       from '@/components/case-study/PhaseObserver'
-import PhaseProgress       from '@/components/case-study/PhaseProgress'
+// PhaseProgress removed — phase eyebrows handle wayfinding
 import AimHeroImage           from '@/components/case-study/AimHeroImage'
 import MobileLendingHeroImage from '@/components/case-study/MobileLendingHeroImage'
 import PainPoints            from '@/components/case-study/PainPoints'
@@ -381,9 +381,8 @@ export default function CaseStudyPage({ params }: PageProps) {
         accentColor={tokens.label}
       />
 
-      {/* Phase sections with observer, progress, and dividers */}
+      {/* Phase sections with observer and dividers */}
       <PhaseObserver>
-        <PhaseProgress />
 
         <PhaseSection
           phase="problem"

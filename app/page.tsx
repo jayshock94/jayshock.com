@@ -8,6 +8,7 @@ import CaliberCardImage from '@/components/work/CaliberCardImage'
 import HowIWork      from '@/components/about/HowIWork'
 import Toolkit       from '@/components/about/Toolkit'
 import AboutText     from '@/components/about/AboutText'
+import ContactForm   from '@/app/contact/ContactForm'
 import ScrollReveal    from '@/components/ui/ScrollReveal'
 import SectionTracker  from '@/components/ui/SectionTracker'
 import { caseStudies } from '@/data/case-studies'
@@ -64,38 +65,43 @@ export default function HomePage() {
               <span className="hero-word" style={{ animationDelay: '400ms'  }}>I&apos;m </span>
             </span>
             <span style={{ fontWeight: 700, color: 'var(--color-ink)' }}>
-              <span className="hero-word hero-word--bold">Jay,</span>
+              <span className="hero-word hero-word--bold">Jay Shock.</span>
             </span>
             <br />
             <span style={{ fontWeight: 300, color: 'var(--color-text-muted)' }}>
-              <span className="hero-word" style={{ animationDelay: '500ms'  }}>a </span>
-              <span className="hero-word" style={{ animationDelay: '560ms'  }}>product </span>
+              <span className="hero-word" style={{ animationDelay: '500ms'  }}>I </span>
+              <span className="hero-word" style={{ animationDelay: '560ms'  }}>make </span>
+              <span className="hero-word" style={{ animationDelay: '620ms'  }}>complex </span>
+              <span className="hero-word" style={{ animationDelay: '680ms'  }}>products </span>
             </span>
             <span style={{ fontWeight: 700, color: 'var(--color-ink)' }}>
-              <span className="hero-word hero-word--bold">designer </span>
-            </span>
-            <span style={{ fontWeight: 300, color: 'var(--color-text-muted)' }}>
-              <span className="hero-word" style={{ animationDelay: '620ms'  }}>turning </span>
-              <span className="hero-word" style={{ animationDelay: '680ms'  }}>complexity </span>
-              <span className="hero-word" style={{ animationDelay: '740ms'  }}>into </span>
-            </span>
-            <span style={{ fontWeight: 700, color: 'var(--color-ink)' }}>
-              <span className="hero-word hero-word--bold">simplicity.</span>
+              <span className="hero-word hero-word--bold">simple.</span>
             </span>
           </h1>
 
-          {/* Subline */}
-          <p
-            className="text-body-lg mb-[var(--space-stack-lg)] text-center md:text-left hero-fade-up"
-            style={{
-              color:          'var(--color-text-muted)',
-              maxWidth:       '520px',
-              animationDelay: '900ms',
-            }}
+          {/* Status chips */}
+          <div
+            className="flex flex-wrap gap-[var(--space-component-sm)] mb-[var(--space-stack-lg)] justify-center md:justify-start hero-fade-up"
+            style={{ animationDelay: '900ms' }}
           >
-            8 years experience. Currently based in Utah, designing financial systems
-            in enterprise SaaS.
-          </p>
+            <span className="chip">
+              <span
+                style={{
+                  width: '7px',
+                  height: '7px',
+                  borderRadius: '50%',
+                  background: 'var(--color-status-available)',
+                  boxShadow: '0 0 6px var(--color-status-available-glow)',
+                  flexShrink: 0,
+                }}
+                aria-hidden="true"
+              />
+              Open to opportunities
+            </span>
+            <span className="chip">
+              8 years in fintech and enterprise SaaS
+            </span>
+          </div>
 
           {/* CTAs */}
           <div
@@ -198,7 +204,7 @@ export default function HomePage() {
                     About
                   </p>
                   <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-sm)]">
-                    I find the problem before I design the solution.
+                    I got here by paying attention.
                   </h2>
 
                   <AboutText />
@@ -358,64 +364,65 @@ export default function HomePage() {
 
 
       {/* =========================================================
-          Section 06 — Contact CTA
+          Section 06 — Contact (peak-end: last impression)
       ========================================================= */}
       <section
         id="contact"
-        className="py-[var(--space-section-md)]"
+        className="py-[var(--space-section-lg)]"
         aria-label="Contact"
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
-          <ScrollReveal>
-            <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
-              <div className="mb-[var(--space-stack-lg)]">
-                <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)]">
-                  Contact
-                </p>
-                <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-sm)]">
-                  Let&apos;s build something.
-                </h2>
-                <p className="text-body text-[var(--color-text-secondary)] mb-[var(--space-stack-md)]">
-                  I&apos;m always looking for interesting problems and good people to solve them with.
-                </p>
+          <div className="border-t border-[var(--color-border)] pt-[var(--space-section-md)]">
 
-                {/* Status tags */}
-                <div className="flex flex-wrap gap-[var(--space-component-sm)]">
-                  {['Open to remote', 'Available for consulting', 'Mountain time'].map((tag) => (
-                    <span
-                      key={tag}
-                      style={{
-                        padding: '6px 14px',
-                        borderRadius: '999px',
-                        border: '0.5px solid var(--color-border)',
-                        background: 'var(--color-surface)',
-                        fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-                        fontSize: '12px',
-                        fontWeight: 400,
-                        color: 'var(--color-text-muted)',
-                        letterSpacing: '0.02em',
-                      }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+            <div className="flex flex-col md:flex-row gap-[var(--space-section-sm)]">
+
+              {/* Left — headline + context */}
+              <div className="md:w-[360px] flex-shrink-0">
+                <ScrollReveal>
+                  <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)]">
+                    What&apos;s next
+                  </p>
+                  <h2 className="text-h1 text-[var(--color-ink)] mb-[var(--space-stack-md)]">
+                    Let&apos;s make it simple.
+                  </h2>
+                  <p className="text-body text-[var(--color-text-secondary)] mb-[var(--space-stack-md)]">
+                    If you are building something complex and need someone who will own the problem with you, I want to hear about it.
+                  </p>
+                  <a
+                    href="mailto:hello@jayshock.com"
+                    className="text-body hover-ink"
+                    style={{
+                      color: 'var(--color-ink)',
+                      textDecoration: 'none',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 'var(--space-component-sm)',
+                    }}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ opacity: 0.6 }}>
+                      <rect x="2" y="4" width="20" height="16" rx="2" />
+                      <path d="M22 4L12 13L2 4" />
+                    </svg>
+                    hello@jayshock.com
+                  </a>
+                  <div className="mt-[var(--space-stack-md)]">
+                    <Button variant="secondary" href="/api/resume">
+                      Download resume
+                    </Button>
+                  </div>
+                </ScrollReveal>
               </div>
 
-              {/* CTAs + contact detail */}
-              <div className="flex flex-wrap items-center gap-[var(--space-component-sm)] mb-[var(--space-stack-sm)]">
-                <Button variant="glass" href="/contact">
-                  Get in touch
-                </Button>
-                <Button variant="secondary" href="/api/resume">
-                  Download resume
-                </Button>
+              {/* Right — form */}
+              <div className="flex-1">
+                <ScrollReveal>
+                  <ContactForm />
+                </ScrollReveal>
               </div>
-              <p className="text-body-sm text-[var(--color-text-placeholder)]">
-                hello@jayshock.com
-              </p>
+
             </div>
-          </ScrollReveal>
+
+          </div>
         </div>
       </section>
 

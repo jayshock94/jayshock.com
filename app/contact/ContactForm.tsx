@@ -15,14 +15,15 @@ const TOPIC_OPTIONS = [
 
 const FIELD_CLASS = `
   w-full
-  px-[var(--space-component-md)] py-[10px]
+  px-[var(--space-component-md)] py-[12px]
   bg-[var(--color-surface)]
   border border-[var(--color-border)]
-  rounded-[6px]
-  text-ui-md text-[var(--color-ink)]
+  rounded-[var(--radius-md)]
+  text-body-sm text-[var(--color-ink)]
   placeholder:text-[var(--color-text-placeholder)]
-  focus:outline-none focus:border-[var(--color-border-mid)] focus:ring-1 focus:ring-[var(--color-border-mid)]
-  transition-colors duration-200
+  focus:outline-none focus:border-[var(--color-border-strong)]
+  focus:bg-[var(--color-surface-elevated)]
+  transition-all duration-200
 `
 
 const LABEL_CLASS = `
@@ -50,108 +51,125 @@ export default function ContactForm() {
   if (state.status === 'success') {
     return (
       <div
-        className="
-          py-[var(--space-section-sm)]
-          flex flex-col gap-[var(--space-stack-sm)]
-        "
-        role="status"
-        aria-live="polite"
+        className="rounded-[12px] p-[var(--space-component-lg)]"
+        style={{
+          background: 'var(--color-surface)',
+          border: '0.5px solid var(--color-border)',
+        }}
       >
-        <p className="text-h3 text-[var(--color-ink)]">
+        <p className="text-h4 text-[var(--color-ink)] mb-[var(--space-stack-xs)]">
           Got it.
         </p>
-        <p className="text-body text-[var(--color-text-secondary)]">
+        <p className="text-body text-[var(--color-text-secondary)] mb-[var(--space-stack-md)]">
           I will be in touch within 48 hours.
         </p>
+        <button
+          type="button"
+          onClick={() => window.location.reload()}
+          className="text-ui-md hover-ink"
+          style={{
+            background: 'none',
+            border: 'none',
+            padding: 0,
+            color: 'var(--color-text-muted)',
+            cursor: 'pointer',
+          }}
+        >
+          Send another message
+        </button>
       </div>
     )
   }
 
   return (
-    <form
-      action={formAction}
-      noValidate
-      className="flex flex-col gap-[var(--space-component-md)]"
-    >
-      {/* Name */}
-      <div className="flex flex-col">
-        <label htmlFor="name" className={LABEL_CLASS}>Name</label>
-        <input
-          id="name"
-          name="name"
-          type="text"
-          autoComplete="name"
-          placeholder="Your name"
-          className={FIELD_CLASS}
-          required
-        />
-      </div>
+    <form action={formAction} className="flex flex-col gap-[var(--space-component-md)]">
 
-      {/* Email */}
-      <div className="flex flex-col">
-        <label htmlFor="email" className={LABEL_CLASS}>Email</label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          autoComplete="email"
-          placeholder="you@example.com"
-          className={FIELD_CLASS}
-          required
-        />
+      {/* Name + Email row */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-[var(--space-component-md)]">
+        <div>
+          <label htmlFor="contact-name" className={LABEL_CLASS}>Name</label>
+          <input
+            id="contact-name"
+            name="name"
+            type="text"
+            required
+            placeholder="Your name"
+            className={FIELD_CLASS}
+          />
+        </div>
+        <div>
+          <label htmlFor="contact-email" className={LABEL_CLASS}>Email</label>
+          <input
+            id="contact-email"
+            name="email"
+            type="email"
+            required
+            placeholder="you@example.com"
+            className={FIELD_CLASS}
+          />
+        </div>
       </div>
 
       {/* Topic */}
-      <div className="flex flex-col">
-        <label htmlFor="topic" className={LABEL_CLASS}>
-          What are you reaching out about?
-        </label>
+      <div style={{ position: 'relative' }}>
+        <label htmlFor="contact-topic" className={LABEL_CLASS}>Topic</label>
         <select
-          id="topic"
+          id="contact-topic"
           name="topic"
-          className={`${FIELD_CLASS} appearance-none cursor-pointer`}
-          defaultValue=""
           required
+          className={FIELD_CLASS}
+          defaultValue=""
+          style={{ appearance: 'none', paddingRight: '40px', cursor: 'pointer' }}
         >
           {TOPIC_OPTIONS.map(opt => (
             <option
               key={opt.value}
               value={opt.value}
               disabled={opt.value === ''}
+              hidden={opt.value === ''}
             >
               {opt.label}
             </option>
           ))}
         </select>
+        <svg
+          width="16" height="16" viewBox="0 0 16 16" fill="none"
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            right: '14px',
+            bottom: '14px',
+            pointerEvents: 'none',
+            color: 'var(--color-text-placeholder)',
+          }}
+        >
+          <path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
       </div>
 
       {/* Message */}
-      <div className="flex flex-col">
-        <label htmlFor="message" className={LABEL_CLASS}>Message</label>
+      <div>
+        <label htmlFor="contact-message" className={LABEL_CLASS}>Message</label>
         <textarea
-          id="message"
+          id="contact-message"
           name="message"
-          rows={5}
-          placeholder="Tell me what you are working on."
-          className={`${FIELD_CLASS} resize-y min-h-[120px]`}
           required
+          rows={4}
+          placeholder="Tell me what you are working on."
+          className={FIELD_CLASS}
+          style={{ resize: 'vertical', minHeight: '100px' }}
         />
       </div>
 
-      {/* Server-side error */}
+      {/* Error */}
       {state.status === 'error' && (
-        <p
-          className="text-body-sm text-[var(--color-text-muted)]"
-          role="alert"
-          aria-live="polite"
-        >
+        <p className="text-body-sm" style={{ color: '#ef4444' }}>
           {state.message}
         </p>
       )}
 
-      <div className="pt-[var(--space-component-xs)]">
-        <SubmitButton />
-      </div>
+      {/* Submit */}
+      <SubmitButton />
     </form>
   )
 }
