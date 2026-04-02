@@ -117,6 +117,12 @@
   --color-hover-subtle: rgba(255, 255, 255, 0.06);
 
   /* -----------------------------------------------------------
+     SEMANTIC TOKENS — STATUS
+  ----------------------------------------------------------- */
+  --color-status-available:      #4ade80;
+  --color-status-available-glow: rgba(74, 222, 128, 0.4);
+
+  /* -----------------------------------------------------------
      SEMANTIC TOKENS — SHADOWS
      Token-driven so dark mode can swap to lighter shadows.
   ----------------------------------------------------------- */

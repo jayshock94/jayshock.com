@@ -196,7 +196,7 @@ export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
           >
             {comingSoon ? 'Coming soon' : 'View case study'}
             {!comingSoon && (
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <svg className="work-card-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                 <path d="M5.25 3.5L8.75 7L5.25 10.5" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             )}

@@ -25,13 +25,15 @@
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "WebFetch(domain:cloak-sip-04614362.figma.site)",
-      "Bash(WK=\"C:/Users/jaysh/Desktop/claude-code/jayshock-portfolio/.claude/worktrees/pensive-montalcini/public/images/AIM\")",
-      "Bash(mkdir -p \"$WK\")",
-      "Bash(cp \"C:/Users/jaysh/Desktop/claude-code/jayshock-portfolio/public/images/AIM/Aim main/Customer dashboard_ai summary.png\" \"$WK/customer-dashboard-ai-summary.png\")",
-      "Bash(cp \"C:/Users/jaysh/Desktop/claude-code/jayshock-portfolio/public/images/AIM/Aim main/Customer_loan detials_other transactions.png\" \"$WK/customer-loan-details-other-transactions.png\")",
-      "Bash(cp \"C:/Users/jaysh/Desktop/claude-code/jayshock-portfolio/public/images/AIM/Aim main/Task board.png\" \"$WK/task-board.png\")",
       "Bash(npm run:*)",
-      "mcp__Claude_Preview__preview_start"
+      "mcp__Claude_Preview__preview_start",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/api/resume)",
+      "Bash(curl -v http://localhost:3000/api/resume)",
+      "Bash(curl -s -w \"\\\\nHTTP_CODE:%{http_code}\" http://localhost:3000/api/resume -o /tmp/resume-test.pdf)",
+      "Bash(curl -s http://localhost:3000/api/resume)",
+      "Bash(node -e \":*)",
+      "Bash(curl -s -w \"\\\\nHTTP_CODE:%{http_code}\\\\nSIZE:%{size_download}\" http://localhost:3000/api/resume -o /tmp/resume-test.pdf)",
+      "Bash(curl -s -H \"Accept: text/html\" http://localhost:3000/api/resume)"
     ]
   }
 }

@@ -426,6 +426,28 @@ body > * {
   background: var(--color-hover-subtle);
 }
 
+/* Work card mobile interactivity signals */
+@media (hover: none) {
+  .work-card {
+    -webkit-tap-highlight-color: transparent;
+  }
+  .work-card:active {
+    transform: scale(0.98) !important;
+    box-shadow: var(--shadow-sm) !important;
+    transition: transform 100ms ease, box-shadow 100ms ease !important;
+  }
+  /* Gentle arrow nudge when card scrolls into view */
+  [data-reveal="visible"] .work-card-arrow {
+    animation: arrow-nudge 600ms cubic-bezier(0.22, 1, 0.36, 1) 400ms both;
+  }
+}
+
+@keyframes arrow-nudge {
+  0%, 100% { transform: translateX(0); }
+  40%      { transform: translateX(4px); }
+  70%      { transform: translateX(1px); }
+}
+
 /* -----------------------------------------------------------
    PHASE LIST — bullet points in phase content blocks
 ----------------------------------------------------------- */
