@@ -52,6 +52,7 @@
   /* Dark glass — for dark-mode surfaces and smoked buttons */
   --glass-dark-thin:    rgba(22, 22, 22, 0.16);
   --glass-dark-regular: rgba(22, 22, 22, 0.28);
+  --glass-dark-medium:  rgba(22, 22, 22, 0.40);
   --glass-dark-thick:   rgba(22, 22, 22, 0.50);
 
   /* Glass borders — the edge of glass is always brighter than the fill */

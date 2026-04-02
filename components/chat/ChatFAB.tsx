@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect, useCallback } from 'react'
 import CatAvatar from './CatAvatar'
+import ChatBubble from './ChatBubble'
 
 const BUBBLE_DISMISSED_PREFIX = 'jayshock-chat-bubble-dismissed'
 const AUTO_DISMISS_MS = 10000
@@ -81,85 +82,78 @@ export default function ChatFAB({ isOpen, isStreaming, onClick, pageType }: Chat
       {/* Welcome bubble */}
       {showBubble && !isOpen && (
         <div
-          className={dismissing ? 'chat-bubble-exit' : 'chat-bubble-enter'}
           style={{
             position: 'fixed',
-            bottom: 'calc(max(24px, env(safe-area-inset-bottom)) + 70px)',
+            bottom: 'calc(max(24px, env(safe-area-inset-bottom)) + 96px)',
             right: 'calc(max(24px, env(safe-area-inset-right)) - 10px)',
-            maxWidth: '200px',
-            padding: 'var(--space-component-md)',
-            borderRadius: '14px',
-            background: 'rgba(30, 30, 28, 0.92)',
-            backdropFilter: 'blur(24px)',
-            WebkitBackdropFilter: 'blur(24px)',
-            border: '0.5px solid var(--glass-border-mid)',
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
+            maxWidth: '240px',
             zIndex: 59,
           }}
         >
-          {/* Dismiss button */}
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation()
-              dismissBubble()
-            }}
-            aria-label="Dismiss"
-            style={{
-              position: 'absolute',
-              top: '6px',
-              right: '6px',
-              width: '20px',
-              height: '20px',
-              border: 'none',
-              background: 'transparent',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: 'var(--color-text-placeholder)',
-              padding: 0,
-            }}
-          >
-            <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
-              <path
-                d="M1 1L7 7M7 1L1 7"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-              />
-            </svg>
-          </button>
+          <ChatBubble dismissing={dismissing}>
+            {/* Dismiss button */}
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation()
+                dismissBubble()
+              }}
+              aria-label="Dismiss"
+              style={{
+                position: 'absolute',
+                top: '6px',
+                right: '6px',
+                width: '20px',
+                height: '20px',
+                border: 'none',
+                background: 'transparent',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'var(--color-text-placeholder)',
+                padding: 0,
+              }}
+            >
+              <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
+                <path
+                  d="M1 1L7 7M7 1L1 7"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </button>
 
-          {/* Header */}
-          <p
-            style={{
-              margin: '0 0 6px 0',
-              fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-              fontSize: '11px',
-              fontWeight: 500,
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-              color: 'var(--color-accent)',
-            }}
-          >
-            Barnaby
-          </p>
+            {/* Header */}
+            <p
+              style={{
+                margin: '0 0 6px 0',
+                fontFamily: 'var(--font-outfit), system-ui, sans-serif',
+                fontSize: '11px',
+                fontWeight: 500,
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                color: 'var(--color-accent)',
+              }}
+            >
+              Barnaby
+            </p>
 
-          {/* Message text */}
-          <p
-            style={{
-              margin: 0,
-              fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-              fontSize: '13px',
-              fontWeight: 300,
-              lineHeight: '1.65',
-              color: 'var(--color-text-secondary)',
-            }}
-          >
-            {BUBBLE_MESSAGES[pageType ?? 'home'] ?? BUBBLE_MESSAGES.home}
-          </p>
-
+            {/* Message text */}
+            <p
+              style={{
+                margin: 0,
+                fontFamily: 'var(--font-outfit), system-ui, sans-serif',
+                fontSize: '13px',
+                fontWeight: 300,
+                lineHeight: '1.65',
+                color: 'var(--color-text-secondary)',
+              }}
+            >
+              {BUBBLE_MESSAGES[pageType ?? 'home'] ?? BUBBLE_MESSAGES.home}
+            </p>
+          </ChatBubble>
         </div>
       )}
 

@@ -274,6 +274,45 @@ body > * {
   border:                  0.5px solid var(--glass-border-mid);
 }
 
+.glass-bubble {
+  position:                relative;
+  background:              var(--color-surface);
+  border:                  1px solid var(--glass-border-mid);
+  border-radius:           14px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 0.5px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Tail border (behind) */
+.glass-bubble::before {
+  content: '';
+  position: absolute;
+  bottom: -13px;
+  right: 22px;
+  width: 0;
+  height: 0;
+  border-left:  13px solid transparent;
+  border-right: 13px solid transparent;
+  border-top:   13px solid var(--glass-border-mid);
+  pointer-events: none;
+}
+
+/* Tail fill (covers seam between body border and tail) */
+.glass-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -11px;
+  right: 23px;
+  width: 0;
+  height: 0;
+  border-left:  12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top:   12px solid var(--color-surface);
+  pointer-events: none;
+  z-index: 1;
+}
+
 /* -----------------------------------------------------------
    TYPOGRAPHY UTILITY CLASSES
    Single font family: Outfit throughout.
