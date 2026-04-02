@@ -50,10 +50,10 @@ export default function AboutPage() {
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <ScrollReveal>
-            <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)]">
+            <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)] text-center">
               About
             </p>
-            <h1 className="text-h1 text-[var(--color-ink)] mb-[var(--space-section-sm)]">
+            <h1 className="text-h1 text-[var(--color-ink)] mb-[var(--space-section-sm)] text-center">
               I got here by paying attention.
             </h1>
           </ScrollReveal>
@@ -108,16 +108,16 @@ export default function AboutPage() {
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
             <ScrollReveal>
-              <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)]">
+              <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)] text-center">
                 How I think
               </p>
-              <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-lg)] max-w-content">
+              <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-lg)] max-w-content mx-auto text-center">
                 Complexity does not disappear. It gets redistributed.
               </h2>
             </ScrollReveal>
 
             <div
-              className="flex flex-col gap-[var(--space-stack-md)]"
+              className="flex flex-col gap-[var(--space-stack-md)] mx-auto"
               style={{ maxWidth: 'var(--space-content-max)' }}
             >
               <ScrollReveal>
@@ -153,7 +153,7 @@ export default function AboutPage() {
 
             {/* Context paragraphs */}
             <div
-              className="flex flex-col gap-[var(--space-stack-md)] mb-[var(--space-section-sm)]"
+              className="flex flex-col gap-[var(--space-stack-md)] mb-[var(--space-section-sm)] mx-auto"
               style={{ maxWidth: 'var(--space-content-max)' }}
             >
               <ScrollReveal>
@@ -214,10 +214,10 @@ export default function AboutPage() {
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
             <ScrollReveal>
-              <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)]">
+              <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)] text-center">
                 Experience
               </p>
-              <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-lg)]">
+              <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-lg)] text-center">
                 Where I have been.
               </h2>
             </ScrollReveal>
@@ -280,7 +280,7 @@ export default function AboutPage() {
             </div>
 
             <ScrollReveal>
-              <div className="mt-[var(--space-stack-lg)]">
+              <div className="mt-[var(--space-stack-lg)] text-center">
                 <Button variant="secondary" href="/experience">
                   Full experience and resume
                 </Button>
@@ -301,7 +301,7 @@ export default function AboutPage() {
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
             <ScrollReveal>
-              <div className="max-w-content">
+              <div className="max-w-content mx-auto text-center">
                 <p className="text-body-lg text-[var(--color-text-secondary)] mb-[var(--space-stack-lg)]">
                   Open to senior product design roles and consulting engagements. Remote first, open to hybrid.
                 </p>

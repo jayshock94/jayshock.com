@@ -21,7 +21,7 @@ export default function HeroTypeTags({ tags, barnabyMessages }: HeroTypeTagsProp
 
   return (
     <div
-      className="hero-fade-up flex flex-wrap gap-[var(--space-component-xs)]"
+      className="hero-fade-up flex flex-wrap justify-center gap-[var(--space-component-xs)]"
       style={{ animationDelay: '650ms' }}
       aria-label="Project type tags"
     >

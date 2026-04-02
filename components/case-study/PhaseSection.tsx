@@ -2,6 +2,7 @@ import Image from 'next/image'
 import type { CaseStudyImage, ContentBlock, GlossaryTerm, PhaseContent, PhaseKey } from '@/data/types'
 import ScrollReveal from '@/components/ui/ScrollReveal'
 import GlossaryParagraph from './GlossaryParagraph'
+import BarnabyTooltip from './BarnabyTooltip'
 import PhoneFrame from './PhoneFrame'
 import PaymentSuccessAnimation from './PaymentSuccessAnimation'
 
@@ -16,6 +17,12 @@ interface PhaseSectionProps {
   mediaSlotAfterBlock?: number
   /** Glossary terms to highlight inline with Barnaby tooltips. */
   glossary?: GlossaryTerm[]
+  /** Optional inline note shown after the first paragraph. Full text is a Barnaby tooltip. */
+  headerNote?: {
+    text: string
+    barnabyTerm: string
+    barnabyDefinition: string
+  }
 }
 
 const PHASE_LABELS: Record<PhaseKey, string> = {
@@ -62,6 +69,25 @@ const PHASE_VARS: Record<PhaseKey, {
   },
 }
 
+/** Render a caption with an optional Barnaby "note" tooltip at the end. */
+function Caption({ text, note, accentColor }: { text: string; note?: string; accentColor: string }) {
+  return (
+    <figcaption className="mt-[var(--space-component-sm)] text-body-sm text-[var(--color-text-muted)] text-center">
+      {text}
+      {note && (
+        <>
+          {' '}
+          <BarnabyTooltip
+            term="Recreated"
+            definition={note}
+            accentColor={accentColor}
+          />
+        </>
+      )}
+    </figcaption>
+  )
+}
+
 /** Render images with breakout layouts based on count and aspect. */
 function renderImages(images: CaseStudyImage[], vars: typeof PHASE_VARS.impact) {
   if (images.length === 0) return null
@@ -102,9 +128,7 @@ function renderImages(images: CaseStudyImage[], vars: typeof PHASE_VARS.impact) 
               </div>
             )}
             {images[0].caption && (
-              <figcaption className="mt-[var(--space-component-sm)] text-body-sm text-[var(--color-text-muted)] text-center">
-                {images[0].caption}
-              </figcaption>
+              <Caption text={images[0].caption} note={images[0].captionNote} accentColor={vars.label} />
             )}
           </figure>
         </div>
@@ -146,9 +170,7 @@ function renderImages(images: CaseStudyImage[], vars: typeof PHASE_VARS.impact) 
               )}
             </div>
             {images[0].caption && (
-              <figcaption className="mt-[var(--space-component-sm)] text-body-sm text-[var(--color-text-muted)] text-center">
-                {images[0].caption}
-              </figcaption>
+              <Caption text={images[0].caption} note={images[0].captionNote} accentColor={vars.label} />
             )}
           </figure>
         </div>
@@ -192,9 +214,7 @@ function renderImages(images: CaseStudyImage[], vars: typeof PHASE_VARS.impact) 
                   />
                 </div>
                 {img.caption && (
-                  <figcaption className="mt-[var(--space-component-sm)] text-body-sm text-[var(--color-text-muted)] text-center">
-                    {img.caption}
-                  </figcaption>
+                  <Caption text={img.caption} note={img.captionNote} accentColor={vars.label} />
                 )}
               </>
             ) : (
@@ -211,9 +231,7 @@ function renderImages(images: CaseStudyImage[], vars: typeof PHASE_VARS.impact) 
                   </p>
                 </div>
                 {img.caption && (
-                  <figcaption className="mt-[var(--space-component-sm)] text-body-sm text-[var(--color-text-muted)] text-center">
-                    {img.caption}
-                  </figcaption>
+                  <Caption text={img.caption} note={img.captionNote} accentColor={vars.label} />
                 )}
               </>
             )}
@@ -231,6 +249,7 @@ export default function PhaseSection({
   mediaSlot,
   mediaSlotAfterBlock,
   glossary,
+  headerNote,
 }: PhaseSectionProps) {
   const vars   = PHASE_VARS[phase]
   const label  = PHASE_LABELS[phase]
@@ -266,7 +285,7 @@ export default function PhaseSection({
 
         {/* Phase eyebrow with number */}
         <ScrollReveal>
-          <div className="flex items-center gap-[var(--space-component-sm)] mb-[var(--space-stack-sm)]">
+          <div className="flex items-center justify-center gap-[var(--space-component-sm)] mb-[var(--space-stack-sm)]">
             {phaseNum && (
               <span
                 className="text-label"
@@ -285,7 +304,7 @@ export default function PhaseSection({
         <ScrollReveal>
           <h2
             id={`phase-heading-${phase}`}
-            className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-lg)] max-w-content"
+            className="text-h2 text-[var(--color-ink)] max-w-content mx-auto text-center mb-[var(--space-stack-lg)]"
           >
             {headline}
           </h2>
@@ -353,6 +372,7 @@ export default function PhaseSection({
                         style={{
                           color: isFirstParagraph ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
                           maxWidth: 'var(--space-content-max)',
+                          margin: '0 auto',
                         }}
                       />
                     ) : (
@@ -361,6 +381,7 @@ export default function PhaseSection({
                         style={{
                           color: isFirstParagraph ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
                           maxWidth: 'var(--space-content-max)',
+                          margin: '0 auto',
                         }}
                       >
                         {block.text}
@@ -369,11 +390,31 @@ export default function PhaseSection({
                   </ScrollReveal>
                 )}
 
+                {/* Inline note after first paragraph */}
+                {headerNote && isFirstParagraph && (
+                  <ScrollReveal>
+                    <p
+                      className="text-body-sm"
+                      style={{
+                        color: 'var(--color-text-muted)',
+                        maxWidth: 'var(--space-content-max)',
+                        margin: 'var(--space-stack-sm) auto 0',
+                      }}
+                    >
+                      <BarnabyTooltip
+                        term={headerNote.barnabyTerm}
+                        definition={headerNote.barnabyDefinition}
+                        accentColor={vars.label}
+                      />
+                    </p>
+                  </ScrollReveal>
+                )}
+
                 {/* ── Subheader block ── */}
                 {block.type === 'subheader' && (
                   <ScrollReveal>
                     <h3
-                      className="text-h4 text-[var(--color-ink)] max-w-content"
+                      className="text-h4 text-[var(--color-ink)] max-w-content mx-auto"
                       style={{
                         marginTop: i > 0 ? 'var(--space-stack-lg)' : undefined,
                       }}
@@ -386,7 +427,7 @@ export default function PhaseSection({
                 {/* ── List block ── */}
                 {block.type === 'list' && (
                   <ScrollReveal>
-                    <div style={{ maxWidth: 'var(--space-content-max)' }}>
+                    <div style={{ maxWidth: 'var(--space-content-max)', margin: '0 auto' }}>
                       {block.lead && (
                         <p
                           className="text-body"
@@ -474,7 +515,7 @@ export default function PhaseSection({
 
         {/* Estimated metrics footnote */}
         {estimatedNote && (
-          <p className="mt-[var(--space-stack-lg)] text-body-sm text-[var(--color-text-muted)]">
+          <p className="mt-[var(--space-stack-lg)] text-body-sm text-[var(--color-text-muted)] max-w-content mx-auto text-center">
             <sup aria-hidden="true">*</sup> {estimatedNote}
           </p>
         )}

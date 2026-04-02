@@ -80,24 +80,11 @@ export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
             minHeight:      'clamp(280px, 30vw, 360px)',
           }}
         >
-          {/* Top row: industry + year */}
-          <div
-            style={{
-              display:        'flex',
-              justifyContent: 'space-between',
-              alignItems:     'center',
-              marginBottom:   'var(--space-stack-md)',
-            }}
-          >
+          {/* Top row: industry · year */}
+          <div style={{ marginBottom: 'var(--space-stack-md)' }}>
             <span
               className="text-label"
               style={{ color: 'rgba(255,255,255,0.4)' }}
-            >
-              {industry}
-            </span>
-            <span
-              className="text-label"
-              style={{ color: 'rgba(255,255,255,0.35)' }}
             >
               {year}
             </span>
