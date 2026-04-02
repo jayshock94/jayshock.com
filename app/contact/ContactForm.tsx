@@ -18,10 +18,10 @@ const FIELD_CLASS = `
   px-[var(--space-component-md)] py-[12px]
   bg-[var(--color-surface)]
   border border-[var(--color-border)]
-  rounded-[8px]
+  rounded-[var(--radius-md)]
   text-body-sm text-[var(--color-ink)]
   placeholder:text-[var(--color-text-placeholder)]
-  focus:outline-none focus:border-[var(--color-border-strong)] focus:ring-1 focus:ring-[var(--color-border-mid)]
+  focus:outline-none focus:border-[var(--color-border-strong)]
   focus:bg-[var(--color-surface-elevated)]
   transition-all duration-200
 `
@@ -111,7 +111,7 @@ export default function ContactForm() {
       </div>
 
       {/* Topic */}
-      <div>
+      <div style={{ position: 'relative' }}>
         <label htmlFor="contact-topic" className={LABEL_CLASS}>Topic</label>
         <select
           id="contact-topic"
@@ -119,7 +119,7 @@ export default function ContactForm() {
           required
           className={FIELD_CLASS}
           defaultValue=""
-          style={{ appearance: 'none' }}
+          style={{ appearance: 'none', paddingRight: '40px', cursor: 'pointer' }}
         >
           {TOPIC_OPTIONS.map(opt => (
             <option
@@ -132,6 +132,19 @@ export default function ContactForm() {
             </option>
           ))}
         </select>
+        <svg
+          width="16" height="16" viewBox="0 0 16 16" fill="none"
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            right: '14px',
+            bottom: '14px',
+            pointerEvents: 'none',
+            color: 'var(--color-text-placeholder)',
+          }}
+        >
+          <path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
       </div>
 
       {/* Message */}

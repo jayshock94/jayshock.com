@@ -63,17 +63,17 @@
   /* -----------------------------------------------------------
      SEMANTIC TOKENS — SURFACES
   ----------------------------------------------------------- */
-  --color-canvas:           #161616;
-  --color-surface:          #202020;
+  --color-canvas:           #0a0a0a;
+  --color-surface:          #141414;
   --color-surface-glass:    var(--glass-dark-regular);
-  --color-surface-elevated: #2A2A2A;
+  --color-surface-elevated: #1a1a1a;
 
   /* -----------------------------------------------------------
      SEMANTIC TOKENS — BORDERS
   ----------------------------------------------------------- */
-  --color-border:        rgba(255, 255, 255, 0.10);
-  --color-border-mid:    rgba(255, 255, 255, 0.16);
-  --color-border-strong: rgba(255, 255, 255, 0.24);
+  --color-border:        rgba(255, 255, 255, 0.08);
+  --color-border-mid:    rgba(255, 255, 255, 0.14);
+  --color-border-strong: rgba(255, 255, 255, 0.22);
 
   /* -----------------------------------------------------------
      SEMANTIC TOKENS — TEXT
@@ -107,9 +107,9 @@
      Used in globals.css for the body background radial gradient.
      Swapped out in dark mode.
   ----------------------------------------------------------- */
-  --color-bloom-center: #1E1E1C;
-  --color-bloom-mid:    #161616;
-  --color-bloom-edge:   #111111;
+  --color-bloom-center: #141412;
+  --color-bloom-mid:    #0a0a0a;
+  --color-bloom-edge:   #050505;
 
   /* -----------------------------------------------------------
      SEMANTIC TOKENS — SURFACE INTERACTIONS
@@ -126,11 +126,11 @@
      SEMANTIC TOKENS — SHADOWS
      Token-driven so dark mode can swap to lighter shadows.
   ----------------------------------------------------------- */
-  --shadow-sm:         0 2px 8px rgba(0, 0, 0, 0.12);
-  --shadow-card:       0 4px 24px rgba(0, 0, 0, 0.15);
-  --shadow-card-hover: 0 12px 48px rgba(0, 0, 0, 0.30);
-  --shadow-nav:        0 2px 24px rgba(0, 0, 0, 0.24);
-  --shadow-elevated:   0 4px 20px rgba(0, 0, 0, 0.16);
+  --shadow-sm:         0 1px 4px rgba(0, 0, 0, 0.16);
+  --shadow-card:       0 2px 16px rgba(0, 0, 0, 0.20);
+  --shadow-card-hover: 0 8px 32px rgba(0, 0, 0, 0.28);
+  --shadow-nav:        0 2px 20px rgba(0, 0, 0, 0.22);
+  --shadow-elevated:   0 4px 16px rgba(0, 0, 0, 0.18);
 
   /* -----------------------------------------------------------
      SEMANTIC TOKENS — TRANSITIONS
@@ -147,6 +147,14 @@
   --border-default: 1px;
   --border-accent:  2px;
   --border-thick:   2.5px;
+
+  /* -----------------------------------------------------------
+     SEMANTIC TOKENS — BORDER RADIUS
+  ----------------------------------------------------------- */
+  --radius-sm:   6px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-pill:  999px;
 
   /* -----------------------------------------------------------
      SEMANTIC TOKENS — SCRIM

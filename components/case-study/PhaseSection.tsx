@@ -80,7 +80,7 @@ function renderImages(images: CaseStudyImage[], vars: typeof PHASE_VARS.impact) 
           <figure className="m-0">
             {images[0].src ? (
               <div
-                className="relative w-full rounded-[8px] overflow-hidden border border-[var(--color-border)]"
+                className="relative w-full rounded-[var(--radius-md)] overflow-hidden border border-[var(--color-border)]"
                 style={{ aspectRatio: '16/9' }}
               >
                 <Image
@@ -93,7 +93,7 @@ function renderImages(images: CaseStudyImage[], vars: typeof PHASE_VARS.impact) 
               </div>
             ) : (
               <div
-                className="w-full rounded-[8px] border border-[var(--color-border)] flex items-center justify-center p-[var(--space-component-md)]"
+                className="w-full rounded-[var(--radius-md)] border border-[var(--color-border)] flex items-center justify-center p-[var(--space-component-md)]"
                 style={{ background: 'var(--color-surface)', aspectRatio: '16/9' }}
               >
                 <p className="text-body-sm text-[var(--color-text-muted)] text-center opacity-60">
@@ -136,7 +136,7 @@ function renderImages(images: CaseStudyImage[], vars: typeof PHASE_VARS.impact) 
                 />
               ) : (
                 <div
-                  className="w-full max-w-[280px] rounded-[8px] border border-[var(--color-border)] flex items-center justify-center p-[var(--space-component-md)]"
+                  className="w-full max-w-[280px] rounded-[var(--radius-md)] border border-[var(--color-border)] flex items-center justify-center p-[var(--space-component-md)]"
                   style={{ background: 'var(--color-surface)', aspectRatio: '9/18' }}
                 >
                   <p className="text-body-sm text-[var(--color-text-muted)] text-center opacity-60">
@@ -180,7 +180,7 @@ function renderImages(images: CaseStudyImage[], vars: typeof PHASE_VARS.impact) 
             ) : img.src ? (
               <>
                 <div
-                  className="relative w-full rounded-[8px] overflow-hidden border border-[var(--color-border)]"
+                  className="relative w-full rounded-[var(--radius-md)] overflow-hidden border border-[var(--color-border)]"
                   style={{ aspectRatio: img.aspect === 'portrait' ? '9/18' : '16/9' }}
                 >
                   <Image
@@ -200,7 +200,7 @@ function renderImages(images: CaseStudyImage[], vars: typeof PHASE_VARS.impact) 
             ) : (
               <>
                 <div
-                  className="w-full rounded-[8px] border border-[var(--color-border)] flex items-center justify-center p-[var(--space-component-md)]"
+                  className="w-full rounded-[var(--radius-md)] border border-[var(--color-border)] flex items-center justify-center p-[var(--space-component-md)]"
                   style={{
                     background: 'var(--color-surface)',
                     aspectRatio: img.aspect === 'portrait' ? '9/18' : '16/9',
@@ -301,7 +301,7 @@ export default function PhaseSection({
             {stats.map((stat, i) => (
               <ScrollReveal key={i}>
                 <div
-                  className={`bg-[var(--color-stat-box-bg)] border border-[var(--color-border)] rounded-[8px] p-[var(--space-component-lg)]${
+                  className={`bg-[var(--color-stat-box-bg)] border border-[var(--color-border)] rounded-[var(--radius-md)] p-[var(--space-component-lg)]${
                     stats.length === 3 && i === 2 ? ' col-span-2 md:col-span-1' : ''
                   }`}
                   role="listitem"

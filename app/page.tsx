@@ -84,42 +84,23 @@ export default function HomePage() {
             className="flex flex-wrap gap-[var(--space-component-sm)] mb-[var(--space-stack-lg)] justify-center md:justify-start hero-fade-up"
             style={{ animationDelay: '900ms' }}
           >
-            {[
-              { text: 'Open to opportunities', dot: true },
-              { text: '8 years in fintech and enterprise SaaS' },
-            ].map((chip) => (
+            <span className="chip">
               <span
-                key={chip.text}
                 style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  padding: '8px 16px',
-                  borderRadius: '999px',
-                  border: '0.5px solid var(--color-border)',
-                  background: 'var(--color-surface)',
-                  fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-                  fontSize: '13px',
-                  fontWeight: 400,
-                  color: 'var(--color-text-muted)',
+                  width: '7px',
+                  height: '7px',
+                  borderRadius: '50%',
+                  background: 'var(--color-status-available)',
+                  boxShadow: '0 0 6px var(--color-status-available-glow)',
+                  flexShrink: 0,
                 }}
-              >
-                {chip.dot && (
-                  <span
-                    style={{
-                      width: '8px',
-                      height: '8px',
-                      borderRadius: '50%',
-                      background: 'var(--color-status-available)',
-                      boxShadow: '0 0 6px var(--color-status-available-glow)',
-                      flexShrink: 0,
-                    }}
-                    aria-hidden="true"
-                  />
-                )}
-                {chip.text}
-              </span>
-            ))}
+                aria-hidden="true"
+              />
+              Open to opportunities
+            </span>
+            <span className="chip">
+              8 years in fintech and enterprise SaaS
+            </span>
           </div>
 
           {/* CTAs */}

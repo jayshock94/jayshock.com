@@ -353,22 +353,6 @@ export default function HowIWork() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-component-sm)' }}>
           {/* Step buttons in a row with connecting line */}
           <div style={{ position: 'relative' }}>
-            {/* Connecting line behind the steps (desktop only) */}
-            <div
-              className="hidden md:block"
-              style={{
-                position: 'absolute',
-                top: '50%',
-                left: '24px',
-                right: '24px',
-                height: '1px',
-                background: 'var(--color-border)',
-                opacity: 0.3,
-                transform: 'translateY(-50%)',
-                pointerEvents: 'none',
-              }}
-            />
-
             <div
               className="grid grid-cols-3 md:grid-cols-6 gap-[var(--space-component-xs)]"
               style={{ position: 'relative' }}
@@ -399,7 +383,6 @@ export default function HowIWork() {
                         setExpandedStep(null)
                       } else {
                         setExpandedStep(idx)
-                        // Only move compass if this card is not already lit (grey card)
                         if (!isLit) {
                           const firstPhase = (item.phases as readonly number[])[0]
                           if (firstPhase !== undefined) {
@@ -412,36 +395,57 @@ export default function HowIWork() {
                       style={{
                         gap: '8px',
                         padding: '10px 12px',
-                        borderRadius: '10px',
-                        border: isExpanded
-                          ? `1px solid ${matchPhase?.border ?? 'var(--color-border)'}`
-                          : isLit
-                            ? `0.5px solid ${matchPhase?.border ?? 'var(--color-border)'}`
-                            : '0.5px solid transparent',
-                        background: isExpanded
-                          ? matchPhase?.bg ?? 'var(--color-surface)'
-                          : 'transparent',
+                        position: 'relative',
+                        background: 'transparent',
+                        border: 'none',
                         cursor: 'pointer',
                         transition: 'all 0.3s ease',
                         outline: 'none',
                       }}
                     >
+                      {/* Connector line — gradient from this step's color to next step's state */}
+                      {idx < LIFECYCLE.length - 1 && (() => {
+                        const nextItem = LIFECYCLE[idx + 1]
+                        const nextIsLit = nextItem.phases.some(p => p === active)
+                        const nextMatchPhase = nextIsLit
+                          ? PHASES[(nextItem.phases as readonly number[]).find(p => p === active) ?? (nextItem.phases as readonly number[])[0]]
+                          : null
+                        const fromColor = isLit ? (matchPhase?.border ?? 'var(--color-border)') : 'var(--color-border)'
+                        const toColor = nextIsLit ? (nextMatchPhase?.border ?? 'var(--color-border)') : 'var(--color-border)'
+                        return (
+                          <span
+                            style={{
+                              position: 'absolute',
+                              top: '28px',
+                              left: 'calc(50% + 22px)',
+                              width: 'calc(100% - 44px)',
+                              height: '1px',
+                              background: `linear-gradient(to right, ${fromColor}, ${toColor})`,
+                              transition: 'opacity 0.3s ease',
+                              zIndex: 0,
+                            }}
+                            aria-hidden="true"
+                          />
+                        )
+                      })()}
                       <span
                         style={{
-                          width: '22px',
-                          height: '22px',
+                          width: '36px',
+                          height: '36px',
                           borderRadius: '50%',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
                           fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-                          fontSize: '9px',
-                          fontWeight: 500,
-                          letterSpacing: '0.04em',
-                          color: isLit ? matchPhase?.color : 'var(--color-text-placeholder)',
-                          background: isLit ? matchPhase?.bg : 'var(--color-surface)',
-                          border: `0.5px solid ${isLit ? matchPhase?.border ?? 'var(--color-border)' : 'var(--color-border)'}`,
+                          fontSize: '12px',
+                          fontWeight: 600,
+                          letterSpacing: '0.02em',
+                          color: isLit ? (matchPhase?.color ?? 'var(--color-ink)') : 'var(--color-text-placeholder)',
+                          background: isLit ? (matchPhase?.bg ?? 'var(--color-surface)') : 'var(--color-surface)',
+                          border: `1px solid ${isLit ? (matchPhase?.border ?? 'var(--color-border)') : 'var(--color-border)'}`,
                           transition: 'all 0.3s ease',
+                          position: 'relative',
+                          zIndex: 1,
                         }}
                       >
                         {item.step}

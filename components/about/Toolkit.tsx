@@ -177,14 +177,14 @@ function ChipGrid({ category }: { category: ChipCategory }) {
         <span
           key={item}
           style={{
-            padding: '10px 18px',
-            borderRadius: '10px',
+            padding: '8px 16px',
+            borderRadius: 'var(--radius-md)',
             border: `0.5px solid ${category.border}`,
-            background: category.bg,
+            background: 'transparent',
             fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-            fontSize: '14px',
+            fontSize: '13px',
             fontWeight: 400,
-            color: 'var(--color-text-primary)',
+            color: category.color,
             letterSpacing: '0.01em',
             whiteSpace: 'nowrap',
           }}

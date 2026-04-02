@@ -29,14 +29,14 @@ export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
         onMouseLeave={() => setHovered(false)}
         style={{
           position:              'relative',
-          borderRadius:          '16px',
+          borderRadius:          'var(--radius-lg)',
           overflow:              'hidden',
           background:            tokens.heroZone,
           border:                `0.5px solid ${hovered && !comingSoon ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.06)'}`,
           boxShadow: hovered && !comingSoon
             ? 'var(--shadow-card-hover)'
             : 'var(--shadow-card)',
-          transform:             hovered && !comingSoon ? 'translateY(-3px)' : 'translateY(0)',
+          transform:             hovered && !comingSoon ? 'translateY(-2px)' : 'translateY(0)',
           cursor:                comingSoon ? 'default' : 'pointer',
           transition:            'transform var(--transition-smooth), box-shadow var(--transition-base), border-color var(--transition-base)',
         }}

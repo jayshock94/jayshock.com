@@ -111,7 +111,7 @@ body > * {
 
 /* -----------------------------------------------------------
    PILL GLASS — Apple-informed hover/active
-   scale(1.03) hover, spring easing, GPU-only properties.
+   scale(1.02) hover, spring easing, GPU-only properties.
 ----------------------------------------------------------- */
 .glass-pill {
   background:              var(--color-pill-bg);
@@ -129,7 +129,7 @@ body > * {
 }
 
 .glass-pill:hover {
-  transform: scale(1.03);
+  transform: scale(1.02);
   background: var(--color-pill-bg-hover);
   border-color: rgba(255, 255, 255, 0.65);
   box-shadow:
@@ -138,7 +138,7 @@ body > * {
 }
 
 .glass-pill:active {
-  transform: scale(0.97);
+  transform: scale(0.98);
   transition-duration: 0.1s;
   box-shadow:
     0 1px 4px rgba(28, 25, 23, 0.10),
@@ -163,7 +163,7 @@ body > * {
 }
 
 .glass-button-primary:hover:not(:disabled) {
-  transform: scale(1.03);
+  transform: scale(1.02);
   background: var(--color-button-primary-hover);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.15),
@@ -171,7 +171,7 @@ body > * {
 }
 
 .glass-button-primary:active:not(:disabled) {
-  transform: scale(0.97);
+  transform: scale(0.98);
   transition-duration: 0.1s;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
@@ -185,6 +185,7 @@ body > * {
    SECONDARY BUTTON — outlined, no fill
 ----------------------------------------------------------- */
 .btn-secondary {
+  background: rgba(255, 255, 255, 0.03);
   transition:
     transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
     border-color 0.25s ease,
@@ -193,14 +194,14 @@ body > * {
 }
 
 .btn-secondary:hover {
-  transform: scale(1.03);
+  transform: scale(1.02);
   color: var(--color-ink);
   border-color: var(--color-border-strong);
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .btn-secondary:active {
-  transform: scale(0.97);
+  transform: scale(0.98);
   transition-duration: 0.1s;
 }
 
@@ -215,7 +216,7 @@ body > * {
 }
 
 .btn-ghost:hover {
-  transform: scale(1.03);
+  transform: scale(1.02);
   color: var(--color-ink);
   text-decoration: underline;
   text-underline-offset: 4px;
@@ -223,7 +224,7 @@ body > * {
 }
 
 .btn-ghost:active {
-  transform: scale(0.97);
+  transform: scale(0.98);
   transition-duration: 0.1s;
 }
 
@@ -244,7 +245,7 @@ body > * {
 }
 
 .btn-solid-white:hover {
-  transform: scale(1.03);
+  transform: scale(1.02);
   background: rgba(255, 255, 255, 1);
   box-shadow:
     0 6px 20px rgba(0, 0, 0, 0.15),
@@ -252,7 +253,7 @@ body > * {
 }
 
 .btn-solid-white:active {
-  transform: scale(0.97);
+  transform: scale(0.98);
   transition-duration: 0.1s;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
 }
@@ -426,6 +427,25 @@ body > * {
   background: var(--color-hover-subtle);
 }
 
+/* -----------------------------------------------------------
+   CHIP — metadata indicators, not interactive
+   Visually distinct from buttons: no border, subtle fill, smaller.
+----------------------------------------------------------- */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.06);
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--color-text-muted);
+  letter-spacing: 0.01em;
+  border: none;
+}
+
 /* Work card mobile interactivity signals */
 @media (hover: none) {
   .work-card {
@@ -492,14 +512,14 @@ body > * {
 @media (min-width: 768px) {
   .nav-card {
     border: 0.5px solid var(--color-nav-card-border);
-    border-radius: 16px;
+    border-radius: var(--radius-lg);
     box-shadow:
-      0 2px 24px rgba(0, 0, 0, 0.24),
+      var(--shadow-nav),
       inset 0 1px 0 var(--glass-border-light);
   }
 
   .nav-card--open {
-    border-radius: 16px 16px 0 0;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   }
 }
 
@@ -512,7 +532,7 @@ body > * {
 
 @media (min-width: 768px) {
   .nav-drawer {
-    border-radius: 0 0 16px 16px;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
   }
 }
 
@@ -606,7 +626,7 @@ body > * {
 ----------------------------------------------------------- */
 [data-reveal="hidden"] {
   opacity: 0;
-  transform: translateY(22px) scale(0.97);
+  transform: translateY(16px) scale(0.98);
 }
 
 [data-reveal="visible"] {
@@ -739,7 +759,7 @@ body > * {
 
 @keyframes buttonPulseGlow {
   0%   { box-shadow: 0 0 0 0 rgba(165, 0, 17, 0);    transform: scale(1); }
-  50%  { box-shadow: 0 0 20px 6px rgba(165, 0, 17, 0.35); transform: scale(1.03); }
+  50%  { box-shadow: 0 0 20px 6px rgba(165, 0, 17, 0.35); transform: scale(1.02); }
   100% { box-shadow: 0 0 0 0 rgba(165, 0, 17, 0);    transform: scale(1); }
 }
 
@@ -796,7 +816,7 @@ body > * {
 
 /* Panel entrance */
 @keyframes chat-panel-enter {
-  from { opacity: 0; transform: translateY(16px) scale(0.97); }
+  from { opacity: 0; transform: translateY(16px) scale(0.98); }
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 .chat-panel-enter {
@@ -821,7 +841,7 @@ body > * {
   transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .work-card:hover .work-card-image {
-  transform: scale(1.03);
+  transform: scale(1.02);
 }
 
 /* FAB breathing pulse — subtle scale when idle, delayed past entrance */
@@ -853,7 +873,7 @@ body > * {
 
 /* Barnaby tooltip enter */
 @keyframes barnaby-tooltip-enter {
-  from { opacity: 0; transform: translateY(4px) scale(0.97); }
+  from { opacity: 0; transform: translateY(4px) scale(0.98); }
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 .barnaby-tooltip-enter {

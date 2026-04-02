@@ -110,7 +110,7 @@ export default function Footer() {
         className="
           max-w-layout mx-auto
           px-[var(--space-page-margin)]
-          pb-[24px]
+          pb-[var(--space-component-lg)]
           text-center
         "
       >
