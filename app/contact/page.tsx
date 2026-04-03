@@ -31,6 +31,16 @@ export default function ContactPage() {
 
           <ContactForm />
 
+          <p className="text-body-sm text-[var(--color-text-muted)] text-center mt-[var(--space-stack-lg)]">
+            Prefer email?{' '}
+            <a
+              href="mailto:hello@jayshock.com"
+              style={{ color: 'var(--color-text-secondary)', textDecoration: 'underline', textUnderlineOffset: '3px' }}
+            >
+              hello@jayshock.com
+            </a>
+          </p>
+
         </div>
       </div>
     </div>

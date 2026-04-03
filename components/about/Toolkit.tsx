@@ -90,7 +90,7 @@ export default function Toolkit() {
   return (
     <div>
       {/* Header */}
-      <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)] text-center">
+      <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-sm)] text-center">
         My toolkit
       </p>
       <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-sm)] text-center">
