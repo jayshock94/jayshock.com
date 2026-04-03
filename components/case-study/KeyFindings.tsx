@@ -69,7 +69,7 @@ function GlossaryText({
 export default function KeyFindings({ findings, accentColor = 'var(--color-accent)', glossary }: KeyFindingsProps) {
   return (
     <div
-      className="max-w-content"
+      className="max-w-data"
       style={{ marginTop: 'var(--space-stack-lg)', marginBottom: 'var(--space-stack-lg)' }}
     >
       <p
