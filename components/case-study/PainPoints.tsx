@@ -16,7 +16,7 @@ interface PainPointsProps {
  */
 export default function PainPoints({ points, accentColor = 'var(--phase-problem-label)' }: PainPointsProps) {
   return (
-    <div className="max-w-data mx-auto" style={{ marginTop: 'var(--space-stack-lg)', marginBottom: 'var(--space-stack-lg)' }}>
+    <div className="" style={{ marginTop: 'var(--space-stack-lg)', marginBottom: 'var(--space-stack-lg)' }}>
       <p
         className="text-label"
         style={{
