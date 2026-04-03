@@ -17,6 +17,14 @@ const SHAPES: Record<IconVariant, React.ComponentType> = {
   contact: GlassCube,
 }
 
+/** Warm glow colors per variant — used for the bottom point light */
+const GLOW_COLORS: Record<IconVariant, string> = {
+  work:    '#c8a0e0',
+  about:   '#d4a870',
+  skills:  '#70c0a8',
+  contact: '#80a8d4',
+}
+
 interface SectionIconCanvasProps {
   variant: IconVariant
 }
@@ -28,12 +36,27 @@ export default function SectionIconCanvas({ variant }: SectionIconCanvasProps) {
     <Canvas
       gl={{ alpha: true, antialias: true }}
       dpr={[1, 1.5]}
-      camera={{ fov: 35, position: [0, 0, 5] }}
+      camera={{ fov: 35, position: [0, 0.2, 5] }}
       style={{ width: '100%', height: '100%' }}
     >
-      <ambientLight intensity={0.4} />
-      <directionalLight position={[3, 3, 5]} intensity={0.8} />
-      <directionalLight position={[-2, -1, 3]} intensity={0.3} color="#8AAAC8" />
+      {/* Very low ambient — keeps it dark and moody */}
+      <ambientLight intensity={0.15} />
+
+      {/* Key light from below — warm, dramatic, Resend-style bottom glow */}
+      <pointLight
+        position={[0, -2.5, 1.5]}
+        intensity={2.5}
+        color={GLOW_COLORS[variant]}
+        distance={8}
+        decay={2}
+      />
+
+      {/* Subtle fill from top-right — cool, barely visible */}
+      <directionalLight position={[2, 2, 3]} intensity={0.2} color="#a0a8b8" />
+
+      {/* Rim light from behind — catches glass edges */}
+      <directionalLight position={[-1, 1, -2]} intensity={0.15} color="#ffffff" />
+
       <Suspense fallback={null}>
         <Environment preset="night" />
         <Shape />

@@ -37,37 +37,62 @@ export default function SectionIcon({ variant, glowColor }: SectionIconProps) {
       style={{ marginBottom: 'var(--space-stack-md)' }}
     >
       <div style={{ position: 'relative' }}>
-        {/* Glow */}
+        {/* Warm glow underneath — concentrated at bottom, fading up */}
         <div
           style={{
             position: 'absolute',
-            inset: '-30%',
-            background: `radial-gradient(ellipse 70% 50% at 50% 80%, ${glowColor}, transparent 70%)`,
-            opacity: 0.35,
-            filter: 'blur(16px)',
+            left: '10%',
+            right: '10%',
+            bottom: '-20%',
+            height: '60%',
+            background: `radial-gradient(ellipse 80% 60% at 50% 90%, ${glowColor}, transparent 70%)`,
+            opacity: 0.5,
+            filter: 'blur(12px)',
             pointerEvents: 'none',
             zIndex: 0,
           }}
           aria-hidden="true"
         />
 
-        {/* Container */}
+        {/* Dark container — matte feel with subtle noise texture */}
         <div
           style={{
             position: 'relative',
-            width: 'clamp(72px, 8vw, 96px)',
-            height: 'clamp(72px, 8vw, 96px)',
-            borderRadius: 'var(--radius-lg, 12px)',
-            background: 'var(--color-surface)',
-            border: '0.5px solid var(--color-border)',
+            width: 'clamp(80px, 9vw, 104px)',
+            height: 'clamp(80px, 9vw, 104px)',
+            borderRadius: '18px',
+            background: `
+              radial-gradient(ellipse 100% 40% at 50% 100%, color-mix(in oklch, ${glowColor} 8%, #0c0c0c), transparent 60%),
+              linear-gradient(180deg, #101010, #0a0a0a)
+            `,
+            border: '0.5px solid rgba(255, 255, 255, 0.06)',
+            boxShadow: `
+              0 1px 0 rgba(255, 255, 255, 0.04) inset,
+              0 -1px 0 rgba(255, 255, 255, 0.02) inset,
+              0 4px 24px rgba(0, 0, 0, 0.4)
+            `,
             overflow: 'hidden',
             zIndex: 1,
           }}
         >
+          {/* Warm bottom edge highlight */}
+          <div
+            style={{
+              position: 'absolute',
+              bottom: 0,
+              left: '15%',
+              right: '15%',
+              height: '2px',
+              background: `linear-gradient(90deg, transparent, ${glowColor}, transparent)`,
+              opacity: 0.4,
+              borderRadius: '1px',
+            }}
+            aria-hidden="true"
+          />
+
           {webgl ? (
             <SectionIconCanvas variant={variant} />
           ) : (
-            /* CSS fallback */
             <div
               style={{
                 width: '100%',
@@ -82,9 +107,8 @@ export default function SectionIcon({ variant, glowColor }: SectionIconProps) {
                   width: '40%',
                   height: '40%',
                   borderRadius: variant === 'about' || variant === 'skills' ? '50%' : '20%',
-                  background: `linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02))`,
-                  border: '0.5px solid rgba(255,255,255,0.1)',
-                  backdropFilter: 'blur(14px)',
+                  background: `linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.01))`,
+                  border: '0.5px solid rgba(255,255,255,0.08)',
                 }}
               />
             </div>

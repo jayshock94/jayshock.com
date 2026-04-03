@@ -6,20 +6,17 @@ import * as THREE from 'three'
 
 /**
  * Glass speech bubble — Contact section.
- * Rounded rectangle with a small tail.
- * Reads as "message" / "get in touch".
+ * Rounded rectangle with trailing dots, bottom-lit with slate blue warmth.
  */
 const GlassMessage = memo(function GlassMessage() {
   const groupRef = useGlassBreathe()
 
-  // Create a rounded rectangle shape for extrusion
   const bubbleShape = useMemo(() => {
     const shape = new THREE.Shape()
     const w = 1.4
     const h = 1.0
     const r = 0.25
 
-    // Rounded rectangle
     shape.moveTo(-w / 2 + r, -h / 2)
     shape.lineTo(w / 2 - r, -h / 2)
     shape.quadraticCurveTo(w / 2, -h / 2, w / 2, -h / 2 + r)
@@ -47,42 +44,48 @@ const GlassMessage = memo(function GlassMessage() {
       <mesh position={[0, 0.1, -0.15]}>
         <extrudeGeometry args={[bubbleShape, extrudeSettings]} />
         <meshPhysicalMaterial
-          transmission={0.88}
-          roughness={0.08}
+          transmission={0.82}
+          roughness={0.03}
           ior={1.45}
-          thickness={0.4}
-          envMapIntensity={1.0}
-          color="#b0c8e0"
+          thickness={0.5}
+          clearcoat={1}
+          clearcoatRoughness={0.05}
+          envMapIntensity={1.5}
+          color="#98b8d8"
           transparent
           opacity={0.88}
         />
       </mesh>
 
-      {/* Small tail / indicator dot */}
+      {/* Trailing dot */}
       <mesh position={[-0.35, -0.5, 0]}>
         <sphereGeometry args={[0.12, 16, 16]} />
         <meshPhysicalMaterial
-          transmission={0.8}
-          roughness={0.1}
+          transmission={0.75}
+          roughness={0.03}
           ior={1.4}
-          thickness={0.2}
-          envMapIntensity={0.8}
-          color="#90b0d0"
+          thickness={0.25}
+          clearcoat={1}
+          clearcoatRoughness={0.05}
+          envMapIntensity={1.5}
+          color="#80a8d0"
           transparent
           opacity={0.8}
         />
       </mesh>
 
-      {/* Smaller dot */}
+      {/* Smaller trailing dot */}
       <mesh position={[-0.55, -0.7, 0]}>
         <sphereGeometry args={[0.07, 16, 16]} />
         <meshPhysicalMaterial
-          transmission={0.75}
-          roughness={0.1}
+          transmission={0.7}
+          roughness={0.03}
           ior={1.4}
           thickness={0.15}
-          envMapIntensity={0.8}
-          color="#80a8d4"
+          clearcoat={1}
+          clearcoatRoughness={0.05}
+          envMapIntensity={1.5}
+          color="#7098c0"
           transparent
           opacity={0.7}
         />
