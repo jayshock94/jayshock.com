@@ -10,7 +10,7 @@ import GlassCube from './shapes/GlassCube'
 
 export type IconVariant = 'work' | 'about' | 'skills' | 'contact'
 
-const SHAPES: Record<IconVariant, React.ComponentType> = {
+const SHAPES: Record<IconVariant, React.ComponentType<{ tintColor?: string }>> = {
   work: GlassPrism,
   about: GlassSphere,
   skills: GlassTorus,
@@ -62,7 +62,7 @@ export default function SectionIconCanvas({ variant, glowColorHex }: SectionIcon
 
       <Suspense fallback={null}>
         <Environment preset="night" />
-        <Shape />
+        <Shape tintColor={lightColor} />
       </Suspense>
     </Canvas>
   )

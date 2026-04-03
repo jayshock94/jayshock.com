@@ -7,7 +7,7 @@ import { useGlassBreathe } from '../useGlassFloat'
  * Glass lens with orbital ring — About section.
  * Bottom-lit warm glow catches the sphere and ring edge.
  */
-const GlassLens = memo(function GlassLens() {
+const GlassLens = memo(function GlassLens(_props: { tintColor?: string }) {
   const groupRef = useGlassBreathe()
 
   return (

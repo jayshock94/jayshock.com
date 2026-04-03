@@ -10,7 +10,7 @@ import type { Group } from 'three'
  * Three rounded panels stacked vertically with parallax float.
  * Bottom-lit to catch warm glow from below.
  */
-const GlassLayers = memo(function GlassLayers() {
+const GlassLayers = memo(function GlassLayers(_props: { tintColor?: string }) {
   const groupRef = useRef<Group>(null)
   const layer1 = useRef<Group>(null)
   const layer2 = useRef<Group>(null)

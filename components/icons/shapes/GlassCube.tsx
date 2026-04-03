@@ -8,7 +8,7 @@ import * as THREE from 'three'
  * Glass speech bubble — Contact section.
  * Rounded rectangle with trailing dots, bottom-lit with slate blue warmth.
  */
-const GlassMessage = memo(function GlassMessage() {
+const GlassMessage = memo(function GlassMessage(_props: { tintColor?: string }) {
   const groupRef = useGlassBreathe()
 
   const bubbleShape = useMemo(() => {

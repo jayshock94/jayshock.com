@@ -5,10 +5,11 @@ import { useGlassBreathe } from '../useGlassFloat'
 
 /**
  * Connected glass nodes — Skills section.
- * Three spheres connected by rods, bottom-lit with teal warmth.
+ * Accepts tintColor to match active toolkit tab.
  */
-const GlassNodes = memo(function GlassNodes() {
+const GlassNodes = memo(function GlassNodes({ tintColor }: { tintColor?: string }) {
   const groupRef = useGlassBreathe()
+  const c = tintColor || '#70c0a8'
 
   const nodeMaterial = {
     transmission: 0.8,
@@ -44,15 +45,15 @@ const GlassNodes = memo(function GlassNodes() {
     <group ref={groupRef} scale={0.9}>
       <mesh position={positions[0]}>
         <sphereGeometry args={[0.35, 32, 32]} />
-        <meshPhysicalMaterial {...nodeMaterial} color="#88d0c0" />
+        <meshPhysicalMaterial {...nodeMaterial} color={c} />
       </mesh>
       <mesh position={positions[1]}>
         <sphereGeometry args={[0.28, 32, 32]} />
-        <meshPhysicalMaterial {...nodeMaterial} color="#68b8a8" />
+        <meshPhysicalMaterial {...nodeMaterial} color={c} />
       </mesh>
       <mesh position={positions[2]}>
         <sphereGeometry args={[0.32, 32, 32]} />
-        <meshPhysicalMaterial {...nodeMaterial} color="#78c8b4" />
+        <meshPhysicalMaterial {...nodeMaterial} color={c} />
       </mesh>
 
       {[[0, 1], [1, 2], [0, 2]].map(([a, b]) => {
@@ -69,7 +70,7 @@ const GlassNodes = memo(function GlassNodes() {
         return (
           <mesh key={`${a}-${b}`} position={[midX, midY, midZ]} rotation={[0, 0, -angle]}>
             <cylinderGeometry args={[0.035, 0.035, length * 0.55, 8]} />
-            <meshPhysicalMaterial {...rodMaterial} color="#70b8a8" />
+            <meshPhysicalMaterial {...rodMaterial} color={c} />
           </mesh>
         )
       })}
