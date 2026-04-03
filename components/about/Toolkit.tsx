@@ -172,7 +172,7 @@ export default function Toolkit() {
 
 function ChipGrid({ category }: { category: ChipCategory }) {
   return (
-    <div className="flex flex-wrap gap-[var(--space-component-sm)]">
+    <div className="flex flex-wrap justify-center gap-[var(--space-component-sm)] max-w-content mx-auto">
       {category.items.map((item) => (
         <span
           key={item}

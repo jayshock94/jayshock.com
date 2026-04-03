@@ -271,7 +271,7 @@ export default function ChatPanel({
               flexWrap: 'wrap',
               gap: 'var(--space-component-xs)',
               paddingTop: 'var(--space-component-xs)',
-              paddingLeft: '32px',
+              paddingLeft: 0,
             }}
           >
             {chips.map((chip, i) => (
