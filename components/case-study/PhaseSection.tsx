@@ -313,7 +313,7 @@ export default function PhaseSection({
         {/* Stats (Impact phase) */}
         {stats && stats.length > 0 && (
           <div
-            className="grid grid-cols-2 md:grid-cols-3 gap-[var(--space-component-md)] mb-[var(--space-section-md)]"
+            className="max-w-content mx-auto grid grid-cols-2 md:grid-cols-3 gap-[var(--space-component-md)] mb-[var(--space-section-md)]"
             role="list"
             aria-label="Impact metrics"
           >

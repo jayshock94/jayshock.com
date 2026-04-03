@@ -23,7 +23,7 @@ export default function CompetitiveGrid({ competitors, criteria }: CompetitiveGr
   return (
     <ScrollReveal>
       <div
-        className=""
+        className="max-w-content mx-auto"
         style={{ marginTop: 'var(--space-stack-lg)', marginBottom: 'var(--space-stack-lg)' }}
       >
         <p
