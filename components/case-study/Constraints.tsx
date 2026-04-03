@@ -26,7 +26,7 @@ export default function Constraints({ constraints }: ConstraintsProps) {
 
   return (
     <ScrollReveal>
-      <div style={{ marginTop: 'var(--space-stack-lg)', marginBottom: 'var(--space-stack-md)' }}>
+      <div className="max-w-data" style={{ marginTop: 'var(--space-stack-lg)', marginBottom: 'var(--space-stack-md)' }}>
         <div
           style={{
             display: 'flex',

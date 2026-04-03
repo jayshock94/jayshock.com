@@ -18,7 +18,7 @@ interface ResearchMethodsProps {
 export default function ResearchMethods({ methods, accentColor = 'var(--phase-discovery-label)' }: ResearchMethodsProps) {
   return (
     <div
-      className="max-w-content"
+      className="max-w-data"
       style={{ marginTop: 'var(--space-stack-lg)', marginBottom: 'var(--space-stack-lg)' }}
     >
       <p

@@ -100,7 +100,7 @@ function renderImages(images: CaseStudyImage[], vars: typeof PHASE_VARS.impact) 
     return (
       <ScrollReveal>
         <div
-          className="max-w-layout mx-auto"
+          className="max-w-layout"
           style={{ marginTop: 'var(--space-stack-lg)', marginBottom: 'var(--space-stack-md)' }}
         >
           <figure className="m-0">
@@ -182,7 +182,7 @@ function renderImages(images: CaseStudyImage[], vars: typeof PHASE_VARS.impact) 
   return (
     <ScrollReveal>
       <div
-        className="max-w-layout mx-auto grid grid-cols-1 md:grid-cols-2 gap-[var(--space-component-md)]"
+        className="max-w-layout grid grid-cols-1 md:grid-cols-2 gap-[var(--space-component-md)]"
         style={{
           marginTop: 'var(--space-stack-lg)',
           marginBottom: 'var(--space-stack-md)',
@@ -313,7 +313,7 @@ export default function PhaseSection({
         {/* Stats (Impact phase) */}
         {stats && stats.length > 0 && (
           <div
-            className="grid grid-cols-2 md:grid-cols-3 gap-[var(--space-component-md)] mb-[var(--space-section-md)]"
+            className="max-w-data grid grid-cols-2 md:grid-cols-3 gap-[var(--space-component-md)] mb-[var(--space-section-md)]"
             role="list"
             aria-label="Impact metrics"
           >

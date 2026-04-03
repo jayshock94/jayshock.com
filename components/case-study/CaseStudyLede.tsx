@@ -84,7 +84,7 @@ export default function CaseStudyLede({ context, overview, roleMeta, roleSummary
         {/* Structured role metadata grid */}
         {roleMeta && roleMeta.length > 0 && (
           <ScrollReveal>
-            <div style={{ maxWidth: 'var(--space-content-max)' }}>
+            <div className="max-w-data">
               <p
                 className="text-label"
                 style={{
