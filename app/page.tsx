@@ -11,6 +11,7 @@ import AboutText     from '@/components/about/AboutText'
 import ContactForm   from '@/app/contact/ContactForm'
 import ScrollReveal    from '@/components/ui/ScrollReveal'
 import SectionTracker  from '@/components/ui/SectionTracker'
+import SectionIcon     from '@/components/icons/SectionIcon'
 import { caseStudies } from '@/data/case-studies'
 
 export const metadata: Metadata = {
@@ -130,10 +131,13 @@ export default function HomePage() {
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
 
+          <div className="hero-fade-up" style={{ animationDelay: '1200ms' }}>
+            <SectionIcon variant="work" glowColor="var(--phase-impact-label)" />
+          </div>
           <p
             className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-lg)] text-center hero-fade-up"
             id="work-eyebrow"
-            style={{ animationDelay: '1200ms' }}
+            style={{ animationDelay: '1300ms' }}
           >
             Selected Work
           </p>
@@ -180,6 +184,7 @@ export default function HomePage() {
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <ScrollReveal>
             <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
+              <SectionIcon variant="about" glowColor="var(--phase-problem-label)" />
               <div className="flex flex-col gap-[var(--space-stack-lg)] md:flex-row md:gap-[var(--space-7)]">
 
                 {/* Left — photo */}
@@ -255,6 +260,7 @@ export default function HomePage() {
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <ScrollReveal>
             <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
+              <SectionIcon variant="skills" glowColor="var(--phase-discovery-label)" />
               <Toolkit />
             </div>
           </ScrollReveal>
@@ -379,6 +385,7 @@ export default function HomePage() {
               {/* Header — centered */}
               <div className="text-center">
                 <ScrollReveal>
+                  <SectionIcon variant="contact" glowColor="var(--phase-solution-label)" />
                   <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-sm)]">
                     What&apos;s next
                   </p>
