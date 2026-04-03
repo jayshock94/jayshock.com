@@ -274,7 +274,7 @@ export default function PhaseSection({
     <section
       id={phase}
       data-phase-section={phase}
-      className="py-[var(--space-section-lg)] transition-colors duration-700"
+      className="py-[var(--space-section-md)] transition-colors duration-700"
       style={{
         backgroundColor: vars.bg,
         backgroundImage: `radial-gradient(ellipse 80% 50% at 50% 20%, ${vars.glass}, transparent 70%)`,

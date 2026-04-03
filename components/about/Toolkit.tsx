@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from 'react'
 import { TOOLKIT_TOOLS, TOOLKIT_SKILLS, EDUCATION, CERTIFICATIONS } from '@/data/resume'
+import SectionIcon from '@/components/icons/SectionIcon'
 // CERTIFICATIONS includes all certs (primary + LinkedIn courses)
 
 /* ------------------------------------------------------------------ */
@@ -73,6 +74,9 @@ const CATEGORIES: Category[] = [
 /*  Component                                                          */
 /* ------------------------------------------------------------------ */
 
+/** Hex colors for Three.js point light — must match CATEGORIES order */
+const GLOW_HEX = ['#c8a0e0', '#d4a870', '#70c0a8', '#80a8d4'] as const
+
 export default function Toolkit() {
   const [active, setActive] = useState(0)
   const cat = CATEGORIES[active]
@@ -89,8 +93,13 @@ export default function Toolkit() {
 
   return (
     <div>
+      <SectionIcon
+        variant="skills"
+        glowColor={cat.color}
+        glowColorHex={GLOW_HEX[active]}
+      />
       {/* Header */}
-      <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)] text-center">
+      <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-sm)] text-center">
         My toolkit
       </p>
       <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-sm)] text-center">
@@ -155,6 +164,7 @@ export default function Toolkit() {
         id="toolkit-panel"
         role="tabpanel"
         aria-labelledby={`toolkit-tab-${cat.id}`}
+        className="overflow-hidden"
       >
         {cat.kind === 'chips' ? (
           <ChipGrid category={cat} />

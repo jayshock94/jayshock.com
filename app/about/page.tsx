@@ -50,7 +50,7 @@ export default function AboutPage() {
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <ScrollReveal>
-            <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)] text-center">
+            <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-sm)] text-center">
               About
             </p>
             <h1 className="text-h1 text-[var(--color-ink)] mb-[var(--space-section-sm)] text-center">
@@ -70,7 +70,7 @@ export default function AboutPage() {
                   height={420}
                   className="
                     w-[200px] h-[200px] rounded-full object-cover object-top
-                    md:w-[280px] md:h-auto md:aspect-[3/4] md:rounded-[8px]
+                    md:w-[240px] md:h-[240px] md:rounded-[8px]
                   "
                   style={{ border: '0.5px solid var(--color-border)' }}
                   priority
@@ -108,7 +108,7 @@ export default function AboutPage() {
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
             <ScrollReveal>
-              <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)] text-center">
+              <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-sm)] text-center">
                 How I think
               </p>
               <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-lg)] max-w-content mx-auto text-center">
@@ -214,7 +214,7 @@ export default function AboutPage() {
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
             <ScrollReveal>
-              <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)] text-center">
+              <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-sm)] text-center">
                 Experience
               </p>
               <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-lg)] text-center">

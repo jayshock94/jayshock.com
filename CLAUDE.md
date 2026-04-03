@@ -72,7 +72,8 @@ These rules apply to every file, every component, every session:
 - Mobile must work — if the layout cannot adapt gracefully to mobile, flag it and propose an alternative before building
 - Never use a spacing value that is not a named semantic token
 - Never exceed `--space-layout-max` (1200px) for page content width
-- Never exceed `--space-content-max` (720px) for body copy line length
+- Never exceed `--space-content-max` (860px) for body copy and data grid line length
+- Always use `--space-stack-sm` (12px) between eyebrow labels and headings
 
 ### Component rules
 - Glass treatment applies only to interactive elements — buttons, nav, modals, dropdowns
@@ -222,7 +223,7 @@ Fluid section tokens (use clamp):
 --space-page-margin     clamp(20px, 6vw, 80px)
 
 Fixed layout tokens:
---space-content-max     720px
+--space-content-max     860px
 --space-layout-max      1200px
 ```
 

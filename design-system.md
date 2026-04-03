@@ -459,8 +459,8 @@ Tied to readability, touch targets (minimum 44px), and visual grouping.
 --space-component-lg:   var(--space-5);   /* 24px — card padding, form groups */
 
 /* Vertical text stacking */
---space-stack-xs:       6px;              /* Between eyebrow and heading */
---space-stack-sm:       var(--space-3);   /* 12px — label to heading */
+--space-stack-xs:       6px;              /* Tight interior gaps */
+--space-stack-sm:       var(--space-3);   /* 12px — eyebrow to heading (standardized) */
 --space-stack-md:       var(--space-5);   /* 24px — heading to body */
 --space-stack-lg:       var(--space-6);   /* 32px — body to CTA */
 ```
@@ -491,8 +491,8 @@ Never applies inside a component — only between sections and layout blocks.
 ### Layout Constraints (Fixed)
 
 ```css
-/* Max width for body copy — never exceeds this */
---space-content-max:  720px;
+/* Max width for body copy and data grids — centered layout column */
+--space-content-max:  860px;
 
 /* Max width for full page layout */
 --space-layout-max:   1200px;
@@ -517,7 +517,7 @@ module.exports = {
   theme: {
     extend: {
       maxWidth: {
-        content: '720px',
+        content: '860px',
         layout: '1200px',
       },
       screens: {
