@@ -15,8 +15,7 @@ export default function SuggestionChip({ label, onClick, index }: SuggestionChip
       className="chat-chip-enter"
       style={{
         animationDelay: `${index * 60}ms`,
-        padding: '10px 16px',
-        minHeight: '44px',
+        padding: '7px 12px',
         borderRadius: '40px',
         border: '0.5px solid var(--color-border-mid)',
         background: 'transparent',
@@ -26,9 +25,7 @@ export default function SuggestionChip({ label, onClick, index }: SuggestionChip
         fontWeight: 'var(--text-body-sm-weight)',
         lineHeight: 'var(--text-body-sm-line-height)',
         cursor: 'pointer',
-        whiteSpace: 'nowrap',
         transition: 'border-color 200ms ease, background 200ms ease',
-        flexShrink: 0,
       }}
       onMouseEnter={e => {
         e.currentTarget.style.borderColor = 'var(--color-border-strong)'

@@ -33,7 +33,6 @@ const config: Config = {
       },
       maxWidth: {
         content: 'var(--space-content-max)',
-        data:    'var(--space-data-max)',
         layout:  'var(--space-layout-max)',
       },
       backdropBlur: {

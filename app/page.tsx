@@ -279,7 +279,7 @@ export default function HomePage() {
                 <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)]">
                   Experience
                 </p>
-                <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-sm)]">
+                <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-lg)]">
                   Where I have been.
                 </h2>
                 <Button variant="secondary" href="/experience">
