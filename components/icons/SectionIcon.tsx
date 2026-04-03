@@ -37,24 +37,7 @@ export default function SectionIcon({ variant, glowColor }: SectionIconProps) {
       style={{ marginBottom: 'var(--space-stack-md)' }}
     >
       <div style={{ position: 'relative' }}>
-        {/* Warm glow underneath — concentrated at bottom, fading up */}
-        <div
-          style={{
-            position: 'absolute',
-            left: '10%',
-            right: '10%',
-            bottom: '-20%',
-            height: '60%',
-            background: `radial-gradient(ellipse 80% 60% at 50% 90%, ${glowColor}, transparent 70%)`,
-            opacity: 0.5,
-            filter: 'blur(12px)',
-            pointerEvents: 'none',
-            zIndex: 0,
-          }}
-          aria-hidden="true"
-        />
-
-        {/* Dark container — matte feel with subtle noise texture */}
+        {/* Dark container — glow stays inside */}
         <div
           style={{
             position: 'relative',
@@ -62,7 +45,7 @@ export default function SectionIcon({ variant, glowColor }: SectionIconProps) {
             height: 'clamp(80px, 9vw, 104px)',
             borderRadius: '18px',
             background: `
-              radial-gradient(ellipse 100% 40% at 50% 100%, color-mix(in oklch, ${glowColor} 8%, #0c0c0c), transparent 60%),
+              radial-gradient(ellipse 100% 50% at 50% 100%, color-mix(in oklch, ${glowColor} 15%, #0c0c0c), transparent 65%),
               linear-gradient(180deg, #101010, #0a0a0a)
             `,
             border: '0.5px solid rgba(255, 255, 255, 0.06)',
