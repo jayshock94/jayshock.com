@@ -175,87 +175,82 @@ export default function HomePage() {
 
 
       {/* =========================================================
-          Section 03 — About
+          Section 03 — About (includes How I Work as subsection)
       ========================================================= */}
       <section
         className="py-[var(--space-section-md)]"
         aria-label="About"
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
+
+          {/* Icon + heading centered above everything */}
           <ScrollReveal>
-            <div className="pt-[var(--space-section-sm)]">
+            <div className="text-center pt-[var(--space-section-sm)]">
               <SectionIcon variant="about" glowColor="var(--phase-problem-label)" />
-              <div className="flex flex-col gap-[var(--space-stack-lg)] md:flex-row md:gap-[var(--space-7)]">
-
-                {/* Left — photo */}
-                <div className="flex-shrink-0 flex justify-center md:justify-start">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src="/images/jay-headshot.png"
-                    alt="Jay Shock"
-                    className="
-                      w-[180px] h-[180px] rounded-full object-cover object-top
-                      md:w-[280px] md:h-auto md:aspect-[3/4] md:rounded-[8px]
-                    "
-                    style={{
-                      border: '0.5px solid var(--color-border)',
-                    }}
-                  />
-                </div>
-
-                {/* Right — copy */}
-                <div className="flex-1">
-                  <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-sm)]">
-                    About
-                  </p>
-                  <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-sm)]">
-                    I got here by paying attention.
-                  </h2>
-
-                  <AboutText />
-
-                  <div className="flex flex-wrap gap-[var(--space-component-sm)]">
-                    <Button variant="glass" href="/about">
-                      More about me
-                    </Button>
-                    <Button variant="secondary" href="/experience">
-                      View experience
-                    </Button>
-                  </div>
-                </div>
-
-              </div>
+              <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-sm)]">
+                About
+              </p>
+              <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-lg)]">
+                I got here by paying attention.
+              </h2>
             </div>
           </ScrollReveal>
-        </div>
-      </section>
 
-
-      {/* =========================================================
-          Section 04 — How I Work
-      ========================================================= */}
-      <section
-        className="py-[var(--space-section-md)]"
-        id="how-i-work"
-        aria-label="How I work"
-      >
-        <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
+          {/* Two-column: photo + copy */}
           <ScrollReveal>
-            <div className="pt-[var(--space-section-sm)]">
-              <HowIWork />
+            <div className="flex flex-col gap-[var(--space-stack-lg)] md:flex-row md:gap-[var(--space-7)]">
+
+              {/* Left — photo */}
+              <div className="flex-shrink-0 flex justify-center md:justify-start">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/jay-headshot.png"
+                  alt="Jay Shock"
+                  className="
+                    w-[180px] h-[180px] rounded-full object-cover object-top
+                    md:w-[240px] md:h-[240px] md:rounded-[8px]
+                  "
+                  style={{
+                    border: '0.5px solid var(--color-border)',
+                  }}
+                />
+              </div>
+
+              {/* Right — copy */}
+              <div className="flex-1">
+                <AboutText />
+
+                <div className="flex flex-wrap gap-[var(--space-component-sm)]">
+                  <Button variant="glass" href="/about">
+                    More about me
+                  </Button>
+                  <Button variant="secondary" href="/experience">
+                    View experience
+                  </Button>
+                </div>
+              </div>
+
             </div>
           </ScrollReveal>
+
+          {/* How I Work — subsection within About */}
+          <div id="how-i-work" style={{ marginTop: 'var(--space-section-md)' }}>
+            <ScrollReveal>
+              <HowIWork />
+            </ScrollReveal>
+          </div>
+
         </div>
       </section>
 
 
       {/* =========================================================
-          Section 05 — My Toolkit
+          Section 05 — Skills & Experience (Toolkit + Experience under one icon)
       ========================================================= */}
       <section
         className="py-[var(--space-section-md)]"
         id="toolkit"
-        aria-label="My toolkit"
+        aria-label="Skills and experience"
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <ScrollReveal>
@@ -263,23 +258,10 @@ export default function HomePage() {
               <Toolkit />
             </div>
           </ScrollReveal>
-        </div>
-      </section>
 
-
-      {/* =========================================================
-          Section 06 — Experience
-      ========================================================= */}
-      <section
-        id="experience"
-        className="py-[var(--space-section-md)]"
-        aria-label="Experience"
-      >
-        <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
-          <ScrollReveal>
-            <div className="pt-[var(--space-section-sm)]">
-
-              {/* Header row */}
+          {/* Experience — subsection within Skills */}
+          <div id="experience" style={{ marginTop: 'var(--space-section-md)' }}>
+            <ScrollReveal>
               <div className="mb-[var(--space-stack-lg)] text-center">
                 <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-sm)]">
                   Experience
@@ -292,7 +274,6 @@ export default function HomePage() {
                 </Button>
               </div>
 
-              {/* Timeline */}
               <div className="flex flex-col">
                 {[
                   {
@@ -323,8 +304,6 @@ export default function HomePage() {
                     style={{ padding: 'var(--space-stack-md) 0' }}
                   >
                     <div className="flex flex-col gap-[var(--space-component-xs)] md:flex-row md:items-baseline md:gap-[var(--space-7)]">
-
-                      {/* Left — role + company + dates */}
                       <div className="md:w-[320px] flex-shrink-0">
                         <p className="text-h4 text-[var(--color-ink)]">
                           {job.role}
@@ -333,8 +312,6 @@ export default function HomePage() {
                           {job.company} &middot; {job.period}
                         </p>
                       </div>
-
-                      {/* Right — summary + case study link */}
                       <div className="flex-1">
                         <p className="text-body text-[var(--color-text-secondary)] mb-[var(--space-component-xs)]">
                           {job.summary}
@@ -356,14 +333,12 @@ export default function HomePage() {
                           </span>
                         )}
                       </div>
-
                     </div>
                   </div>
                 ))}
               </div>
-
-            </div>
-          </ScrollReveal>
+            </ScrollReveal>
+          </div>
         </div>
       </section>
 

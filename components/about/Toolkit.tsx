@@ -164,6 +164,7 @@ export default function Toolkit() {
         id="toolkit-panel"
         role="tabpanel"
         aria-labelledby={`toolkit-tab-${cat.id}`}
+        className="overflow-hidden"
       >
         {cat.kind === 'chips' ? (
           <ChipGrid category={cat} />
