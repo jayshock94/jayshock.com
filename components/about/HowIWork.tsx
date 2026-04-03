@@ -45,14 +45,6 @@ const PHASES = [
   },
 ] as const
 
-/** Process steps that light up for each phase */
-const PROCESS_MAP: Record<string, string[]> = {
-  see:   ['Discover', 'Define'],
-  own:   ['Define', 'Ideate'],
-  solve: ['Ideate', 'Design', 'Test'],
-  do:    ['Test', 'Deliver'],
-}
-
 /* ------------------------------------------------------------------ */
 /*  Component                                                          */
 /* ------------------------------------------------------------------ */
@@ -226,34 +218,9 @@ export default function HowIWork() {
                 >
                   {p.title}
                 </p>
-                <p className="text-body" style={{ color: 'var(--color-text-secondary)', marginBottom: 'var(--space-stack-md)' }}>
+                <p className="text-body" style={{ color: 'var(--color-text-secondary)' }}>
                   {p.desc}
                 </p>
-                <div className="flex flex-wrap items-center gap-[var(--space-component-xs)]">
-                  <span
-                    className="text-label"
-                    style={{ color: 'var(--color-text-placeholder)', letterSpacing: '0.08em' }}
-                  >
-                    In practice
-                  </span>
-                  {PROCESS_MAP[p.id].map((step) => (
-                    <span
-                      key={step}
-                      style={{
-                        padding: '4px 10px',
-                        borderRadius: '999px',
-                        border: `0.5px solid ${p.border}`,
-                        fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-                        fontSize: '11px',
-                        fontWeight: 400,
-                        color: p.color,
-                        letterSpacing: '0.02em',
-                      }}
-                    >
-                      {step}
-                    </span>
-                  ))}
-                </div>
               </div>
             ))}
           </div>
