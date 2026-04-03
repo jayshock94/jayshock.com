@@ -183,7 +183,7 @@ export default function HomePage() {
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <ScrollReveal>
-            <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
+            <div className="pt-[var(--space-section-sm)]">
               <SectionIcon variant="about" glowColor="var(--phase-problem-label)" />
               <div className="flex flex-col gap-[var(--space-stack-lg)] md:flex-row md:gap-[var(--space-7)]">
 
@@ -241,7 +241,7 @@ export default function HomePage() {
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <ScrollReveal>
-            <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
+            <div className="pt-[var(--space-section-sm)]">
               <HowIWork />
             </div>
           </ScrollReveal>
@@ -259,7 +259,7 @@ export default function HomePage() {
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <ScrollReveal>
-            <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
+            <div className="pt-[var(--space-section-sm)]">
               <SectionIcon variant="skills" glowColor="var(--phase-discovery-label)" />
               <Toolkit />
             </div>
@@ -278,7 +278,7 @@ export default function HomePage() {
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <ScrollReveal>
-            <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
+            <div className="pt-[var(--space-section-sm)]">
 
               {/* Header row */}
               <div className="mb-[var(--space-stack-lg)] text-center">
@@ -378,7 +378,7 @@ export default function HomePage() {
         aria-label="Contact"
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
-          <div className="border-t border-[var(--color-border)] pt-[var(--space-section-md)]">
+          <div className="pt-[var(--space-section-md)]">
 
             <div className="flex flex-col gap-[var(--space-section-sm)]">
 
