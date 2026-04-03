@@ -11,6 +11,7 @@ import AboutText     from '@/components/about/AboutText'
 import ContactForm   from '@/app/contact/ContactForm'
 import ScrollReveal    from '@/components/ui/ScrollReveal'
 import SectionTracker  from '@/components/ui/SectionTracker'
+import SectionIcon     from '@/components/icons/SectionIcon'
 import { caseStudies } from '@/data/case-studies'
 
 export const metadata: Metadata = {
@@ -130,10 +131,13 @@ export default function HomePage() {
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
 
+          <div className="hero-fade-up" style={{ animationDelay: '1200ms' }}>
+            <SectionIcon variant="work" glowColor="var(--phase-impact-label)" />
+          </div>
           <p
             className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-lg)] text-center hero-fade-up"
             id="work-eyebrow"
-            style={{ animationDelay: '1200ms' }}
+            style={{ animationDelay: '1300ms' }}
           >
             Selected Work
           </p>
@@ -179,7 +183,8 @@ export default function HomePage() {
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <ScrollReveal>
-            <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
+            <div className="pt-[var(--space-section-sm)]">
+              <SectionIcon variant="about" glowColor="var(--phase-problem-label)" />
               <div className="flex flex-col gap-[var(--space-stack-lg)] md:flex-row md:gap-[var(--space-7)]">
 
                 {/* Left — photo */}
@@ -200,7 +205,7 @@ export default function HomePage() {
 
                 {/* Right — copy */}
                 <div className="flex-1">
-                  <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)]">
+                  <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-sm)]">
                     About
                   </p>
                   <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-sm)]">
@@ -236,7 +241,7 @@ export default function HomePage() {
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <ScrollReveal>
-            <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
+            <div className="pt-[var(--space-section-sm)]">
               <HowIWork />
             </div>
           </ScrollReveal>
@@ -254,7 +259,7 @@ export default function HomePage() {
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <ScrollReveal>
-            <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
+            <div className="pt-[var(--space-section-sm)]">
               <Toolkit />
             </div>
           </ScrollReveal>
@@ -272,11 +277,11 @@ export default function HomePage() {
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <ScrollReveal>
-            <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
+            <div className="pt-[var(--space-section-sm)]">
 
               {/* Header row */}
               <div className="mb-[var(--space-stack-lg)] text-center">
-                <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)]">
+                <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-sm)]">
                   Experience
                 </p>
                 <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-lg)]">
@@ -372,44 +377,23 @@ export default function HomePage() {
         aria-label="Contact"
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
-          <div className="border-t border-[var(--color-border)] pt-[var(--space-section-md)]">
+          <div className="pt-[var(--space-section-md)]">
 
             <div className="flex flex-col gap-[var(--space-section-sm)]">
 
               {/* Header — centered */}
               <div className="text-center">
                 <ScrollReveal>
-                  <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-xs)]">
+                  <SectionIcon variant="contact" glowColor="var(--phase-solution-label)" />
+                  <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-sm)]">
                     What&apos;s next
                   </p>
                   <h2 className="text-h1 text-[var(--color-ink)] mb-[var(--space-stack-md)]">
                     Let&apos;s make it simple.
                   </h2>
-                  <p className="text-body text-[var(--color-text-secondary)] mb-[var(--space-stack-md)] max-w-content mx-auto">
+                  <p className="text-body text-[var(--color-text-secondary)] max-w-content mx-auto">
                     If you are building something complex and need someone who will own the problem with you, I want to hear about it.
                   </p>
-                  <div className="flex items-center justify-center gap-[var(--space-component-md)]">
-                    <a
-                      href="mailto:hello@jayshock.com"
-                      className="text-body hover-ink"
-                      style={{
-                        color: 'var(--color-ink)',
-                        textDecoration: 'none',
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: 'var(--space-component-sm)',
-                      }}
-                    >
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ opacity: 0.6 }}>
-                        <rect x="2" y="4" width="20" height="16" rx="2" />
-                        <path d="M22 4L12 13L2 4" />
-                      </svg>
-                      hello@jayshock.com
-                    </a>
-                    <Button variant="secondary" href="/api/resume">
-                      Download resume
-                    </Button>
-                  </div>
                 </ScrollReveal>
               </div>
 
@@ -418,6 +402,16 @@ export default function HomePage() {
                 <ScrollReveal>
                   <ContactForm />
                 </ScrollReveal>
+                <p className="text-body-sm text-[var(--color-text-muted)] text-center mt-[var(--space-stack-lg)]">
+                  Prefer email?{' '}
+                  <a
+                    href="mailto:hello@jayshock.com"
+                    className="hover-ink"
+                    style={{ color: 'var(--color-text-secondary)', textDecoration: 'underline', textUnderlineOffset: '3px' }}
+                  >
+                    hello@jayshock.com
+                  </a>
+                </p>
               </div>
 
             </div>

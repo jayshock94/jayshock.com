@@ -89,20 +89,20 @@ export default function KeyFindings({ findings, accentColor = 'var(--color-accen
               style={{
                 padding: 'var(--space-component-lg)',
                 borderRadius: '8px',
-                background: 'var(--color-surface)',
-                border: '0.5px solid var(--color-border)',
-                borderTop: `3px solid ${accentColor}`,
+                background: `color-mix(in oklch, ${accentColor} 6%, var(--color-surface))`,
+                border: `0.5px solid color-mix(in oklch, ${accentColor} 20%, var(--color-border))`,
                 height: '100%',
               }}
             >
-              {/* Filled circle badge */}
+              {/* Outlined circle badge */}
               <span
                 style={{
                   width: '28px',
                   height: '28px',
                   borderRadius: '50%',
-                  background: accentColor,
-                  color: 'var(--color-canvas)',
+                  background: 'transparent',
+                  border: `1.5px solid ${accentColor}`,
+                  color: accentColor,
                   display: 'inline-flex',
                   alignItems: 'center',
                   justifyContent: 'center',
