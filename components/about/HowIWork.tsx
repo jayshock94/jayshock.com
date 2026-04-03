@@ -65,28 +65,30 @@ export default function HowIWork() {
   }, [])
 
   return (
-    <div>
-      {/* Header */}
-      <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-sm)] text-center">
-        How I work
-      </p>
-      <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-sm)] text-center">
+    <div className="flex flex-col gap-[var(--space-stack-md)]">
+      {/* Subsection heading — left aligned */}
+      <h3 className="text-h3 text-[var(--color-ink)]">
         No matter the project.
-      </h2>
-      <p
-        className="text-body text-[var(--color-text-secondary)] mb-[var(--space-stack-lg)] text-center mx-auto"
-        style={{ maxWidth: 'var(--space-content-max)' }}
-      >
-        Whether it is a full product redesign or a single flow. Scopes change,
-        problems arise, constraints shift. This is how I handle it.
-      </p>
+      </h3>
 
-      {/* Toggle row — 4 pills, always fits one line */}
-      <div
-        role="tablist"
-        aria-label="Process phases"
-        className="flex justify-center gap-[var(--space-component-xs)] mb-[var(--space-stack-lg)]"
-      >
+      {/* Content — left aligned */}
+      <div className="flex flex-col gap-[var(--space-stack-md)]">
+        <p
+          className="text-body text-[var(--color-text-secondary)]"
+          style={{ maxWidth: 'var(--space-content-max)' }}
+        >
+          Whether it is a full product redesign or a single flow. Scopes change,
+          problems arise, constraints shift. This is how I handle it.
+        </p>
+
+        <div className="flex flex-col gap-[var(--space-component-md)]">
+
+          {/* Toggle row — 4 pills, left aligned */}
+          <div
+            role="tablist"
+            aria-label="Process phases"
+            className="flex gap-[var(--space-component-xs)]"
+          >
         {PHASES.map((p, i) => {
           const isActive = active === i
           return (
@@ -121,15 +123,14 @@ export default function HowIWork() {
             </button>
           )
         })}
-      </div>
+          </div>
 
-      {/* Description card */}
-      <div
-        id="how-i-work-panel"
-        role="tabpanel"
-        aria-labelledby={`tab-${phase.id}`}
-        className="max-w-content mx-auto"
-      >
+          {/* Description card */}
+          <div
+            id="how-i-work-panel"
+            role="tabpanel"
+            aria-labelledby={`tab-${phase.id}`}
+          >
         <div
           style={{
             padding: 'var(--space-component-lg)',
@@ -166,6 +167,9 @@ export default function HowIWork() {
               </div>
             ))}
           </div>
+        </div>
+          </div>
+
         </div>
       </div>
     </div>

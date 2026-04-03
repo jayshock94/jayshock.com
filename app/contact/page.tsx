@@ -14,9 +14,6 @@ export default function ContactPage() {
         <div className="max-w-content mx-auto">
 
           <header className="mb-[var(--space-section-sm)] text-center">
-            <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-sm)]">
-              Contact
-            </p>
             <h1 className="text-h1 text-[var(--color-ink)] mb-[var(--space-stack-md)]">
               Get in touch
             </h1>

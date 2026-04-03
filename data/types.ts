@@ -81,10 +81,16 @@ export interface CaseStudy {
   year: string
   /** Tags shown in the hero header. */
   types: string[]
-  /** One-line impact summary — kept for SEO/meta, no longer rendered on cards. */
+  /** One-line impact summary — shown as problem hook on cards. */
   cardImpactLine: string
   /** Hero metric shown large on work cards. */
   cardStat?: { value: string; label: string }
+  /**
+   * Short ownership description for the card — more specific than `role`.
+   * e.g. "Solo designer · every screen, every flow"
+   * Falls back to `role` if omitted.
+   */
+  cardRole?: string
   /** Image shown in the work card. Path relative to /public. */
   cardImage: string
   /**
