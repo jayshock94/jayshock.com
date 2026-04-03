@@ -27,10 +27,13 @@ const GLOW_COLORS: Record<IconVariant, string> = {
 
 interface SectionIconCanvasProps {
   variant: IconVariant
+  /** Override the default glow color for dynamic theming */
+  glowColorHex?: string
 }
 
-export default function SectionIconCanvas({ variant }: SectionIconCanvasProps) {
+export default function SectionIconCanvas({ variant, glowColorHex }: SectionIconCanvasProps) {
   const Shape = SHAPES[variant]
+  const lightColor = glowColorHex || GLOW_COLORS[variant]
 
   return (
     <Canvas
@@ -46,7 +49,7 @@ export default function SectionIconCanvas({ variant }: SectionIconCanvasProps) {
       <pointLight
         position={[0, -2.5, 1.5]}
         intensity={2.5}
-        color={GLOW_COLORS[variant]}
+        color={lightColor}
         distance={8}
         decay={2}
       />

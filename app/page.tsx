@@ -260,7 +260,6 @@ export default function HomePage() {
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <ScrollReveal>
             <div className="pt-[var(--space-section-sm)]">
-              <SectionIcon variant="skills" glowColor="var(--phase-discovery-label)" />
               <Toolkit />
             </div>
           </ScrollReveal>

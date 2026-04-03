@@ -12,6 +12,8 @@ const SectionIconCanvas = dynamic(() => import('./SectionIconCanvas'), {
 interface SectionIconProps {
   variant: IconVariant
   glowColor: string
+  /** Raw hex color for Three.js point light override */
+  glowColorHex?: string
 }
 
 function hasWebGL(): boolean {
@@ -24,7 +26,7 @@ function hasWebGL(): boolean {
   }
 }
 
-export default function SectionIcon({ variant, glowColor }: SectionIconProps) {
+export default function SectionIcon({ variant, glowColor, glowColorHex }: SectionIconProps) {
   const [webgl, setWebgl] = useState(true)
 
   useEffect(() => {
@@ -74,7 +76,7 @@ export default function SectionIcon({ variant, glowColor }: SectionIconProps) {
           />
 
           {webgl ? (
-            <SectionIconCanvas variant={variant} />
+            <SectionIconCanvas variant={variant} glowColorHex={glowColorHex} />
           ) : (
             <div
               style={{
