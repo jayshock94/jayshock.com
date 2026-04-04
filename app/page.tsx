@@ -190,6 +190,7 @@ export default function HomePage() {
               >
                 <WorkCard
                   caseStudy={cs}
+                  imagePosition={i % 2 === 0 ? 'right' : 'left'}
                   cardImageSlot={
                     cs.slug === 'aim' ? <AimCardImage /> :
                     cs.slug === 'mobile-lending-management' ? <MobileLendingCardImage /> :

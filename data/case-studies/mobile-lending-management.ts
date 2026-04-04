@@ -19,6 +19,8 @@ const mobileLendingManagement: CaseStudy = {
     'It was easier to call support than use the app.',
   cardStat: { value: '~40%', label: 'Fewer support calls' },
   cardRole:     'Lead Product Designer · Sole designer, research through handoff',
+  cardEyebrow:  'White-label loan management app',
+  cardDescription: 'Led product design upgrading a legacy loan app under tight dev constraints, moving borrowers from support calls to self-service.',
   cardImage: '/images/work/mobile-lending.png',
 
   // Lendmark crimson — extracted from brand image, run through color algorithm
