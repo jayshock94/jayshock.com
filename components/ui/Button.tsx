@@ -20,12 +20,12 @@ interface ButtonProps {
 }
 
 const BASE =
-  'inline-flex items-center justify-center gap-[var(--space-component-xs)] rounded-[40px] px-[24px] py-[10px] text-ui-md cursor-pointer no-underline select-none min-h-[44px]'
+  'inline-flex items-center justify-center gap-[var(--space-component-sm)] rounded-[40px] px-[16px] py-[10px] text-ui-md cursor-pointer no-underline select-none min-h-[44px]'
 
 const VARIANTS: Record<ButtonVariant, string> = {
-  // Frosted glass pill — the primary CTA, most prominent
+  // M3 primary glass pill — dark tint, backdrop blur, drop shadow
   glass:
-    'glass-pill text-[var(--color-ink)] font-[400] tracking-[0.02em]',
+    'glass-pill text-white font-[500] tracking-[0.1px]',
 
   // Subtle outlined — secondary actions, no fill
   secondary:
