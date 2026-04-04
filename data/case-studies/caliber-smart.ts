@@ -21,6 +21,8 @@ const caliberSmart: CaseStudy = {
     'Reps were running their business from Vimeo links, group chats, and phone calls to payroll.',
   cardStat: { value: '400–600', label: 'Reps using platform daily' },
   cardRole:     'Solo Product Designer · Every screen, every flow',
+  cardEyebrow:  'D2D sales platform',
+  cardDescription: 'Solo Product Designer rebuilding the full sales platform from scratch — replacing fragmented tools with a single app 400+ reps used every day.',
   cardImage: '',
 
   // Solar gold — processed through color algorithm on the page

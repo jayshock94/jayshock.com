@@ -38,14 +38,14 @@ const EXPERIENCE = [
 
 export default function AboutPage() {
   return (
-    <div className="pt-[var(--space-section-md)] pb-[var(--space-section-lg)]">
+    <div className="pt-[var(--space-section-xl)] pb-[var(--space-section-xl)]">
 
 
       {/* =========================================================
           Section 01 — Who I Am
       ========================================================= */}
       <section
-        className="pb-[var(--space-section-lg)]"
+        className="pb-[var(--space-section-xl)]"
         aria-label="Who I am"
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
@@ -99,13 +99,13 @@ export default function AboutPage() {
           Section 02 — How I Think
       ========================================================= */}
       <section
-        className="py-[var(--space-section-md)]"
+        className="py-[var(--space-section-xl)]"
         aria-label="How I think"
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
             <ScrollReveal>
-              <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-lg)] max-w-content mx-auto text-center">
+              <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-md)] max-w-content mx-auto text-center">
                 Complexity does not disappear. It gets redistributed.
               </h2>
             </ScrollReveal>
@@ -139,7 +139,7 @@ export default function AboutPage() {
           Section 03 — How I Work
       ========================================================= */}
       <section
-        className="py-[var(--space-section-md)]"
+        className="py-[var(--space-section-xl)]"
         aria-label="How I work"
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
@@ -185,7 +185,7 @@ export default function AboutPage() {
           Section 04 — My Toolkit
       ========================================================= */}
       <section
-        className="py-[var(--space-section-md)]"
+        className="py-[var(--space-section-xl)]"
         aria-label="My toolkit"
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
@@ -202,13 +202,13 @@ export default function AboutPage() {
           Section 05 — Experience Snapshot
       ========================================================= */}
       <section
-        className="py-[var(--space-section-md)]"
+        className="py-[var(--space-section-xl)]"
         aria-label="Experience snapshot"
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
             <ScrollReveal>
-              <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-lg)] text-center">
+              <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-md)] text-center">
                 Where I have been.
               </h2>
             </ScrollReveal>
@@ -271,7 +271,7 @@ export default function AboutPage() {
             </div>
 
             <ScrollReveal>
-              <div className="mt-[var(--space-stack-lg)] text-center">
+              <div className="mt-[var(--space-stack-md)] text-center">
                 <Button variant="secondary" href="/experience">
                   Full experience and resume
                 </Button>
@@ -286,14 +286,14 @@ export default function AboutPage() {
           Section 06 — Contact CTA
       ========================================================= */}
       <section
-        className="py-[var(--space-section-lg)]"
+        className="py-[var(--space-section-xl)]"
         aria-label="Contact"
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
             <ScrollReveal>
               <div className="max-w-content mx-auto text-center">
-                <p className="text-body-lg text-[var(--color-text-secondary)] mb-[var(--space-stack-lg)]">
+                <p className="text-body-lg text-[var(--color-text-secondary)] mb-[var(--space-stack-md)]">
                   Open to senior product design roles and consulting engagements. Remote first, open to hybrid.
                 </p>
                 <Button variant="glass" href="/contact">

@@ -141,7 +141,7 @@ export default function Nav() {
             position: 'fixed',
             inset: 0,
             zIndex: 49,
-            background: 'rgba(22, 22, 22, 0.95)',
+            background: 'var(--color-mobile-overlay)',
             backdropFilter: 'blur(48px) saturate(180%)',
             WebkitBackdropFilter: 'blur(48px) saturate(180%)',
             display: 'flex',

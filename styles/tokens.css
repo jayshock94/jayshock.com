@@ -1,17 +1,19 @@
 /* =============================================================
    DESIGN TOKENS — Single source of truth for all visual values.
    Never use a raw value in a component. Always use a named token.
+
+   Color system: Material Theme Builder M3 export (Portfolio.json)
+   Seed: #F2F2F2 (neutral) — the work IS the accent color.
+   Extended colors: Impact · Problem · Discovery · Solution
    ============================================================= */
 
 :root {
 
-  /* Dark mode only */
   color-scheme: dark;
 
   /* -----------------------------------------------------------
      PRIMITIVE SCALE — NEUTRAL
      Clean neutrals — barely-warm gray scale.
-     Canvas reads as light gray, not cream.
      Never use these directly; use semantic tokens below.
   ----------------------------------------------------------- */
   --neutral-50:  #EDEDED;
@@ -38,8 +40,7 @@
 
   /* -----------------------------------------------------------
      PRIMITIVE SCALE — GLASS
-     Four tiers, Apple-standard opacity ranges.
-     Base is barely-warm white so glass reads neutral, not cold.
+     Dark mode defaults. Light mode overrides below.
      Blur is always heavy (40px+) — that's what makes it glass.
   ----------------------------------------------------------- */
 
@@ -49,7 +50,7 @@
   --glass-regular:    rgba(252, 251, 250, 0.26);
   --glass-thick:      rgba(252, 251, 250, 0.40);
 
-  /* Dark glass — for dark-mode surfaces and smoked buttons */
+  /* Dark glass — nav, pill, interactive surfaces (dark mode) */
   --glass-dark-thin:    rgba(22, 22, 22, 0.16);
   --glass-dark-regular: rgba(22, 22, 22, 0.28);
   --glass-dark-medium:  rgba(22, 22, 22, 0.40);
@@ -62,12 +63,29 @@
   --glass-border-dark:   rgba(255, 255, 255, 0.10);
 
   /* -----------------------------------------------------------
-     SEMANTIC TOKENS — SURFACES
+     PRIMITIVE SCALE — SURFACE CONTAINERS (M3)
+     5 levels of depth. Dark mode defaults.
+     Use --color-canvas / --color-surface / etc. in components.
   ----------------------------------------------------------- */
-  --color-canvas:           #0a0a0a;
-  --color-surface:          #141414;
+  --color-surface-container-lowest:  #0E0E0E;
+  --color-surface-container-low:     #1C1B1B;
+  --color-surface-container:         #201F1F;
+  --color-surface-container-high:    #2A2A2A;
+  --color-surface-container-highest: #353434;
+  --color-surface-dim:               #141313;
+  --color-surface-bright:            #3A3939;
+
+  /* -----------------------------------------------------------
+     SEMANTIC TOKENS — SURFACES
+     Aliases into the 5-level container set above.
+     All existing component references continue to work.
+  ----------------------------------------------------------- */
+  --color-canvas:           var(--color-surface-container-lowest);
+  --color-surface:          var(--color-surface-container-low);
+  --color-surface-elevated: var(--color-surface-container);
+  --color-surface-raised:   var(--color-surface-container-high);
+  --color-surface-overlay:  var(--color-surface-container-highest);
   --color-surface-glass:    var(--glass-dark-regular);
-  --color-surface-elevated: #1a1a1a;
 
   /* -----------------------------------------------------------
      SEMANTIC TOKENS — BORDERS
@@ -78,12 +96,13 @@
 
   /* -----------------------------------------------------------
      SEMANTIC TOKENS — TEXT
+     M3 onSurface / onSurfaceVariant / outline / outlineVariant
   ----------------------------------------------------------- */
-  --color-ink:              #F2F2F2;
-  --color-text-primary:     #F2F2F2;
-  --color-text-secondary:   #BEBEBE;
-  --color-text-muted:       #888888;
-  --color-text-placeholder: #555555;
+  --color-ink:              #E5E2E1;
+  --color-text-primary:     #E5E2E1;
+  --color-text-secondary:   #C4C7C8;
+  --color-text-muted:       #8E9192;
+  --color-text-placeholder: #444748;
 
   /* -----------------------------------------------------------
      SEMANTIC TOKENS — ACCENT
@@ -96,21 +115,30 @@
 
   /* -----------------------------------------------------------
      SEMANTIC TOKENS — INTERACTIVE (BUTTONS)
-     Primary is solid ink — confident, not decorative.
+     M3 primary (dark): white pill, dark text.
+     Confident and typographic — the work is the color accent.
   ----------------------------------------------------------- */
-  --color-button-primary:       var(--neutral-100);
-  --color-button-primary-hover: #FFFFFF;
-  --color-button-text:          var(--neutral-900);
+  --color-button-primary:       #FFFFFF;
+  --color-button-primary-hover: #E2E2E2;
+  --color-button-text:          #2F3131;
   --color-button-border:        rgba(255, 255, 255, 0.12);
 
   /* -----------------------------------------------------------
-     SEMANTIC TOKENS — BLOOM GRADIENT
-     Used in globals.css for the body background radial gradient.
-     Swapped out in dark mode.
+     SEMANTIC TOKENS — INVERSE SURFACE (M3)
+     For chips, badges, and high-contrast elements that must
+     read on any background in both modes without JavaScript.
   ----------------------------------------------------------- */
-  --color-bloom-center: #141412;
-  --color-bloom-mid:    #0a0a0a;
-  --color-bloom-edge:   #050505;
+  --color-inverse-surface:    #E5E2E1;
+  --color-inverse-on-surface: #313030;
+  --color-inverse-primary:    #5D5F5F;
+
+  /* -----------------------------------------------------------
+     SEMANTIC TOKENS — BLOOM GRADIENT
+     M3 dark surface scale — warm depth, not pure black.
+  ----------------------------------------------------------- */
+  --color-bloom-center: #1C1B1B;
+  --color-bloom-mid:    #141313;
+  --color-bloom-edge:   #0E0E0E;
 
   /* -----------------------------------------------------------
      SEMANTIC TOKENS — SURFACE INTERACTIONS
@@ -125,17 +153,24 @@
 
   /* -----------------------------------------------------------
      SEMANTIC TOKENS — SHADOWS
-     Token-driven so dark mode can swap to lighter shadows.
+     Token-driven for theme flexibility.
   ----------------------------------------------------------- */
-  --shadow-sm:         0 1px 4px rgba(0, 0, 0, 0.16);
-  --shadow-card:       0 2px 16px rgba(0, 0, 0, 0.20);
-  --shadow-card-hover: 0 8px 32px rgba(0, 0, 0, 0.28);
-  --shadow-nav:        0 2px 20px rgba(0, 0, 0, 0.22);
-  --shadow-elevated:   0 4px 16px rgba(0, 0, 0, 0.18);
+  --shadow-sm:           0 1px 4px rgba(0, 0, 0, 0.16);
+  --shadow-card:         0 2px 16px rgba(0, 0, 0, 0.20);
+  --shadow-card-hover:   0 8px 32px rgba(0, 0, 0, 0.28);
+  --shadow-nav:          0 2px 20px rgba(0, 0, 0, 0.22);
+  --shadow-elevated:     0 4px 16px rgba(0, 0, 0, 0.18);
+  --shadow-surface-color: rgba(0, 0, 0, 0.24);
+  --shadow-bubble:        rgba(0, 0, 0, 0.40);
+
+  /* -----------------------------------------------------------
+     SEMANTIC TOKENS — OVERLAYS + VIGNETTE
+  ----------------------------------------------------------- */
+  --color-vignette:       rgba(28, 25, 23, 0.04);
+  --color-mobile-overlay: rgba(22, 22, 22, 0.95);
 
   /* -----------------------------------------------------------
      SEMANTIC TOKENS — TRANSITIONS
-     Standardized durations for consistent interaction feel.
   ----------------------------------------------------------- */
   --transition-fast:      150ms ease;
   --transition-base:      200ms ease;
@@ -155,11 +190,10 @@
   --radius-sm:   6px;
   --radius-md:   8px;
   --radius-lg:   12px;
-  --radius-pill:  999px;
+  --radius-pill: 999px;
 
   /* -----------------------------------------------------------
      SEMANTIC TOKENS — SCRIM
-     Dark overlay for image wells. Black in light and dark mode.
   ----------------------------------------------------------- */
   --color-scrim-heavy: rgba(0, 0, 0, 0.58);
   --color-scrim-mid:   rgba(0, 0, 0, 0.22);
@@ -167,8 +201,8 @@
 
   /* -----------------------------------------------------------
      SEMANTIC TOKENS — CARD GLASS
-     Base RGB values used by the brand tint algorithm.
-     Light mode blends into near-white; dark mode into surface.
+     Base RGB for the brand tint algorithm in colorAlgorithm.ts.
+     heroZone is always dark regardless of site theme.
   ----------------------------------------------------------- */
   --card-glass-base-r: 32;
   --card-glass-base-g: 32;
@@ -188,76 +222,126 @@
   --color-pill-bg-hover: var(--glass-dark-regular);
 
   /* -----------------------------------------------------------
-     SEMANTIC TOKENS — BADGE (ThemeToggle)
-     Inverts automatically in dark mode via ink/canvas flip.
+     SEMANTIC TOKENS — BADGE (self-inverting via ink/canvas)
   ----------------------------------------------------------- */
   --color-badge-bg:      var(--color-ink);
   --color-badge-fg:      var(--color-canvas);
   --color-badge-divider: rgba(0, 0, 0, 0.18);
 
   /* -----------------------------------------------------------
-     SEMANTIC TOKENS — STAT BOX (phase section impact metrics)
+     SEMANTIC TOKENS — STAT BOX
   ----------------------------------------------------------- */
   --color-stat-box-bg: rgba(255, 255, 255, 0.06);
 
   /* -----------------------------------------------------------
      SEMANTIC TOKENS — CASE STUDY HERO
+     Always rendered on a dark heroZone — these never change.
   ----------------------------------------------------------- */
   --hero-text-primary:   #FFFFFF;
   --hero-text-secondary: rgba(255, 255, 255, 0.75);
   --hero-text-muted:     rgba(255, 255, 255, 0.50);
 
   /* -----------------------------------------------------------
-     PHASE COLOR TOKENS
-     Fixed across all case studies.
-     Order: Impact → Problem → Discovery → Solution.
+     PHASE EXTENDED TOKENS — Tab + Card system (M3 segment control)
+     Three-tier system per phase:
+       *-tab:      Active tab pill background (0.25 opacity tint)
+       *-card:     Content card tint (0.10 opacity)
+       *-extended: Brighter label for text on tinted surfaces
+                   (lighter than *-label which is tuned for dark canvas)
+     Also:
+       --color-primary-glass:   Tonal glass for primary button
+       --color-border-subtle-16: Container borders (tab group, cards)
   ----------------------------------------------------------- */
 
-  /* Impact — opens the case study, deepest tone */
-  --phase-impact-bg:     #1E1A28;
-  --phase-impact-glass:  rgba(30, 26, 40, 0.42);
-  --phase-impact-border: rgba(180, 160, 224, 0.18);
+  /* Active tab pill backgrounds */
+  --phase-impact-tab:     rgba(102, 85, 143, 0.25);
+  --phase-problem-tab:    rgba(115, 90, 56, 0.25);
+  --phase-discovery-tab:  rgba(46, 122, 108, 0.25);
+  --phase-solution-tab:   rgba(46, 94, 142, 0.25);
+
+  /* Content card tints */
+  --phase-impact-card:    rgba(102, 85, 143, 0.10);
+  --phase-problem-card:   rgba(115, 90, 56, 0.10);
+  --phase-discovery-card: rgba(46, 122, 108, 0.10);
+  --phase-solution-card:  rgba(46, 94, 142, 0.10);
+
+  /* Extended labels — brighter, for text on tinted glass surfaces */
+  --phase-impact-extended:    #d1bcfe;
+  --phase-problem-extended:   #e5c399;
+  --phase-discovery-extended: #a8e6da;
+  --phase-solution-extended:  #a8cce8;
+
+  /* Primary glass — M3 tonal glass for primary button surface */
+  --color-primary-glass: rgba(93, 95, 95, 0.10);
+
+  /* Border subtle-16 — for segment controls and content cards.
+     Sits between --color-border (0.08) and --color-border-mid (0.14). */
+  --color-border-subtle-16: rgba(142, 145, 146, 0.16);
+
+  /* -----------------------------------------------------------
+     WORK CARD TOKENS
+     On-dark-hero text hierarchy. Fixed — never theme-switching.
+     heroZone (generated by colorAlgorithm.ts) is always dark.
+  ----------------------------------------------------------- */
+  --work-card-eyebrow:      rgba(255, 255, 255, 0.35);
+  --work-card-stat-sub:     rgba(255, 255, 255, 0.45);
+  --work-card-hook:         rgba(255, 255, 255, 0.55);
+  --work-card-role:         rgba(255, 255, 255, 0.40);
+  --work-card-tag-text:     rgba(255, 255, 255, 0.40);
+  --work-card-tag-bg:       rgba(255, 255, 255, 0.04);
+  --work-card-tag-border:   rgba(255, 255, 255, 0.12);
+  --work-card-border:       rgba(255, 255, 255, 0.06);
+  --work-card-border-hover: rgba(255, 255, 255, 0.20);
+
+  /* -----------------------------------------------------------
+     PHASE COLOR TOKENS — DARK MODE DEFAULTS
+     Hues unchanged from M3 extended color seeds.
+     Fixed order: Impact → Problem → Discovery → Solution.
+  ----------------------------------------------------------- */
+
+  /* Impact — opens the case study, deep purple tint */
+  --phase-impact-bg:     #1A1821;
+  --phase-impact-glass:  rgba(26, 24, 33, 0.50);
+  --phase-impact-border: rgba(180, 160, 224, 0.20);
   --phase-impact-label:  #B4A0E0;
-  --phase-impact-text:   #F2F2F2;
+  --phase-impact-text:   var(--color-text-primary);
 
   /* Problem — context and constraints, warm neutral */
-  --phase-problem-bg:     #211D18;
-  --phase-problem-glass:  rgba(33, 29, 24, 0.42);
-  --phase-problem-border: rgba(200, 170, 140, 0.18);
+  --phase-problem-bg:     #201C17;
+  --phase-problem-glass:  rgba(32, 28, 23, 0.50);
+  --phase-problem-border: rgba(200, 168, 128, 0.20);
   --phase-problem-label:  #C8A880;
-  --phase-problem-text:   #F2F2F2;
+  --phase-problem-text:   var(--color-text-primary);
 
-  /* Discovery — research and insights, cool-warm neutral */
-  --phase-discovery-bg:     #181F1E;
-  --phase-discovery-glass:  rgba(24, 31, 30, 0.42);
-  --phase-discovery-border: rgba(128, 196, 180, 0.18);
+  /* Discovery — research and insights, cool teal */
+  --phase-discovery-bg:     #171E1D;
+  --phase-discovery-glass:  rgba(23, 30, 29, 0.50);
+  --phase-discovery-border: rgba(128, 196, 180, 0.20);
   --phase-discovery-label:  #80C4B4;
-  --phase-discovery-text:   #F2F2F2;
+  --phase-discovery-text:   var(--color-text-primary);
 
   /* Solution — closes with craft, brand slate */
-  --phase-solution-bg:     #181D25;
-  --phase-solution-glass:  rgba(24, 29, 37, 0.42);
-  --phase-solution-border: rgba(140, 174, 214, 0.18);
+  --phase-solution-bg:     #171C24;
+  --phase-solution-glass:  rgba(23, 28, 36, 0.50);
+  --phase-solution-border: rgba(128, 168, 212, 0.20);
   --phase-solution-label:  #80A8D4;
-  --phase-solution-text:   #F2F2F2;
+  --phase-solution-text:   var(--color-text-primary);
 
-  /* Phase ambient canvas shifts (subtle — barely perceptible) */
-  --phase-impact-canvas:    #1A1822;
-  --phase-problem-canvas:   #1E1B18;
-  --phase-discovery-canvas: #161D1C;
-  --phase-solution-canvas:  #161A21;
+  /* Phase ambient canvas shifts */
+  --phase-impact-canvas:    #1A1821;
+  --phase-problem-canvas:   #1D1A17;
+  --phase-discovery-canvas: #161C1B;
+  --phase-solution-canvas:  #161920;
 
   /* Phase nav glass tints */
-  --phase-impact-nav:    rgba(26, 24, 34, 0.88);
-  --phase-problem-nav:   rgba(30, 27, 23, 0.88);
-  --phase-discovery-nav: rgba(22, 29, 28, 0.88);
-  --phase-solution-nav:  rgba(22, 26, 33, 0.88);
+  --phase-impact-nav:    rgba(26, 24, 33, 0.90);
+  --phase-problem-nav:   rgba(29, 26, 23, 0.90);
+  --phase-discovery-nav: rgba(22, 28, 27, 0.90);
+  --phase-solution-nav:  rgba(22, 25, 32, 0.90);
 
   /* -----------------------------------------------------------
      CASE STUDY OVERRIDE TOKENS
-     Hero sets --case-*-light and --case-*-dark as inline CSS vars.
-     These tokens pick the right variant based on current mode.
-     Never used outside the case study hero section.
+     Hero sets inline CSS vars per case study.
   ----------------------------------------------------------- */
   --case-canvas: var(--case-canvas-dark, var(--color-canvas));
   --case-label:  var(--case-label-dark,  var(--color-accent));
@@ -266,95 +350,97 @@
 
   /* -----------------------------------------------------------
      TYPOGRAPHY TOKENS
-     Single font family: Outfit
-     Sizes use clamp() where fluid scaling applies.
+     Single font family: Outfit.
+     Sizes and weights match M3 type scale (Figma node 58186-19244).
+     Letter spacing values are in px (M3 convention).
   ----------------------------------------------------------- */
 
-  /* Display — homepage hero only. Mixed-weight technique allowed at this level. */
-  --text-display-size:        clamp(48px, 7vw, 80px);
-  --text-display-weight:      700;
-  --text-display-line-height: 1.05;
-  --text-display-tracking:    -0.02em;
+  /* Display → M3 display/medium-emphasized — homepage hero */
+  --text-display-size:        45px;
+  --text-display-weight:      500;
+  --text-display-line-height: 52px;
+  --text-display-tracking:    0;
 
-  /* H1 — page titles, case study titles */
-  --text-h1-size:             clamp(32px, 5vw, 52px);
-  --text-h1-weight:           600;
-  --text-h1-line-height:      1.1;
-  --text-h1-tracking:         -0.02em;
+  /* H1 → M3 headline/large-emphasized — page titles */
+  --text-h1-size:             32px;
+  --text-h1-weight:           500;
+  --text-h1-line-height:      40px;
+  --text-h1-tracking:         0;
 
-  /* H2 — section headings, phase titles */
-  --text-h2-size:             clamp(24px, 3vw, 32px);
+  /* H2 → M3 headline/medium-emphasized — section headings */
+  --text-h2-size:             28px;
   --text-h2-weight:           500;
-  --text-h2-line-height:      1.2;
-  --text-h2-tracking:         -0.01em;
+  --text-h2-line-height:      36px;
+  --text-h2-tracking:         0;
 
-  /* H3 — subsection headings, card titles */
-  --text-h3-size:             clamp(19px, 2.5vw, 24px);
+  /* H3 → M3 headline/small-emphasized — subsection headings */
+  --text-h3-size:             24px;
   --text-h3-weight:           500;
-  --text-h3-line-height:      1.25;
-  --text-h3-tracking:         -0.01em;
+  --text-h3-line-height:      32px;
+  --text-h3-tracking:         0;
 
-  /* H4 — minor headings, tight contexts */
-  --text-h4-size:             18px;
+  /* H4 → M3 title/large-emphasized — minor headings */
+  --text-h4-size:             22px;
   --text-h4-weight:           500;
-  --text-h4-line-height:      1.3;
-  --text-h4-tracking:         0em;
+  --text-h4-line-height:      28px;
+  --text-h4-tracking:         0;
 
-  /* Intro — lead paragraphs, hero sublines, section openers.
-     Sits between body-lg and H3. Use when 18px is too small
-     but the content is prose, not a heading. */
-  --text-intro-size:          21px;
-  --text-intro-weight:        300;
-  --text-intro-line-height:   1.7;
+  /* Intro → M3 title/large — lead paragraphs, hero sublines */
+  --text-intro-size:          22px;
+  --text-intro-weight:        400;
+  --text-intro-line-height:   28px;
 
-  /* Body large — supporting intro copy, about page openers */
-  --text-body-lg-size:        18px;
-  --text-body-lg-weight:      300;
-  --text-body-lg-line-height: 1.75;
+  /* Body large → M3 body/large */
+  --text-body-lg-size:        16px;
+  --text-body-lg-weight:      400;
+  --text-body-lg-line-height: 24px;
+  --text-body-lg-tracking:    0.5px;
 
-  /* Body — standard body copy, case study content */
-  --text-body-size:           16px;
-  --text-body-weight:         300;
-  --text-body-line-height:    1.8;
-  --text-body-tracking:       0.01em;
+  /* Body → M3 body/medium */
+  --text-body-size:           14px;
+  --text-body-weight:         400;
+  --text-body-line-height:    20px;
+  --text-body-tracking:       0.25px;
 
-  /* Body small — secondary content, card descriptions */
-  --text-body-sm-size:        14px;
+  /* Body small → M3 body/small */
+  --text-body-sm-size:        12px;
   --text-body-sm-weight:      400;
-  --text-body-sm-line-height: 1.65;
+  --text-body-sm-line-height: 16px;
+  --text-body-sm-tracking:    0.4px;
 
-  /* UI medium — buttons, nav links, interactive text */
+  /* UI medium → M3 label/large — buttons, nav links */
   --text-ui-md-size:          14px;
   --text-ui-md-weight:        500;
-  --text-ui-md-line-height:   1.4;
+  --text-ui-md-line-height:   20px;
+  --text-ui-md-tracking:      0.1px;
 
-  /* UI small — phase labels, tags, uppercase UI */
+  /* UI small → M3 label/medium — phase labels, tags */
   --text-ui-sm-size:          12px;
   --text-ui-sm-weight:        500;
-  --text-ui-sm-line-height:   1.3;
-  --text-ui-sm-tracking:      0.08em;
+  --text-ui-sm-line-height:   16px;
+  --text-ui-sm-tracking:      0.5px;
 
-  /* Label — eyebrows, metadata, captions */
-  --text-label-size:          12px;
-  --text-label-weight:        400;
-  --text-label-line-height:   1.3;
-  --text-label-tracking:      0.1em;
+  /* Label → M3 label/small — eyebrows, metadata, captions */
+  --text-label-size:          11px;
+  --text-label-weight:        500;
+  --text-label-line-height:   16px;
+  --text-label-tracking:      0.5px;
 
-  /* Stat large — phase impact metrics (biggest stat display) */
-  --text-stat-lg-size:        clamp(32px, 5vw, 48px);
-  --text-stat-lg-weight:      700;
-  --text-stat-lg-line-height: 1.1;
+  /* Stat large → M3 display/large — phase impact metrics */
+  --text-stat-lg-size:        57px;
+  --text-stat-lg-weight:      400;
+  --text-stat-lg-line-height: 64px;
 
-  /* Stat — card hero metrics */
-  --text-stat-size:           clamp(28px, 4vw, 40px);
-  --text-stat-weight:         700;
-  --text-stat-line-height:    1.1;
+  /* Stat → M3 display/small — card hero metrics */
+  --text-stat-size:           36px;
+  --text-stat-weight:         400;
+  --text-stat-line-height:    44px;
 
-  /* Hero title — case study hero, sits between display and h1 */
-  --text-hero-title-size:     clamp(36px, 6vw, 64px);
-  --text-hero-title-weight:   700;
-  --text-hero-title-line-height: 1.08;
-  --text-hero-title-tracking: -0.02em;
+  /* Hero title → M3 display/large-emphasized — case study hero */
+  --text-hero-title-size:        57px;
+  --text-hero-title-weight:      500;
+  --text-hero-title-line-height: 64px;
+  --text-hero-title-tracking:    -0.25px;
 
   /* -----------------------------------------------------------
      SPACING TOKENS — PRIMITIVE (8pt base)
@@ -371,30 +457,33 @@
   --space-10: 128px;
 
   /* -----------------------------------------------------------
-     SPACING TOKENS — COMPONENT (fixed, never changes)
+     SPACING TOKENS — COMPONENT (fixed)
   ----------------------------------------------------------- */
-  --space-component-xs: var(--space-1);
-  --space-component-sm: var(--space-2);
+  --space-component-xs:   var(--space-1);
+  --space-component-sm:   var(--space-2);
   --space-component-base: var(--space-3);
-  --space-component-md: var(--space-4);
-  --space-component-lg: var(--space-5);
+  --space-component-md:   var(--space-4);
+  --space-component-lg:   var(--space-5);
 
   /* Vertical text stacking */
-  --space-stack-xs: 6px;
-  --space-stack-sm: var(--space-3);
-  --space-stack-md: var(--space-5);
-  --space-stack-lg: var(--space-6);
+  --space-stack-xs:    6px;
+  --space-stack-sm:    var(--space-3);   /* 12px — eyebrow to heading */
+  --space-stack-title: var(--space-4);   /* 16px — heading to subheading, toggle to controlled content */
+  --space-stack-md:    var(--space-5);   /* 24px — heading to body, content to button/CTA */
+  --space-stack-lg:    var(--space-6);   /* 32px — job row padding top/bottom */
 
   /* -----------------------------------------------------------
-     SPACING TOKENS — SECTION (fluid, scales with viewport)
+     SPACING TOKENS — SECTION (fluid)
   ----------------------------------------------------------- */
   --space-section-sm:  clamp(32px, 5vw, 48px);
   --space-section-md:  clamp(48px, 7vw, 80px);
   --space-section-lg:  clamp(64px, 10vw, 128px);
+  --space-section-xl:  80px;             /* py on main sections → 160px visual gap between sections */
+  --space-subsection:  40px;             /* py on subsections  → 80px visual gap between subsections */
   --space-page-margin: clamp(20px, 6vw, 80px);
 
   /* -----------------------------------------------------------
-     LAYOUT CONSTRAINTS (fixed)
+     LAYOUT CONSTRAINTS
   ----------------------------------------------------------- */
   --space-content-max: 860px;
   --space-layout-max:  1200px;
@@ -413,19 +502,6 @@
   --shadow-chat-panel:     0 8px 40px rgba(0, 0, 0, 0.36);
 }
 
-/* -----------------------------------------------------------
-   RESPONSIVE TYPE ADJUSTMENTS
-   Display and H1 use clamp() — no media query overrides needed.
-   Body large scales slightly on mobile.
------------------------------------------------------------ */
-@media (max-width: 768px) {
-  :root {
-    --text-h4-size:      17px;
-    --text-intro-size:   18px;
-    --text-body-lg-size: 17px;
-    --text-body-size:    15px;
-  }
-}
 
 
 /* -----------------------------------------------------------
@@ -433,8 +509,8 @@
    Applied by PhaseObserver via data-phase on <html>.
    Canvas and nav glass shift to match the active phase.
    Typography, borders, spacing — nothing else changes.
-   Dark mode variants are scoped to html[data-theme="dark"]
-   so they take precedence over the light defaults.
+   Phase tokens are defined per-mode above so these selectors
+   automatically resolve to dark or light values.
 ----------------------------------------------------------- */
 [data-phase="impact"] {
   --color-canvas:        var(--phase-impact-canvas);
@@ -452,4 +528,3 @@
   --color-canvas:        var(--phase-solution-canvas);
   --color-surface-glass: var(--phase-solution-nav);
 }
-

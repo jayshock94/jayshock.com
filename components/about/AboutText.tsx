@@ -3,8 +3,8 @@
 import { useState } from 'react'
 
 const paragraphs = [
-  `I started with video and graphic design, fell into UX through friends who needed help with their software projects, and never looked back. Eight years later I am still inside complex systems, making them work for the people who actually use them.`,
-  `I grew up with dyslexia and ADHD. That taught me to pay attention to what people mean, not just what they say. It is basically my whole approach to research, and the reason I spot gaps other people walk past.`,
+  `I started with video and graphic design, fell into UX through software engineering friends, and never looked back.`,
+  `I pay attention to what people mean, not just what they say. It is basically my whole approach to research, and the reason I spot gaps other people walk past.`,
 ]
 
 export default function AboutText() {
@@ -12,11 +12,11 @@ export default function AboutText() {
 
   return (
     <div
-      className="flex flex-col gap-[var(--space-stack-sm)] mb-[var(--space-stack-lg)]"
+      className="flex flex-col gap-[var(--space-component-md)]"
       style={{ maxWidth: 'var(--space-content-max)' }}
     >
       {/* First paragraph — always visible */}
-      <p className="text-body text-[var(--color-text-secondary)]">
+      <p className="text-body-lg text-[var(--color-text-secondary)]">
         {paragraphs[0]}
       </p>
 
@@ -25,7 +25,7 @@ export default function AboutText() {
         {paragraphs.slice(1).map((p, i) => (
           <p
             key={i}
-            className="text-body text-[var(--color-text-secondary)]"
+            className="text-body-lg text-[var(--color-text-secondary)]"
           >
             {p}
           </p>
