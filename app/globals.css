@@ -115,40 +115,40 @@ body::after {
   background-repeat: no-repeat;
   background-image:
     /* ── Diagonal light leaks ── */
-    /* Leak 1 — upper-left to lower-right, hero area */
+    /* Leak 1 — converges inward from left toward content, hero area */
     linear-gradient(
-      135deg,
+      155deg,
       transparent              0%,
       transparent              6%,
-      rgba(100,100,100,0.045)  9%,
-      transparent             14%,
+      rgba(100,100,100,0.040)  9%,
+      transparent             15%,
       transparent            100%
     ),
-    /* Leak 2 — upper-right to lower-left, between cards */
+    /* Leak 2 — converges inward from right toward content, cards area */
     linear-gradient(
-      225deg,
+      205deg,
       transparent              0%,
       transparent             22%,
-      rgba(100,100,100,0.050) 26%,
-      transparent             32%,
+      rgba(100,100,100,0.045) 26%,
+      transparent             33%,
       transparent            100%
     ),
-    /* Leak 3 — upper-left to lower-right, mid-page */
+    /* Leak 3 — inward from left, mid-page */
     linear-gradient(
-      140deg,
+      160deg,
       transparent              0%,
       transparent             44%,
-      rgba(100,100,100,0.045) 48%,
-      transparent             54%,
+      rgba(100,100,100,0.040) 48%,
+      transparent             55%,
       transparent            100%
     ),
-    /* Leak 4 — upper-right to lower-left, lower sections */
+    /* Leak 4 — inward from right, lower sections */
     linear-gradient(
-      220deg,
+      200deg,
       transparent              0%,
       transparent             65%,
-      rgba(100,100,100,0.050) 69%,
-      transparent             75%,
+      rgba(100,100,100,0.045) 69%,
+      transparent             76%,
       transparent            100%
     ),
     /* ── Ambient radial bands (alternating sides) ── */
