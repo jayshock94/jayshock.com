@@ -274,7 +274,7 @@ export default function PhaseSection({
     <section
       id={phase}
       data-phase-section={phase}
-      className="py-[var(--space-section-md)] transition-colors duration-700"
+      className="py-[var(--space-section-xl)] transition-colors duration-700"
       style={{
         backgroundColor: vars.bg,
         backgroundImage: `radial-gradient(ellipse 80% 50% at 50% 20%, ${vars.glass}, transparent 70%)`,
@@ -304,7 +304,7 @@ export default function PhaseSection({
         <ScrollReveal>
           <h2
             id={`phase-heading-${phase}`}
-            className="text-h2 text-[var(--color-ink)] max-w-content mx-auto text-center mb-[var(--space-stack-lg)]"
+            className="text-h2 text-[var(--color-ink)] max-w-content mx-auto text-center mb-[var(--space-stack-md)]"
           >
             {headline}
           </h2>
@@ -313,7 +313,7 @@ export default function PhaseSection({
         {/* Stats (Impact phase) */}
         {stats && stats.length > 0 && (
           <div
-            className="max-w-content mx-auto grid grid-cols-2 md:grid-cols-3 gap-[var(--space-component-md)] mb-[var(--space-section-md)]"
+            className="max-w-content mx-auto grid grid-cols-2 md:grid-cols-3 gap-[var(--space-component-md)] mb-[var(--space-subsection)]"
             role="list"
             aria-label="Impact metrics"
           >
@@ -484,8 +484,8 @@ export default function PhaseSection({
             <blockquote
               className="max-w-layout mx-auto text-center"
               style={{
-                marginTop: 'var(--space-section-md)',
-                marginBottom: 'var(--space-stack-lg)',
+                marginTop: 'var(--space-subsection)',
+                marginBottom: 'var(--space-stack-md)',
                 paddingTop: 'var(--space-stack-lg)',
                 paddingBottom: 'var(--space-stack-lg)',
                 borderTop: '0.5px solid var(--color-border)',

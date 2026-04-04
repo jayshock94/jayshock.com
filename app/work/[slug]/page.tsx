@@ -683,7 +683,7 @@ export default function CaseStudyPage({ params }: PageProps) {
       {/* ── Explorations — directions tried and killed ── */}
       {cs.explorations && cs.explorations.length > 0 && (
         <section
-          className="py-[var(--space-section-md)]"
+          className="py-[var(--space-section-xl)]"
           style={{ background: '#161616' }}
           aria-label="Design explorations"
         >
@@ -696,7 +696,7 @@ export default function CaseStudyPage({ params }: PageProps) {
                 <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-md)]">
                   Directions I tried and killed.
                 </h2>
-                <p className="text-body text-[var(--color-text-secondary)] mb-[var(--space-section-sm)]">
+                <p className="text-body text-[var(--color-text-secondary)] mb-[var(--space-stack-md)]">
                   Not everything shipped. These are the ideas I invested in, tested, and
                   ultimately cut because something better emerged from the research.
                 </p>
@@ -769,7 +769,7 @@ export default function CaseStudyPage({ params }: PageProps) {
       {/* ── Learnings — what the project taught me ── */}
       {cs.learnings && (
         <section
-          className="py-[var(--space-section-sm)]"
+          className="py-[var(--space-subsection)]"
           style={{ background: '#161616' }}
           aria-label="What I learned"
         >
@@ -790,20 +790,20 @@ export default function CaseStudyPage({ params }: PageProps) {
 
       {/* Bottom navigation — force back to true canvas, no phase bleed */}
       <section
-        className="py-[var(--space-section-md)]"
+        className="py-[var(--space-section-xl)]"
         style={{ background: '#161616' }}
         aria-label="What to read next"
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <ScrollReveal>
-            <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)] mb-[var(--space-section-sm)]">
+            <div className="border-t border-[var(--color-border)] pt-[var(--space-stack-md)] mb-[var(--space-stack-md)]">
               <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-md)]">
                 Next
               </p>
             </div>
 
             {nextCS && (
-              <div className="max-w-[480px] mb-[var(--space-section-sm)]">
+              <div className="max-w-[480px] mb-[var(--space-stack-lg)]">
                 <WorkCard
                   caseStudy={nextCS}
                   cardImageSlot={
@@ -816,7 +816,7 @@ export default function CaseStudyPage({ params }: PageProps) {
               </div>
             )}
 
-            <div className="flex flex-wrap items-center justify-between gap-[var(--space-component-md)] mb-[var(--space-section-md)]">
+            <div className="flex flex-wrap items-center justify-between gap-[var(--space-component-md)] mb-[var(--space-stack-lg)]">
               <Link
                 href="/work"
                 className="text-ui-md text-[var(--color-text-muted)] hover:text-[var(--color-ink)] transition-colors duration-200"
@@ -827,7 +827,7 @@ export default function CaseStudyPage({ params }: PageProps) {
           </ScrollReveal>
 
           <ScrollReveal>
-            <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
+            <div className="border-t border-[var(--color-border)] pt-[var(--space-stack-lg)]">
               <p className="text-body-lg text-[var(--color-text-secondary)] mb-[var(--space-stack-lg)] max-w-content">
                 Whether you are looking for a senior product designer or a
                 partner for a complex problem, I want to hear about it.

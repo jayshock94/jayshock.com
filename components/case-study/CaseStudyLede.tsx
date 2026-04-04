@@ -47,8 +47,8 @@ export default function CaseStudyLede({ context, overview, roleMeta, roleSummary
     <section
       className="bg-[var(--color-canvas)]"
       style={{
-        paddingTop: 'var(--space-section-md)',
-        paddingBottom: 'var(--space-section-md)',
+        paddingTop: 'var(--space-section-xl)',
+        paddingBottom: 'var(--space-section-xl)',
       }}
       aria-label="Project context"
     >

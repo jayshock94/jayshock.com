@@ -30,7 +30,7 @@ export default function CaseStudyHero({ caseStudy, tokens, heroImageSlot, tagMes
         className="max-w-layout mx-auto px-[var(--space-page-margin)] w-full"
         style={{
           paddingTop: 'clamp(80px, 10vw, 120px)',
-          paddingBottom: heroImageSlot ? '0' : 'var(--space-section-md)',
+          paddingBottom: heroImageSlot ? '0' : 'var(--space-section-xl)',
         }}
       >
         {/* Eyebrow */}
@@ -81,7 +81,7 @@ export default function CaseStudyHero({ caseStudy, tokens, heroImageSlot, tagMes
           <div
             className="hero-fade-up"
             style={{
-              marginTop: 'var(--space-section-md)',
+              marginTop: 'var(--space-subsection)',
               marginBottom: '0',
               animationDelay: '750ms',
               display: 'flex',

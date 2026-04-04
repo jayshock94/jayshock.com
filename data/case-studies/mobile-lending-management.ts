@@ -49,7 +49,7 @@ const mobileLendingManagement: CaseStudy = {
     images: [],
     quote: {
       text:        'The mobile app is another highlight. Simple, user friendly, and secure. Managing my finances is a breeze.',
-      attribution: '— Borrower feedback, relayed through client team',
+      attribution: 'Borrower feedback, relayed through client team',
     },
     estimatedNote:
       'Missed payment reduction estimated from qualitative reports by client teams. Formal analytics weren\'t tracked at launch.',
@@ -102,7 +102,7 @@ const mobileLendingManagement: CaseStudy = {
     ],
     quote: {
       text:        'I always had anxiety about whether the payment actually was submitted. That confetti screen, I know that sounds silly, but I like it a lot, because now I know I did it right.',
-      attribution: '— Borrower, relayed through client team',
+      attribution: 'Borrower, relayed through client team',
     },
   },
 

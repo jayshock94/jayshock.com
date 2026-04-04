@@ -154,7 +154,7 @@ const aim: CaseStudy = {
     },
     {
       term: 'drawer management',
-      definition: 'a teller\'s personal queue of work. think of it like a physical desk drawer full of tasks — loans to process, payments to verify, documents to follow up on. each teller only sees their own.',
+      definition: 'a teller\'s personal queue of work. think of it like a physical desk drawer full of tasks. loans to process, payments to verify, documents to follow up on. each teller only sees their own.',
     },
     {
       term: 'auto-assign logic',
