@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 export default function AimCardImage() {
   return (
     <div
@@ -9,18 +11,13 @@ export default function AimCardImage() {
         bottom: '-20%',
       }}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <Image
         src="/images/work/AIM card.png"
         alt="AIM loan management platform"
-        style={{
-          position:      'absolute',
-          inset:         0,
-          width:         '100%',
-          height:        '100%',
-          objectFit:     'cover',
-          objectPosition:'left top',
-        }}
+        fill
+        unoptimized
+        style={{ objectFit: 'cover', objectPosition: 'left top' }}
+        priority
       />
     </div>
   )
