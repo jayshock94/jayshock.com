@@ -82,6 +82,84 @@ body::after {
   100% { opacity: 0;    }
 }
 
+/* ── Page atmosphere layers ──────────────────────────────
+   Fixed full-viewport grain + diagonal light streaks.
+   Rendered via <PageAtmosphere> in layout.tsx so they
+   bleed naturally across section boundaries.
+──────────────────────────────────────────────────────── */
+
+/* Paper texture — soft-light blend, parallax scroll.
+   background-position shifts via --atm-scroll at 30% content speed. */
+.atm-grain {
+  position: fixed;
+  inset: 0;
+  background-image: url('/images/background overlays/V10.jpg');
+  background-repeat: repeat;
+  background-size: 900px auto;
+  background-position: 0 var(--atm-scroll, 0px);
+  mix-blend-mode: soft-light;
+  opacity: 0.09;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Light bands — four alternating left/right glows spread across
+   a 500vh tall canvas. As the background scrolls at parallax speed,
+   different light sources drift into view, so the lighting direction
+   changes naturally as you read down the page. */
+.atm-streaks {
+  position: fixed;
+  inset: 0;
+  background-size: 100% 500vh;
+  background-position: 0 var(--atm-scroll, 0px);
+  background-repeat: no-repeat;
+  background-image:
+    /* ── Diagonal light leaks ── */
+    /* Leak 1 — upper-left to lower-right, hero area */
+    linear-gradient(
+      135deg,
+      transparent              0%,
+      transparent              6%,
+      rgba(100,100,100,0.045)  9%,
+      transparent             14%,
+      transparent            100%
+    ),
+    /* Leak 2 — upper-right to lower-left, between cards */
+    linear-gradient(
+      225deg,
+      transparent              0%,
+      transparent             22%,
+      rgba(100,100,100,0.050) 26%,
+      transparent             32%,
+      transparent            100%
+    ),
+    /* Leak 3 — upper-left to lower-right, mid-page */
+    linear-gradient(
+      140deg,
+      transparent              0%,
+      transparent             44%,
+      rgba(100,100,100,0.045) 48%,
+      transparent             54%,
+      transparent            100%
+    ),
+    /* Leak 4 — upper-right to lower-left, lower sections */
+    linear-gradient(
+      220deg,
+      transparent              0%,
+      transparent             65%,
+      rgba(100,100,100,0.050) 69%,
+      transparent             75%,
+      transparent            100%
+    ),
+    /* ── Ambient radial bands (alternating sides) ── */
+    radial-gradient(ellipse 90%  22% at 22% 10%, rgba(100,100,100,0.055) 0%, transparent 70%),
+    radial-gradient(ellipse 90%  22% at 78% 32%, rgba(100,100,100,0.055) 0%, transparent 70%),
+    radial-gradient(ellipse 90%  22% at 20% 55%, rgba(100,100,100,0.055) 0%, transparent 70%),
+    radial-gradient(ellipse 90%  22% at 80% 78%, rgba(100,100,100,0.055) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
 /* All content must sit above the vignette layer */
 body > * {
   position: relative;
