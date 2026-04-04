@@ -14,10 +14,11 @@ const mobileLendingManagement: CaseStudy = {
   eyebrow:      'Fintech · 2024–2025',
   role:         'Lead Product Designer',
   year:         '2024–2025',
-  types:        ['White-Label App', '9 App Audit', 'Payment Redesign', 'Usability Tested', 'Confetti Moment'],
+  types:        ['White-Label App', 'Usability Testing', '9 App Audit', 'Payment Redesign'],
   cardImpactLine:
-    'It was easier to call support than use the app. Payments got missed, borrowers got frustrated, and the interface hadn\'t been updated in years.',
+    'It was easier to call support than use the app.',
   cardStat: { value: '~40%', label: 'Fewer support calls' },
+  cardRole:     'Lead Product Designer · Sole designer, research through handoff',
   cardImage: '/images/work/mobile-lending.png',
 
   // Lendmark crimson — extracted from brand image, run through color algorithm

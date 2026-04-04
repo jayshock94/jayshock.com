@@ -50,9 +50,6 @@ export default function AboutPage() {
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <ScrollReveal>
-            <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-sm)] text-center">
-              About
-            </p>
             <h1 className="text-h1 text-[var(--color-ink)] mb-[var(--space-section-sm)] text-center">
               I got here by paying attention.
             </h1>
@@ -108,9 +105,6 @@ export default function AboutPage() {
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
             <ScrollReveal>
-              <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-sm)] text-center">
-                How I think
-              </p>
               <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-lg)] max-w-content mx-auto text-center">
                 Complexity does not disappear. It gets redistributed.
               </h2>
@@ -214,9 +208,6 @@ export default function AboutPage() {
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
             <ScrollReveal>
-              <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-sm)] text-center">
-                Experience
-              </p>
               <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-lg)] text-center">
                 Where I have been.
               </h2>

@@ -8,40 +8,40 @@ import { useState, useCallback } from 'react'
 
 const PHASES = [
   {
-    id:    'see',
-    label: 'See it',
-    title: 'Understand what is actually happening',
-    desc:  'The stated problem is rarely the real one. I dig until I understand what is actually happening before I touch anything.',
-    color: 'var(--phase-impact-label)',
-    bg:    'rgba(180, 160, 224, 0.12)',
-    border:'rgba(180, 160, 224, 0.22)',
+    id:      'see',
+    label:   'See it',
+    title:   'Understand what is actually happening',
+    desc:    'The stated problem is rarely the real one. I dig until I understand what is actually happening before I touch anything.',
+    tabBg:   'var(--phase-impact-tab)',
+    cardBg:  'var(--phase-impact-card)',
+    accent:  'var(--phase-impact-extended)',
   },
   {
-    id:    'own',
-    label: 'Own it',
-    title: 'Take responsibility for the outcome',
-    desc:  'I figure out my part in it. The win, the miss, the gap. No excuses, no finger pointing. Just ownership.',
-    color: 'var(--phase-problem-label)',
-    bg:    'rgba(200, 170, 140, 0.12)',
-    border:'rgba(200, 170, 140, 0.22)',
+    id:      'own',
+    label:   'Own it',
+    title:   'Take responsibility for the outcome',
+    desc:    'I figure out my part in it. The win, the miss, the gap. No excuses, no finger pointing. Just ownership.',
+    tabBg:   'var(--phase-problem-tab)',
+    cardBg:  'var(--phase-problem-card)',
+    accent:  'var(--phase-problem-extended)',
   },
   {
-    id:    'solve',
-    label: 'Solve it',
-    title: 'Find the answer that holds up',
-    desc:  'Explore every angle. The solution has to hold up for the business and the user, not just look good in a prototype.',
-    color: 'var(--phase-discovery-label)',
-    bg:    'rgba(128, 196, 180, 0.12)',
-    border:'rgba(128, 196, 180, 0.22)',
+    id:      'solve',
+    label:   'Solve it',
+    title:   'Find the answer that holds up',
+    desc:    'Explore every angle. The solution has to hold up for the business and the user, not just look good in a prototype.',
+    tabBg:   'var(--phase-discovery-tab)',
+    cardBg:  'var(--phase-discovery-card)',
+    accent:  'var(--phase-discovery-extended)',
   },
   {
-    id:    'do',
-    label: 'Do it',
-    title: 'Ship it and keep going',
-    desc:  'Build it, test it, ship it. If a new gap shows up, the cycle starts again. I keep going until it is right.',
-    color: 'var(--phase-solution-label)',
-    bg:    'rgba(140, 174, 214, 0.12)',
-    border:'rgba(140, 174, 214, 0.22)',
+    id:      'do',
+    label:   'Do it',
+    title:   'Ship it and keep going',
+    desc:    'Build it, test it, ship it. If a new gap shows up, the cycle starts again. I keep going until it is right.',
+    tabBg:   'var(--phase-solution-tab)',
+    cardBg:  'var(--phase-solution-card)',
+    accent:  'var(--phase-solution-extended)',
   },
 ] as const
 
@@ -52,7 +52,6 @@ const PHASES = [
 export default function HowIWork() {
   const [active, setActive] = useState(0)
   const phase = PHASES[active]
-
 
   const handleKey = useCallback((e: React.KeyboardEvent, i: number) => {
     const n = PHASES.length
@@ -65,108 +64,154 @@ export default function HowIWork() {
   }, [])
 
   return (
-    <div>
-      {/* Header */}
-      <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-sm)] text-center">
-        How I work
-      </p>
-      <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-sm)] text-center">
-        No matter the project.
-      </h2>
-      <p
-        className="text-body text-[var(--color-text-secondary)] mb-[var(--space-stack-lg)] text-center mx-auto"
-        style={{ maxWidth: 'var(--space-content-max)' }}
-      >
-        Whether it is a full product redesign or a single flow. Scopes change,
-        problems arise, constraints shift. This is how I handle it.
-      </p>
+    <div className="flex flex-col gap-[var(--space-stack-md)]">
 
-      {/* Toggle row — 4 pills, always fits one line */}
-      <div
-        role="tablist"
-        aria-label="Process phases"
-        className="flex justify-center gap-[var(--space-component-xs)] mb-[var(--space-stack-lg)]"
-      >
-        {PHASES.map((p, i) => {
-          const isActive = active === i
-          return (
-            <button
-              key={p.id}
-              role="tab"
-              id={`tab-${p.id}`}
-              aria-selected={isActive}
-              aria-controls="how-i-work-panel"
-              tabIndex={isActive ? 0 : -1}
-              onClick={() => setActive(i)}
-              onKeyDown={(e) => handleKey(e, i)}
-              style={{
-                padding: '10px 18px',
-                borderRadius: '999px',
-                border: isActive
-                  ? `1px solid ${p.border}`
-                  : '0.5px solid var(--color-border)',
-                background: isActive ? p.bg : 'transparent',
-                color: isActive ? p.color : 'var(--color-text-muted)',
-                fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-                fontSize: '13px',
-                fontWeight: isActive ? 500 : 400,
-                letterSpacing: '0.02em',
-                cursor: 'pointer',
-                transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-                outline: 'none',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              {p.label}
-            </button>
-          )
-        })}
-      </div>
-
-      {/* Description card */}
-      <div
-        id="how-i-work-panel"
-        role="tabpanel"
-        aria-labelledby={`tab-${phase.id}`}
-        className="max-w-content mx-auto"
-      >
-        <div
+      {/* Heading + subtitle */}
+      <div className="flex flex-col gap-[var(--space-stack-sm)]">
+        <h2
+          className="text-h1"
+          style={{ color: 'var(--color-ink)' }}
+        >
+          No matter the project.
+        </h2>
+        <p
           style={{
-            padding: 'var(--space-component-lg)',
-            borderRadius: '12px',
-            border: `0.5px solid ${phase.border}`,
-            background: phase.bg,
-            transition: 'border-color 0.3s ease, background 0.3s ease',
+            fontFamily:    'var(--font-outfit), system-ui, sans-serif',
+            fontSize:      'var(--text-body-lg-size)',
+            fontWeight:    500,
+            lineHeight:    '24px',
+            letterSpacing: '0.15px',
+            color:         'var(--color-text-secondary)',
+            maxWidth:      '700px',
           }}
         >
-          {/* Grid stack — all descriptions occupy the same cell, tallest sets height */}
+          Whether it is a full product redesign or a single flow. Scopes change,
+          problems arise, constraints shift. This is how I handle it.
+        </p>
+      </div>
+
+      {/* Segment control + content card */}
+      <div className="flex flex-col gap-[var(--space-component-md)]">
+
+        {/* ── M3 Standard button group ── */}
+        <div
+          role="tablist"
+          aria-label="Process phases"
+          className="how-i-work-tabs"
+          style={{
+            display:        'inline-flex',
+            alignSelf:      'flex-start',
+            maxWidth:       '100%',
+            overflowX:      'auto',
+            scrollbarWidth: 'none',
+            gap:            '8px',
+          }}
+        >
+          {PHASES.map((p, i) => {
+            const isActive = active === i
+            return (
+              <button
+                key={p.id}
+                role="tab"
+                id={`tab-${p.id}`}
+                className="how-i-work-tab"
+                aria-selected={isActive}
+                aria-controls="how-i-work-panel"
+                tabIndex={isActive ? 0 : -1}
+                onClick={() => setActive(i)}
+                onKeyDown={(e) => handleKey(e, i)}
+                style={{
+                  padding:      '10px 16px',
+                  borderRadius: 'var(--radius-pill)',
+                  border:              isActive ? '0.5px solid var(--color-nav-card-border)' : '1px solid var(--color-text-placeholder)',
+                  backgroundImage:     isActive ? `linear-gradient(${p.tabBg}, ${p.tabBg})` : 'none',
+                  backgroundColor:     isActive ? 'rgba(22, 22, 22, 0.50)' : 'transparent',
+                  backdropFilter:      isActive ? 'blur(48px) saturate(180%)' : 'none',
+                  WebkitBackdropFilter: isActive ? 'blur(48px) saturate(180%)' : 'none',
+                  boxShadow:           isActive ? '0 4px 16px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.50)' : 'none',
+                  color:               isActive ? p.accent : 'var(--color-text-secondary)',
+                  fontFamily:          'var(--font-outfit), system-ui, sans-serif',
+                  fontSize:            'var(--text-ui-md-size)',
+                  fontWeight:          500,
+                  lineHeight:          '20px',
+                  letterSpacing:       '0.1px',
+                  cursor:              'pointer',
+                  outline:             'none',
+                  whiteSpace:          'nowrap',
+                  flexShrink:          0,
+                  transition:          'background 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s ease',
+                }}
+              >
+                {p.label}
+              </button>
+            )
+          })}
+        </div>
+
+        {/* ── Content card ── */}
+        <div
+          id="how-i-work-panel"
+          role="tabpanel"
+          aria-labelledby={`tab-${phase.id}`}
+          style={{
+            padding:            '20px 24px',
+            borderRadius:       '12px',
+            border:             '1px solid var(--color-border-subtle-16)',
+            background:         phase.cardBg,
+            backdropFilter:     'blur(2px)',
+            WebkitBackdropFilter: 'blur(2px)',
+            transition:         'background 0.3s ease',
+          }}
+        >
+          {/* Grid stack — all panels share one cell; tallest sets the height */}
           <div style={{ display: 'grid' }}>
             {PHASES.map((p, i) => (
               <div
                 key={p.id}
                 style={{
-                  gridArea: '1 / 1',
-                  opacity: active === i ? 1 : 0,
-                  transition: 'opacity 0.2s ease',
+                  gridArea:    '1 / 1',
+                  display:     'flex',
+                  flexDirection: 'column',
+                  gap:         'var(--space-stack-xs)',
+                  opacity:     active === i ? 1 : 0,
+                  transition:  'opacity 0.2s ease',
                   pointerEvents: active === i ? 'auto' : 'none',
                 }}
               >
+                {/* Card title — uses extended (brighter) phase accent */}
                 <p
-                  className="text-h4"
                   style={{
-                    color: 'var(--color-ink)',
-                    marginBottom: 'var(--space-stack-xs)',
+                    fontFamily:    'var(--font-outfit), system-ui, sans-serif',
+                    fontSize:      'var(--text-body-lg-size)',
+                    fontWeight:    500,
+                    lineHeight:    '24px',
+                    letterSpacing: '0.15px',
+                    color:         p.accent,
+                    margin:        0,
                   }}
                 >
                   {p.title}
                 </p>
-                <p className="text-body" style={{ color: 'var(--color-text-secondary)' }}>
+
+                {/* Card body */}
+                <p
+                  style={{
+                    fontFamily:    'var(--font-outfit), system-ui, sans-serif',
+                    fontSize:      'var(--text-body-size)',
+                    fontWeight:    400,
+                    lineHeight:    '20px',
+                    letterSpacing: '0.25px',
+                    color:         'var(--color-text-secondary)',
+                    margin:        0,
+                  }}
+                >
                   {p.desc}
                 </p>
               </div>
             ))}
           </div>
         </div>
+
       </div>
     </div>
   )

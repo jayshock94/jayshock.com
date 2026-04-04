@@ -15,10 +15,11 @@ const aim: CaseStudy = {
   eyebrow:      'Fintech · Enterprise SaaS',
   role:         'Senior UX Designer',
   year:         '2022–2024',
-  types:        ['Fintech', 'Enterprise', '$10M Impact'],
+  types:        ['Fintech', 'Enterprise SaaS', '3-Year Initiative', '12 Modules'],
   cardImpactLine:
-    'Unified 5 legacy tools into one lending workspace. Landed a $10M contract.',
+    'Lenders were losing clients to a system built in the early 2000s.',
   cardStat: { value: '$10M+', label: 'Annual contract secured' },
+  cardRole:     'Senior UX Designer · Owned IA, navigation, and 5 of 12 modules',
   cardImage:    '',
 
   // Deep navy — processed through color algorithm on the page

@@ -16,10 +16,11 @@ const caliberSmart: CaseStudy = {
   eyebrow:      'D2D Sales · 2019–2020',
   role:         'Product Designer',
   year:         '2019–2020',
-  types:        ['D2D Sales', 'Gamification', 'Solar', 'Solo Designer'],
+  types:        ['D2D Sales', 'Gamification', 'Solar Tools', 'Full App Rebuild'],
   cardImpactLine:
-    'Reps were running their business from Vimeo links, social media posts, and phone calls to payroll. I rebuilt the entire app around how they actually worked.',
-  cardStat: { value: '400-600', label: 'Reps using platform daily' },
+    'Reps were running their business from Vimeo links, group chats, and phone calls to payroll.',
+  cardStat: { value: '400–600', label: 'Reps using platform daily' },
+  cardRole:     'Solo Product Designer · Every screen, every flow',
   cardImage: '',
 
   // Solar gold — processed through color algorithm on the page
