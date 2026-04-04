@@ -105,38 +105,10 @@ These are what every component uses. They never change regardless of phase or ca
 
 ---
 
-### Dark Mode Tokens
+---
 
-Dark mode inverts to warm dark — not pure black.
-All tokens above get remapped inside `@media (prefers-color-scheme: dark)`.
-
-```css
-@media (prefers-color-scheme: dark) {
-  --color-canvas:           #1A1816;              /* Warm dark — not pure black */
-  --color-surface:          #242018;              /* Slightly lighter warm dark */
-  --color-surface-glass:    rgba(40,35,28,0.85);  /* Dark warm glass */
-  --color-surface-elevated: #2E2A24;
-
-  --color-border:           #2E2A26;
-  --color-border-mid:       #3A3630;
-  --color-border-strong:    #4A4640;
-
-  --color-ink:              #F0EDE8;              /* Warm white text on dark */
-  --color-text-primary:     #F0EDE8;
-  --color-text-secondary:   #B8B2A8;
-  --color-text-muted:       #7A746C;
-  --color-text-placeholder: #5A5450;
-
-  --color-accent:           #6A94B9;              /* Lightened slate for dark mode */
-  --color-accent-tint:      rgba(74,116,153,0.15);
-  --color-accent-border:    rgba(74,116,153,0.30);
-  --color-accent-deep:      #8AAAC8;
-
-  --color-button-primary:   rgba(240,237,232,0.12); /* Light smoked glass on dark */
-  --color-button-text:      #F0EDE8;
-  --color-button-border:    rgba(255,255,255,0.15);
-}
-```
+> **Dark mode only.** This site runs in dark mode exclusively. There is no light mode variant.
+> The semantic tokens above are the actual values in use. No `@media (prefers-color-scheme)` overrides exist.
 
 ---
 
@@ -255,12 +227,15 @@ export function generateTokens(inputHex: string): ColorTokenSet {
 ```
 Single font:    Outfit (Google Fonts)
                 Variable-weight sans-serif — humanist with geometric clarity
-                Weight 300 for body copy and long reads
-                Weight 400 for UI text, buttons, labels
-                Weight 500 for headings H2–H4 and uppercase labels
-                Weight 600 for H1
-                Weight 700 for Display only
+                Weight 300 — body copy and long reads (light)
+                Weight 400 — UI text (regular)
+                Weight 500 — buttons, nav links, tab labels, chip text (medium)
+                Weight 600 — card titles, H3 (semibold)
+                Weight 700 — display hero only (bold)
                 Variable: --font-outfit
+
+No other font family is used anywhere in the system.
+All components must reference: fontFamily: 'var(--font-outfit), system-ui, sans-serif'
 ```
 
 ### Loading
@@ -455,14 +430,15 @@ Tied to readability, touch targets (minimum 44px), and visual grouping.
 /* Internal component gaps */
 --space-component-xs:   var(--space-1);   /* 4px  — icon to label, dot gaps */
 --space-component-sm:   var(--space-2);   /* 8px  — tight gaps, nav link spacing */
+--space-component-base: var(--space-3);   /* 12px — button row gaps */
 --space-component-md:   var(--space-4);   /* 16px — default button/input padding */
 --space-component-lg:   var(--space-5);   /* 24px — card padding, form groups */
 
 /* Vertical text stacking */
 --space-stack-xs:       6px;              /* Tight interior gaps */
---space-stack-sm:       var(--space-3);   /* 12px — eyebrow to heading (standardized) */
---space-stack-md:       var(--space-5);   /* 24px — heading to body */
---space-stack-lg:       var(--space-6);   /* 32px — body to CTA */
+--space-stack-sm:       var(--space-3);   /* 12px — eyebrow to heading */
+--space-stack-md:       var(--space-5);   /* 24px — heading to body, subheading bottom margin */
+--space-stack-lg:       var(--space-6);   /* 32px — job row padding top/bottom */
 ```
 
 ---
@@ -473,10 +449,7 @@ Section and page level spacing. Scales with viewport using clamp().
 Never applies inside a component — only between sections and layout blocks.
 
 ```css
-/* Between related sections */
---space-section-sm:   clamp(32px, 5vw, 48px);
-
-/* Standard page section padding — top and bottom */
+/* Standard page section padding — top and bottom (all sections use this) */
 --space-section-md:   clamp(48px, 7vw, 80px);
 
 /* Hero sections, major page-level breaks */
@@ -491,11 +464,101 @@ Never applies inside a component — only between sections and layout blocks.
 ### Layout Constraints (Fixed)
 
 ```css
-/* Max width for body copy and data grids — centered layout column */
+/* Max width for body copy, about, experience, contact sections */
 --space-content-max:  860px;
 
-/* Max width for full page layout */
+/* Max width for full-bleed sections like work cards and hero */
 --space-layout-max:   1200px;
+```
+
+---
+
+### Section Layout Pattern — The Rule
+
+**Every page section follows this exact two-layer pattern. No exceptions.**
+
+```
+<section>                         ← outer: py-[--space-section-md]  px-[--space-page-margin]
+  <div class="max-w-__ mx-auto">  ← inner: max-width only, NO padding
+    content
+  </div>
+</section>
+```
+
+The `px-[--space-page-margin]` lives on the `<section>` tag.
+The inner `<div>` only constrains width — it never adds more padding.
+Breaking this pattern causes sections to have different effective widths even if max-width matches.
+
+**Which max-width to use:**
+
+| Section | Max-width class | Token |
+|---|---|---|
+| About, Experience, Contact | `max-w-content` | 860px |
+| Work (case study cards), Hero | `max-w-layout` | 1200px |
+
+**Implemented examples:**
+
+```tsx
+{/* About — 860px content column */}
+<section
+  className="px-[var(--space-page-margin)]"
+  style={{ paddingTop: 'var(--space-section-md)', paddingBottom: 'var(--space-section-md)' }}
+>
+  <div className="mx-auto" style={{ maxWidth: 'var(--space-content-max)' }}>
+    {/* content */}
+  </div>
+</section>
+
+{/* Experience — same pattern, Tailwind shorthand */}
+<section className="py-[var(--space-section-md)] px-[var(--space-page-margin)]" id="toolkit">
+  <div className="max-w-content mx-auto">
+    {/* content */}
+  </div>
+</section>
+
+{/* Work / Featured case studies — 1200px layout column */}
+<section id="work" className="py-[var(--space-section-md)]">
+  <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
+    {/* content */}
+  </div>
+</section>
+```
+
+---
+
+### Section Icon → Subsection Gap — The 70px Rule
+
+Every section on the homepage has this internal structure:
+
+```
+Section icon + display heading   ← section header block
+        ↕ 70px                   ← always exactly 70px, hardcoded, no token
+First subsection content
+        ↕ 70px                   ← same gap between every subsection
+Second subsection content
+```
+
+This 70px gap is applied with `style={{ marginTop: '70px' }}` or `gap: '70px'` on the flex container.
+It is NOT a token — it is a fixed design rule. Never use a section spacing token here.
+
+**Applies to all sections:** Work, About, Experience, Contact.
+
+```tsx
+{/* Correct — section icon header, then 70px to first content */}
+<div className="text-center">
+  <SectionIcon variant="work" glowColor="..." />
+  <h2 className="text-display">Featured case studies</h2>
+</div>
+<div style={{ marginTop: '70px' }}>
+  {/* first subsection */}
+</div>
+
+{/* Correct — multiple subsections within a section */}
+<div className="flex flex-col items-center" style={{ gap: '70px' }}>
+  <SectionHeader />
+  <Subsection1 />
+  <Subsection2 />
+</div>
 ```
 
 ---
@@ -594,40 +657,39 @@ phase section backgrounds, hero content areas, any static non-interactive surfac
 
 ## Component Specifications
 
-### Button — Primary
+### Button — Glass (primary action)
 ```
-Background:     glass-dark (rgba(28,25,23,0.75))
-Text:           --color-button-text (#FAF8F5)
-Border:         0.5px solid rgba(255,255,255,0.12)
-Border radius:  6px
-Padding:        8px 20px
-Font:           --text-ui-md (Jost 400, 13px)
-Blur:           backdrop-filter: blur(12px)
-Hover:          background opacity increases to 0.88
-Active:         scale(0.98)
-Transition:     all 0.2s ease
+Background:     rgba(22, 22, 22, 0.50) + linear-gradient overlay
+Border:         0.5px solid var(--color-nav-card-border)
+Border radius:  var(--radius-pill) — fully rounded
+Padding:        10px 20px
+Font:           Outfit 500, var(--text-ui-md-size), 20px line-height
+Color:          var(--color-ink)
+Blur:           backdrop-filter: blur(48px) saturate(180%)
+Shadow:         0 4px 16px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.50)
+Hover:          opacity shift via Button.tsx
 ```
 
 ### Button — Secondary
 ```
 Background:     transparent
-Text:           --color-text-primary
-Border:         0.5px solid --color-border-mid
-Border radius:  6px
-Padding:        8px 20px
-Font:           --text-ui-md
-Hover:          background --color-surface
+Text:           var(--color-text-secondary)
+Border:         1px solid var(--color-text-placeholder)
+Border radius:  var(--radius-pill)
+Padding:        10px 20px
+Font:           Outfit 500, var(--text-ui-md-size), 20px line-height
+Hover:          text shifts to var(--color-ink)
 No glass
 ```
 
 ### Button — Ghost
 ```
 Background:     transparent
-Text:           --color-text-muted
+Text:           var(--color-text-muted)
 Border:         none
 Padding:        8px 16px
-Font:           --text-ui-md
-Hover:          text --color-text-primary
+Font:           Outfit 500, var(--text-ui-md-size)
+Hover:          text var(--color-ink)
 No glass
 ```
 
@@ -642,6 +704,123 @@ Z-index:        50
 Padding:        0 --space-page-margin
 Transition:     background 0.7s ease
 ```
+
+### Glass Tab Button (HowIWork + Toolkit tabs)
+
+Used for segment controls: "See it / Own it / Solve it / Do it" and "Tools / Skills / Education / Certs".
+This is the full recipe — both components use identical styles.
+
+```tsx
+// Active state
+style={{
+  padding:              '10px 16px',
+  borderRadius:         'var(--radius-pill)',
+  border:               '0.5px solid var(--color-nav-card-border)',
+  backgroundImage:      `linear-gradient(${phaseTabBg}, ${phaseTabBg})`,  // tinted overlay
+  backgroundColor:      'rgba(22, 22, 22, 0.50)',
+  backdropFilter:       'blur(48px) saturate(180%)',
+  WebkitBackdropFilter: 'blur(48px) saturate(180%)',
+  boxShadow:            '0 4px 16px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.50)',
+  color:                phaseAccentColor,    // phase extended token, bright
+  fontFamily:           'var(--font-outfit), system-ui, sans-serif',
+  fontSize:             'var(--text-ui-md-size)',
+  fontWeight:           500,
+  lineHeight:           '20px',
+  letterSpacing:        '0.1px',
+  cursor:               'pointer',
+  outline:              'none',
+  whiteSpace:           'nowrap',
+  transition:           'all 0.2s ease',
+}}
+
+// Inactive state — only these properties change
+style={{
+  border:               '1px solid var(--color-text-placeholder)',
+  backgroundImage:      'none',
+  backgroundColor:      'transparent',
+  backdropFilter:       'none',
+  WebkitBackdropFilter: 'none',
+  boxShadow:            'none',
+  color:                'var(--color-text-secondary)',
+}}
+```
+
+Both tabs also get `className="how-i-work-tab"` which applies hover overrides via globals.css.
+
+---
+
+### Chip Container (Toolkit grid wrapper)
+
+```tsx
+style={{
+  border:       '1px solid var(--color-border-subtle-16)',  // rgba(142,145,146,0.16) — subtle 16% outline
+  borderRadius: '8px',
+  padding:      '20px 24px',
+}}
+// Chip gap
+className="flex flex-wrap gap-x-[8px] gap-y-[16px]"
+```
+
+**Key: use `--color-border-subtle-16` not `--color-text-placeholder` for containers.**
+`--color-text-placeholder` is for individual chip item outlines only.
+
+### Chip Item
+
+```tsx
+style={{
+  padding:      '6px 16px',
+  height:       '32px',
+  display:      'inline-flex',
+  alignItems:   'center',
+  borderRadius: 'var(--radius-md)',
+  border:       '1px solid var(--color-text-placeholder)',
+  background:   'transparent',
+  fontFamily:   'var(--font-outfit), system-ui, sans-serif',
+  fontSize:     'var(--text-ui-md-size)',
+  fontWeight:   500,
+  color:        categoryColor,   // phase label token for the active category
+  letterSpacing: '0.1px',
+  whiteSpace:   'nowrap',
+}}
+```
+
+---
+
+### Experience Job Row (Where I have been)
+
+Job rows live inside a `flex flex-col` container. Each row has:
+
+```tsx
+// Row wrapper
+<div
+  className={i > 0 ? 'border-t border-[var(--color-border)]' : ''}
+  style={{ padding: 'var(--space-stack-lg) 0' }}   // 32px top/bottom, no sides
+>
+  {/* Two-column layout */}
+  <div className="flex flex-col gap-[var(--space-component-xs)] md:flex-row md:items-start md:gap-[var(--space-8)]">
+    {/* Left column — 320px fixed desktop */}
+    <div className="md:w-[320px] flex-shrink-0">
+      <p className="text-h4 text-[var(--color-ink)]">{job.role}</p>
+      <p className="text-body-sm text-[var(--color-text-muted)]">{job.company} · {job.period}</p>
+    </div>
+    {/* Right column — flex-1 */}
+    <div className="flex-1">
+      <p className="text-body text-[var(--color-text-secondary)]">{job.summary}</p>
+      {/* Text button — 24px margin above and below */}
+      <Link className="text-ui-md text-[var(--color-text-muted)] block" style={{ margin: '24px 0' }}>
+        View case study →
+      </Link>
+    </div>
+  </div>
+</div>
+```
+
+Rules:
+- First row: no top border. Every subsequent row: `border-t border-[var(--color-border)]`.
+- Left column is always `md:items-start` (top-aligned with body text), never centered.
+- Desktop gap between columns: `var(--space-8)` = 64px.
+- "View case study" and "Case study coming soon" both use `block` with `style={{ margin: '24px 0' }}`.
+- "Download resume" button above the job list: `variant="glass"`, not "secondary" or "outline".
 
 ### Work Card (Infographic Style)
 ```
@@ -748,8 +927,7 @@ module.exports = {
         border:     'var(--color-border)',
       },
       fontFamily: {
-        display:  'var(--font-fraunces)',
-        body:     'var(--font-jost)',
+        outfit: 'var(--font-outfit)',
       },
       spacing: {
         'component-sm':   'var(--space-component-sm)',
@@ -824,6 +1002,7 @@ All tokens are defined in `styles/tokens.css` and imported in `app/layout.tsx`.
 
 ---
 
-*Last updated: pre-build planning phase · Portfolio site · Phase 1*
+*Last updated: 2026-04-04 · Portfolio site · Phase 1 — About + Experience sections built*
 *All token values confirmed against WCAG AA minimum*
 *Color algorithm implementation required before any new color token is introduced*
+*Dark mode only — no light mode variant exists*

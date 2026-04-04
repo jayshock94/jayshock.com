@@ -90,21 +90,15 @@ export default function Toolkit() {
   return (
     <div>
       {/* Header */}
-      <h3 className="text-h3 text-[var(--color-ink)] mb-[var(--space-stack-sm)] text-center">
+      <h2 className="text-h1 text-[var(--color-ink)] mb-[var(--space-stack-md)]">
         What I work with.
-      </h3>
-      <p
-        className="text-body text-[var(--color-text-secondary)] mb-[var(--space-stack-lg)] text-center mx-auto"
-        style={{ maxWidth: 'var(--space-content-max)' }}
-      >
-        The software, skills, and credentials I bring to the table.
-      </p>
+      </h2>
 
       {/* Category pills */}
       <div
         role="tablist"
         aria-label="Toolkit categories"
-        className="flex flex-wrap justify-center gap-[var(--space-component-sm)] mb-[var(--space-stack-lg)]"
+        className="flex flex-wrap gap-[var(--space-component-sm)] mb-[16px]"
       >
         {CATEGORIES.map((c, i) => {
           const isActive = active === i
@@ -113,32 +107,31 @@ export default function Toolkit() {
               key={c.id}
               role="tab"
               id={`toolkit-tab-${c.id}`}
+              className="how-i-work-tab"
               aria-selected={isActive}
               aria-controls="toolkit-panel"
               tabIndex={isActive ? 0 : -1}
               onClick={() => setActive(i)}
               onKeyDown={(e) => handleKey(e, i)}
               style={{
-                padding: '10px 20px',
-                borderRadius: '999px',
-                border: isActive
-                  ? `1px solid ${c.border}`
-                  : '0.5px solid var(--color-border)',
-                background: isActive ? c.bg : 'var(--color-surface)',
-                backdropFilter: isActive ? 'blur(48px) saturate(180%)' : 'none',
+                padding:              '10px 16px',
+                borderRadius:         'var(--radius-pill)',
+                border:               isActive ? '0.5px solid var(--color-nav-card-border)' : '1px solid var(--color-text-placeholder)',
+                backgroundImage:      isActive ? `linear-gradient(${c.bg}, ${c.bg})` : 'none',
+                backgroundColor:      isActive ? 'rgba(22, 22, 22, 0.50)' : 'transparent',
+                backdropFilter:       isActive ? 'blur(48px) saturate(180%)' : 'none',
                 WebkitBackdropFilter: isActive ? 'blur(48px) saturate(180%)' : 'none',
-                boxShadow: isActive
-                  ? '0 4px 20px rgba(0,0,0,0.16), inset 0 1px 0 rgba(255,255,255,0.10)'
-                  : 'none',
-                color: isActive ? c.color : 'var(--color-text-muted)',
-                fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-                fontSize: '13px',
-                fontWeight: isActive ? 500 : 400,
-                letterSpacing: '0.02em',
-                cursor: 'pointer',
-                transform: `scale(${isActive ? 1.06 : 1})`,
-                transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-                outline: 'none',
+                boxShadow:            isActive ? '0 4px 16px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.50)' : 'none',
+                color:                isActive ? c.color : 'var(--color-text-secondary)',
+                fontFamily:           'var(--font-outfit), system-ui, sans-serif',
+                fontSize:             'var(--text-ui-md-size)',
+                fontWeight:           500,
+                lineHeight:           '20px',
+                letterSpacing:        '0.1px',
+                cursor:               'pointer',
+                outline:              'none',
+                transition:           'all 0.2s ease',
+                whiteSpace:           'nowrap',
               }}
             >
               {c.label}
@@ -170,20 +163,30 @@ export default function Toolkit() {
 
 function ChipGrid({ category }: { category: ChipCategory }) {
   return (
-    <div className="flex flex-wrap justify-center gap-[var(--space-component-sm)] max-w-content mx-auto">
+    <div
+      className="flex flex-wrap gap-x-[8px] gap-y-[16px]"
+      style={{
+        border: '1px solid var(--color-border-subtle-16)',
+        borderRadius: '8px',
+        padding: '20px 24px',
+      }}
+    >
       {category.items.map((item) => (
         <span
           key={item}
           style={{
-            padding: '8px 16px',
+            padding: '6px 16px',
+            height: '32px',
+            display: 'inline-flex',
+            alignItems: 'center',
             borderRadius: 'var(--radius-md)',
-            border: `0.5px solid ${category.border}`,
+            border: '1px solid var(--color-text-placeholder)',
             background: 'transparent',
             fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-            fontSize: '13px',
-            fontWeight: 400,
+            fontSize: 'var(--text-ui-md-size)',
+            fontWeight: 500,
             color: category.color,
-            letterSpacing: '0.01em',
+            letterSpacing: '0.1px',
             whiteSpace: 'nowrap',
           }}
         >

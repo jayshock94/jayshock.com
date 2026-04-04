@@ -33,7 +33,7 @@ export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
         borderRadius: 'var(--radius-lg)',
         overflow:   'hidden',
         background: tokens.heroZone,
-        border:     `0.5px solid ${hovered && !comingSoon ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.06)'}`,
+        border:     `0.5px solid ${hovered && !comingSoon ? 'var(--work-card-border-hover)' : 'var(--work-card-border)'}`,
         boxShadow:  hovered && !comingSoon ? 'var(--shadow-card-hover)' : 'var(--shadow-card)',
         transform:  hovered && !comingSoon ? 'translateY(-2px)' : 'translateY(0)',
         cursor:     comingSoon ? 'default' : 'pointer',
@@ -83,7 +83,7 @@ export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
         <p
           className="text-label"
           style={{
-            color:        'rgba(255,255,255,0.35)',
+            color:        'var(--work-card-eyebrow)',
             margin:       0,
             marginBottom: 'var(--space-stack-sm)',
           }}
@@ -110,7 +110,7 @@ export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
             <p
               className="text-body-sm"
               style={{
-                color:     'rgba(255,255,255,0.45)',
+                color:     'var(--work-card-stat-sub)',
                 margin:    0,
                 marginTop: '6px',
               }}
@@ -125,7 +125,7 @@ export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
           <p
             className="text-body"
             style={{
-              color:        'rgba(255,255,255,0.55)',
+              color:        'var(--work-card-hook)',
               fontStyle:    'italic',
               margin:       0,
               marginBottom: 'var(--space-stack-sm)',
@@ -153,7 +153,7 @@ export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
         <p
           className="text-body-sm"
           style={{
-            color:        'rgba(255,255,255,0.4)',
+            color:        'var(--work-card-role)',
             lineHeight:   1.5,
             margin:       0,
             marginBottom: 'var(--space-stack-sm)',
@@ -176,12 +176,12 @@ export default function WorkCard({ caseStudy, cardImageSlot }: WorkCardProps) {
               style={{
                 padding:      '4px 12px',
                 borderRadius: '999px',
-                border:       '0.5px solid rgba(255,255,255,0.12)',
-                background:   'rgba(255,255,255,0.04)',
+                border:       '0.5px solid var(--work-card-tag-border)',
+                background:   'var(--work-card-tag-bg)',
                 fontFamily:   'var(--font-outfit), system-ui, sans-serif',
                 fontSize:     '11px',
                 fontWeight:   400,
-                color:        'rgba(255,255,255,0.4)',
+                color:        'var(--work-card-tag-text)',
                 lineHeight:   1,
               }}
             >
