@@ -30,11 +30,11 @@ export default function ExperiencePage() {
             <p className="text-body-sm text-[var(--color-text-muted)] mb-[var(--space-stack-md)] text-center">
               Currently employed. Open to the right senior role or consulting engagement. Remote first, open to hybrid.
             </p>
-            <div className="flex flex-wrap justify-center gap-[var(--space-component-sm)]">
-              <Button variant="glass" href="/api/resume">
+            <div className="grid grid-cols-2 gap-[8px] mx-auto" style={{ maxWidth: '320px' }}>
+              <Button variant="glass" href="/api/resume" className="w-full">
                 Download resume
               </Button>
-              <Button variant="secondary" href="/contact">
+              <Button variant="secondary" href="/contact" className="w-full">
                 Get in touch
               </Button>
             </div>
@@ -53,7 +53,7 @@ export default function ExperiencePage() {
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
             <ScrollReveal>
-              <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-md)] text-center">
+              <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-title)] text-center">
                 What I bring.
               </h2>
             </ScrollReveal>
@@ -101,7 +101,7 @@ export default function ExperiencePage() {
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
             <ScrollReveal>
-              <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-md)] text-center">
+              <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-title)] text-center">
                 What I use.
               </h2>
             </ScrollReveal>
@@ -168,7 +168,7 @@ export default function ExperiencePage() {
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
             <ScrollReveal>
-              <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-md)] text-center">
+              <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-title)] text-center">
                 Where I have been.
               </h2>
             </ScrollReveal>

@@ -188,34 +188,76 @@ body > * {
 }
 
 /* -----------------------------------------------------------
-   PILL GLASS — matches nav bar glass treatment
-   Same blur/saturate/border recipe as .glass-nav.
+   SEGMENT GROUP — M3 standard button group container
+   Rounded pill container with border, holds toggle tabs.
+----------------------------------------------------------- */
+.segment-group {
+  display:      inline-flex;
+  align-self:   flex-start;
+  max-width:    100%;
+  overflow-x:   auto;
+  scrollbar-width: none;
+  gap:          8px;
+  padding:      8px;
+  border-radius: 100px;
+  border:       1px solid var(--color-border-subtle-16);
+  background:   var(--color-surface);
+}
+
+.segment-group::-webkit-scrollbar {
+  display: none;
+}
+
+.segment-tab {
+  padding:        6px 12px;
+  border-radius:  100px;
+  border:         none;
+  background:     transparent;
+  font-family:    var(--font-outfit), system-ui, sans-serif;
+  font-size:      var(--text-ui-md-size);
+  font-weight:    500;
+  line-height:    20px;
+  letter-spacing: 0.1px;
+  cursor:         pointer;
+  outline:        none;
+  white-space:    nowrap;
+  flex-shrink:    0;
+  color:          var(--color-text-secondary);
+  transition:     background 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  color 0.25s ease,
+                  box-shadow 0.25s ease;
+}
+
+.segment-tab:hover {
+  color: var(--color-ink);
+}
+
+/* -----------------------------------------------------------
+   PILL PRIMARY — solid white pill on dark canvas
+   Clear primary action. No glass, no confusion with chips.
 ----------------------------------------------------------- */
 .glass-pill {
-  background:              var(--glass-dark-regular);
-  backdrop-filter:         blur(48px) saturate(180%);
-  -webkit-backdrop-filter: blur(48px) saturate(180%);
-  border:                  0.5px solid var(--color-nav-card-border);
-  box-shadow:              0 4px 16px rgba(0, 0, 0, 0.25), inset 0 1px 0 var(--glass-border-light);
-  color:                   #FFFFFF;
+  background:  var(--color-ink);
+  border:      0.5px solid transparent;
+  box-shadow:  0 2px 8px rgba(0, 0, 0, 0.20);
+  color:       var(--color-button-text);
   transition:
     transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
     background 0.25s ease,
     box-shadow 0.25s ease,
-    border-color 0.25s ease;
+    opacity 0.25s ease;
 }
 
 .glass-pill:hover {
   transform: scale(1.02);
-  background: var(--glass-dark-medium);
-  border-color: var(--glass-border-subtle);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.30);
+  background: rgba(242, 242, 242, 0.85);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
 }
 
 .glass-pill:active {
   transform: scale(0.98);
   transition-duration: 0.1s;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.20);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
 }
 
 /* -----------------------------------------------------------
@@ -460,6 +502,38 @@ body > * {
   }
 }
 
+/* Mobile center alignment for section content */
+@media (max-width: 767px) {
+  /* Headings and display text */
+  .text-display,
+  .text-h1,
+  .text-h2,
+  .text-h3 {
+    text-align: center;
+  }
+
+  /* About photo — center it */
+  .mobile-center-photo {
+    align-self: center !important;
+  }
+
+  /* Flex containers that hold buttons, pills, etc — center on mobile */
+  .mobile-center {
+    align-items: center;
+    text-align: center;
+  }
+
+  .mobile-center-row {
+    justify-content: center;
+  }
+
+  /* Segment groups — center on mobile */
+  .how-i-work-tabs,
+  .segment-group {
+    align-self: center !important;
+  }
+}
+
 .text-intro {
   font-family: var(--font-outfit), system-ui, sans-serif;
   font-size: var(--text-intro-size);
@@ -592,14 +666,7 @@ body > * {
    Scrolls horizontally on mobile with no visible scrollbar.
    Tabs stay on one line — no wrapping needed since labels are short.
 ----------------------------------------------------------- */
-.how-i-work-tabs::-webkit-scrollbar {
-  display: none;
-}
-
-.how-i-work-tab:not([aria-selected="true"]):hover {
-  color: var(--color-ink) !important;
-  background-color: var(--color-hover-subtle) !important;
-}
+/* Legacy scrollbar hide — now handled by .segment-group */
 
 /* Work card mobile interactivity signals */
 @media (hover: none) {

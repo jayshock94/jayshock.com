@@ -16,7 +16,7 @@ export default function AboutText() {
       style={{ maxWidth: 'var(--space-content-max)' }}
     >
       {/* First paragraph — always visible */}
-      <p className="text-body-lg text-[var(--color-text-secondary)]">
+      <p className="text-body-lg text-[var(--color-text-secondary)] text-center md:text-left">
         {paragraphs[0]}
       </p>
 
@@ -25,7 +25,7 @@ export default function AboutText() {
         {paragraphs.slice(1).map((p, i) => (
           <p
             key={i}
-            className="text-body-lg text-[var(--color-text-secondary)]"
+            className="text-body-lg text-[var(--color-text-secondary)] text-center md:text-left"
           >
             {p}
           </p>
@@ -46,7 +46,7 @@ export default function AboutText() {
           fontWeight: 400,
           color: 'var(--color-text-muted)',
           cursor: 'pointer',
-          textAlign: 'left',
+          textAlign: 'center',
         }}
       >
         {expanded ? 'Show less' : 'Show more'}

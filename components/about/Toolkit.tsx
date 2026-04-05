@@ -88,7 +88,7 @@ export default function Toolkit() {
   }, [])
 
   return (
-    <div>
+    <div className="flex flex-col items-center md:items-start">
       {/* Header */}
       <h2 className="text-h1 text-[var(--color-ink)] mb-[var(--space-stack-md)]">
         What I work with.
@@ -98,7 +98,7 @@ export default function Toolkit() {
       <div
         role="tablist"
         aria-label="Toolkit categories"
-        className="flex flex-wrap gap-[var(--space-component-sm)] mb-[16px]"
+        className="segment-group mb-[16px]"
       >
         {CATEGORIES.map((c, i) => {
           const isActive = active === i
@@ -107,31 +107,19 @@ export default function Toolkit() {
               key={c.id}
               role="tab"
               id={`toolkit-tab-${c.id}`}
-              className="how-i-work-tab"
+              className="segment-tab"
               aria-selected={isActive}
               aria-controls="toolkit-panel"
               tabIndex={isActive ? 0 : -1}
               onClick={() => setActive(i)}
               onKeyDown={(e) => handleKey(e, i)}
               style={{
-                padding:              '10px 16px',
-                borderRadius:         'var(--radius-pill)',
-                border:               isActive ? '0.5px solid var(--color-nav-card-border)' : '1px solid var(--color-text-placeholder)',
                 backgroundImage:      isActive ? `linear-gradient(${c.bg}, ${c.bg})` : 'none',
                 backgroundColor:      isActive ? 'rgba(22, 22, 22, 0.50)' : 'transparent',
                 backdropFilter:       isActive ? 'blur(48px) saturate(180%)' : 'none',
                 WebkitBackdropFilter: isActive ? 'blur(48px) saturate(180%)' : 'none',
                 boxShadow:            isActive ? '0 4px 16px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.50)' : 'none',
                 color:                isActive ? c.color : 'var(--color-text-secondary)',
-                fontFamily:           'var(--font-outfit), system-ui, sans-serif',
-                fontSize:             'var(--text-ui-md-size)',
-                fontWeight:           500,
-                lineHeight:           '20px',
-                letterSpacing:        '0.1px',
-                cursor:               'pointer',
-                outline:              'none',
-                transition:           'all 0.2s ease',
-                whiteSpace:           'nowrap',
               }}
             >
               {c.label}

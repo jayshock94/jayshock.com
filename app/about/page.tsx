@@ -105,7 +105,7 @@ export default function AboutPage() {
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
             <ScrollReveal>
-              <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-md)] max-w-content mx-auto text-center">
+              <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-title)] max-w-content mx-auto text-center">
                 Complexity does not disappear. It gets redistributed.
               </h2>
             </ScrollReveal>
@@ -208,7 +208,7 @@ export default function AboutPage() {
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
             <ScrollReveal>
-              <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-md)] text-center">
+              <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-title)] text-center">
                 Where I have been.
               </h2>
             </ScrollReveal>
