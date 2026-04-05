@@ -110,7 +110,7 @@ export interface EducationEntry {
 }
 
 export const EDUCATION: EducationEntry[] = [
-  { label: 'Graphic Design coursework', institution: 'Utah Valley University' },
+  { label: 'Graphic Design Coursework', institution: 'Utah Valley University' },
 ]
 
 /** Top certifications shown on resume PDF. */

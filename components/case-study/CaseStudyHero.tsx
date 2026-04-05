@@ -35,7 +35,7 @@ export default function CaseStudyHero({ caseStudy, tokens, heroImageSlot, tagMes
           className="hero-fade-up text-display text-center mx-auto"
           style={{
             color: 'var(--hero-text-primary)',
-            marginBottom: 'var(--space-stack-md)',
+            marginBottom: 'var(--space-stack-title)',
             maxWidth: 'var(--space-content-max)',
             animationDelay: '300ms',
           }}

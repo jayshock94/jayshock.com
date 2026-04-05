@@ -67,26 +67,15 @@ export default function HowIWork() {
     <div className="flex flex-col gap-[var(--space-stack-md)]">
 
       {/* Heading + subtitle */}
-      <div className="flex flex-col gap-[var(--space-stack-sm)]">
+      <div className="flex flex-col gap-[var(--space-stack-title)]">
         <h2
           className="text-h1"
           style={{ color: 'var(--color-ink)' }}
         >
           No matter the project.
         </h2>
-        <p
-          style={{
-            fontFamily:    'var(--font-outfit), system-ui, sans-serif',
-            fontSize:      'var(--text-body-lg-size)',
-            fontWeight:    500,
-            lineHeight:    '24px',
-            letterSpacing: '0.15px',
-            color:         'var(--color-text-secondary)',
-            maxWidth:      '700px',
-          }}
-        >
-          Whether it is a full product redesign or a single flow. Scopes change,
-          problems arise, constraints shift. This is how I handle it.
+        <p className="text-intro text-[var(--color-text-secondary)] text-center md:text-left" style={{ maxWidth: '700px' }}>
+          Scopes change, problems arise, constraints shift. This is how I handle it.
         </p>
       </div>
 
@@ -97,15 +86,7 @@ export default function HowIWork() {
         <div
           role="tablist"
           aria-label="Process phases"
-          className="how-i-work-tabs"
-          style={{
-            display:        'inline-flex',
-            alignSelf:      'flex-start',
-            maxWidth:       '100%',
-            overflowX:      'auto',
-            scrollbarWidth: 'none',
-            gap:            '8px',
-          }}
+          className="how-i-work-tabs segment-group"
         >
           {PHASES.map((p, i) => {
             const isActive = active === i
@@ -114,32 +95,19 @@ export default function HowIWork() {
                 key={p.id}
                 role="tab"
                 id={`tab-${p.id}`}
-                className="how-i-work-tab"
+                className="segment-tab"
                 aria-selected={isActive}
                 aria-controls="how-i-work-panel"
                 tabIndex={isActive ? 0 : -1}
                 onClick={() => setActive(i)}
                 onKeyDown={(e) => handleKey(e, i)}
                 style={{
-                  padding:      '10px 16px',
-                  borderRadius: 'var(--radius-pill)',
-                  border:              isActive ? '0.5px solid var(--color-nav-card-border)' : '1px solid var(--color-text-placeholder)',
-                  backgroundImage:     isActive ? `linear-gradient(${p.tabBg}, ${p.tabBg})` : 'none',
-                  backgroundColor:     isActive ? 'rgba(22, 22, 22, 0.50)' : 'transparent',
-                  backdropFilter:      isActive ? 'blur(48px) saturate(180%)' : 'none',
+                  backgroundImage:      isActive ? `linear-gradient(${p.tabBg}, ${p.tabBg})` : 'none',
+                  backgroundColor:      isActive ? 'rgba(22, 22, 22, 0.50)' : 'transparent',
+                  backdropFilter:       isActive ? 'blur(48px) saturate(180%)' : 'none',
                   WebkitBackdropFilter: isActive ? 'blur(48px) saturate(180%)' : 'none',
-                  boxShadow:           isActive ? '0 4px 16px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.50)' : 'none',
-                  color:               isActive ? p.accent : 'var(--color-text-secondary)',
-                  fontFamily:          'var(--font-outfit), system-ui, sans-serif',
-                  fontSize:            'var(--text-ui-md-size)',
-                  fontWeight:          500,
-                  lineHeight:          '20px',
-                  letterSpacing:       '0.1px',
-                  cursor:              'pointer',
-                  outline:             'none',
-                  whiteSpace:          'nowrap',
-                  flexShrink:          0,
-                  transition:          'background 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s ease',
+                  boxShadow:            isActive ? '0 4px 16px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.50)' : 'none',
+                  color:                isActive ? p.accent : 'var(--color-text-secondary)',
                 }}
               >
                 {p.label}

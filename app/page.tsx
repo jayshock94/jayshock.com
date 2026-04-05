@@ -180,7 +180,7 @@ export default function HomePage() {
             className="
               grid grid-cols-1 gap-[var(--space-component-lg)] items-stretch
             "
-            style={{ marginTop: '70px' }}
+            style={{ marginTop: 'clamp(40px, 8vw, 70px)' }}
           >
             {featured.map((cs, i) => (
               <div
@@ -221,7 +221,7 @@ export default function HomePage() {
           className="mx-auto"
           style={{ maxWidth: 'var(--space-content-max)' }}
         >
-          <div className="flex flex-col items-center" style={{ gap: '70px' }}>
+          <div className="flex flex-col items-center" style={{ gap: 'clamp(40px, 8vw, 70px)' }}>
 
             {/* Section header — icon + display heading */}
             <ScrollReveal>
@@ -239,11 +239,11 @@ export default function HomePage() {
             {/* Subsection 1 — I got here by paying attention */}
             <ScrollReveal>
               {/* Photo + copy row */}
-              <div className="flex flex-col gap-[var(--space-stack-lg)] md:flex-row md:gap-[48px] items-start">
+              <div className="flex flex-col items-center md:items-start gap-[var(--space-stack-lg)] md:flex-row md:gap-[48px]">
 
                 {/* Photo — mobile: fixed 220×220; desktop: stretches to content column height */}
                 <div
-                  className="flex-shrink-0 self-stretch relative overflow-hidden rounded-[8px] min-h-[220px]"
+                  className="flex-shrink-0 md:self-stretch relative overflow-hidden rounded-full md:rounded-[8px] min-h-[220px] h-[220px] md:h-auto"
                   style={{ width: '220px', border: '0.5px solid var(--color-text-muted)' }}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -261,11 +261,11 @@ export default function HomePage() {
                   </h2>
                   <AboutText />
                   {/* Buttons */}
-                  <div className="flex flex-wrap gap-[var(--space-component-base)] overflow-hidden">
-                    <Button variant="glass" href="/contact">
+                  <div className="grid grid-cols-2 gap-[8px] self-center md:self-start" style={{ maxWidth: '320px' }}>
+                    <Button variant="glass" href="/contact" className="w-full">
                       Get in touch
                     </Button>
-                    <Button variant="secondary" href="/about">
+                    <Button variant="secondary" href="/about" className="w-full">
                       More about me
                     </Button>
                   </div>
@@ -303,22 +303,24 @@ export default function HomePage() {
               </p>
             </div>
           </ScrollReveal>
-          <div style={{ marginTop: '70px' }}>
+          <div style={{ marginTop: 'clamp(40px, 8vw, 70px)' }}>
             <ScrollReveal>
               <Toolkit />
             </ScrollReveal>
           </div>
 
           {/* Experience — subsection within Skills */}
-          <div id="experience" style={{ marginTop: '70px' }}>
+          <div id="experience" style={{ marginTop: 'clamp(40px, 8vw, 70px)' }}>
             <ScrollReveal>
-              <div className="mb-[var(--space-stack-lg)]">
-                <h2 className="text-h1 text-[var(--color-ink)] mb-[24px]">
+              <div className="mb-[var(--space-stack-sm)]">
+                <h2 className="text-h1 text-[var(--color-ink)] mb-[var(--space-stack-md)]">
                   Where I have been.
                 </h2>
-                <Button variant="glass" href="/experience">
-                  Download resume
-                </Button>
+                <div className="flex justify-center md:justify-start">
+                  <Button variant="glass" href="/experience">
+                    Download resume
+                  </Button>
+                </div>
               </div>
 
               <div className="flex flex-col">
@@ -344,11 +346,11 @@ export default function HomePage() {
                     summary: 'Identified a gap nobody had named. Pitched and built a virtual badge system that got reps on doors weeks sooner.',
                     slug:    '',
                   },
-                ].map((job, i) => (
+                ].map((job, i, arr) => (
                   <div
                     key={job.company}
                     className={i > 0 ? 'border-t border-[var(--color-border)]' : ''}
-                    style={{ padding: 'var(--space-stack-lg) 0' }}
+                    style={{ paddingTop: 'var(--space-stack-lg)', paddingBottom: i === arr.length - 1 ? '0' : 'var(--space-stack-lg)' }}
                   >
                     <div className="flex flex-col gap-[var(--space-component-xs)] md:flex-row md:items-start md:gap-[var(--space-8)]">
                       <div className="md:w-[320px] flex-shrink-0">
@@ -372,14 +374,14 @@ export default function HomePage() {
                               transition-colors duration-200
                               block
                             "
-                            style={{ margin: '24px 0' }}
+                            style={{ marginTop: '24px' }}
                           >
                             View case study &rarr;
                           </Link>
                         ) : (
                           <span
                             className="text-ui-md text-[var(--color-text-placeholder)] block"
-                            style={{ margin: '24px 0' }}
+                            style={{ marginTop: '24px' }}
                           >
                             Case study coming soon
                           </span>
@@ -403,7 +405,7 @@ export default function HomePage() {
         className="py-[var(--space-section-md)] px-[var(--space-page-margin)]"
         aria-label="Contact"
       >
-        <div className="max-w-content mx-auto flex flex-col gap-[70px]">
+        <div className="max-w-content mx-auto flex flex-col gap-[clamp(40px,8vw,70px)]">
 
           {/* Block 1 — section icon + "Contact" title, centered */}
           <ScrollReveal>
@@ -418,30 +420,11 @@ export default function HomePage() {
           {/* Block 2 — intro copy + email + form (one subsection) */}
           <div className="flex flex-col gap-[var(--space-stack-lg)]">
             <ScrollReveal>
-              <div className="flex flex-col gap-[16px]">
-                <p
-                  style={{
-                    fontFamily:    'var(--font-outfit), system-ui, sans-serif',
-                    fontSize:      '32px',
-                    lineHeight:    '40px',
-                    fontWeight:    500,
-                    color:         'var(--color-ink)',
-                    letterSpacing: '0px',
-                  }}
-                >
+              <div className="flex flex-col">
+                <h2 className="text-h1 text-[var(--color-ink)]" style={{ marginBottom: 'var(--space-stack-title)' }}>
                   Let&apos;s make it simple.
-                </p>
-                <p
-                  style={{
-                    fontFamily:    'var(--font-outfit), system-ui, sans-serif',
-                    fontSize:      '16px',
-                    lineHeight:    '24px',
-                    fontWeight:    500,
-                    color:         'var(--color-text-secondary)',
-                    letterSpacing: '0.15px',
-                    maxWidth:      '700px',
-                  }}
-                >
+                </h2>
+                <p className="text-intro text-[var(--color-text-secondary)] text-center md:text-left" style={{ maxWidth: '700px', marginBottom: 'var(--space-stack-md)' }}>
                   If you are building something complex and need someone who will own the problem with you, I want to hear about it.
                 </p>
                 <p className="text-body-lg text-[var(--color-text-muted)]">

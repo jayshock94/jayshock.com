@@ -14,7 +14,7 @@ export default function ContactPage() {
         <div className="max-w-content mx-auto flex flex-col gap-[var(--space-stack-lg)]">
 
           <header>
-            <h1 className="text-h1 text-[var(--color-ink)] mb-[var(--space-stack-md)]">
+            <h1 className="text-h1 text-[var(--color-ink)] mb-[var(--space-stack-title)]">
               Get in touch
             </h1>
             <p className="text-body-lg text-[var(--color-text-secondary)] mb-[var(--space-stack-sm)]">

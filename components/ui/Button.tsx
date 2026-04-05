@@ -23,9 +23,9 @@ const BASE =
   'inline-flex items-center justify-center gap-[var(--space-component-sm)] rounded-[40px] px-[16px] py-[10px] text-ui-md cursor-pointer no-underline select-none min-h-[44px]'
 
 const VARIANTS: Record<ButtonVariant, string> = {
-  // M3 primary glass pill — dark tint, backdrop blur, drop shadow
+  // Primary pill — solid white on dark canvas, clear CTA
   glass:
-    'glass-pill text-white font-[500] tracking-[0.1px]',
+    'glass-pill text-[var(--color-button-text)] font-[500] tracking-[0.1px]',
 
   // Subtle outlined — secondary actions, no fill
   secondary:
