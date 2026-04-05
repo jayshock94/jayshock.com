@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Outfit } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/react'
 import Nav         from '@/components/nav/Nav'
 import Footer      from '@/components/ui/Footer'
 import ChatLazy    from '@/components/chat/ChatLazy'
@@ -63,6 +64,7 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <ChatLazy />
+        <Analytics />
       </body>
     </html>
   )
