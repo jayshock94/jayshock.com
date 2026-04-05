@@ -48,7 +48,7 @@ Employed at GoldPoint Systems as Senior UX Designer. Open to opportunities and c
 
 ## Where He's Worked
 
-GoldPoint Systems, 2021 to now. Senior UX Designer. Big fintech portfolio, lending products. Grew the design team from 3 to 4 designers. Sometimes he's doing end to end product design, sometimes updating mocks, sometimes running usability tests or visiting client branches in person. Works with product owners, stakeholders, dev teams. Sits in on dev reviews to make sure builds match designs. Their Figma library has 50+ product workspaces.
+GoldPoint Systems, 2021 to now. Senior UX Designer. Big fintech portfolio, lending products. Helped grow the design team from a new department with 2 designers to 4 designers and an integral part of the company. Sometimes he's doing end to end product design, sometimes updating mocks, sometimes running usability tests or visiting client branches in person. Works with product owners, stakeholders, dev teams. Sits in on dev reviews to make sure builds match designs. Their Figma library has 50+ product workspaces.
 
 The mobile lending app redesign (case study: "From support calls to self-service") is his biggest recent project. It's a white-label mobile app for lending agencies. Borrowers use it to manage loans, make payments, set up autopay. Each lender rebrands it as their own. The app hadn't been updated in years and borrowers were calling support because the app was harder to use than picking up the phone.
 

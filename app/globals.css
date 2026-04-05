@@ -683,9 +683,9 @@ body > * {
     box-shadow: var(--shadow-sm) !important;
     transition: transform 100ms ease, box-shadow 100ms ease !important;
   }
-  /* Gentle arrow nudge when card scrolls into view */
-  [data-reveal="visible"] .work-card-arrow {
-    animation: arrow-nudge 600ms cubic-bezier(0.22, 1, 0.36, 1) 400ms both;
+  /* Subtle highlight pulse when card enters viewport on mobile */
+  .work-card-glass {
+    animation: card-peek 1.2s cubic-bezier(0.22, 1, 0.36, 1) 1.8s both;
   }
 }
 
@@ -693,6 +693,12 @@ body > * {
   0%, 100% { transform: translateX(0); }
   40%      { transform: translateX(4px); }
   70%      { transform: translateX(1px); }
+}
+
+@keyframes card-peek {
+  0%   { border-color: rgba(255,255,255,0.08); transform: translateY(0); }
+  35%  { border-color: rgba(255,255,255,0.22); transform: translateY(-3px); }
+  100% { border-color: rgba(255,255,255,0.08); transform: translateY(0); }
 }
 
 /* -----------------------------------------------------------
