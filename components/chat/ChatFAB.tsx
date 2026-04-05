@@ -131,9 +131,9 @@ export default function ChatFAB({ isOpen, isStreaming, onClick, pageType }: Chat
               style={{
                 margin: '0 0 6px 0',
                 fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-                fontSize: '11px',
-                fontWeight: 500,
-                letterSpacing: '0.08em',
+                fontSize: 'var(--text-label-size)',
+                fontWeight: 'var(--text-label-weight)',
+                letterSpacing: 'var(--text-label-tracking)',
                 textTransform: 'uppercase',
                 color: 'var(--color-accent)',
               }}
@@ -146,9 +146,9 @@ export default function ChatFAB({ isOpen, isStreaming, onClick, pageType }: Chat
               style={{
                 margin: 0,
                 fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-                fontSize: '13px',
-                fontWeight: 300,
-                lineHeight: '1.65',
+                fontSize: 'var(--text-body-size)',
+                fontWeight: 'var(--text-body-weight)',
+                lineHeight: 'var(--text-body-line-height)',
                 color: 'var(--color-text-secondary)',
               }}
             >
