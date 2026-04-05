@@ -391,9 +391,9 @@
   --text-intro-line-height:   28px;
 
   /* Body large → M3 body/large */
-  --text-body-lg-size:        16px;
-  --text-body-lg-weight:      400;
-  --text-body-lg-line-height: 24px;
+  --text-body-lg-size:        17px;
+  --text-body-lg-weight:      300;
+  --text-body-lg-line-height: 1.75;
   --text-body-lg-tracking:    0.5px;
 
   /* Body → M3 body/medium */
