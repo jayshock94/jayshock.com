@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import dynamic from 'next/dynamic'
 import type { IconVariant } from './SectionIconCanvas'
 
@@ -26,19 +26,67 @@ function hasWebGL(): boolean {
   }
 }
 
+/** Static placeholder shown instantly while Three.js loads */
+function IconPlaceholder({ variant, glowColor }: { variant: IconVariant; glowColor: string }) {
+  return (
+    <div
+      style={{
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <div
+        style={{
+          width: '40%',
+          height: '40%',
+          borderRadius: variant === 'about' || variant === 'skills' ? '50%' : '20%',
+          background: `radial-gradient(circle at 50% 70%, color-mix(in oklch, ${glowColor} 12%, transparent), rgba(255,255,255,0.02))`,
+          border: '0.5px solid rgba(255,255,255,0.08)',
+          transition: 'opacity 0.4s ease',
+        }}
+      />
+    </div>
+  )
+}
+
 export default function SectionIcon({ variant, glowColor, glowColorHex }: SectionIconProps) {
   const [webgl, setWebgl] = useState(true)
+  const [inView, setInView] = useState(false)
+  const [canvasReady, setCanvasReady] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     setWebgl(hasWebGL())
   }, [])
+
+  // Only mount the Three.js canvas when the icon scrolls into view
+  useEffect(() => {
+    const el = ref.current
+    if (!el || !webgl) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true)
+          observer.disconnect()
+        }
+      },
+      { rootMargin: '200px 0px' }, // start loading 200px before visible
+    )
+
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [webgl])
 
   return (
     <div
       className="flex justify-center"
       style={{ marginBottom: 'var(--space-stack-md)' }}
     >
-      <div style={{ position: 'relative' }}>
+      <div style={{ position: 'relative' }} ref={ref}>
         {/* Dark container — glow stays inside */}
         <div
           style={{
@@ -74,28 +122,31 @@ export default function SectionIcon({ variant, glowColor, glowColorHex }: Sectio
             aria-hidden="true"
           />
 
-          {webgl ? (
-            <SectionIconCanvas variant={variant} glowColorHex={glowColorHex} />
-          ) : (
-            <div
-              style={{
-                width: '100%',
-                height: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
+          {webgl && inView ? (
+            <>
+              {/* Show placeholder until canvas first paints */}
+              {!canvasReady && (
+                <div style={{ position: 'absolute', inset: 0 }}>
+                  <IconPlaceholder variant={variant} glowColor={glowColor} />
+                </div>
+              )}
               <div
                 style={{
-                  width: '40%',
-                  height: '40%',
-                  borderRadius: variant === 'about' || variant === 'skills' ? '50%' : '20%',
-                  background: `linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.01))`,
-                  border: '0.5px solid rgba(255,255,255,0.08)',
+                  width: '100%',
+                  height: '100%',
+                  opacity: canvasReady ? 1 : 0,
+                  transition: 'opacity 0.5s ease',
                 }}
-              />
-            </div>
+              >
+                <SectionIconCanvas
+                  variant={variant}
+                  glowColorHex={glowColorHex}
+                  onCreated={() => setCanvasReady(true)}
+                />
+              </div>
+            </>
+          ) : (
+            <IconPlaceholder variant={variant} glowColor={glowColor} />
           )}
         </div>
       </div>

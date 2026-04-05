@@ -12,7 +12,7 @@ export default function AimCardImage() {
       }}
     >
       <Image
-        src="/images/work/AIM card.png"
+        src="/images/1.png"
         alt="AIM loan management platform"
         fill
         unoptimized

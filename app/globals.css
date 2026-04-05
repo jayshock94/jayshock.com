@@ -432,6 +432,34 @@ body > * {
   letter-spacing: var(--text-h4-tracking);
 }
 
+/* Mobile heading step-down: display→h1, h1→h2, h2→h3, h3→h4 */
+@media (max-width: 767px) {
+  .text-display {
+    font-size: var(--text-h1-size);
+    font-weight: var(--text-h1-weight);
+    line-height: var(--text-h1-line-height);
+    letter-spacing: var(--text-h1-tracking);
+  }
+  .text-h1 {
+    font-size: var(--text-h2-size);
+    font-weight: var(--text-h2-weight);
+    line-height: var(--text-h2-line-height);
+    letter-spacing: var(--text-h2-tracking);
+  }
+  .text-h2 {
+    font-size: var(--text-h3-size);
+    font-weight: var(--text-h3-weight);
+    line-height: var(--text-h3-line-height);
+    letter-spacing: var(--text-h3-tracking);
+  }
+  .text-h3 {
+    font-size: var(--text-h4-size);
+    font-weight: var(--text-h4-weight);
+    line-height: var(--text-h4-line-height);
+    letter-spacing: var(--text-h4-tracking);
+  }
+}
+
 .text-intro {
   font-family: var(--font-outfit), system-ui, sans-serif;
   font-size: var(--text-intro-size);
@@ -688,6 +716,34 @@ body > * {
      forwards:  holds "to" state after animation ends
    Apply .hero-fade-up + animation-delay inline per element.
 ----------------------------------------------------------- */
+/* -----------------------------------------------------------
+   CASE STUDY GATE — entrance and error shake
+----------------------------------------------------------- */
+@keyframes gate-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes gate-shake {
+  0%, 100% { transform: translateX(0); }
+  15% { transform: translateX(-6px); }
+  30% { transform: translateX(6px); }
+  45% { transform: translateX(-4px); }
+  60% { transform: translateX(4px); }
+  75% { transform: translateX(-2px); }
+  90% { transform: translateX(2px); }
+}
+
+.gate-shake {
+  animation: gate-shake 0.5s ease;
+}
+
 @keyframes hero-fade-up {
   from {
     opacity: 0;
@@ -959,6 +1015,21 @@ body > * {
 }
 .chat-fab-enter {
   animation: chat-fab-enter 600ms cubic-bezier(0.34, 1.56, 0.64, 1) 3s both;
+}
+
+/* -----------------------------------------------------------
+   WORK CARD — glass hover
+----------------------------------------------------------- */
+.work-card-glass {
+  border: 0.5px solid rgba(255,255,255,0.08);
+  box-shadow: 0 2px 24px rgba(0,0,0,0.24), inset 0 1px 0 rgba(255,255,255,0.06);
+  transform: translateY(0);
+  transition: transform var(--transition-smooth), box-shadow var(--transition-base), border-color var(--transition-base);
+}
+.work-card-glass:hover {
+  border-color: rgba(255,255,255,0.16);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.32), inset 0 1px 0 rgba(255,255,255,0.08);
+  transform: translateY(-2px);
 }
 
 /* -----------------------------------------------------------

@@ -3,7 +3,8 @@ import WorkCard from '@/components/work/WorkCard'
 import AimCardImage           from '@/components/work/AimCardImage'
 import MobileLendingCardImage from '@/components/work/MobileLendingCardImage'
 import CaliberCardImage       from '@/components/work/CaliberCardImage'
-import { caseStudies, additionalCaseStudies } from '@/data/case-studies'
+import SectionIcon            from '@/components/icons/SectionIcon'
+import { caseStudies } from '@/data/case-studies'
 
 export const metadata: Metadata = {
   title:       'Work — Jay Shock, Product Designer',
@@ -13,32 +14,25 @@ export const metadata: Metadata = {
 
 export default function WorkPage() {
   return (
-    <div className="pt-[var(--space-section-md)] pb-[var(--space-section-lg)]">
-      <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
+    <div className="py-[var(--space-section-md)] px-[var(--space-page-margin)]">
+      <div className="max-w-content mx-auto flex flex-col gap-[70px]">
 
-        <header className="mb-[var(--space-section-sm)] text-center">
-          <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-sm)]">
-            Selected Work
-          </p>
-          <h1 className="text-h1 text-[var(--color-ink)]">
-            Three case studies.
+        <div className="text-center">
+          <SectionIcon variant="work" glowColor="var(--phase-impact-label)" />
+          <h1
+            className="text-display"
+            style={{ color: 'var(--color-ink)', marginTop: '-14px' }}
+          >
+            Featured case studies
           </h1>
-          <p className="text-body-lg text-[var(--color-text-secondary)] mt-[var(--space-stack-md)] max-w-content mx-auto">
-            Enterprise SaaS, fintech, and internal tools. Each one is an
-            argument — that a complex problem was understood, navigated, and
-            solved.
-          </p>
-        </header>
+        </div>
 
-        <div
-          className="
-            grid grid-cols-1 gap-[var(--space-component-lg)]
-          "
-        >
-          {caseStudies.map(cs => (
+        <div className="grid grid-cols-1 gap-[var(--space-component-lg)]">
+          {caseStudies.map((cs, i) => (
             <WorkCard
               key={cs.slug}
               caseStudy={cs}
+              imagePosition={i % 2 === 0 ? 'right' : 'left'}
               cardImageSlot={
                 cs.slug === 'aim' ? <AimCardImage /> :
                 cs.slug === 'mobile-lending-management' ? <MobileLendingCardImage /> :
@@ -48,12 +42,45 @@ export default function WorkPage() {
             />
           ))}
 
-          {additionalCaseStudies.map(cs => (
-            <WorkCard
-              key={cs.slug}
-              caseStudy={cs}
-            />
-          ))}
+          {/* Placeholder for upcoming case studies */}
+          <div
+            style={{
+              borderRadius:         '16px',
+              border:               '0.5px solid rgba(255,255,255,0.08)',
+              background:           'rgba(255,255,255,0.02)',
+              padding:              '48px 24px',
+              textAlign:            'center',
+              display:              'flex',
+              flexDirection:        'column',
+              alignItems:           'center',
+              gap:                  '8px',
+            }}
+          >
+            <p
+              style={{
+                fontFamily:    'var(--font-outfit), system-ui, sans-serif',
+                fontSize:      '22px',
+                fontWeight:    500,
+                lineHeight:    '28px',
+                color:         'var(--color-ink)',
+                margin:        0,
+              }}
+            >
+              More case studies on the way.
+            </p>
+            <p
+              style={{
+                fontFamily:    'var(--font-outfit), system-ui, sans-serif',
+                fontSize:      '16px',
+                fontWeight:    400,
+                lineHeight:    '24px',
+                color:         'var(--color-text-muted)',
+                margin:        0,
+              }}
+            >
+              Jay is currently writing up additional work. Check back soon.
+            </p>
+          </div>
         </div>
 
       </div>

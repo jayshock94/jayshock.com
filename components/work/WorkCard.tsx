@@ -1,6 +1,3 @@
-'use client'
-
-import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import type { CaseStudy } from '@/data/types'
@@ -16,8 +13,6 @@ export default function WorkCard({
   cardImageSlot,
   imagePosition = 'right',
 }: WorkCardProps) {
-  const [hovered, setHovered] = useState(false)
-
   const {
     slug, title, eyebrow, cardEyebrow, cardImpactLine,
     cardDescription, cardStat, cardImage, comingSoon,
@@ -147,20 +142,15 @@ export default function WorkCard({
 
   const cardContent = (
     <article
-      onMouseEnter={() => !comingSoon && setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      className={comingSoon ? '' : 'work-card-glass'}
       style={{
         position:             'relative',
         borderRadius:         '16px',
         overflow:             'hidden',
-        background:           'var(--color-surface-glass)',
-        backdropFilter:       'blur(14px)',
-        WebkitBackdropFilter: 'blur(14px)',
-        border:               `0.5px solid ${hovered ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.10)'}`,
-        boxShadow:            hovered ? 'var(--shadow-card-hover)' : 'var(--shadow-card)',
-        transform:            hovered ? 'translateY(-2px)' : 'translateY(0)',
+        background:           `linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 50%, transparent 100%), rgba(255,255,255,0.04)`,
+        backdropFilter:       'blur(48px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(48px) saturate(180%)',
         cursor:               comingSoon ? 'default' : 'pointer',
-        transition:           'transform var(--transition-smooth), box-shadow var(--transition-base), border-color var(--transition-base)',
       }}
     >
       {/* Desktop: side-by-side, grows with content, min 286px */}
