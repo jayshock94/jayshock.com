@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { useFormState, useFormStatus } from 'react-dom'
 import { submitContact, type ContactFormState } from '@/app/actions/contact'
 import Button from '@/components/ui/Button'
@@ -7,27 +8,26 @@ import Button from '@/components/ui/Button'
 const INITIAL_STATE: ContactFormState = { status: 'idle' }
 
 const TOPIC_OPTIONS = [
-  { value: '',                    label: 'What are you reaching out about?' },
-  { value: 'job',                 label: 'Job opportunity'                  },
-  { value: 'consulting',          label: 'Consulting inquiry'               },
-  { value: 'hello',               label: 'Just saying hello'                },
+  { value: '',            label: 'What are you reaching out about?' },
+  { value: 'job',         label: 'Job opportunity'                  },
+  { value: 'consulting',  label: 'Consulting inquiry'               },
+  { value: 'hello',       label: 'Just saying hello'                },
 ] as const
 
 const FIELD_CLASS = `
   w-full
-  px-[var(--space-component-md)] py-[12px]
-  bg-[var(--color-surface)]
-  border border-[var(--color-border)]
-  rounded-[var(--radius-md)]
-  text-body-sm text-[var(--color-ink)]
-  placeholder:text-[var(--color-text-placeholder)]
-  focus:outline-none focus:border-[var(--color-border-strong)]
-  focus:bg-[var(--color-surface-elevated)]
+  px-[var(--space-component-md)] py-[14px]
+  bg-transparent
+  border border-[rgba(255,255,255,0.08)]
+  rounded-[12px]
+  text-body-lg text-[var(--color-ink)]
+  placeholder:text-[var(--color-text-muted)]
+  focus:outline-none focus:border-[rgba(255,255,255,0.18)]
   transition-all duration-200
 `
 
 const LABEL_CLASS = `
-  text-label text-[var(--color-text-muted)]
+  text-label text-[var(--color-text-secondary)]
   mb-[var(--space-component-xs)] block
 `
 
@@ -38,7 +38,7 @@ function SubmitButton() {
       type="submit"
       variant="glass"
       disabled={pending}
-      className="w-full sm:w-auto justify-center"
+      className="self-start"
     >
       {pending ? 'Sending...' : 'Send it'}
     </Button>
@@ -47,6 +47,7 @@ function SubmitButton() {
 
 export default function ContactForm() {
   const [state, formAction] = useFormState(submitContact, INITIAL_STATE)
+  const [topicSelected, setTopicSelected] = useState(false)
 
   if (state.status === 'success') {
     return (
@@ -82,10 +83,10 @@ export default function ContactForm() {
   }
 
   return (
-    <form action={formAction} className="flex flex-col gap-[var(--space-component-md)]">
+    <form action={formAction} className="flex flex-col gap-[var(--space-stack-md)]">
 
       {/* Name + Email row */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-[var(--space-component-md)]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-[var(--space-stack-md)]">
         <div>
           <label htmlFor="contact-name" className={LABEL_CLASS}>Name</label>
           <input
@@ -119,7 +120,13 @@ export default function ContactForm() {
           required
           className={FIELD_CLASS}
           defaultValue=""
-          style={{ appearance: 'none', paddingRight: '40px', cursor: 'pointer' }}
+          onChange={(e) => setTopicSelected(e.target.value !== '')}
+          style={{
+            appearance: 'none',
+            paddingRight: '40px',
+            cursor: 'pointer',
+            color: topicSelected ? 'var(--color-ink)' : 'var(--color-text-muted)',
+          }}
         >
           {TOPIC_OPTIONS.map(opt => (
             <option
@@ -138,9 +145,9 @@ export default function ContactForm() {
           style={{
             position: 'absolute',
             right: '14px',
-            bottom: '14px',
+            bottom: '16px',
             pointerEvents: 'none',
-            color: 'var(--color-text-placeholder)',
+            color: 'var(--color-text-muted)',
           }}
         >
           <path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
@@ -154,10 +161,10 @@ export default function ContactForm() {
           id="contact-message"
           name="message"
           required
-          rows={4}
+          rows={5}
           placeholder="Tell me what you are working on."
           className={FIELD_CLASS}
-          style={{ resize: 'vertical', minHeight: '100px' }}
+          style={{ resize: 'vertical', minHeight: '120px' }}
         />
       </div>
 

@@ -6,17 +6,18 @@ export default function MobileLendingCardImage() {
       style={{
         position: 'absolute',
         top:    '24px',
-        left:   '-4%',
+        left:   '-20%',
         right:  0,
-        bottom: '-40%',
+        bottom: '-30%',
       }}
     >
       <Image
-        src="/images/work/gac case study cover image v1 2.png"
+        src="/images/gac case study card hero v2.png"
         alt="Mobile lending management app"
         fill
+        unoptimized
         sizes="(max-width: 768px) 100vw, 50vw"
-        style={{ objectFit: 'cover', objectPosition: 'left top' }}
+        style={{ objectFit: 'contain', objectPosition: 'right top' }}
       />
     </div>
   )

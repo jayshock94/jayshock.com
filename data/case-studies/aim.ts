@@ -17,7 +17,7 @@ const aim: CaseStudy = {
   year:         '2022–2024',
   types:        ['Fintech', 'Enterprise SaaS', '3-Year Initiative', '12 Modules'],
   cardImpactLine:
-    'Lenders were losing clients to a system built in the early 2000s.',
+    'The software was driving clients away',
   cardStat: { value: '$10M+', label: 'Annual contract secured' },
   cardRole:     'Senior UX Designer · Owned IA, navigation, and 5 of 12 modules',
   cardEyebrow:  'Loan management platform',

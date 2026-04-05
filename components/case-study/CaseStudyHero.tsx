@@ -11,7 +11,7 @@ interface CaseStudyHeroProps {
 }
 
 export default function CaseStudyHero({ caseStudy, tokens, heroImageSlot, tagMessages }: CaseStudyHeroProps) {
-  const { title, role, year, industry, types } = caseStudy
+  const { title, role, types } = caseStudy
 
   return (
     <section
@@ -20,39 +20,24 @@ export default function CaseStudyHero({ caseStudy, tokens, heroImageSlot, tagMes
         ['--case-hero-bg' as string]: tokens.heroZone,
         position: 'relative',
         overflow: 'visible',
-        minHeight: heroImageSlot ? 'auto' : '70vh',
-        display: 'flex',
-        alignItems: 'center',
       } as React.CSSProperties}
       aria-label="Case study overview"
     >
       <div
         className="max-w-layout mx-auto px-[var(--space-page-margin)] w-full"
         style={{
-          paddingTop: 'clamp(80px, 10vw, 120px)',
+          paddingTop: 'clamp(80px, 12vw, 140px)',
           paddingBottom: heroImageSlot ? '0' : 'var(--space-section-xl)',
         }}
       >
-        {/* Eyebrow */}
-        <p
-          className="hero-fade-up text-label text-center"
-          style={{
-            color: 'var(--hero-text-muted)',
-            marginBottom: 'var(--space-stack-md)',
-            animationDelay: '300ms',
-          }}
-        >
-          {industry} · {year}
-        </p>
-
-        {/* Title */}
+        {/* Title — display size, matching homepage section headings */}
         <h1
-          className="hero-fade-up text-hero-title text-center mx-auto"
+          className="hero-fade-up text-display text-center mx-auto"
           style={{
             color: 'var(--hero-text-primary)',
             marginBottom: 'var(--space-stack-md)',
             maxWidth: 'var(--space-content-max)',
-            animationDelay: '400ms',
+            animationDelay: '300ms',
           }}
         >
           {title}
@@ -65,7 +50,7 @@ export default function CaseStudyHero({ caseStudy, tokens, heroImageSlot, tagMes
             color: 'var(--hero-text-secondary)',
             marginBottom: 'var(--space-stack-lg)',
             maxWidth: 'var(--space-content-max)',
-            animationDelay: '550ms',
+            animationDelay: '450ms',
           }}
         >
           {role}
@@ -83,7 +68,7 @@ export default function CaseStudyHero({ caseStudy, tokens, heroImageSlot, tagMes
             style={{
               marginTop: 'var(--space-subsection)',
               marginBottom: '0',
-              animationDelay: '750ms',
+              animationDelay: '650ms',
               display: 'flex',
               justifyContent: 'center',
               overflow: 'visible',

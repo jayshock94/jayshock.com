@@ -8,7 +8,7 @@ import CaseStudyHero       from '@/components/case-study/CaseStudyHero'
 import CaseStudyLede       from '@/components/case-study/CaseStudyLede'
 import PhaseSection        from '@/components/case-study/PhaseSection'
 import PhaseObserver       from '@/components/case-study/PhaseObserver'
-// PhaseProgress removed — phase eyebrows handle wayfinding
+import CaseStudyGate       from '@/components/case-study/CaseStudyGate'
 import AimHeroImage           from '@/components/case-study/AimHeroImage'
 import MobileLendingHeroImage from '@/components/case-study/MobileLendingHeroImage'
 import PainPoints            from '@/components/case-study/PainPoints'
@@ -363,7 +363,7 @@ export default function CaseStudyPage({ params }: PageProps) {
   const isCaliber = cs.slug === 'caliber-smart'
 
   return (
-    <>
+    <CaseStudyGate>
       {/* Editorial hero */}
       <CaseStudyHero
         caseStudy={cs}
@@ -396,7 +396,6 @@ export default function CaseStudyPage({ params }: PageProps) {
 
         <PhaseSection
           phase="problem"
-          phaseNumber={1}
           content={cs.problem}
           glossary={cs.glossary}
           mediaSlot={
@@ -491,7 +490,6 @@ export default function CaseStudyPage({ params }: PageProps) {
 
         <PhaseSection
           phase="discovery"
-          phaseNumber={2}
           content={cs.discovery}
           glossary={cs.glossary}
           headerNote={isCaliber ? CALIBER_HEADER_NOTE : undefined}
@@ -615,7 +613,6 @@ export default function CaseStudyPage({ params }: PageProps) {
 
         <PhaseSection
           phase="solution"
-          phaseNumber={3}
           content={cs.solution}
           glossary={cs.glossary}
           mediaSlot={
@@ -672,7 +669,6 @@ export default function CaseStudyPage({ params }: PageProps) {
 
         <PhaseSection
           phase="impact"
-          phaseNumber={4}
           content={cs.impact}
           glossary={cs.glossary}
           mediaSlot={isMobileLending ? <FinalAppComposite /> : undefined}
@@ -690,17 +686,19 @@ export default function CaseStudyPage({ params }: PageProps) {
           <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
             <ScrollReveal>
               <div className="max-w-content">
-                <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-sm)]">
-                  WHAT I EXPLORED
-                </p>
-                <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-md)]">
+                <h2 className="text-display text-[var(--color-ink)]">
                   Directions I tried and killed.
                 </h2>
-                <p className="text-body text-[var(--color-text-secondary)] mb-[var(--space-stack-md)]">
-                  Not everything shipped. These are the ideas I invested in, tested, and
-                  ultimately cut because something better emerged from the research.
-                </p>
               </div>
+            </ScrollReveal>
+
+            <div style={{ height: '70px' }} />
+
+            <ScrollReveal>
+              <p className="text-body text-[var(--color-text-secondary)] max-w-content" style={{ marginBottom: 'var(--space-stack-md)' }}>
+                Not everything shipped. These are the ideas I invested in, tested, and
+                ultimately cut because something better emerged from the research.
+              </p>
             </ScrollReveal>
 
             <div className="grid md:grid-cols-3 gap-[var(--space-component-lg)] max-w-layout">
@@ -776,9 +774,9 @@ export default function CaseStudyPage({ params }: PageProps) {
           <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
             <ScrollReveal>
               <div className="max-w-content">
-                <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-sm)]">
-                  WHAT I LEARNED
-                </p>
+                <h2 className="text-h1 text-[var(--color-ink)]" style={{ marginBottom: 'var(--space-stack-md)' }}>
+                  What I learned.
+                </h2>
                 <p className="text-intro text-[var(--color-text-secondary)]">
                   {cs.learnings}
                 </p>
@@ -796,11 +794,7 @@ export default function CaseStudyPage({ params }: PageProps) {
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <ScrollReveal>
-            <div className="border-t border-[var(--color-border)] pt-[var(--space-stack-md)] mb-[var(--space-stack-md)]">
-              <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-md)]">
-                Next
-              </p>
-            </div>
+            <div className="border-t border-[var(--color-border)] pt-[var(--space-stack-lg)]" />
 
             {nextCS && (
               <div className="max-w-[480px] mb-[var(--space-stack-lg)]">
@@ -839,6 +833,6 @@ export default function CaseStudyPage({ params }: PageProps) {
           </ScrollReveal>
         </div>
       </section>
-    </>
+    </CaseStudyGate>
   )
 }
