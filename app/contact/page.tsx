@@ -40,7 +40,7 @@ export default function ContactPage() {
                   I want to hear about whatever complex system, product, or problem we could be working on.
                 </p>
                 <p className="text-body-lg text-[var(--color-text-muted)]">
-                  Prefer email?{' '}
+                  Rather send it yourself?{' '}
                   <a
                     href="mailto:hello@jayshock.com"
                     className="hover-ink"
