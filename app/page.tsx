@@ -50,7 +50,7 @@ export default function HomePage() {
             className="text-center w-full"
             style={{
               fontFamily:   'var(--font-outfit), system-ui, sans-serif',
-              fontSize:     'clamp(32px, 6.6vw, 57px)',
+              fontSize:     'clamp(38px, 7vw, 57px)',
               lineHeight:   '1.12',
               letterSpacing: '-0.25px',
               fontWeight:   400,
@@ -190,6 +190,7 @@ export default function HomePage() {
               >
                 <WorkCard
                   caseStudy={cs}
+                  imagePosition={i % 2 === 0 ? 'right' : 'left'}
                   cardImageSlot={
                     cs.slug === 'aim' ? <AimCardImage /> :
                     cs.slug === 'mobile-lending-management' ? <MobileLendingCardImage /> :
@@ -414,52 +415,51 @@ export default function HomePage() {
             </div>
           </ScrollReveal>
 
-          {/* Block 2 — intro copy, left-aligned */}
-          <ScrollReveal>
-            <div className="flex flex-col gap-[16px]">
-              <p
-                style={{
-                  fontFamily:    'var(--font-outfit), system-ui, sans-serif',
-                  fontSize:      '32px',
-                  lineHeight:    '40px',
-                  fontWeight:    500,
-                  color:         'var(--color-ink)',
-                  letterSpacing: '0px',
-                }}
-              >
-                Let&apos;s make it simple.
-              </p>
-              <p
-                style={{
-                  fontFamily:    'var(--font-outfit), system-ui, sans-serif',
-                  fontSize:      '16px',
-                  lineHeight:    '24px',
-                  fontWeight:    500,
-                  color:         'var(--color-text-secondary)',
-                  letterSpacing: '0.15px',
-                  maxWidth:      '700px',
-                }}
-              >
-                If you are building something complex and need someone who will own the problem with you, I want to hear about it.
-              </p>
-            </div>
-          </ScrollReveal>
+          {/* Block 2 — intro copy + email + form (one subsection) */}
+          <div className="flex flex-col gap-[var(--space-stack-lg)]">
+            <ScrollReveal>
+              <div className="flex flex-col gap-[16px]">
+                <p
+                  style={{
+                    fontFamily:    'var(--font-outfit), system-ui, sans-serif',
+                    fontSize:      '32px',
+                    lineHeight:    '40px',
+                    fontWeight:    500,
+                    color:         'var(--color-ink)',
+                    letterSpacing: '0px',
+                  }}
+                >
+                  Let&apos;s make it simple.
+                </p>
+                <p
+                  style={{
+                    fontFamily:    'var(--font-outfit), system-ui, sans-serif',
+                    fontSize:      '16px',
+                    lineHeight:    '24px',
+                    fontWeight:    500,
+                    color:         'var(--color-text-secondary)',
+                    letterSpacing: '0.15px',
+                    maxWidth:      '700px',
+                  }}
+                >
+                  If you are building something complex and need someone who will own the problem with you, I want to hear about it.
+                </p>
+                <p className="text-body-lg text-[var(--color-text-muted)]">
+                  Prefer email?{' '}
+                  <a
+                    href="mailto:hello@jayshock.com"
+                    className="hover-ink"
+                    style={{ color: 'var(--color-text-secondary)', textDecoration: 'underline', textUnderlineOffset: '3px' }}
+                  >
+                    hello@jayshock.com
+                  </a>
+                </p>
+              </div>
+            </ScrollReveal>
 
-          {/* Block 3 — form */}
-          <div className="w-full">
             <ScrollReveal>
               <ContactForm />
             </ScrollReveal>
-            <p className="text-body-sm text-[var(--color-text-muted)] mt-[var(--space-stack-lg)]">
-              Prefer email?{' '}
-              <a
-                href="mailto:hello@jayshock.com"
-                className="hover-ink"
-                style={{ color: 'var(--color-text-secondary)', textDecoration: 'underline', textUnderlineOffset: '3px' }}
-              >
-                hello@jayshock.com
-              </a>
-            </p>
           </div>
 
         </div>

@@ -9,8 +9,6 @@ import PaymentSuccessAnimation from './PaymentSuccessAnimation'
 interface PhaseSectionProps {
   phase:   PhaseKey
   content: PhaseContent
-  /** Phase number for the eyebrow (1-based). */
-  phaseNumber?: number
   /** Custom media node injected after a specific content block. */
   mediaSlot?: React.ReactNode
   /** Which content block index to inject mediaSlot after. Default: last block. */
@@ -96,7 +94,6 @@ function renderImages(images: CaseStudyImage[], vars: typeof PHASE_VARS.impact) 
   const isSinglePortrait = images.length === 1 && images[0].aspect === 'portrait'
 
   if (isSingleLandscape) {
-    // Break out to full layout width
     return (
       <ScrollReveal>
         <div
@@ -138,7 +135,6 @@ function renderImages(images: CaseStudyImage[], vars: typeof PHASE_VARS.impact) 
 
   if (isSinglePortrait) {
     const isConfetti = images[0].src === '__confetti__'
-    // Phase-tinted background well with phone frame or confetti animation
     return (
       <ScrollReveal>
         <div
@@ -245,7 +241,6 @@ function renderImages(images: CaseStudyImage[], vars: typeof PHASE_VARS.impact) 
 export default function PhaseSection({
   phase,
   content: phaseContent,
-  phaseNumber,
   mediaSlot,
   mediaSlotAfterBlock,
   glossary,
@@ -265,8 +260,6 @@ export default function PhaseSection({
     {},
   )
 
-  const phaseNum = phaseNumber ? String(phaseNumber).padStart(2, '0') : undefined
-
   // Track paragraph count to apply text-intro only to the first paragraph block
   let paragraphCount = 0
 
@@ -274,7 +267,7 @@ export default function PhaseSection({
     <section
       id={phase}
       data-phase-section={phase}
-      className="py-[var(--space-section-md)] transition-colors duration-700"
+      className="py-[var(--space-section-xl)] transition-colors duration-700"
       style={{
         backgroundColor: vars.bg,
         backgroundImage: `radial-gradient(ellipse 80% 50% at 50% 20%, ${vars.glass}, transparent 70%)`,
@@ -283,37 +276,39 @@ export default function PhaseSection({
     >
       <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
 
-        {/* Phase eyebrow with number */}
+        {/* Phase label — subtle colored tag, not an eyebrow */}
         <ScrollReveal>
-          <div className="flex items-center justify-center gap-[var(--space-component-sm)] mb-[var(--space-stack-sm)]">
-            {phaseNum && (
-              <span
-                className="text-label"
-                style={{ color: 'var(--color-text-placeholder)' }}
-              >
-                {phaseNum}
-              </span>
-            )}
-            <span className="text-label" style={{ color: vars.label }}>
+          <div className="flex justify-center" style={{ marginBottom: 'var(--space-stack-sm)' }}>
+            <span
+              className="text-body-sm"
+              style={{
+                color: vars.label,
+                fontWeight: 500,
+                letterSpacing: '0.05em',
+              }}
+            >
               {label}
             </span>
           </div>
         </ScrollReveal>
 
-        {/* Section headline */}
+        {/* Section headline — display size, matching homepage */}
         <ScrollReveal>
           <h2
             id={`phase-heading-${phase}`}
-            className="text-h2 text-[var(--color-ink)] max-w-content mx-auto text-center mb-[var(--space-stack-lg)]"
+            className="text-display text-[var(--color-ink)] max-w-content mx-auto text-center"
           >
             {headline}
           </h2>
         </ScrollReveal>
 
+        {/* 70px gap between heading and content — matching homepage */}
+        <div style={{ height: '70px' }} />
+
         {/* Stats (Impact phase) */}
         {stats && stats.length > 0 && (
           <div
-            className="max-w-content mx-auto grid grid-cols-2 md:grid-cols-3 gap-[var(--space-component-md)] mb-[var(--space-section-md)]"
+            className="max-w-content mx-auto grid grid-cols-2 md:grid-cols-3 gap-[var(--space-component-md)] mb-[var(--space-subsection)]"
             role="list"
             aria-label="Impact metrics"
           >
@@ -410,13 +405,13 @@ export default function PhaseSection({
                   </ScrollReveal>
                 )}
 
-                {/* ── Subheader block ── */}
+                {/* ── Subheader block — upgraded to text-h2, matching homepage subsections ── */}
                 {block.type === 'subheader' && (
                   <ScrollReveal>
                     <h3
-                      className="text-h4 text-[var(--color-ink)] max-w-content mx-auto"
+                      className="text-h2 text-[var(--color-ink)] max-w-content mx-auto"
                       style={{
-                        marginTop: i > 0 ? 'var(--space-stack-lg)' : undefined,
+                        marginTop: i > 0 ? 'var(--space-subsection)' : undefined,
                       }}
                     >
                       {block.text}
@@ -484,8 +479,8 @@ export default function PhaseSection({
             <blockquote
               className="max-w-layout mx-auto text-center"
               style={{
-                marginTop: 'var(--space-section-md)',
-                marginBottom: 'var(--space-stack-lg)',
+                marginTop: 'var(--space-subsection)',
+                marginBottom: 'var(--space-stack-md)',
                 paddingTop: 'var(--space-stack-lg)',
                 paddingBottom: 'var(--space-stack-lg)',
                 borderTop: '0.5px solid var(--color-border)',
@@ -506,7 +501,7 @@ export default function PhaseSection({
                   className="text-body-sm not-italic"
                   style={{ color: vars.label }}
                 >
-                  – {quote.attribution}
+                  {quote.attribution}
                 </cite>
               )}
             </blockquote>

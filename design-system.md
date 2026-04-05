@@ -435,11 +435,22 @@ Tied to readability, touch targets (minimum 44px), and visual grouping.
 --space-component-lg:   var(--space-5);   /* 24px — card padding, form groups */
 
 /* Vertical text stacking */
---space-stack-xs:       6px;              /* Tight interior gaps */
---space-stack-sm:       var(--space-3);   /* 12px — eyebrow to heading */
---space-stack-md:       var(--space-5);   /* 24px — heading to body, subheading bottom margin */
---space-stack-lg:       var(--space-6);   /* 32px — job row padding top/bottom */
+--space-stack-xs:    6px;              /* Tight interior gaps */
+--space-stack-sm:    var(--space-3);   /* 12px — eyebrow to heading */
+--space-stack-title: var(--space-4);   /* 16px — heading to subheading, toggle to controlled content */
+--space-stack-md:    var(--space-5);   /* 24px — heading to body, content to button/CTA */
+--space-stack-lg:    var(--space-6);   /* 32px — job row padding top/bottom */
 ```
+
+### Stack spacing rules
+
+| Relationship | Token | Value |
+|---|---|---|
+| Eyebrow label → heading | `--space-stack-sm` | 12px |
+| Heading → subheading/title | `--space-stack-title` | 16px |
+| Heading → body copy | `--space-stack-md` | 24px |
+| Content → button or sibling CTA | `--space-stack-md` | 24px |
+| Toggle/control → controlled content below | `--space-stack-title` | 16px |
 
 ---
 
@@ -449,15 +460,26 @@ Section and page level spacing. Scales with viewport using clamp().
 Never applies inside a component — only between sections and layout blocks.
 
 ```css
-/* Standard page section padding — top and bottom (all sections use this) */
+/* Main page sections — use as py on each <section> → 160px visual gap between sections */
+--space-section-xl:   80px;
+
+/* Subsections within a section — use as py → 80px visual gap between subsections */
+--space-subsection:   40px;
+
+/* Standard section padding — legacy/utility use */
 --space-section-md:   clamp(48px, 7vw, 80px);
 
-/* Hero sections, major page-level breaks */
+/* Hero sections, major page-level breaks — legacy/utility use */
 --space-section-lg:   clamp(64px, 10vw, 128px);
 
 /* Left and right page margin — all breakpoints */
 --space-page-margin:  clamp(20px, 6vw, 80px);
 ```
+
+### Section spacing rules
+
+- Every main `<section>` uses `py-[var(--space-section-xl)]` (80px top + 80px bottom = 160px between sections)
+- Subsections within a section use `py-[var(--space-subsection)]` (40px top + 40px bottom = 80px between subsections)
 
 ---
 

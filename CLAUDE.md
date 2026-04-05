@@ -211,15 +211,20 @@ Fixed component tokens:
 --space-component-base  12px
 --space-component-md    16px
 --space-component-lg    24px
---space-stack-xs        6px
---space-stack-sm        12px
---space-stack-md        24px
---space-stack-lg        32px
 
-Fluid section tokens (use clamp):
---space-section-sm      clamp(32px, 5vw, 48px)
---space-section-md      clamp(48px, 7vw, 80px)
---space-section-lg      clamp(64px, 10vw, 128px)
+Stack tokens (vertical text/content grouping):
+--space-stack-xs        6px    — tight interior gaps
+--space-stack-sm        12px   — eyebrow label to heading
+--space-stack-title     16px   — heading to subheading, toggle to controlled content
+--space-stack-md        24px   — heading to body, content to button/CTA
+--space-stack-lg        32px   — job row padding top/bottom
+
+Section tokens:
+--space-section-xl      80px                    — py on main sections (→ 160px visual gap)
+--space-subsection      40px                    — py on subsections (→ 80px visual gap)
+--space-section-sm      clamp(32px, 5vw, 48px)  — small section breaks
+--space-section-md      clamp(48px, 7vw, 80px)  — legacy/utility
+--space-section-lg      clamp(64px, 10vw, 128px)— legacy/utility
 --space-page-margin     clamp(20px, 6vw, 80px)
 
 Fixed layout tokens:

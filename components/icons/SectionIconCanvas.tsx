@@ -29,9 +29,11 @@ interface SectionIconCanvasProps {
   variant: IconVariant
   /** Override the default glow color for dynamic theming */
   glowColorHex?: string
+  /** Called once the Canvas has created its WebGL context */
+  onCreated?: () => void
 }
 
-export default function SectionIconCanvas({ variant, glowColorHex }: SectionIconCanvasProps) {
+export default function SectionIconCanvas({ variant, glowColorHex, onCreated }: SectionIconCanvasProps) {
   const Shape = SHAPES[variant]
   const lightColor = glowColorHex || GLOW_COLORS[variant]
 
@@ -41,6 +43,7 @@ export default function SectionIconCanvas({ variant, glowColorHex }: SectionIcon
       dpr={[1, 1.5]}
       camera={{ fov: 35, position: [0, 0.2, 5] }}
       style={{ width: '100%', height: '100%' }}
+      onCreated={onCreated}
     >
       {/* Very low ambient — keeps it dark and moody */}
       <ambientLight intensity={0.15} />

@@ -33,7 +33,15 @@
       "Bash(curl -s http://localhost:3000/api/resume)",
       "Bash(node -e \":*)",
       "Bash(curl -s -w \"\\\\nHTTP_CODE:%{http_code}\\\\nSIZE:%{size_download}\" http://localhost:3000/api/resume -o /tmp/resume-test.pdf)",
-      "Bash(curl -s -H \"Accept: text/html\" http://localhost:3000/api/resume)"
+      "Bash(curl -s -H \"Accept: text/html\" http://localhost:3000/api/resume)",
+      "Bash(echo \"exit: $?\")",
+      "Bash(curl -s -X POST http://localhost:3000/api/chat -H \"Content-Type: application/json\" -d '{\"\"\"\"messages\"\"\"\":[{\"\"\"\"role\"\"\"\":\"\"\"\"user\"\"\"\",\"\"\"\"content\"\"\"\":\"\"\"\"What did Jay do at Caliber?\"\"\"\"}],\"\"\"\"pageContext\"\"\"\":{\"\"\"\"path\"\"\"\":\"\"\"\"/\"\"\"\",\"\"\"\"pageType\"\"\"\":\"\"\"\"home\"\"\"\"}}' --max-time 20)",
+      "Bash(curl -s -X POST http://localhost:3000/api/chat -H \"Content-Type: application/json\" -d '{\"\"\"\"messages\"\"\"\":[{\"\"\"\"role\"\"\"\":\"\"\"\"user\"\"\"\",\"\"\"\"content\"\"\"\":\"\"\"\"What did Jay do at Caliber?\"\"\"\"}],\"\"\"\"currentPage\"\"\"\":\"\"\"\"/\"\"\"\"}' --max-time 25)",
+      "Bash(curl -s -X POST http://localhost:3000/api/chat -H \"Content-Type: application/json\" -H \"x-forwarded-for: 1.2.3.4\" -d '{\"\"\"\"messages\"\"\"\":[{\"\"\"\"role\"\"\"\":\"\"\"\"user\"\"\"\",\"\"\"\"content\"\"\"\":\"\"\"\"What did Jay do at Caliber?\"\"\"\"}],\"\"\"\"currentPage\"\"\"\":\"\"\"\"/\"\"\"\"}' --max-time 25)",
+      "Bash(ls .env*)",
+      "mcp__49f34f1b-f74e-4314-86ee-c54a3863336f__use_figma",
+      "Bash(cp \"C:\\\\Users\\\\jaysh\\\\Desktop\\\\claude-code\\\\jayshock-portfolio\\\\.claude\\\\worktrees\\\\friendly-haslett\\\\public\\\\images\\\\work\\\\AIM card.png\" \"C:\\\\Users\\\\jaysh\\\\Desktop\\\\claude-code\\\\jayshock-portfolio\\\\public\\\\images\\\\work\\\\AIM card.png\")",
+      "Bash(cp \"C:\\\\Users\\\\jaysh\\\\Desktop\\\\claude-code\\\\jayshock-portfolio\\\\.claude\\\\worktrees\\\\friendly-haslett\\\\public\\\\images\\\\work\\\\gac case study cover image v1 2.png\" \"C:\\\\Users\\\\jaysh\\\\Desktop\\\\claude-code\\\\jayshock-portfolio\\\\public\\\\images\\\\work\\\\gac case study cover image v1 2.png\")"
     ]
   }
 }

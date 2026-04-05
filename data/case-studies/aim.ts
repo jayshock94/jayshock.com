@@ -17,9 +17,11 @@ const aim: CaseStudy = {
   year:         '2022–2024',
   types:        ['Fintech', 'Enterprise SaaS', '3-Year Initiative', '12 Modules'],
   cardImpactLine:
-    'Lenders were losing clients to a system built in the early 2000s.',
+    'The software was driving clients away',
   cardStat: { value: '$10M+', label: 'Annual contract secured' },
   cardRole:     'Senior UX Designer · Owned IA, navigation, and 5 of 12 modules',
+  cardEyebrow:  'Loan management platform',
+  cardDescription: 'Senior UX Designer unifying fragmented legacy tools into a platform lenders chose to renew.',
   cardImage:    '',
 
   // Deep navy — processed through color algorithm on the page
@@ -152,7 +154,7 @@ const aim: CaseStudy = {
     },
     {
       term: 'drawer management',
-      definition: 'a teller\'s personal queue of work. think of it like a physical desk drawer full of tasks — loans to process, payments to verify, documents to follow up on. each teller only sees their own.',
+      definition: 'a teller\'s personal queue of work. think of it like a physical desk drawer full of tasks. loans to process, payments to verify, documents to follow up on. each teller only sees their own.',
     },
     {
       term: 'auto-assign logic',

@@ -16,9 +16,11 @@ const mobileLendingManagement: CaseStudy = {
   year:         '2024–2025',
   types:        ['White-Label App', 'Usability Testing', '9 App Audit', 'Payment Redesign'],
   cardImpactLine:
-    'It was easier to call support than use the app.',
-  cardStat: { value: '~40%', label: 'Fewer support calls' },
+    'It was easier to call to make a payment, than use the app',
+  cardStat: { value: '40%', label: 'Fewer support calls' },
   cardRole:     'Lead Product Designer · Sole designer, research through handoff',
+  cardEyebrow:  'White-label loan management app',
+  cardDescription: 'Led product design upgrading a legacy loan app under tight dev constraints, moving borrowers from support calls to self-service.',
   cardImage: '/images/work/mobile-lending.png',
 
   // Lendmark crimson — extracted from brand image, run through color algorithm
@@ -47,7 +49,7 @@ const mobileLendingManagement: CaseStudy = {
     images: [],
     quote: {
       text:        'The mobile app is another highlight. Simple, user friendly, and secure. Managing my finances is a breeze.',
-      attribution: '— Borrower feedback, relayed through client team',
+      attribution: 'Borrower feedback, relayed through client team',
     },
     estimatedNote:
       'Missed payment reduction estimated from qualitative reports by client teams. Formal analytics weren\'t tracked at launch.',
@@ -100,7 +102,7 @@ const mobileLendingManagement: CaseStudy = {
     ],
     quote: {
       text:        'I always had anxiety about whether the payment actually was submitted. That confetti screen, I know that sounds silly, but I like it a lot, because now I know I did it right.',
-      attribution: '— Borrower, relayed through client team',
+      attribution: 'Borrower, relayed through client team',
     },
   },
 

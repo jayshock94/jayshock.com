@@ -94,6 +94,18 @@ export interface CaseStudy {
   /** Image shown in the work card. Path relative to /public. */
   cardImage: string
   /**
+   * Short product-type label for the work card eyebrow.
+   * Falls back to `eyebrow` if omitted.
+   * e.g. "Loan management platform"
+   */
+  cardEyebrow?: string
+  /**
+   * One-sentence narrative description for the new card layout.
+   * Tells what the designer did and why it mattered.
+   * e.g. "Senior UX Designer unifying fragmented legacy tools into a platform lenders chose to renew."
+   */
+  cardDescription?: string
+  /**
    * Brand color hex — processed through generateTokens() before use.
    * Never used directly; only used as algorithm input.
    */

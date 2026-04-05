@@ -466,10 +466,11 @@
   --space-component-lg:   var(--space-5);
 
   /* Vertical text stacking */
-  --space-stack-xs: 6px;
-  --space-stack-sm: var(--space-3);
-  --space-stack-md: var(--space-5);
-  --space-stack-lg: var(--space-6);
+  --space-stack-xs:    6px;
+  --space-stack-sm:    var(--space-3);   /* 12px — eyebrow to heading */
+  --space-stack-title: var(--space-4);   /* 16px — heading to subheading, toggle to controlled content */
+  --space-stack-md:    var(--space-5);   /* 24px — heading to body, content to button/CTA */
+  --space-stack-lg:    var(--space-6);   /* 32px — job row padding top/bottom */
 
   /* -----------------------------------------------------------
      SPACING TOKENS — SECTION (fluid)
@@ -477,6 +478,8 @@
   --space-section-sm:  clamp(32px, 5vw, 48px);
   --space-section-md:  clamp(48px, 7vw, 80px);
   --space-section-lg:  clamp(64px, 10vw, 128px);
+  --space-section-xl:  80px;             /* py on main sections → 160px visual gap between sections */
+  --space-subsection:  40px;             /* py on subsections  → 80px visual gap between subsections */
   --space-page-margin: clamp(20px, 6vw, 80px);
 
   /* -----------------------------------------------------------

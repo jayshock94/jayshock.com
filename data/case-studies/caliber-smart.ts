@@ -18,9 +18,11 @@ const caliberSmart: CaseStudy = {
   year:         '2019–2020',
   types:        ['D2D Sales', 'Gamification', 'Solar Tools', 'Full App Rebuild'],
   cardImpactLine:
-    'Reps were running their business from Vimeo links, group chats, and phone calls to payroll.',
+    'Reps were spending more time calling rep services than knocking doors.',
   cardStat: { value: '400–600', label: 'Reps using platform daily' },
   cardRole:     'Solo Product Designer · Every screen, every flow',
+  cardEyebrow:  'D2D sales platform',
+  cardDescription: 'Solo Product Designer building the ultimate door to door sales app. From processing sales, to reserving your spot on the Cancun trip.',
   cardImage: '',
 
   // Solar gold — processed through color algorithm on the page

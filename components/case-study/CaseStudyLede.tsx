@@ -47,29 +47,17 @@ export default function CaseStudyLede({ context, overview, roleMeta, roleSummary
     <section
       className="bg-[var(--color-canvas)]"
       style={{
-        paddingTop: 'var(--space-section-md)',
-        paddingBottom: 'var(--space-section-md)',
+        paddingTop: 'var(--space-section-xl)',
+        paddingBottom: 'var(--space-section-xl)',
       }}
       aria-label="Project context"
     >
       <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
 
-        {/* Section eyebrow */}
-        <ScrollReveal>
-          <div className="flex items-center gap-[var(--space-component-sm)] mb-[var(--space-stack-sm)]">
-            <span className="text-label" style={{ color: 'var(--color-text-placeholder)' }}>
-              00
-            </span>
-            <span className="text-label" style={{ color: 'var(--color-ink)' }}>
-              Overview
-            </span>
-          </div>
-        </ScrollReveal>
-
-        {/* Context as lede paragraph */}
+        {/* Context as lede paragraph — text-intro, matching homepage subsection copy */}
         {context && (
           <ScrollReveal>
-            <div className="max-w-content" style={{ marginBottom: 'var(--space-stack-lg)' }}>
+            <div className="max-w-content" style={{ marginBottom: '70px' }}>
               <GlossaryParagraph
                 text={context}
                 glossary={glossary || []}
@@ -86,11 +74,8 @@ export default function CaseStudyLede({ context, overview, roleMeta, roleSummary
           <ScrollReveal>
             <div className="max-w-content mx-auto">
               <p
-                className="text-label"
-                style={{
-                  color: 'var(--color-text-muted)',
-                  marginBottom: 'var(--space-stack-md)',
-                }}
+                className="text-h2 text-[var(--color-ink)]"
+                style={{ marginBottom: 'var(--space-stack-md)' }}
               >
                 My role
               </p>
@@ -183,11 +168,8 @@ export default function CaseStudyLede({ context, overview, roleMeta, roleSummary
               }}
             >
               <p
-                className="text-label"
-                style={{
-                  color: 'var(--color-text-muted)',
-                  marginBottom: 'var(--space-stack-xs)',
-                }}
+                className="text-h2 text-[var(--color-ink)]"
+                style={{ marginBottom: 'var(--space-stack-sm)' }}
               >
                 My role
               </p>

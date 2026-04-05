@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function ExperiencePage() {
   return (
-    <div className="pt-[var(--space-section-md)] pb-[var(--space-section-lg)]">
+    <div className="pt-[var(--space-section-xl)] pb-[var(--space-section-xl)]">
 
 
       {/* =========================================================
@@ -21,13 +21,13 @@ export default function ExperiencePage() {
       <section aria-label="Experience overview">
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <ScrollReveal>
-            <h1 className="text-h1 text-[var(--color-ink)] mb-[var(--space-stack-sm)] text-center">
+            <h1 className="text-h1 text-[var(--color-ink)] mb-[var(--space-stack-title)] text-center">
               Jay Shock
             </h1>
             <p className="text-body-lg text-[var(--color-text-secondary)] mb-[var(--space-stack-xs)] text-center">
               Product Designer
             </p>
-            <p className="text-body-sm text-[var(--color-text-muted)] mb-[var(--space-stack-lg)] text-center">
+            <p className="text-body-sm text-[var(--color-text-muted)] mb-[var(--space-stack-md)] text-center">
               Currently employed. Open to the right senior role or consulting engagement. Remote first, open to hybrid.
             </p>
             <div className="flex flex-wrap justify-center gap-[var(--space-component-sm)]">
@@ -47,13 +47,13 @@ export default function ExperiencePage() {
           Skills by Category
       ========================================================= */}
       <section
-        className="py-[var(--space-section-md)]"
+        className="py-[var(--space-section-xl)]"
         aria-label="Skills"
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
             <ScrollReveal>
-              <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-lg)] text-center">
+              <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-md)] text-center">
                 What I bring.
               </h2>
             </ScrollReveal>
@@ -95,13 +95,13 @@ export default function ExperiencePage() {
           Tools
       ========================================================= */}
       <section
-        className="py-[var(--space-section-md)]"
+        className="py-[var(--space-section-xl)]"
         aria-label="Tools"
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
             <ScrollReveal>
-              <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-lg)] text-center">
+              <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-md)] text-center">
                 What I use.
               </h2>
             </ScrollReveal>
@@ -162,13 +162,13 @@ export default function ExperiencePage() {
           Experience Timeline
       ========================================================= */}
       <section
-        className="py-[var(--space-section-md)]"
+        className="py-[var(--space-section-xl)]"
         aria-label="Experience timeline"
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
             <ScrollReveal>
-              <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-lg)] text-center">
+              <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-md)] text-center">
                 Where I have been.
               </h2>
             </ScrollReveal>
@@ -228,7 +228,7 @@ export default function ExperiencePage() {
           Education
       ========================================================= */}
       <section
-        className="py-[var(--space-section-md)]"
+        className="py-[var(--space-section-xl)]"
         aria-label="Education"
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
@@ -256,13 +256,13 @@ export default function ExperiencePage() {
           Download CTA
       ========================================================= */}
       <section
-        className="py-[var(--space-section-lg)]"
+        className="py-[var(--space-section-xl)]"
         aria-label="Download resume"
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
             <ScrollReveal>
-              <p className="text-body-lg text-[var(--color-text-secondary)] mb-[var(--space-stack-lg)] text-center">
+              <p className="text-body-lg text-[var(--color-text-secondary)] mb-[var(--space-stack-md)] text-center">
                 Want the full picture in one document?
               </p>
               <div className="text-center">

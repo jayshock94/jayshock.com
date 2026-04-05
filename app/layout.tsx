@@ -3,7 +3,8 @@ import { Outfit } from 'next/font/google'
 import Nav         from '@/components/nav/Nav'
 import Footer      from '@/components/ui/Footer'
 import ChatLazy    from '@/components/chat/ChatLazy'
-import BloomScroll from '@/components/BloomScroll'
+import BloomScroll      from '@/components/BloomScroll'
+import PageAtmosphere   from '@/components/ui/PageAtmosphere'
 import '../styles/tokens.css'
 import './globals.css'
 
@@ -56,6 +57,7 @@ export default function RootLayout({
       className={outfit.variable}
     >
       <body className="min-h-screen flex flex-col">
+        <PageAtmosphere />
         <BloomScroll />
         <Nav />
         <main className="flex-1">{children}</main>
