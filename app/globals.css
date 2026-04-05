@@ -17,6 +17,11 @@ html {
   text-rendering: optimizeLegibility;
 }
 
+/* Prevent iOS auto-zoom on input focus (requires >= 16px) */
+@media screen and (max-width: 768px) {
+  input, textarea, select { font-size: 16px !important; }
+}
+
 /* -----------------------------------------------------------
    BACKGROUND CANVAS SYSTEM
    Radial light bloom — page feels lit from within.
@@ -1082,6 +1087,18 @@ body > * {
 }
 .chat-fab-enter {
   animation: chat-fab-enter 600ms cubic-bezier(0.34, 1.56, 0.64, 1) 3s both;
+}
+
+/* Hide Barnaby when case study gate is locked */
+body[data-gate-locked] button[aria-label="Open chat"],
+body[data-gate-locked] button[aria-label="Close chat"] {
+  display: none !important;
+}
+
+/* Contact form field placeholder */
+.contact-field::placeholder {
+  color: var(--color-text-muted);
+  opacity: 1;
 }
 
 /* -----------------------------------------------------------

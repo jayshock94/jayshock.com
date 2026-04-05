@@ -67,14 +67,14 @@ export default function HowIWork() {
     <div className="flex flex-col gap-[var(--space-stack-md)]">
 
       {/* Heading + subtitle */}
-      <div className="flex flex-col gap-[var(--space-stack-title)]">
+      <div className="flex flex-col gap-[var(--space-stack-sm)]">
         <h2
           className="text-h1"
           style={{ color: 'var(--color-ink)' }}
         >
           No matter the project.
         </h2>
-        <p className="text-intro text-[var(--color-text-secondary)] text-center md:text-left" style={{ maxWidth: '700px' }}>
+        <p className="text-body-lg text-[var(--color-text-secondary)] text-center md:text-left" style={{ maxWidth: '700px' }}>
           Scopes change, problems arise, constraints shift. This is how I handle it.
         </p>
       </div>
