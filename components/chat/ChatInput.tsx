@@ -85,7 +85,7 @@ export default function ChatInput({ onSend, isDisabled }: ChatInputProps) {
           color: 'var(--color-text-primary)',
           fontFamily: 'var(--font-outfit), system-ui, sans-serif',
           fontSize: '16px', /* 16px minimum prevents iOS auto-zoom on focus */
-          fontWeight: 'var(--text-body-sm-weight)',
+          fontWeight: 'var(--text-body-weight)',
           lineHeight: '1.6',
           padding: '12px 0',
           overflowY: 'auto',

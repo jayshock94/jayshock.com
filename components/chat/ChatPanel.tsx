@@ -137,7 +137,7 @@ export default function ChatPanel({
               style={{
                 fontFamily: 'var(--font-outfit), system-ui, sans-serif',
                 fontSize: 'var(--text-ui-md-size)',
-                fontWeight: 500,
+                fontWeight: 'var(--text-ui-md-weight)',
                 lineHeight: '1.1',
                 color: 'var(--color-text-primary)',
               }}
@@ -147,11 +147,11 @@ export default function ChatPanel({
             <div
               style={{
                 fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-                fontSize: '10px',
-                fontWeight: 400,
-                lineHeight: '1.3',
+                fontSize: 'var(--text-label-size)',
+                fontWeight: 'var(--text-body-sm-weight)',
+                lineHeight: 'var(--text-label-line-height)',
                 color: 'var(--color-text-muted)',
-                letterSpacing: '0.02em',
+                letterSpacing: 'var(--text-label-tracking)',
                 marginTop: '2px',
               }}
             >
@@ -235,8 +235,8 @@ export default function ChatPanel({
                   style={{
                     color: 'var(--color-text-muted)',
                     fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-                    fontSize: 'var(--text-body-sm-size)',
-                    fontWeight: 'var(--text-body-sm-weight)',
+                    fontSize: 'var(--text-body-size)',
+                    fontWeight: 'var(--text-body-weight)',
                     fontStyle: 'italic',
                     lineHeight: '1.6',
                   }}

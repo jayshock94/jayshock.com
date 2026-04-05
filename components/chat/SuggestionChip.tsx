@@ -21,9 +21,9 @@ export default function SuggestionChip({ label, onClick, index }: SuggestionChip
         background: 'transparent',
         color: 'var(--color-text-secondary)',
         fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-        fontSize: 'var(--text-body-sm-size)',
-        fontWeight: 'var(--text-body-sm-weight)',
-        lineHeight: 'var(--text-body-sm-line-height)',
+        fontSize: 'var(--text-body-size)',
+        fontWeight: 'var(--text-body-weight)',
+        lineHeight: 'var(--text-body-line-height)',
         cursor: 'pointer',
         transition: 'border-color 200ms ease, background 200ms ease',
       }}
