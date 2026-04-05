@@ -15,8 +15,8 @@ export default function MobileLendingCardImage() {
         src="/images/gac case study card hero v2.png"
         alt="Mobile lending management app"
         fill
-        unoptimized
         sizes="(max-width: 768px) 100vw, 50vw"
+        quality={90}
         style={{ objectFit: 'contain', objectPosition: 'right top' }}
       />
     </div>

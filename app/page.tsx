@@ -243,8 +243,8 @@ export default function HomePage() {
 
                 {/* Photo — mobile: fixed 220×220; desktop: stretches to content column height */}
                 <div
-                  className="flex-shrink-0 md:self-stretch relative overflow-hidden rounded-full md:rounded-[8px] min-h-[220px] h-[220px] md:h-auto"
-                  style={{ width: '220px', border: '0.5px solid var(--color-text-muted)' }}
+                  className="flex-shrink-0 md:self-stretch relative overflow-hidden rounded-full md:rounded-[8px] w-[140px] h-[140px] md:w-[220px] md:min-h-[220px] md:h-auto"
+                  style={{ border: '0.5px solid var(--color-text-muted)' }}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img

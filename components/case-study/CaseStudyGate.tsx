@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef, type ReactNode, type FormEvent } from 'react'
+import { useRouter } from 'next/navigation'
 
 const SESSION_KEY = 'cs-unlocked'
 const SITE_PASSWORD = 'blue-canyon-44'
@@ -10,6 +11,7 @@ interface CaseStudyGateProps {
 }
 
 export default function CaseStudyGate({ children }: CaseStudyGateProps) {
+  const router = useRouter()
   const [unlocked, setUnlocked] = useState<boolean | null>(null)
   const [value, setValue] = useState('')
   const [error, setError] = useState(false)
@@ -49,16 +51,16 @@ export default function CaseStudyGate({ children }: CaseStudyGateProps) {
 
   return (
     <>
-      {/* Scrim */}
+      {/* Scrim — covers everything including nav and footer */}
       <div
         style={{
           position: 'fixed',
           inset: 0,
-          zIndex: 9999,
+          zIndex: 99999,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          background: 'rgba(0, 0, 0, 0.7)',
+          background: 'rgba(0, 0, 0, 0.85)',
           backdropFilter: 'blur(24px)',
           WebkitBackdropFilter: 'blur(24px)',
           padding: 'var(--space-page-margin)',
@@ -68,6 +70,7 @@ export default function CaseStudyGate({ children }: CaseStudyGateProps) {
         <div
           className={shaking ? 'gate-shake' : ''}
           style={{
+            position: 'relative',
             width: '100%',
             maxWidth: '400px',
             borderRadius: '20px',
@@ -84,6 +87,35 @@ export default function CaseStudyGate({ children }: CaseStudyGateProps) {
             animation: 'gate-enter 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
           }}
         >
+          {/* Close button */}
+          <button
+            type="button"
+            aria-label="Go back"
+            onClick={() => router.back()}
+            style={{
+              position: 'absolute',
+              top: '16px',
+              right: '16px',
+              width: '32px',
+              height: '32px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              background: 'transparent',
+              border: 'none',
+              cursor: 'pointer',
+              color: 'var(--color-text-muted)',
+              transition: 'color 0.2s ease',
+              padding: 0,
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--color-ink)' }}
+            onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--color-text-muted)' }}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
           {/* Lock icon */}
           <svg
             width="32"
