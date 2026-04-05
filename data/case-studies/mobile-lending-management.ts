@@ -16,11 +16,11 @@ const mobileLendingManagement: CaseStudy = {
   year:         '2024–2025',
   types:        ['White-Label App', 'Usability Testing', '9 App Audit', 'Payment Redesign'],
   cardImpactLine:
-    'It was easier to call to make a payment, than use the app',
+    'It was easier to call and pay than it was to use the app.',
   cardStat: { value: '40%', label: 'Fewer support calls' },
   cardRole:     'Lead Product Designer · Sole designer, research through handoff',
   cardEyebrow:  'White-label loan management app',
-  cardDescription: 'Led product design upgrading a legacy loan app under tight dev constraints, moving borrowers from support calls to self-service.',
+  cardDescription: 'Senior UX Designer upgrading a legacy loan app under tight dev constraints, moving borrowers from support calls to self-service.',
   cardImage: '/images/work/mobile-lending.png',
 
   // Lendmark crimson — extracted from brand image, run through color algorithm

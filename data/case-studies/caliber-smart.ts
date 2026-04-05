@@ -22,7 +22,7 @@ const caliberSmart: CaseStudy = {
   cardStat: { value: '400–600', label: 'Reps using platform daily' },
   cardRole:     'Solo Product Designer · Every screen, every flow',
   cardEyebrow:  'D2D sales platform',
-  cardDescription: 'Solo Product Designer building the ultimate door to door sales app. From processing sales, to reserving your spot on the Cancun trip.',
+  cardDescription: 'Solo Product Designer building the D2D app reps actually want. From processing sales, to reserving their spot on the Cancun trip.',
   cardImage: '',
 
   // Solar gold — processed through color algorithm on the page
