@@ -88,7 +88,7 @@ export default function Toolkit() {
   }, [])
 
   return (
-    <div>
+    <div className="flex flex-col items-center md:items-start">
       {/* Header */}
       <h2 className="text-h1 text-[var(--color-ink)] mb-[var(--space-stack-md)]">
         What I work with.

@@ -15,7 +15,8 @@ export default function AimCardImage() {
         src="/images/1.png"
         alt="AIM loan management platform"
         fill
-        unoptimized
+        sizes="(max-width: 768px) 100vw, 50vw"
+        quality={90}
         style={{ objectFit: 'cover', objectPosition: 'left top' }}
         priority
       />
