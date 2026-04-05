@@ -411,8 +411,9 @@ export default function HomePage() {
           <ScrollReveal>
             <div className="text-center">
               <SectionIcon variant="contact" glowColor="var(--phase-solution-label)" />
-              <p className="text-display" style={{ color: 'var(--color-ink)', marginTop: '-14px' }}>
-                Contact
+              <p className="text-display" style={{ marginTop: '-14px' }}>
+                <span style={{ color: 'var(--color-text-secondary)', fontWeight: 300 }}>Contact</span>{' '}
+                <span style={{ color: 'var(--color-ink)' }}>Jay</span>
               </p>
             </div>
           </ScrollReveal>
@@ -421,8 +422,9 @@ export default function HomePage() {
           <div className="flex flex-col gap-[var(--space-stack-lg)]">
             <ScrollReveal>
               <div className="flex flex-col">
-                <h2 className="text-h1 text-[var(--color-ink)]" style={{ marginBottom: 'var(--space-stack-title)' }}>
-                  Let&apos;s make it simple together.
+                <h2 className="text-h1" style={{ marginBottom: 'var(--space-stack-title)' }}>
+                  <span style={{ color: 'var(--color-text-secondary)', fontWeight: 300 }}>Let&apos;s make it</span>{' '}
+                  <span style={{ color: 'var(--color-ink)' }}>simple.</span>
                 </h2>
                 <p className="text-intro text-[var(--color-text-secondary)] text-center md:text-left" style={{ maxWidth: '700px', marginBottom: 'var(--space-stack-md)' }}>
                   I want to hear about whatever complex system, product, or problem we could be working on.

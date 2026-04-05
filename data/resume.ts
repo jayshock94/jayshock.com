@@ -68,8 +68,10 @@ export const TIMELINE: TimelineEntry[] = [
     company:  'GoldPoint Systems',
     period:   '2021 to present',
     paragraphs: [
-      'Grew the design team from 3 to 4 designers. Contributing to a design system that spans multiple products and serves clients across the financial industry, each with their own brand guidelines.',
-      'Led new product work beyond legacy redesigns. Headed the lending management platform redesign from the ground up.',
+      'Helped grow the design team from a new department with 2 designers to 4 designers and an integral part of the company.',
+      'Contributing to a design system that spans multiple products and serves clients across the financial industry, each with their own brand guidelines.',
+      'Led new product work beyond legacy redesigns.',
+      'Headed the lending management platform redesign from the ground up.',
     ],
     slug: '/work/aim',
   },
