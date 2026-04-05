@@ -5,6 +5,8 @@ const CASE_STUDY_TITLES: Record<string, string> = {
   'aim': 'Account & Information Management — replacing legacy lending tools with a unified workspace',
   'mobile-lending-management': 'From support calls to self-service',
   'caliber-smart': 'Rebuilding a D2D sales app around how reps actually worked',
+  'virtual-badge': 'Virtual badge system — getting reps on doors faster',
+  'goldpoint-les': 'Lending Engine Service — unifying fragmented legacy tools',
 }
 
 /**

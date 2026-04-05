@@ -142,7 +142,7 @@ export default function WorkCard({
 
   const cardContent = (
     <article
-      className={comingSoon ? '' : 'work-card-glass'}
+      className={comingSoon ? '' : 'work-card work-card-glass'}
       style={{
         position:             'relative',
         borderRadius:         '16px',
@@ -217,6 +217,7 @@ export default function WorkCard({
               <p style={statLabelStyle}>{cardStat.label}</p>
             </div>
           )}
+
         </div>
 
         {hasImage && (

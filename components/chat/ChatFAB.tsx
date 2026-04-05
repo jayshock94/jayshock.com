@@ -4,8 +4,9 @@ import { useRef, useState, useEffect, useCallback } from 'react'
 import CatAvatar from './CatAvatar'
 import ChatBubble from './ChatBubble'
 
-const BUBBLE_DISMISSED_PREFIX = 'jayshock-chat-bubble-dismissed'
 const AUTO_DISMISS_MS = 10000
+const SITE_ENTERED_KEY = 'jayshock-chat-bubble-site-entered'
+const CASE_STUDY_KEY = 'jayshock-chat-bubble-case-study'
 
 interface ChatFABProps {
   isOpen: boolean
@@ -18,14 +19,12 @@ interface ChatFABProps {
 const BUBBLE_MESSAGES: Record<string, string> = {
   'case-study': 'I was there for this one. Ask me anything about it.',
   home: 'Ask me anything about Jay, or tell me what you\'re looking for.',
-  about: 'Want to know more about Jay? I\'ve got the inside scoop.',
-  experience: 'I can break down any of these roles for you.',
-  contact: 'Any last questions before you reach out?',
 }
 
 export default function ChatFAB({ isOpen, isStreaming, onClick, pageType }: ChatFABProps) {
-  // Page-specific dismiss key so bubble shows on new page types
-  const dismissKey = `${BUBBLE_DISMISSED_PREFIX}-${pageType ?? 'home'}`
+  // Only show bubble on first site entry OR first case study visit
+  const isCaseStudy = pageType === 'case-study'
+  const dismissKey = isCaseStudy ? CASE_STUDY_KEY : SITE_ENTERED_KEY
 
   // Track if the FAB has been opened at least once — after that, skip entrance animation
   const hasOpened = useRef(false)
@@ -35,17 +34,19 @@ export default function ChatFAB({ isOpen, isStreaming, onClick, pageType }: Chat
   const [showBubble, setShowBubble] = useState(false)
   const [dismissing, setDismissing] = useState(false)
 
-  // Show bubble if not dismissed for this page type
+  // Only show bubble on first site entry (home) or first case study visit
   useEffect(() => {
+    // Skip bubble for about, experience, contact pages
+    if (!isCaseStudy && pageType !== 'home' && pageType !== undefined) return
+
     try {
       if (sessionStorage.getItem(dismissKey)) return
     } catch { /* ignore */ }
 
-    // On case study pages, show sooner since user is already engaged
-    const delay = pageType === 'case-study' ? 2000 : 4200
+    const delay = isCaseStudy ? 2000 : 4200
     const showTimer = setTimeout(() => setShowBubble(true), delay)
     return () => clearTimeout(showTimer)
-  }, [dismissKey, pageType])
+  }, [dismissKey, isCaseStudy, pageType])
 
   // Auto-dismiss after 10s
   useEffect(() => {
