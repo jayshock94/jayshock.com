@@ -2,12 +2,14 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Button from '@/components/ui/Button'
 import ScrollReveal from '@/components/ui/ScrollReveal'
-import { SKILLS, TOOLS, AI_TOOLS, TIMELINE, EDUCATION, CONTACT } from '@/data/resume'
+import SectionIcon from '@/components/icons/SectionIcon'
+import ToolsToggle from '@/components/experience/ToolsToggle'
+import { SKILLS, TIMELINE, EDUCATION, CERTIFICATIONS_PRIMARY, CONTACT, SUMMARY } from '@/data/resume'
 
 export const metadata: Metadata = {
   title:       'Experience — Jay Shock, Product Designer',
   description:
-    'Skills, tools, and career history. Currently employed, open to senior product design roles and consulting engagements.',
+    'Skills, tools, and career history. 8 plus years designing complex products in fintech and enterprise SaaS.',
 }
 
 export default function ExperiencePage() {
@@ -16,27 +18,27 @@ export default function ExperiencePage() {
 
 
       {/* =========================================================
-          Header — Name, title, status, download CTA
+          Header — Display heading + summary + CTAs
       ========================================================= */}
-      <section aria-label="Experience overview">
+      <section
+        className="pb-[var(--space-section-xl)]"
+        aria-label="Experience overview"
+      >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <ScrollReveal>
-            <h1 className="text-h1 text-[var(--color-ink)] mb-[var(--space-stack-title)] text-center">
-              Jay Shock
-            </h1>
-            <p className="text-body-lg text-[var(--color-text-secondary)] mb-[var(--space-stack-xs)] text-center">
-              Product Designer
-            </p>
-            <p className="text-body-sm text-[var(--color-text-muted)] mb-[var(--space-stack-md)] text-center">
-              Currently employed. Open to the right senior role or consulting engagement. Remote first, open to hybrid.
-            </p>
-            <div className="grid grid-cols-2 gap-[8px] mx-auto" style={{ maxWidth: '320px' }}>
-              <Button variant="glass" href="/api/resume" className="w-full">
-                Download resume
-              </Button>
-              <Button variant="secondary" href="/contact" className="w-full">
-                Get in touch
-              </Button>
+            <div className="text-center">
+              <SectionIcon variant="skills" glowColor="var(--phase-discovery-label)" />
+              <h1 className="text-display text-[var(--color-ink)]" style={{ marginTop: '-14px' }}>
+                Experience
+              </h1>
+              <div className="grid grid-cols-2 gap-[8px] mx-auto" style={{ maxWidth: '320px', marginTop: 'var(--space-stack-md)' }}>
+                <Button variant="glass" href="/api/resume" className="w-full">
+                  Download resume
+                </Button>
+                <Button variant="secondary" href="/contact" className="w-full">
+                  Get in touch
+                </Button>
+              </div>
             </div>
           </ScrollReveal>
         </div>
@@ -44,180 +46,104 @@ export default function ExperiencePage() {
 
 
       {/* =========================================================
-          Skills by Category
+          Section 02 — Experience Timeline
       ========================================================= */}
       <section
-        className="py-[var(--space-section-xl)]"
-        aria-label="Skills"
-      >
-        <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
-          <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
-            <ScrollReveal>
-              <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-title)] text-center">
-                What I bring.
-              </h2>
-            </ScrollReveal>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-[var(--space-component-md)]">
-              {SKILLS.map((skill) => (
-                <ScrollReveal key={skill.category}>
-                  <div
-                    className="rounded-[8px] p-[var(--space-component-lg)]"
-                    style={{
-                      background: 'var(--color-surface)',
-                      border: '0.5px solid var(--color-border)',
-                    }}
-                  >
-                    <p className="text-h4 text-[var(--color-ink)] mb-[var(--space-stack-xs)]">
-                      {skill.category}
-                    </p>
-                    <p className="text-body text-[var(--color-text-secondary)] mb-[var(--space-stack-sm)]">
-                      {skill.items}
-                    </p>
-                    {skill.caseStudy && (
-                      <Link
-                        href={skill.caseStudy.slug}
-                        className="text-ui-md text-[var(--color-text-muted)] hover:text-[var(--color-ink)] transition-colors duration-200"
-                      >
-                        {skill.caseStudy.label} &rarr;
-                      </Link>
-                    )}
-                  </div>
-                </ScrollReveal>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-      {/* =========================================================
-          Tools
-      ========================================================= */}
-      <section
-        className="py-[var(--space-section-xl)]"
-        aria-label="Tools"
-      >
-        <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
-          <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
-            <ScrollReveal>
-              <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-title)] text-center">
-                What I use.
-              </h2>
-            </ScrollReveal>
-
-            <ScrollReveal>
-              <div className="flex flex-wrap gap-[var(--space-component-sm)] mb-[var(--space-stack-lg)]">
-                {TOOLS.map((tool) => (
-                  <span
-                    key={tool}
-                    className="text-body-sm"
-                    style={{
-                      padding: '8px 16px',
-                      borderRadius: '8px',
-                      background: 'var(--color-surface)',
-                      border: '0.5px solid var(--color-border)',
-                      color: 'var(--color-text-secondary)',
-                    }}
-                  >
-                    {tool}
-                  </span>
-                ))}
-              </div>
-            </ScrollReveal>
-
-            <ScrollReveal>
-              <div style={{ maxWidth: 'var(--space-content-max)' }}>
-                <p className="text-label text-[var(--color-text-muted)] mb-[var(--space-stack-sm)]">
-                  AI tools
-                </p>
-                <div className="flex flex-wrap gap-[var(--space-component-sm)] mb-[var(--space-stack-md)]">
-                  {AI_TOOLS.map((tool) => (
-                    <span
-                      key={tool}
-                      className="text-body-sm"
-                      style={{
-                        padding: '8px 16px',
-                        borderRadius: '8px',
-                        background: 'var(--color-surface)',
-                        border: '0.5px solid var(--color-border)',
-                        color: 'var(--color-text-secondary)',
-                      }}
-                    >
-                      {tool}
-                    </span>
-                  ))}
-                </div>
-                <p className="text-body text-[var(--color-text-secondary)]">
-                  Using AI to summarize and analyze research, manage tasks, improve prototyping speed, and reduce process friction across the team.
-                </p>
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
-
-      {/* =========================================================
-          Experience Timeline
-      ========================================================= */}
-      <section
-        className="py-[var(--space-section-xl)]"
+        className="pb-[var(--space-section-xl)]"
         aria-label="Experience timeline"
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
-          <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
+          <div className="mx-auto" style={{ maxWidth: 'var(--space-content-max)' }}>
             <ScrollReveal>
-              <h2 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-title)] text-center">
+              <h2 className="text-h1 text-[var(--color-ink)] mb-[var(--space-stack-lg)]">
                 Where I have been.
               </h2>
             </ScrollReveal>
 
-            <div className="flex flex-col">
-              {TIMELINE.map((job, i) => (
-                <ScrollReveal key={job.company}>
-                  <div
-                    className={i > 0 ? 'border-t border-[var(--color-border)]' : ''}
-                    style={{ padding: 'var(--space-stack-lg) 0' }}
-                  >
-                    <div className="flex flex-col gap-[var(--space-component-sm)] md:flex-row md:gap-[var(--space-7)]">
-
-                      {/* Left column — role metadata */}
-                      <div className="md:w-[280px] flex-shrink-0">
-                        <p className="text-h4 text-[var(--color-ink)]">
-                          {job.role}
-                        </p>
-                        <p className="text-body-sm text-[var(--color-text-muted)]">
-                          {job.company}
-                        </p>
-                        <p className="text-body-sm text-[var(--color-text-placeholder)]">
-                          {job.period}
-                        </p>
-                      </div>
-
-                      {/* Right column — description + case study link */}
-                      <div className="flex-1 flex flex-col gap-[var(--space-stack-sm)]">
-                        {job.paragraphs.map((p, j) => (
-                          <p
-                            key={j}
-                            className="text-body text-[var(--color-text-secondary)]"
-                          >
-                            {p}
-                          </p>
-                        ))}
-                        {job.slug && (
-                          <Link
-                            href={job.slug}
-                            className="text-ui-md text-[var(--color-text-muted)] hover:text-[var(--color-ink)] transition-colors duration-200"
-                          >
-                            View case study &rarr;
-                          </Link>
-                        )}
-                      </div>
-                    </div>
-                  </div>
+            {TIMELINE.map((job, i) => (
+              <div
+                key={job.company}
+                className={i > 0 ? 'border-t border-[var(--color-border)]' : ''}
+                style={{
+                  paddingTop: i > 0 ? 'var(--space-section-sm)' : '0',
+                  paddingBottom: 'var(--space-section-sm)',
+                }}
+              >
+                <ScrollReveal>
+                  <h3 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-sm)]">
+                    {job.role}
+                  </h3>
+                  <p className="text-h4 text-[var(--color-text-muted)] mb-[var(--space-stack-md)]">
+                    {job.company} &middot; {job.period}
+                  </p>
                 </ScrollReveal>
-              ))}
+                <ScrollReveal>
+                  <ul className="flex flex-col gap-[var(--space-stack-sm)] list-disc" style={{ paddingLeft: 'var(--space-component-lg)' }}>
+                    {job.paragraphs.map((p, j) => (
+                      <li
+                        key={j}
+                        className="text-body-lg text-[var(--color-text-secondary)]"
+                      >
+                        {p}
+                      </li>
+                    ))}
+                  </ul>
+                </ScrollReveal>
+                {job.slug && (
+                  <ScrollReveal>
+                    <div style={{ marginTop: 'var(--space-stack-md)' }}>
+                      <Button variant="secondary" href={job.slug}>
+                        View case study
+                      </Button>
+                    </div>
+                  </ScrollReveal>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
+      {/* =========================================================
+          Section 03 — Skills
+      ========================================================= */}
+      <section
+        className="pb-[var(--space-section-xl)]"
+        aria-label="Skills"
+      >
+        <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
+          <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
+            <div className="mx-auto" style={{ maxWidth: 'var(--space-content-max)' }}>
+              <ScrollReveal>
+                <h2 className="text-h1 text-[var(--color-ink)] mb-[var(--space-stack-md)]">
+                  What I bring.
+                </h2>
+              </ScrollReveal>
+
+              <div className="flex flex-col gap-[var(--space-stack-md)]">
+                {SKILLS.map((skill) => (
+                  <ScrollReveal key={skill.category}>
+                    <div>
+                      <h3 className="text-h4 text-[var(--color-ink)] mb-[var(--space-stack-xs)]">
+                        {skill.category}
+                      </h3>
+                      <p className="text-body-lg text-[var(--color-text-secondary)]">
+                        {skill.items}
+                      </p>
+                      {skill.caseStudy && (
+                        <Link
+                          href={skill.caseStudy.slug}
+                          className="text-ui-md text-[var(--color-text-muted)] hover:text-[var(--color-ink)] transition-colors duration-200 block"
+                          style={{ marginTop: 'var(--space-stack-xs)' }}
+                        >
+                          {skill.caseStudy.label} &rarr;
+                        </Link>
+                      )}
+                    </div>
+                  </ScrollReveal>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -225,52 +151,119 @@ export default function ExperiencePage() {
 
 
       {/* =========================================================
-          Education
+          Section 04 — Tools
       ========================================================= */}
       <section
-        className="py-[var(--space-section-xl)]"
-        aria-label="Education"
+        className="pb-[var(--space-section-xl)]"
+        aria-label="Tools"
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
-            <ScrollReveal>
-              <div className="flex flex-col gap-[var(--space-stack-md)]">
-                {EDUCATION.map((ed) => (
-                  <div key={ed.label}>
-                    <p className="text-h4 text-[var(--color-ink)]">
-                      {ed.label}
-                    </p>
-                    <p className="text-body-sm text-[var(--color-text-muted)]">
-                      {ed.institution}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </ScrollReveal>
+            <div className="mx-auto" style={{ maxWidth: 'var(--space-content-max)' }}>
+              <ScrollReveal>
+                <h2 className="text-h1 text-[var(--color-ink)] mb-[var(--space-stack-md)]">
+                  What I use.
+                </h2>
+              </ScrollReveal>
+
+              <ScrollReveal>
+                <ToolsToggle />
+              </ScrollReveal>
+            </div>
           </div>
         </div>
       </section>
 
 
       {/* =========================================================
-          Download CTA
+          Section 05 — Education and Certifications
       ========================================================= */}
       <section
-        className="py-[var(--space-section-xl)]"
-        aria-label="Download resume"
+        className="pb-[var(--space-section-xl)]"
+        aria-label="Education and certifications"
       >
         <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
           <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
-            <ScrollReveal>
-              <p className="text-body-lg text-[var(--color-text-secondary)] mb-[var(--space-stack-md)] text-center">
-                Want the full picture in one document?
-              </p>
-              <div className="text-center">
-                <Button variant="glass" href="/api/resume">
-                  Download resume
-                </Button>
+            <div className="mx-auto" style={{ maxWidth: 'var(--space-content-max)' }}>
+              <ScrollReveal>
+                <h2 className="text-h1 text-[var(--color-ink)] mb-[var(--space-stack-md)]">
+                  Education and certifications.
+                </h2>
+              </ScrollReveal>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-[var(--space-component-sm)]">
+                {[
+                  ...EDUCATION.map((ed) => ({ title: ed.label, subtitle: ed.institution })),
+                  ...CERTIFICATIONS_PRIMARY.map((cert) => ({ title: cert.title, subtitle: cert.institution })),
+                ].map((item) => (
+                  <ScrollReveal key={item.title}>
+                    <div
+                      style={{
+                        padding: 'var(--space-component-lg)',
+                        borderRadius: '12px',
+                        border: '0.5px solid var(--color-border)',
+                        background: 'var(--color-surface)',
+                        boxShadow: '0 1px 2px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.03)',
+                      }}
+                    >
+                      <h3
+                        style={{
+                          fontFamily: 'var(--font-outfit), system-ui, sans-serif',
+                          fontSize: '15px',
+                          fontWeight: 500,
+                          color: 'var(--color-text-primary)',
+                          marginBottom: '4px',
+                        }}
+                      >
+                        {item.title}
+                      </h3>
+                      <p
+                        style={{
+                          fontFamily: 'var(--font-outfit), system-ui, sans-serif',
+                          fontSize: '13px',
+                          fontWeight: 300,
+                          color: 'var(--color-text-muted)',
+                        }}
+                      >
+                        {item.subtitle}
+                      </p>
+                    </div>
+                  </ScrollReveal>
+                ))}
               </div>
-            </ScrollReveal>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      {/* =========================================================
+          Section 06 — Contact CTA
+      ========================================================= */}
+      <section
+        className="pb-[var(--space-section-xl)]"
+        aria-label="Contact"
+      >
+        <div className="max-w-layout mx-auto px-[var(--space-page-margin)]">
+          <div className="border-t border-[var(--color-border)] pt-[var(--space-section-sm)]">
+            <div className="mx-auto" style={{ maxWidth: 'var(--space-content-max)' }}>
+              <ScrollReveal>
+                <h2 className="text-h1 text-[var(--color-ink)] mb-[var(--space-stack-sm)]">
+                  Want the full picture?
+                </h2>
+                <p className="text-body-lg text-[var(--color-text-secondary)] mb-[var(--space-stack-md)]">
+                  Download the resume or reach out directly.
+                </p>
+                <div className="grid grid-cols-2 gap-[8px]" style={{ maxWidth: '320px' }}>
+                  <Button variant="glass" href="/api/resume" className="w-full">
+                    Download resume
+                  </Button>
+                  <Button variant="secondary" href="/contact" className="w-full">
+                    Get in touch
+                  </Button>
+                </div>
+              </ScrollReveal>
+            </div>
           </div>
         </div>
       </section>
