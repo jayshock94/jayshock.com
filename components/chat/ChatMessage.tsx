@@ -77,9 +77,9 @@ export default function ChatMessage({ message, isStreaming, onClose }: ChatMessa
               <span
                 style={{
                   fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-                  fontSize: '10px',
-                  fontWeight: 500,
-                  letterSpacing: '0.06em',
+                  fontSize: 'var(--text-label-size)',
+                  fontWeight: 'var(--text-label-weight)',
+                  letterSpacing: 'var(--text-label-tracking)',
                   textTransform: 'uppercase',
                   color: 'var(--color-text-placeholder)',
                   flexShrink: 0,
@@ -90,11 +90,11 @@ export default function ChatMessage({ message, isStreaming, onClose }: ChatMessa
               <span
                 style={{
                   fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-                  fontSize: '11px',
+                  fontSize: 'var(--text-label-size)',
                   fontWeight: 300,
                   fontStyle: 'italic',
                   color: 'var(--color-text-placeholder)',
-                  lineHeight: '1.4',
+                  lineHeight: 'var(--text-label-line-height)',
                 }}
               >
                 {message.loadingFact}
@@ -106,8 +106,8 @@ export default function ChatMessage({ message, isStreaming, onClose }: ChatMessa
               maxWidth: 'var(--chat-bubble-max-width)',
               color: 'var(--color-text-primary)',
               fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-              fontSize: 'var(--text-body-sm-size)',
-              fontWeight: 'var(--text-body-sm-weight)',
+              fontSize: 'var(--text-body-size)',
+              fontWeight: 'var(--text-body-weight)',
               lineHeight: '1.7',
               whiteSpace: 'pre-wrap',
               wordBreak: 'break-word',
@@ -155,8 +155,8 @@ export default function ChatMessage({ message, isStreaming, onClose }: ChatMessa
                 background: 'transparent',
                 color: 'var(--color-text-secondary)',
                 fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-                fontSize: 'var(--text-body-sm-size)',
-                fontWeight: 400,
+                fontSize: 'var(--text-body-size)',
+                fontWeight: 'var(--text-body-weight)',
                 cursor: 'pointer',
                 transition: 'border-color 200ms ease, background 200ms ease',
               }}
@@ -192,9 +192,9 @@ export default function ChatMessage({ message, isStreaming, onClose }: ChatMessa
             background: 'var(--color-button-primary)',
             color: 'var(--color-button-text)',
             fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-            fontSize: 'var(--text-body-sm-size)',
+            fontSize: 'var(--text-body-size)',
             fontWeight: 'var(--text-body-weight)',
-            lineHeight: '1.6',
+            lineHeight: 'var(--text-body-line-height)',
             whiteSpace: 'pre-wrap',
             wordBreak: 'break-word',
           }}
