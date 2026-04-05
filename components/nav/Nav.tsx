@@ -53,7 +53,7 @@ export default function Nav() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 md:pt-[12px] md:pb-[8px] md:px-[var(--space-page-margin)]">
+      <header className="sticky top-0 z-[70] md:pt-[12px] md:pb-[8px] md:px-[var(--space-page-margin)]">
         <div className="md:max-w-layout md:mx-auto">
           <div className={`nav-card${isOpen ? ' nav-card--open' : ''}`}>
             <nav

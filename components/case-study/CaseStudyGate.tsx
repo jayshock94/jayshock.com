@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef, type ReactNode, type FormEvent } from 'react'
+import { createPortal } from 'react-dom'
 import { useRouter } from 'next/navigation'
 
 const SESSION_KEY = 'cs-unlocked'
@@ -23,11 +24,13 @@ export default function CaseStudyGate({ children }: CaseStudyGateProps) {
     setUnlocked(sessionStorage.getItem(SESSION_KEY) === '1')
   }, [])
 
-  // Auto-focus input when gate appears
+  // Auto-focus input and hide Barnaby when gate appears
   useEffect(() => {
     if (unlocked === false) {
       inputRef.current?.focus()
+      document.body.setAttribute('data-gate-locked', '')
     }
+    return () => { document.body.removeAttribute('data-gate-locked') }
   }, [unlocked])
 
   function handleSubmit(e: FormEvent) {
@@ -49,20 +52,18 @@ export default function CaseStudyGate({ children }: CaseStudyGateProps) {
   // Unlocked — render case study
   if (unlocked) return <>{children}</>
 
-  return (
+  return createPortal(
     <>
-      {/* Scrim — covers everything including nav and footer */}
+      {/* Scrim — covers everything including nav, footer, and Barnaby */}
       <div
         style={{
           position: 'fixed',
           inset: 0,
-          zIndex: 99999,
+          zIndex: 62,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          background: 'rgba(0, 0, 0, 0.85)',
-          backdropFilter: 'blur(24px)',
-          WebkitBackdropFilter: 'blur(24px)',
+          background: 'rgba(0, 0, 0, 0.90)',
           padding: 'var(--space-page-margin)',
         }}
       >
@@ -257,6 +258,7 @@ export default function CaseStudyGate({ children }: CaseStudyGateProps) {
           </form>
         </div>
       </div>
-    </>
+    </>,
+    document.body
   )
 }

@@ -18,8 +18,7 @@ export default function ContactPage() {
               Get in touch
             </h1>
             <p className="text-body-lg text-[var(--color-text-secondary)] mb-[var(--space-stack-sm)]">
-              Whether you are looking for a senior product designer or a
-              partner for a complex problem, I want to hear about it.
+              I want to hear about whatever complex system, product, or problem we could be working on.
             </p>
             <p className="text-body-lg text-[var(--color-text-muted)]">
               Prefer email?{' '}

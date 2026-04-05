@@ -422,10 +422,10 @@ export default function HomePage() {
             <ScrollReveal>
               <div className="flex flex-col">
                 <h2 className="text-h1 text-[var(--color-ink)]" style={{ marginBottom: 'var(--space-stack-title)' }}>
-                  Let&apos;s make it simple.
+                  Let&apos;s make it simple together.
                 </h2>
                 <p className="text-intro text-[var(--color-text-secondary)] text-center md:text-left" style={{ maxWidth: '700px', marginBottom: 'var(--space-stack-md)' }}>
-                  If you are building something complex and need someone who will own the problem with you, I want to hear about it.
+                  I want to hear about whatever complex system, product, or problem we could be working on.
                 </p>
                 <p className="text-body-lg text-[var(--color-text-muted)]">
                   Prefer email?{' '}
