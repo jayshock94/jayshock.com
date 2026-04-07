@@ -39,12 +39,13 @@ const PHASE_MAP: Record<ProcessTab, {
   tab: string
   extended: string
   glass: string
+  bg: string
   hover: string
 }> = {
-  'see-it':   { tab: 'var(--phase-impact-tab)',    extended: 'var(--phase-impact-extended)',    glass: 'var(--phase-impact-glass)',    hover: 'rgba(209,188,254,0.08)' },
-  'own-it':   { tab: 'var(--phase-problem-tab)',   extended: 'var(--phase-problem-extended)',   glass: 'var(--phase-problem-glass)',   hover: 'rgba(229,195,153,0.08)' },
-  'solve-it': { tab: 'var(--phase-discovery-tab)', extended: 'var(--phase-discovery-extended)', glass: 'var(--phase-discovery-glass)', hover: 'rgba(34,105,92,0.25)'   },
-  'do-it':    { tab: 'var(--phase-solution-tab)',  extended: 'var(--phase-solution-extended)',  glass: 'var(--phase-solution-glass)',  hover: 'rgba(162,202,248,0.08)' },
+  'see-it':   { tab: 'var(--phase-impact-tab)',    extended: 'var(--phase-impact-extended)',    glass: 'var(--phase-impact-glass)',    bg: 'var(--phase-impact-bg)',    hover: 'rgba(209,188,254,0.08)' },
+  'own-it':   { tab: 'var(--phase-problem-tab)',   extended: 'var(--phase-problem-extended)',   glass: 'var(--phase-problem-glass)',   bg: 'var(--phase-problem-bg)',   hover: 'rgba(229,195,153,0.08)' },
+  'solve-it': { tab: 'var(--phase-discovery-tab)', extended: 'var(--phase-discovery-extended)', glass: 'var(--phase-discovery-glass)', bg: 'var(--phase-discovery-bg)', hover: 'rgba(34,105,92,0.25)'   },
+  'do-it':    { tab: 'var(--phase-solution-tab)',  extended: 'var(--phase-solution-extended)',  glass: 'var(--phase-solution-glass)',  bg: 'var(--phase-solution-bg)',  hover: 'rgba(162,202,248,0.08)' },
 }
 
 // ─── Shared sub-components ─────────────────────────────────────────────────
@@ -201,6 +202,8 @@ export default function AimPage() {
   // Only expand tab bar width on desktop (≥768px)
   const [isDesktop, setIsDesktop]         = useState(false)
   const tabRowRef    = useRef<HTMLDivElement>(null)
+  // Per-tab scroll offset (relative to container top) so returning to a tab restores position
+  const tabScrollOffsets = useRef<Partial<Record<ProcessTab, number>>>({})
   // containerRef  → inner div.flex.flex-col (tabs + content) — DOCK detection (.top)
   // exitSentinel  → zero-height div placed immediately before the SectionDivider — EXIT detection (.top)
   const containerRef  = useRef<HTMLDivElement>(null)
@@ -424,7 +427,7 @@ export default function AimPage() {
             <div ref={containerRef} className="flex flex-col gap-10 md:gap-[70px]">
               {/* Segment tabs — sticky 8px below nav; exits naturally when container bottom passes */}
               <div
-                className="sticky z-10"
+                className="sticky z-10 relative"
                 style={{ top: 'calc(var(--nav-height) + 8px)' }}
               >
                 {/*
@@ -435,6 +438,7 @@ export default function AimPage() {
                   (no competing left/transform animations).
                 */}
                 <div
+                  className="relative"
                   style={(() => {
                     const expand = docked && isDesktop && undockedWidth
                     const overflow = expand ? (1000 - undockedWidth) / 2 : 0
@@ -458,14 +462,35 @@ export default function AimPage() {
                 {TABS.map((tab) => (
                   <button
                     key={tab.id}
-                    onClick={() => setActiveTab(tab.id)}
+                    onClick={() => {
+                      if (tab.id === activeTab) return
+                      // Save current tab's scroll offset relative to container top
+                      const container = containerRef.current
+                      if (container) {
+                        const containerTop = container.getBoundingClientRect().top + window.scrollY
+                        tabScrollOffsets.current[activeTab] = window.scrollY - containerTop
+                      }
+                      setActiveTab(tab.id)
+                      // Restore saved offset for the target tab, or scroll to container top
+                      requestAnimationFrame(() => {
+                        const el = containerRef.current
+                        if (!el) return
+                        const navH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 100
+                        const containerTop = el.getBoundingClientRect().top + window.scrollY
+                        const saved = tabScrollOffsets.current[tab.id]
+                        const top = saved != null
+                          ? containerTop + saved
+                          : containerTop - navH
+                        window.scrollTo({ top, behavior: 'instant' })
+                      })
+                    }}
                     onMouseEnter={() => setHoveredTab(tab.id)}
                     onMouseLeave={() => setHoveredTab(null)}
                     className="min-w-0 flex-1 h-full cursor-pointer"
                   >
                     {activeTab === tab.id ? (
                       <div
-                        className="flex items-center justify-center rounded-full"
+                        className="flex h-full items-center justify-center rounded-full"
                         style={{
                           backgroundImage: `linear-gradient(${PHASE_MAP[activeTab].tab}, ${PHASE_MAP[activeTab].tab})`,
                           backgroundColor: 'var(--glass-dark-thick)',
@@ -504,6 +529,20 @@ export default function AimPage() {
                   </button>
                 ))}
               </div>
+                {/* Scroll-clip blocker — hides content passing above the docked tab bar.
+                   Hugs the tab bar width, uses the opaque phase bg to fully cover content. */}
+                {docked && (
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute left-0 right-0"
+                    style={{
+                      bottom: '100%',
+                      height: '100vh',
+                      background: PHASE_MAP[activeTab].bg,
+                      transition: 'background var(--transition-smooth)',
+                    }}
+                  />
+                )}
                 </div>{/* end sizing wrapper */}
               </div>{/* end sticky wrapper */}
 
