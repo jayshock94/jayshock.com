@@ -151,4 +151,28 @@ export interface CaseStudy {
   comingSoon?: boolean
   /** Slug of the next case study (for "Next" navigation at bottom of page). */
   nextSlug: string
+  /**
+   * Short goal statement shown in the case study info section.
+   * e.g. "Design a unified platform to replace the disconnected legacy systems…"
+   */
+  goal?: string
+  /**
+   * Skills description line shown under Role in the info section.
+   * e.g. "Wireframes, Visual design, Prototyping & Testing"
+   */
+  skills?: string
+  /**
+   * Display-formatted year string — may differ from `year` for the page label.
+   * e.g. "2024 - Ongoing features"
+   */
+  yearDisplay?: string
+  /**
+   * "What was broken" pain-point cards — rendered as a 2×2 grid in the See-it tab.
+   */
+  brokenItems?: Array<{ title: string; body: string }>
+  /**
+   * Two-column takeaway reflection shown at the top of the Take Aways section.
+   * First item = "Not everything shipped" column. Second = "What I learned" column.
+   */
+  takeaways?: Array<{ headline: string; body: string }>
 }

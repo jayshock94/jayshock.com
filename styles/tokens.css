@@ -349,6 +349,16 @@
   --case-bg:     var(--case-bg-dark,     var(--color-surface));
 
   /* -----------------------------------------------------------
+     AIM CASE STUDY BRAND TOKENS
+     GoldPoint Systems deep navy — hero section only.
+     Raw brand color used as hero surface (not algorithm-processed;
+     the algorithm outputs tinted surfaces, not the brand source).
+  ----------------------------------------------------------- */
+  --aim-hero-bg:      #072f54;
+  /* Icon frame depth overlay — very dark purple-black, creates inner shadow depth */
+  --aim-icon-shadow:  rgba(33, 31, 38, 1);
+
+  /* -----------------------------------------------------------
      TYPOGRAPHY TOKENS
      Single font family: Outfit.
      Sizes and weights match M3 type scale (Figma node 58186-19244).
@@ -395,6 +405,12 @@
   --text-body-lg-weight:      300;
   --text-body-lg-line-height: 1.75;
   --text-body-lg-tracking:    0.5px;
+
+  /* Body md → M3 body/large (16sp) — paragraph text, form fields */
+  --text-body-md-size:        16px;
+  --text-body-md-weight:      400;
+  --text-body-md-line-height: 24px;
+  --text-body-md-tracking:    0.5px;
 
   /* Body → M3 body/medium */
   --text-body-size:           14px;
@@ -487,6 +503,7 @@
   ----------------------------------------------------------- */
   --space-content-max: 860px;
   --space-layout-max:  1200px;
+  --nav-height:        100px; /* full sticky header height: pt-12 (12px) + nav (80px) + pb-8 (8px) */
 
   /* -----------------------------------------------------------
      CHAT TOKENS

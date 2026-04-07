@@ -30,6 +30,40 @@ const aim: CaseStudy = {
   context:
     'GoldPoint builds lending software for financial institutions across the US. Their legacy system was losing clients to competitors.',
 
+  goal:        'Design a unified platform to replace the disconnected legacy systems clients had cobbled together, while integrating smoothly with the broader suite of products they rely on.',
+  skills:      'Wireframes, Visual design, Prototyping & Testing',
+  yearDisplay: '2024 - Ongoing features',
+
+  brokenItems: [
+    {
+      title: 'Five or more tabs open at all times',
+      body:  'Lenders managed loans across separate tools, spreadsheets, and browser tabs. Context was scattered. Errors compounded.',
+    },
+    {
+      title: 'Cross-team handoffs broke constantly',
+      body:  'Different teams used different products for each phase of the loan process. Handing work from one team to the next meant switching systems and losing context.',
+    },
+    {
+      title: 'Managers spent hours triaging queues',
+      body:  'Leaders came in early just to figure out who should work on what. Sticky notes, spreadsheets, and manual assignment consumed their mornings.',
+    },
+    {
+      title: 'It took new employees months to learn',
+      body:  'Lenders managed loans across separate tools, spreadsheets, and browser tabs. Context was scattered. Errors compounded.',
+    },
+  ],
+
+  takeaways: [
+    {
+      headline: 'Not everything shipped.',
+      body:     'Not everything I tested made it in. Some ideas lost to better ones, which is how it should work.\n\nSome were casualties of scope and budget, and some I\'m not sure I made the strongest case for.',
+    },
+    {
+      headline: 'What I learned from it',
+      body:     'A good idea isn\'t enough on its own. That means research and data, but also educating the people in the room.\n\nMaking the reasoning visible, not just the outcome. I\'ve worked on that since.',
+    },
+  ],
+
   overview:
     'Senior UX designer on a three-year effort to replace the legacy workflow. I owned settings, navigation, queue tiles, comments, and integrations end to end. Worked alongside the Lead UX Designer, who used this project to mentor me into a lead role. We split modules between us and I led full pages from research through handoff. Direct access to lenders, tellers, and branch managers throughout.',
 
@@ -39,9 +73,11 @@ const aim: CaseStudy = {
   problem: {
     headline: 'Five tabs, a spreadsheet, and a sticky note.',
     content: [
-      { type: 'paragraph', text: 'SIM started as a decision tree in the early 2000s. Two decades of features got bolted on without anyone rethinking the whole. Nobody set out to make it bad. It just grew that way.' },
+      { type: 'paragraph', text: 'CIM started as a decision tree in the early 2000s. Two decades of features got bolted on without anyone ever rethinking the whole, while an entire ecosystem of other products grew up around it.' },
       { type: 'subheader', text: 'The GAIN deadline' },
-      { type: 'paragraph', text: 'Every year the GAIN conference set an immovable deadline. If prototypes weren\'t ready to show clients and secure funding, the work might not get built at all. That pressure shaped every decision we made.' },
+      { type: 'paragraph', text: 'Every year the GAIN conference set an immovable deadline.' },
+      { type: 'paragraph', text: 'If prototypes weren\'t ready to show clients and secure funding, the work might not get built at all.' },
+      { type: 'paragraph', text: 'That pressure shaped every decision we made.' },
     ],
   },
 
