@@ -37,7 +37,8 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  return caseStudySlugs.map(slug => ({ slug }))
+  // 'aim' is handled by the static app/work/aim/page.tsx route
+  return caseStudySlugs.filter(slug => slug !== 'aim').map(slug => ({ slug }))
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
