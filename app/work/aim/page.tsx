@@ -461,7 +461,7 @@ export default function AimPage() {
                     onClick={() => setActiveTab(tab.id)}
                     onMouseEnter={() => setHoveredTab(tab.id)}
                     onMouseLeave={() => setHoveredTab(null)}
-                    className="min-w-0 flex-1 cursor-pointer"
+                    className="min-w-0 flex-1 h-full cursor-pointer"
                   >
                     {activeTab === tab.id ? (
                       <div
@@ -487,9 +487,10 @@ export default function AimPage() {
                       </div>
                     ) : (
                       <span
-                        className="flex items-center justify-center rounded-full font-medium whitespace-nowrap text-[var(--color-text-secondary)]"
+                        className="flex h-full w-full items-center justify-center rounded-full font-medium whitespace-nowrap text-[var(--color-text-secondary)]"
                         style={{
-                          padding: '6px 12px',
+                          paddingLeft: '12px',
+                          paddingRight: '12px',
                           fontSize: 'var(--text-ui-md-size)',
                           lineHeight: 'var(--text-ui-md-line-height)',
                           letterSpacing: 'var(--text-ui-md-tracking)',
