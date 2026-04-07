@@ -209,26 +209,40 @@ export default function AimPage() {
   const containerRef  = useRef<HTMLDivElement>(null)
   const exitSentinel  = useRef<HTMLDivElement>(null)
 
-  // Measure natural size before first paint so explicit px→px transitions work
+  // Measure natural size before first paint so explicit px→px transitions work.
+  // Re-measure on resize because switching between mobile/desktop can leave stale 0-width values.
   useLayoutEffect(() => {
-    const el = tabRowRef.current
-    if (!el) return
-    const rect = el.getBoundingClientRect()
-    setNaturalHeight(Math.round(rect.height))
-    setUndockedWidth(Math.round(rect.width))
-    setIsDesktop(window.innerWidth >= 768)
+    function measure() {
+      const el = tabRowRef.current
+      if (!el) return
+      const rect = el.getBoundingClientRect()
+      // Only update if the element is actually visible (display:none → 0)
+      if (rect.width > 0) {
+        setUndockedWidth(Math.round(rect.width))
+      }
+      if (rect.height > 0) {
+        setNaturalHeight(Math.round(rect.height))
+      }
+      setIsDesktop(window.innerWidth >= 768)
+    }
 
-    function onResize() { setIsDesktop(window.innerWidth >= 768) }
+    measure()
+
+    function onResize() {
+      setIsDesktop(window.innerWidth >= 768)
+      // Re-measure after layout settles (hidden→block transition)
+      requestAnimationFrame(measure)
+    }
     window.addEventListener('resize', onResize)
     return () => window.removeEventListener('resize', onResize)
   }, [])
 
   useEffect(() => {
-    // CSS: top: calc(var(--nav-height) + 8px) = 100 + 8 = 108
-    const NAV_OFFSET    = 108
     const DOCKED_HEIGHT = 70
 
     function update() {
+      // Sticky top: mobile 80px, desktop 108px (matches Tailwind top-[80px] md:top-[108px])
+      const NAV_OFFSET = window.innerWidth >= 768 ? 108 : 80
       const c = containerRef.current?.getBoundingClientRect()
       const e = exitSentinel.current?.getBoundingClientRect()
       if (!c || !e) return
@@ -425,125 +439,209 @@ export default function AimPage() {
             </h2>
 
             <div ref={containerRef} className="flex flex-col gap-10 md:gap-[70px]">
-              {/* Segment tabs — sticky 8px below nav; exits naturally when container bottom passes */}
+              {/* Segment tabs — sticky below nav; exits when container bottom passes.
+                 Desktop and mobile are separate renders to avoid responsive conflicts. */}
               <div
-                className="sticky z-10 relative"
-                style={{ top: 'calc(var(--nav-height) + 8px)' }}
+                className="sticky z-10 relative top-[80px] md:top-[108px]"
               >
-                {/*
-                  Sizing wrapper:
-                  - Undocked: fills parent width naturally (undockedWidth px)
-                  - Docked:   expands to 1000px, centered via symmetric negative margins
-                  Margin-based centering keeps the center point stable during transitions
-                  (no competing left/transform animations).
-                */}
+                {/* ── DESKTOP tab bar ── */}
                 <div
-                  className="relative"
+                  className="hidden md:block relative"
                   style={(() => {
-                    const expand = docked && isDesktop && undockedWidth
-                    const overflow = expand ? (1000 - undockedWidth) / 2 : 0
+                    const w = undockedWidth || undefined // fallback to auto if 0
+                    const expand = docked && w
+                    const overflow = expand ? (1000 - (w as number)) / 2 : 0
                     return {
-                      width: expand ? 1000 : undockedWidth,
+                      width: expand ? 1000 : w,
                       marginLeft: -overflow,
                       marginRight: -overflow,
                       transition: 'width var(--transition-smooth), margin var(--transition-smooth)',
                     }
                   })()}
                 >
-              <div
-                ref={tabRowRef}
-                className="flex w-full items-center gap-2 overflow-hidden rounded-full"
-                style={{
-                  background: 'var(--color-surface-elevated)',
-                  height: docked ? 70 : naturalHeight,
-                  transition: 'height var(--transition-smooth)',
-                }}
-              >
-                {TABS.map((tab) => (
-                  <button
-                    key={tab.id}
-                    onClick={() => {
-                      if (tab.id === activeTab) return
-                      // Save current tab's scroll offset relative to container top
-                      const container = containerRef.current
-                      if (container) {
-                        const containerTop = container.getBoundingClientRect().top + window.scrollY
-                        tabScrollOffsets.current[activeTab] = window.scrollY - containerTop
-                      }
-                      setActiveTab(tab.id)
-                      // Restore saved offset for the target tab, or scroll to container top
-                      requestAnimationFrame(() => {
-                        const el = containerRef.current
-                        if (!el) return
-                        const navH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 100
-                        const containerTop = el.getBoundingClientRect().top + window.scrollY
-                        const saved = tabScrollOffsets.current[tab.id]
-                        const top = saved != null
-                          ? containerTop + saved
-                          : containerTop - navH
-                        window.scrollTo({ top, behavior: 'instant' })
-                      })
-                    }}
-                    onMouseEnter={() => setHoveredTab(tab.id)}
-                    onMouseLeave={() => setHoveredTab(null)}
-                    className="min-w-0 flex-1 h-full cursor-pointer"
-                  >
-                    {activeTab === tab.id ? (
-                      <div
-                        className="flex h-full items-center justify-center rounded-full"
-                        style={{
-                          backgroundImage: `linear-gradient(${PHASE_MAP[activeTab].tab}, ${PHASE_MAP[activeTab].tab})`,
-                          backgroundColor: 'var(--glass-dark-thick)',
-                          backdropFilter: 'blur(48px) saturate(180%)',
-                          boxShadow: '0px 4px 16px var(--shadow-surface-color), inset 0px 1px 0px var(--glass-border-light)',
-                        }}
-                      >
-                        <span
-                          className="flex items-center justify-center px-6 py-4 font-medium whitespace-nowrap"
-                          style={{
-                            color: PHASE_MAP[activeTab].extended,
-                            fontSize: 'var(--text-body-md-size)',
-                            lineHeight: 'var(--text-body-md-line-height)',
-                            letterSpacing: '0.15px',
-                          }}
-                        >
-                          {tab.label}
-                        </span>
-                      </div>
-                    ) : (
-                      <span
-                        className="flex h-full w-full items-center justify-center rounded-full font-medium whitespace-nowrap text-[var(--color-text-secondary)]"
-                        style={{
-                          paddingLeft: '12px',
-                          paddingRight: '12px',
-                          fontSize: 'var(--text-ui-md-size)',
-                          lineHeight: 'var(--text-ui-md-line-height)',
-                          letterSpacing: 'var(--text-ui-md-tracking)',
-                          backgroundColor: hoveredTab === tab.id ? PHASE_MAP[tab.id].hover : 'transparent',
-                          transition: 'background-color 150ms ease',
-                        }}
-                      >
-                        {tab.label}
-                      </span>
-                    )}
-                  </button>
-                ))}
-              </div>
-                {/* Scroll-clip blocker — hides content passing above the docked tab bar.
-                   Hugs the tab bar width, uses the opaque phase bg to fully cover content. */}
-                {docked && (
                   <div
-                    aria-hidden
-                    className="pointer-events-none absolute left-0 right-0"
+                    ref={tabRowRef}
+                    className="flex w-full items-center gap-2 overflow-hidden rounded-full"
                     style={{
-                      bottom: '100%',
-                      height: '100vh',
-                      background: PHASE_MAP[activeTab].bg,
-                      transition: 'background var(--transition-smooth)',
+                      background: 'var(--color-surface-elevated)',
+                      height: docked ? 70 : naturalHeight,
+                      transition: 'height var(--transition-smooth)',
                     }}
-                  />
-                )}
-                </div>{/* end sizing wrapper */}
+                  >
+                    {TABS.map((tab) => (
+                      <button
+                        key={tab.id}
+                        onClick={() => {
+                          if (tab.id === activeTab) return
+                          const container = containerRef.current
+                          if (container) {
+                            const containerTop = container.getBoundingClientRect().top + window.scrollY
+                            tabScrollOffsets.current[activeTab] = window.scrollY - containerTop
+                          }
+                          setActiveTab(tab.id)
+                          requestAnimationFrame(() => {
+                            const el = containerRef.current
+                            if (!el) return
+                            const navH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 100
+                            const containerTop = el.getBoundingClientRect().top + window.scrollY
+                            const saved = tabScrollOffsets.current[tab.id]
+                            const top = saved != null ? containerTop + saved : containerTop - navH
+                            window.scrollTo({ top, behavior: 'instant' })
+                          })
+                        }}
+                        onMouseEnter={() => setHoveredTab(tab.id)}
+                        onMouseLeave={() => setHoveredTab(null)}
+                        className="min-w-0 flex-1 h-full cursor-pointer"
+                      >
+                        {activeTab === tab.id ? (
+                          <div
+                            className="flex h-full items-center justify-center rounded-full"
+                            style={{
+                              backgroundImage: `linear-gradient(${PHASE_MAP[activeTab].tab}, ${PHASE_MAP[activeTab].tab})`,
+                              backgroundColor: 'var(--glass-dark-thick)',
+                              backdropFilter: 'blur(48px) saturate(180%)',
+                              boxShadow: '0px 4px 16px var(--shadow-surface-color), inset 0px 1px 0px var(--glass-border-light)',
+                            }}
+                          >
+                            <span
+                              className="flex items-center justify-center px-6 py-4 font-medium whitespace-nowrap"
+                              style={{
+                                color: PHASE_MAP[activeTab].extended,
+                                fontSize: 'var(--text-body-md-size)',
+                                lineHeight: 'var(--text-body-md-line-height)',
+                                letterSpacing: '0.15px',
+                              }}
+                            >
+                              {tab.label}
+                            </span>
+                          </div>
+                        ) : (
+                          <span
+                            className="flex h-full w-full items-center justify-center rounded-full font-medium whitespace-nowrap text-[var(--color-text-secondary)]"
+                            style={{
+                              paddingLeft: '12px',
+                              paddingRight: '12px',
+                              fontSize: 'var(--text-ui-md-size)',
+                              lineHeight: 'var(--text-ui-md-line-height)',
+                              letterSpacing: 'var(--text-ui-md-tracking)',
+                              backgroundColor: hoveredTab === tab.id ? PHASE_MAP[tab.id].hover : 'transparent',
+                              transition: 'background-color 150ms ease',
+                            }}
+                          >
+                            {tab.label}
+                          </span>
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                  {/* Desktop blocker — hugs tab bar width */}
+                  {docked && (
+                    <div
+                      aria-hidden
+                      className="pointer-events-none absolute left-0 right-0"
+                      style={{ bottom: 0, height: '100vh', background: PHASE_MAP[activeTab].bg, transition: 'background var(--transition-smooth)', zIndex: -1 }}
+                    />
+                  )}
+                </div>
+
+                {/* ── MOBILE tab bar ── */}
+                <div
+                  className="md:hidden"
+                  style={{
+                    ...(docked ? {
+                      position: 'fixed' as const,
+                      top: 80,
+                      left: 0,
+                      width: '100vw',
+                      zIndex: 10,
+                    } : {
+                      width: '100%',
+                    }),
+                    transition: 'width 0.3s, margin 0.3s',
+                  }}
+                >
+                  <div
+                    className="flex w-full items-center gap-1"
+                    style={{
+                      background: 'var(--color-surface-elevated)',
+                      height: docked ? 72 : 56,
+                      borderRadius: docked ? 0 : '9999px',
+                      overflow: docked ? 'visible' : 'hidden',
+                      paddingTop: docked ? 8 : 0,
+                      paddingBottom: docked ? 8 : 0,
+                      paddingLeft: docked ? 'var(--space-page-margin)' : 0,
+                      paddingRight: docked ? 'var(--space-page-margin)' : 0,
+                      transition: 'height 0.3s, padding 0.3s, border-radius 0.3s',
+                    }}
+                  >
+                    {TABS.map((tab) => (
+                      <button
+                        key={tab.id}
+                        onClick={() => {
+                          if (tab.id === activeTab) return
+                          const wasDocked = docked
+                          setActiveTab(tab.id)
+                          if (!wasDocked) {
+                            // Not docked — scroll to dock the tab bar
+                            requestAnimationFrame(() => {
+                              const el = containerRef.current
+                              if (!el) return
+                              const containerTop = el.getBoundingClientRect().top + window.scrollY
+                              window.scrollTo({ top: containerTop - 80, behavior: 'instant' })
+                            })
+                          }
+                          // When docked, don't scroll — content swaps in place below fixed bar
+                        }}
+                        className="min-w-0 flex-1 h-full cursor-pointer"
+                      >
+                        {activeTab === tab.id ? (
+                          <div
+                            className="flex h-full items-center justify-center rounded-full"
+                            style={{
+                              backgroundImage: `linear-gradient(${PHASE_MAP[activeTab].tab}, ${PHASE_MAP[activeTab].tab})`,
+                              backgroundColor: 'var(--glass-dark-thick)',
+                              backdropFilter: 'blur(48px) saturate(180%)',
+                              boxShadow: '0px 4px 16px var(--shadow-surface-color), inset 0px 1px 0px var(--glass-border-light)',
+                            }}
+                          >
+                            <span
+                              className="font-medium whitespace-nowrap"
+                              style={{
+                                color: PHASE_MAP[activeTab].extended,
+                                fontSize: 'var(--text-ui-md-size)',
+                                lineHeight: 'var(--text-ui-md-line-height)',
+                                letterSpacing: '0.15px',
+                              }}
+                            >
+                              {tab.label}
+                            </span>
+                          </div>
+                        ) : (
+                          <span
+                            className="flex w-full items-center justify-center rounded-full font-medium whitespace-nowrap text-[var(--color-text-secondary)]"
+                            style={{
+                              fontSize: 'var(--text-ui-md-size)',
+                              lineHeight: 'var(--text-ui-md-line-height)',
+                              letterSpacing: 'var(--text-ui-md-tracking)',
+                            }}
+                          >
+                            {tab.label}
+                          </span>
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                  {/* Mobile blocker — full-bleed */}
+                  {docked && (
+                    <div
+                      aria-hidden
+                      className="pointer-events-none absolute"
+                      style={{ bottom: 0, height: '100vh', left: '-50vw', right: '-50vw', background: PHASE_MAP[activeTab].bg, transition: 'background var(--transition-smooth)', zIndex: -1 }}
+                    />
+                  )}
+                </div>
+                {/* Spacer — when mobile bar goes fixed, this reserves its height in the flow */}
+                {docked && <div className="md:hidden" style={{ height: 72 }} />}
               </div>{/* end sticky wrapper */}
 
               {/* ── "See it" tab content ── */}
@@ -693,17 +791,150 @@ export default function AimPage() {
                 </div>
               )}
 
-              {/* Placeholder for tabs without content yet */}
+              {/* ── Empty tab placeholder (Own it / Solve it / Do it) ── */}
               {activeTab !== 'see-it' && (
                 <div className="flex items-center justify-center py-20">
                   <p
                     className="font-normal text-[var(--color-text-muted)]"
-                    style={{ fontSize: 'var(--text-body-md-size)' }}
+                    style={{ fontSize: 'var(--text-body-md-size)', lineHeight: 'var(--text-body-md-line-height)' }}
                   >
-                    Content coming soon
+                    Still being worked on
                   </p>
                 </div>
               )}
+              {/* Zero-height sentinel — docked state exits when this reaches the bar bottom */}
+              <div ref={exitSentinel} aria-hidden style={{ height: 0 }} />
+            </div>
+          </div>
+        </section>
+
+        <SectionDivider />
+
+        {/* ══════════════════════════════════════════════════════════
+            IMPACT — Metrics + outcomes + prototype image
+        ══════════════════════════════════════════════════════════ */}
+        <section className="w-full">
+          <div
+            className="mx-auto flex flex-col gap-12 md:gap-[80px]"
+            style={{
+              maxWidth: 'var(--space-content-max)',
+              padding: 'var(--space-section-xl) var(--space-page-margin)',
+            }}
+          >
+            {/* Section heading */}
+            <h2
+              className="w-full text-center font-medium text-[var(--color-ink)]"
+              style={{
+                fontSize: 'var(--text-display-size)',
+                lineHeight: 'var(--text-display-line-height)',
+              }}
+            >
+              Impact
+            </h2>
+
+            {/* Metric cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div
+                className="flex flex-col gap-[var(--space-stack-xs)] rounded-[8px] border border-[var(--color-border)] p-[var(--space-component-lg)]"
+                style={{ background: 'rgba(255,255,255,0.06)' }}
+              >
+                <p
+                  className="font-normal text-[var(--color-ink)]"
+                  style={{
+                    fontSize: 'clamp(40px, 8vw, 57px)',
+                    lineHeight: 1.12,
+                  }}
+                >
+                  $10M+
+                </p>
+                <p
+                  className="font-normal text-[var(--color-text-muted)]"
+                  style={{
+                    fontSize: 'var(--text-body-sm-size)',
+                    lineHeight: 'var(--text-body-sm-line-height)',
+                  }}
+                >
+                  Annual contract secured
+                </p>
+              </div>
+
+              <div
+                className="flex flex-col gap-[var(--space-stack-xs)] rounded-[8px] border border-[var(--color-border)] p-[var(--space-component-lg)]"
+                style={{ background: 'rgba(255,255,255,0.06)' }}
+              >
+                <p
+                  className="font-normal text-[var(--color-ink)]"
+                  style={{
+                    fontSize: 'clamp(40px, 8vw, 57px)',
+                    lineHeight: 1.12,
+                  }}
+                >
+                  ~40%<span
+                    className="font-medium text-[var(--color-text-muted)] align-super"
+                    style={{
+                      fontSize: 'var(--text-label-size)',
+                      letterSpacing: 'var(--text-label-tracking)',
+                    }}
+                  >*</span>
+                </p>
+                <p
+                  className="font-normal text-[var(--color-text-muted)]"
+                  style={{
+                    fontSize: 'var(--text-body-sm-size)',
+                    lineHeight: 'var(--text-body-sm-line-height)',
+                  }}
+                >
+                  Faster cross-team handoffs
+                </p>
+              </div>
+            </div>
+
+            {/* What AIM did */}
+            <div className="flex flex-col gap-[var(--space-stack-md)]">
+              <h3
+                className="font-medium text-[var(--color-ink)]"
+                style={{
+                  fontSize: 'var(--text-h2-size)',
+                  lineHeight: 'var(--text-h2-line-height)',
+                }}
+              >
+                What AIM did
+              </h3>
+              <ul
+                className="flex flex-col gap-2 list-disc pl-8 text-[var(--color-ink)]"
+                style={{
+                  fontSize: 'var(--text-h3-size)',
+                  lineHeight: 'var(--text-h3-line-height)',
+                }}
+              >
+                <li>Saved clients who were actively signing with competitors.</li>
+                <li>It brought back clients who had already left.</li>
+                <li>Gained one contract alone that was a multiple 10M a year contract.</li>
+                <li>Potential clients the VP team had never been able to secure joined.</li>
+              </ul>
+            </div>
+
+            {/* AI Summary prototype image */}
+            <div className="flex flex-col gap-[var(--space-component-xs)]">
+              <div
+                className="overflow-hidden rounded-[4px] border border-[var(--color-border-mid)]"
+              >
+                <img
+                  src="/images/AIM/ai-summary-prototype.png"
+                  alt="AI Account Summary prototype — synthesized loan history and customer context in a readable brief"
+                  className="w-full object-cover"
+                />
+              </div>
+              <p
+                className="font-medium text-[var(--color-text-muted)]"
+                style={{
+                  fontSize: 'var(--text-label-size)',
+                  lineHeight: 'var(--text-label-line-height)',
+                  letterSpacing: 'var(--text-label-tracking)',
+                }}
+              >
+                The AI summary that was killed before launch.
+              </p>
             </div>
           </div>
         </section>
@@ -840,8 +1071,7 @@ export default function AimPage() {
           </div>
         </section>
 
-        {/* Zero-height sentinel — bar stays docked until this divider line reaches the bar bottom */}
-        <div ref={exitSentinel} aria-hidden style={{ height: 0 }} />
+        {/* exitSentinel moved inside containerRef — see below */}
         <SectionDivider />
 
         {/* ══════════════════════════════════════════════════════════
