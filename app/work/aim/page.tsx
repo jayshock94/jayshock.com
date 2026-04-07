@@ -10,7 +10,6 @@
  */
 
 import { useState, useRef, useEffect, useLayoutEffect } from 'react'
-import AimHeroImage from '@/components/case-study/AimHeroImage'
 import aim from '@/data/case-studies/aim'
 
 // ─── Helpers ──────────────────────────────────────────────────────────────
@@ -23,7 +22,6 @@ function blockText(block: import('@/data/types').ContentBlock): string {
 const IMG_APP_ICON    = '/images/AIM/aim-app-icon.png'
 const IMG_CIM_1       = '/images/AIM/cim-legacy-1.png'
 const IMG_CIM_2       = '/images/AIM/cim-legacy-2.png'
-const IMG_CONTACT     = '/images/AIM/contact-avatar.png'
 const IMG_AI_SUMMARY  = '/images/AIM/ai summary 2.png'
 
 // ─── Types ─────────────────────────────────────────────────────────────────
@@ -153,7 +151,7 @@ function TakeawayCard({
 }) {
   return (
     <div
-      className="flex flex-1 flex-col gap-3 overflow-hidden rounded-[8px] border border-[var(--color-border)] p-[25px] md:h-[302px]"
+      className="flex flex-1 flex-col gap-3 overflow-hidden rounded-[8px] border border-[var(--color-border)] p-[25px]"
       style={{ background: 'var(--color-surface)' }}
     >
       <p
@@ -184,45 +182,6 @@ function TakeawayCard({
       >
         {body}
       </p>
-    </div>
-  )
-}
-
-/** Labeled text input field */
-function FormField({
-  label,
-  placeholder,
-  type = 'text',
-}: {
-  label: string
-  placeholder: string
-  type?: string
-}) {
-  return (
-    <div className="flex flex-1 flex-col gap-1">
-      <label
-        className="font-medium text-[var(--color-text-muted)]"
-        style={{
-          fontSize: 'var(--text-ui-sm-size)',
-          lineHeight: 'var(--text-ui-sm-line-height)',
-          letterSpacing: 'var(--text-ui-sm-tracking)',
-        }}
-      >
-        {label}
-      </label>
-      <input
-        type={type}
-        placeholder={placeholder}
-        className="w-full rounded-[4px] border border-[var(--color-border-mid)] font-normal outline-none text-[var(--color-ink)] placeholder:text-[var(--color-text-muted)]"
-        style={{
-          height: 56,
-          padding: '18px 17px',
-          background: 'var(--glass-dark-thin)',
-          fontSize: 'var(--text-body-md-size)',
-          lineHeight: 'var(--text-body-md-line-height)',
-          letterSpacing: 'var(--text-body-md-tracking)',
-        }}
-      />
     </div>
   )
 }
@@ -299,7 +258,11 @@ export default function AimPage() {
             }}
           >
             <div className="w-full max-w-[978px]">
-              <AimHeroImage />
+              <img
+                src="/images/aim case study hero.png"
+                alt="AIM loan management platform — customer dashboard with loan list, task queue, and quick actions"
+                className="w-full h-auto"
+              />
             </div>
           </div>
         </section>
@@ -325,9 +288,9 @@ export default function AimPage() {
                   lineHeight: 'var(--text-display-line-height)',
                 }}
               >
-                Designing
+                Designing AIM
                 <br />
-                Loan Management Platform
+                A Loan Management Platform
               </h1>
             </div>
 
@@ -573,46 +536,60 @@ export default function AimPage() {
                       {blockText(aim.problem.content[0])}
                     </p>
 
-                    {/* Screenshot pair — equal width, stack on small screens */}
-                    <div className="flex flex-col md:flex-row items-start gap-4">
-                      <div className="flex min-w-0 flex-1 flex-col gap-1">
-                        <div className="aspect-video overflow-hidden rounded-[4px] border border-[var(--color-text-placeholder)]">
-                          <img
-                            src={IMG_CIM_1}
-                            alt="Legacy CIM interface — actual screens clients were using in 2024"
-                            className="h-full w-full object-cover"
-                          />
-                        </div>
-                        <p
-                          className="font-medium text-[var(--color-text-placeholder)]"
-                          style={{
-                            fontSize: 'var(--text-label-size)',
-                            lineHeight: 'var(--text-label-line-height)',
-                            letterSpacing: 'var(--text-label-tracking)',
-                          }}
-                        >
-                          Actual screen shots of what clients were using in 2024
-                        </p>
-                      </div>
+                    {/* Screenshot pair — label + two equal-width images */}
+                    <div className="flex flex-col gap-2">
+                      {/* Section label — matches Figma Portfolio/label/medium */}
+                      <p
+                        className="font-medium text-[var(--color-text-muted)]"
+                        style={{
+                          fontSize: 'var(--text-label-size)',
+                          lineHeight: 'var(--text-label-line-height)',
+                          letterSpacing: 'var(--text-label-tracking)',
+                        }}
+                      >
+                        CIM 2024 — In 2024 was still the do it all power-user loan management platform clients were using
+                      </p>
 
-                      <div className="flex min-w-0 flex-1 flex-col gap-1">
-                        <div className="aspect-video overflow-hidden rounded-[4px] border border-[var(--color-text-placeholder)]">
-                          <img
-                            src={IMG_CIM_2}
-                            alt="CIM 2024 legacy interface"
-                            className="h-full w-full object-cover"
-                          />
+                      <div className="flex flex-col md:flex-row items-start gap-4">
+                        <div className="flex min-w-0 flex-1 flex-col gap-1">
+                          <div className="aspect-video overflow-hidden rounded-[4px] border border-[var(--color-border-mid)]">
+                            <img
+                              src={IMG_CIM_1}
+                              alt="Legacy CIM interface — actual screens clients were using in 2024"
+                              className="h-full w-full object-cover"
+                            />
+                          </div>
+                          <p
+                            className="font-medium text-[var(--color-text-muted)]"
+                            style={{
+                              fontSize: 'var(--text-label-size)',
+                              lineHeight: 'var(--text-label-line-height)',
+                              letterSpacing: 'var(--text-label-tracking)',
+                            }}
+                          >
+                            CIM 2024
+                          </p>
                         </div>
-                        <p
-                          className="font-medium text-[var(--color-text-placeholder)]"
-                          style={{
-                            fontSize: 'var(--text-label-size)',
-                            lineHeight: 'var(--text-label-line-height)',
-                            letterSpacing: 'var(--text-label-tracking)',
-                          }}
-                        >
-                          CIM 2024
-                        </p>
+
+                        <div className="flex min-w-0 flex-1 flex-col gap-1">
+                          <div className="aspect-video overflow-hidden rounded-[4px] border border-[var(--color-border-mid)]">
+                            <img
+                              src={IMG_CIM_2}
+                              alt="CIM 2024 legacy interface"
+                              className="h-full w-full object-cover"
+                            />
+                          </div>
+                          <p
+                            className="font-medium text-[var(--color-text-muted)]"
+                            style={{
+                              fontSize: 'var(--text-label-size)',
+                              lineHeight: 'var(--text-label-line-height)',
+                              letterSpacing: 'var(--text-label-tracking)',
+                            }}
+                          >
+                            CIM 2024
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -662,8 +639,8 @@ export default function AimPage() {
                       }}
                     >
                       <p>{blockText(aim.problem.content[2])}</p>
-                      <p className="mt-6">{blockText(aim.problem.content[3])}</p>
-                      <p className="mt-6">{blockText(aim.problem.content[4])}</p>
+                      <p className="mt-3">{blockText(aim.problem.content[3])}</p>
+                      <p className="mt-3">{blockText(aim.problem.content[4])}</p>
                     </div>
                   </div>
                 </div>
@@ -707,96 +684,111 @@ export default function AimPage() {
               Take aways
             </h2>
 
-            <div className="flex flex-col gap-10">
-              {/* Two-column reflection */}
-              <div className="flex flex-col md:flex-row gap-8 md:gap-[70px]">
-                <div className="flex flex-1 flex-col gap-6">
-                  <p
-                    className="md:whitespace-nowrap font-normal text-[var(--color-ink)]"
-                    style={{
-                      fontSize: 'var(--text-h1-size)',
-                      lineHeight: 'var(--text-h1-line-height)',
-                    }}
-                  >
-                    Not everything shipped.
-                  </p>
-                  <p
-                    className="font-normal text-[var(--color-text-secondary)]"
-                    style={{
-                      fontSize: 'var(--text-intro-size)',
-                      lineHeight: 'var(--text-intro-line-height)',
-                    }}
-                  >
-                    Not everything I tested made it in. Some ideas lost to better ones,
-                    which is how it should work.
-                    <br />
-                    <br />
-                    Some were casualties of scope and budget, and some I&apos;m not sure I
-                    made the strongest case for.
-                  </p>
-                </div>
-
-                <div className="flex flex-1 flex-col gap-6">
-                  <p
-                    className="md:whitespace-nowrap font-normal text-[var(--color-ink)]"
-                    style={{
-                      fontSize: 'var(--text-h1-size)',
-                      lineHeight: 'var(--text-h1-line-height)',
-                    }}
-                  >
-                    What I learned from it
-                  </p>
-                  <p
-                    className="font-normal text-[var(--color-text-secondary)]"
-                    style={{
-                      fontSize: 'var(--text-intro-size)',
-                      lineHeight: 'var(--text-intro-line-height)',
-                    }}
-                  >
-                    A good idea isn&apos;t enough on its own. That means research and data,
-                    but also educating the people in the room.
-                    <br />
-                    <br />
-                    Making the reasoning visible, not just the outcome. I&apos;ve worked on
-                    that since.
-                  </p>
-                </div>
-              </div>
-
-              {/* Two-column takeaway cards */}
-              <div className="flex flex-col md:flex-row gap-6">
-                <TakeawayCard
-                  number="01"
-                  title={`Hamburger nav vs tab bar\nvs sidebar`}
-                  body="Early prototypes tested three navigation patterns. Hamburger hid too much from power users who needed everything visible. Tab bar couldn't scale to twelve modules. We landed on a persistent sidebar with collapsible groups so lenders could see the full system at a glance."
-                />
-                <TakeawayCard
-                  number="03"
-                  title="AI Account Summary"
-                  body={`We pushed for an AI-powered account summary that would synthesize loan history and customer context into a readable brief. When a loan landed on someone's desk with no context, they had to dig through multiple screens to piece the story together.\n\nThe AI summary would solve that cold-start problem instantly. I designed the full feature but clients pushed back due to cost and timeline. I still think it was the right idea at the wrong time.`}
-                />
-              </div>
-
-              {/* Full-width AI summary screenshot */}
-              <div className="flex flex-col gap-1">
-                <div className="aspect-video w-full overflow-hidden rounded-[4px] border border-[var(--color-text-placeholder)]">
-                  <img
-                    src={IMG_AI_SUMMARY}
-                    alt="AI Account Summary prototype — synthesized loan history and customer context in a readable brief"
-                    className="h-full w-full object-cover object-top"
-                  />
-                </div>
+            {/* Two-column reflection */}
+            <div className="flex flex-col md:flex-row gap-8 md:gap-[70px]">
+              <div className="flex flex-1 flex-col gap-6">
                 <p
-                  className="font-medium text-[var(--color-text-placeholder)]"
+                  className="md:whitespace-nowrap font-normal text-[var(--color-ink)]"
                   style={{
-                    fontSize: 'var(--text-label-size)',
-                    lineHeight: 'var(--text-label-line-height)',
-                    letterSpacing: 'var(--text-label-tracking)',
+                    fontSize: 'var(--text-h1-size)',
+                    lineHeight: 'var(--text-h1-line-height)',
                   }}
                 >
-                  The AI summary that didn&apos;t make it into the product
+                  {aim.takeaways?.[0]?.headline}
+                </p>
+                <p
+                  className="font-normal text-[var(--color-text-secondary)] whitespace-pre-line"
+                  style={{
+                    fontSize: 'var(--text-intro-size)',
+                    lineHeight: 'var(--text-intro-line-height)',
+                  }}
+                >
+                  {aim.takeaways?.[0]?.body}
                 </p>
               </div>
+
+              <div className="flex flex-1 flex-col gap-6">
+                <p
+                  className="md:whitespace-nowrap font-normal text-[var(--color-ink)]"
+                  style={{
+                    fontSize: 'var(--text-h1-size)',
+                    lineHeight: 'var(--text-h1-line-height)',
+                  }}
+                >
+                  {aim.takeaways?.[1]?.headline}
+                </p>
+                <p
+                  className="font-normal text-[var(--color-text-secondary)] whitespace-pre-line"
+                  style={{
+                    fontSize: 'var(--text-intro-size)',
+                    lineHeight: 'var(--text-intro-line-height)',
+                  }}
+                >
+                  {aim.takeaways?.[1]?.body}
+                </p>
+              </div>
+            </div>
+
+            {/* ── Explorations that didn't ship ── */}
+            <div className="flex flex-col gap-10">
+              <h3
+                className="font-medium text-[var(--color-text-secondary)]"
+                style={{
+                  fontSize: 'var(--text-h2-size)',
+                  lineHeight: 'var(--text-h2-line-height)',
+                }}
+              >
+                Explorations
+              </h3>
+
+              {/* Exploration cards — all three from data */}
+              <div className="flex flex-col gap-6">
+                <div className="flex flex-col md:flex-row gap-6">
+                  {(aim.explorations ?? []).slice(0, 2).map((exp, i) => (
+                    <TakeawayCard
+                      key={exp.title}
+                      number={String(i + 1).padStart(2, '0')}
+                      title={exp.title}
+                      body={exp.description}
+                    />
+                  ))}
+                </div>
+                {(aim.explorations ?? []).slice(2).map((exp, i) => (
+                  <TakeawayCard
+                    key={exp.title}
+                    number={String(i + 3).padStart(2, '0')}
+                    title={exp.title}
+                    body={exp.description}
+                  />
+                ))}
+              </div>
+
+              {/* Exploration screenshot — renders for the first exploration with an image */}
+              {(() => {
+                const withImage = (aim.explorations ?? []).find(e => e.image)
+                if (!withImage?.image) return null
+                return (
+                  <div className="flex flex-col gap-1">
+                    <div className="aspect-video w-full overflow-hidden rounded-[4px] border border-[var(--color-border-mid)]">
+                      <img
+                        src={withImage.image.src}
+                        alt={withImage.image.alt}
+                        className="h-full w-full object-cover object-top"
+                      />
+                    </div>
+                    <p
+                      className="font-medium text-[var(--color-text-muted)]"
+                      style={{
+                        fontSize: 'var(--text-label-size)',
+                        lineHeight: 'var(--text-label-line-height)',
+                        letterSpacing: 'var(--text-label-tracking)',
+                      }}
+                    >
+                      {withImage.image.caption}
+                    </p>
+                  </div>
+                )
+              })()}
             </div>
           </div>
         </section>
@@ -806,197 +798,111 @@ export default function AimPage() {
         <SectionDivider />
 
         {/* ══════════════════════════════════════════════════════════
-            CONTACT
+            CONTACT CTA — lightweight, links to /contact
         ══════════════════════════════════════════════════════════ */}
         <section className="w-full">
           <div
-            className="mx-auto flex flex-col gap-8"
+            className="mx-auto flex flex-col items-center gap-6 text-center"
             style={{
               maxWidth: 'var(--space-content-max)',
               padding: 'var(--space-section-xl) var(--space-page-margin)',
             }}
           >
-            {/* Avatar + heading */}
-            <div className="flex w-full flex-col items-start gap-[10px]">
-              <div className="flex w-full items-start justify-center" style={{ height: 104 }}>
-                <IconFrame src={IMG_CONTACT} alt="Jay Shock" />
-              </div>
-              <div className="flex w-full justify-center">
-                <p
-                  style={{
-                    fontSize: 'var(--text-display-size)',
-                    lineHeight: 'var(--text-display-line-height)',
-                    fontWeight: 300,
-                    color: 'var(--color-text-secondary)',
-                  }}
-                >
-                  Contact{' '}
-                  <span style={{ fontWeight: 500, color: 'var(--color-ink)' }}>Jay</span>
-                </p>
-              </div>
-            </div>
+            <p
+              className="font-light text-[var(--color-text-secondary)]"
+              style={{
+                fontSize: 'var(--text-h1-size)',
+                lineHeight: 'var(--text-h1-line-height)',
+              }}
+            >
+              Like what you see?{' '}
+              <span className="font-medium text-[var(--color-ink)]">Let&apos;s talk.</span>
+            </p>
+            <a
+              href="/contact"
+              className="whitespace-nowrap rounded-[40px] font-medium text-[var(--color-button-text)]"
+              style={{
+                padding: '12px 24px',
+                minHeight: 44,
+                display: 'inline-flex',
+                alignItems: 'center',
+                background: 'var(--color-button-primary)',
+                fontSize: 'var(--text-ui-md-size)',
+                lineHeight: 'var(--text-ui-md-line-height)',
+                letterSpacing: 'var(--text-ui-md-tracking)',
+                border: '1px solid transparent',
+                boxShadow: '0px 2px 8px 0px rgba(0,0,0,0.2)',
+              }}
+            >
+              Get in touch
+            </a>
+          </div>
+        </section>
 
-            {/* Contact body + glass form */}
-            <div className="flex flex-col gap-8">
-              <div className="flex flex-col">
-                <div className="pb-4">
-                  <p
-                    style={{
-                      fontSize: 'var(--text-h1-size)',
-                      lineHeight: 'var(--text-h1-line-height)',
-                      fontWeight: 300,
-                      color: 'var(--color-text-secondary)',
-                    }}
-                  >
-                    Let&apos;s make it{' '}
-                    <span style={{ fontWeight: 500, color: 'var(--color-ink)' }}>
-                      simple.
-                    </span>
-                  </p>
-                </div>
-                <div className="pb-6" style={{ maxWidth: 700 }}>
-                  <p
-                    style={{
-                      fontSize: 'var(--text-intro-size)',
-                      lineHeight: 'var(--text-intro-line-height)',
-                      fontWeight: 400,
-                      color: 'var(--color-text-secondary)',
-                    }}
-                  >
-                    I want to hear about whatever complex system, product, or problem we
-                    could be working on.
-                  </p>
-                </div>
-                <p
-                  style={{
-                    fontSize: 'var(--text-body-lg-size)',
-                    lineHeight: 'var(--text-body-lg-line-height)',
-                    letterSpacing: 'var(--text-body-lg-tracking)',
-                    fontWeight: 300,
-                    color: 'var(--color-text-muted)',
-                  }}
-                >
-                  Prefer email?{' '}
-                  <a
-                    href="mailto:hello@jayshock.com"
-                    className="underline [text-decoration-skip-ink:none]"
-                    style={{ color: 'var(--color-text-secondary)' }}
-                  >
-                    hello@jayshock.com
-                  </a>
-                </p>
-              </div>
+        <SectionDivider />
 
-              {/* Glass form card */}
-              <div
-                className="relative w-full overflow-hidden rounded-2xl border border-[var(--color-border)] p-[25px] backdrop-blur-[24px]"
+        {/* ══════════════════════════════════════════════════════════
+            NEXT CASE STUDY
+        ══════════════════════════════════════════════════════════ */}
+        <section className="w-full">
+          <a
+            href={`/work/${aim.nextSlug}`}
+            className="group block"
+          >
+            <div
+              className="mx-auto flex flex-col items-center gap-3 text-center"
+              style={{
+                maxWidth: 'var(--space-content-max)',
+                padding: 'var(--space-section-xl) var(--space-page-margin)',
+              }}
+            >
+              <p
+                className="font-medium text-[var(--color-text-muted)]"
                 style={{
-                  background:
-                    'linear-gradient(180deg, var(--color-hover-subtle) 0%, rgba(255,255,255,0.02) 50%, transparent 100%), rgba(255,255,255,0.04)',
-                  boxShadow:
-                    '0px 2px 24px 0px var(--shadow-surface-color), inset 0px 1px 0px 1px var(--color-hover-subtle)',
+                  fontSize: 'var(--text-label-size)',
+                  lineHeight: 'var(--text-label-line-height)',
+                  letterSpacing: 'var(--text-label-tracking)',
+                  textTransform: 'uppercase',
                 }}
               >
-                <form className="flex flex-col gap-6">
-                  {/* Name + Email */}
-                  <div className="flex flex-col md:flex-row gap-6">
-                    <FormField label="Name" placeholder="Your name" />
-                    <FormField label="Email" placeholder="you@example.com" type="email" />
-                  </div>
-
-                  {/* Topic select */}
-                  <div className="flex flex-col gap-1">
-                    <label
-                      className="font-medium text-[var(--color-text-muted)]"
-                      style={{
-                        fontSize: 'var(--text-ui-sm-size)',
-                        lineHeight: 'var(--text-ui-sm-line-height)',
-                        letterSpacing: 'var(--text-ui-sm-tracking)',
-                      }}
-                    >
-                      Topic
-                    </label>
-                    <div className="relative">
-                      <select
-                        className="w-full appearance-none rounded-[4px] border border-[var(--color-border-mid)] font-normal text-[var(--color-text-muted)] outline-none"
-                        style={{
-                          height: 56,
-                          padding: '5px 49px 5px 17px',
-                          background: 'var(--glass-dark-thin)',
-                          fontSize: 'var(--text-body-md-size)',
-                          lineHeight: 'var(--text-body-md-line-height)',
-                          letterSpacing: 'var(--text-body-md-tracking)',
-                        }}
-                      >
-                        <option value="">What are you reaching out about?</option>
-                        <option value="work">Work opportunity</option>
-                        <option value="project">Project collaboration</option>
-                        <option value="consulting">Consulting</option>
-                        <option value="other">Something else</option>
-                      </select>
-                      <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                          <path
-                            d="M5 7.5L10 12.5L15 7.5"
-                            stroke="var(--color-text-muted)"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Message textarea */}
-                  <div className="flex flex-col gap-1">
-                    <label
-                      className="font-medium text-[var(--color-text-muted)]"
-                      style={{
-                        fontSize: 'var(--text-ui-sm-size)',
-                        lineHeight: 'var(--text-ui-sm-line-height)',
-                        letterSpacing: 'var(--text-ui-sm-tracking)',
-                      }}
-                    >
-                      Message
-                    </label>
-                    <textarea
-                      rows={5}
-                      placeholder="Tell me what you are working on."
-                      className="w-full resize-none rounded-[4px] border border-[var(--color-border-mid)] font-normal text-[var(--color-ink)] placeholder:text-[var(--color-text-muted)] outline-none"
-                      style={{
-                        padding: '17px',
-                        background: 'var(--glass-dark-thin)',
-                        fontSize: 'var(--text-body-md-size)',
-                        lineHeight: 'var(--text-body-md-line-height)',
-                        letterSpacing: 'var(--text-body-md-tracking)',
-                      }}
-                    />
-                  </div>
-
-                  {/* Submit */}
-                  <div>
-                    <button
-                      type="submit"
-                      className="whitespace-nowrap rounded-[40px] font-medium text-[var(--color-button-text)]"
-                      style={{
-                        padding: '12px 17px',
-                        minHeight: 44,
-                        background: 'var(--color-button-primary)',
-                        fontSize: 'var(--text-ui-md-size)',
-                        lineHeight: 'var(--text-ui-md-line-height)',
-                        letterSpacing: 'var(--text-ui-md-tracking)',
-                        border: '1px solid transparent',
-                        boxShadow: '0px 2px 8px 0px rgba(0,0,0,0.2)',
-                      }}
-                    >
-                      Send to Jay
-                    </button>
-                  </div>
-                </form>
-              </div>
+                Next project
+              </p>
+              <p
+                className="font-medium text-[var(--color-ink)] transition-colors group-hover:text-[var(--color-text-secondary)]"
+                style={{
+                  fontSize: 'var(--text-h1-size)',
+                  lineHeight: 'var(--text-h1-line-height)',
+                }}
+              >
+                From support calls to self-service
+              </p>
+              <p
+                className="font-normal text-[var(--color-text-muted)]"
+                style={{
+                  fontSize: 'var(--text-body-md-size)',
+                  lineHeight: 'var(--text-body-md-line-height)',
+                }}
+              >
+                White-label loan management app
+              </p>
+              {/* Arrow */}
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                className="mt-2 text-[var(--color-text-muted)] transition-transform group-hover:translate-x-1"
+              >
+                <path
+                  d="M5 12H19M19 12L13 6M19 12L13 18"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
             </div>
-          </div>
+          </a>
         </section>
     </>
   )

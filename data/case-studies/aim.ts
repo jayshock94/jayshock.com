@@ -201,19 +201,15 @@ const aim: CaseStudy = {
   explorations: [
     {
       title: 'Hamburger nav vs tab bar vs sidebar',
-      description: 'Early prototypes tested three navigation patterns. Hamburger hid too much from power users who needed everything visible. Tab bar couldn\'t scale to twelve modules. We landed on a persistent sidebar with collapsible groups so lenders could see the full system at a glance.',
-    },
-{
-      title: 'Bold summary banner vs inline stats',
-      description: 'We tested a large hero banner showing key numbers at the top of the dashboard. It looked great in mockups but took up too much vertical space on the 1366x768 monitors most branches used. The final design moved stats into compact tiles so users could see their queue immediately.',
+      description: 'Three patterns. One winner.\n\n· Hamburger — hid too much. Power users needed everything in view.\n· Tab bar — couldn\'t scale past four or five items, let alone twelve modules.\n· Sidebar — persistent, collapsible groups. Lenders could see the whole system at a glance.',
     },
     {
       title: 'AI Account Summary',
-      description: 'I pushed hard for an AI-powered account summary that would synthesize loan history and customer context into a readable brief. When a loan landed on someone\'s desk with no context, they had to dig through multiple screens to piece the story together. The AI summary would solve that cold-start problem instantly. I designed the full feature and prototyped it, but the team decided not to build it. Still think it was the right idea at the wrong time.',
+      description: 'When a loan landed on someone\'s desk, there was no context. They had to dig through multiple screens just to piece together the story. I pushed for an AI summary that would solve that cold-start problem instantly.\n\nI designed and prototyped the full feature. The team decided not to build it. Still think it was the right idea at the wrong time.',
       image: {
         src:     '/images/AIM/ai summary 2.png',
         alt:     'AI Account Summary prototype — synthesized loan history and customer context in a readable brief',
-        caption: 'The AI summary I designed and prototyped. Killed before launch.',
+        caption: 'The AI summary that was killed before launch.',
         aspect:  'landscape',
       },
     },
