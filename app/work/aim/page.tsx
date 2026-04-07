@@ -39,11 +39,12 @@ const PHASE_MAP: Record<ProcessTab, {
   tab: string
   extended: string
   glass: string
+  hover: string
 }> = {
-  'see-it':   { tab: 'var(--phase-impact-tab)',    extended: 'var(--phase-impact-extended)',    glass: 'var(--phase-impact-glass)'    },
-  'own-it':   { tab: 'var(--phase-problem-tab)',   extended: 'var(--phase-problem-extended)',   glass: 'var(--phase-problem-glass)'   },
-  'solve-it': { tab: 'var(--phase-discovery-tab)', extended: 'var(--phase-discovery-extended)', glass: 'var(--phase-discovery-glass)' },
-  'do-it':    { tab: 'var(--phase-solution-tab)',  extended: 'var(--phase-solution-extended)',  glass: 'var(--phase-solution-glass)'  },
+  'see-it':   { tab: 'var(--phase-impact-tab)',    extended: 'var(--phase-impact-extended)',    glass: 'var(--phase-impact-glass)',    hover: 'rgba(209,188,254,0.08)' },
+  'own-it':   { tab: 'var(--phase-problem-tab)',   extended: 'var(--phase-problem-extended)',   glass: 'var(--phase-problem-glass)',   hover: 'rgba(229,195,153,0.08)' },
+  'solve-it': { tab: 'var(--phase-discovery-tab)', extended: 'var(--phase-discovery-extended)', glass: 'var(--phase-discovery-glass)', hover: 'rgba(34,105,92,0.25)'   },
+  'do-it':    { tab: 'var(--phase-solution-tab)',  extended: 'var(--phase-solution-extended)',  glass: 'var(--phase-solution-glass)',  hover: 'rgba(162,202,248,0.08)' },
 }
 
 // ─── Shared sub-components ─────────────────────────────────────────────────
@@ -190,6 +191,7 @@ function TakeawayCard({
 
 export default function AimPage() {
   const [activeTab, setActiveTab] = useState<ProcessTab>('see-it')
+  const [hoveredTab, setHoveredTab] = useState<ProcessTab | null>(null)
 
   // ── Sticky tab dock state ────────────────────────────────────────────────
   const [docked, setDocked]               = useState(false)
@@ -457,7 +459,9 @@ export default function AimPage() {
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className="min-w-0 flex-1"
+                    onMouseEnter={() => setHoveredTab(tab.id)}
+                    onMouseLeave={() => setHoveredTab(null)}
+                    className="min-w-0 flex-1 cursor-pointer"
                   >
                     {activeTab === tab.id ? (
                       <div
@@ -483,11 +487,14 @@ export default function AimPage() {
                       </div>
                     ) : (
                       <span
-                        className="flex items-center justify-center px-3 py-1.5 font-medium whitespace-nowrap text-[var(--color-text-secondary)]"
+                        className="flex items-center justify-center rounded-full font-medium whitespace-nowrap text-[var(--color-text-secondary)]"
                         style={{
+                          padding: '6px 12px',
                           fontSize: 'var(--text-ui-md-size)',
                           lineHeight: 'var(--text-ui-md-line-height)',
                           letterSpacing: 'var(--text-ui-md-tracking)',
+                          backgroundColor: hoveredTab === tab.id ? PHASE_MAP[tab.id].hover : 'transparent',
+                          transition: 'background-color 150ms ease',
                         }}
                       >
                         {tab.label}
