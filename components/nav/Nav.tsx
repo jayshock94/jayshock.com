@@ -97,7 +97,7 @@ export default function Nav() {
                       href={link.href}
                       className="nav-link text-ui-md tracking-[0.02em] transition-all duration-200"
                       style={{
-                        padding: '8px 16px',
+                        padding: 'var(--space-component-sm) var(--space-component-md)',
                         borderRadius: '999px',
                         color: active ? 'var(--color-ink)' : 'var(--color-text-muted)',
                         background: active ? 'var(--color-hover-subtle)' : 'transparent',

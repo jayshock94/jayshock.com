@@ -101,8 +101,8 @@
   --color-ink:              #E5E2E1;
   --color-text-primary:     #E5E2E1;
   --color-text-secondary:   #C4C7C8;
-  --color-text-muted:       #8E9192;
-  --color-text-placeholder: #444748;
+  --color-text-muted:       #9DA0A1;  /* 7.3:1 on canvas — AAA at label sizes */
+  --color-text-placeholder: #606363;  /* 3.2:1 on canvas — minimum usable  */
 
   /* -----------------------------------------------------------
      SEMANTIC TOKENS — ACCENT
@@ -150,6 +150,8 @@
   ----------------------------------------------------------- */
   --color-status-available:      #4ade80;
   --color-status-available-glow: rgba(74, 222, 128, 0.4);
+  --color-status-error:          rgba(220, 100, 100, 0.9);
+  --color-status-error-border:   rgba(220, 100, 100, 0.4);
 
   /* -----------------------------------------------------------
      SEMANTIC TOKENS — SHADOWS
@@ -496,6 +498,7 @@
   --space-section-lg:  clamp(64px, 10vw, 128px);
   --space-section-xl:  80px;             /* py on main sections → 160px visual gap between sections */
   --space-subsection:  40px;             /* py on subsections  → 80px visual gap between subsections */
+  --space-subsection-gap: clamp(40px, 8vw, 70px); /* heading → body gap inside homepage sections */
   --space-page-margin: clamp(20px, 6vw, 80px);
 
   /* -----------------------------------------------------------

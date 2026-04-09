@@ -10,6 +10,7 @@
  */
 
 import { useState, useRef, useEffect, useLayoutEffect } from 'react'
+import Image from 'next/image'
 import aim from '@/data/case-studies/aim'
 
 // ─── Helpers ──────────────────────────────────────────────────────────────
@@ -22,16 +23,69 @@ function blockText(block: import('@/data/types').ContentBlock): string {
 const IMG_APP_ICON    = '/images/AIM/aim-app-icon.png'
 const IMG_CIM_1       = '/images/AIM/cim-legacy-1.png'
 const IMG_CIM_2       = '/images/AIM/cim-legacy-2.png'
+const IMG_CIM_3       = '/images/AIM/cim-legacy-3.png'
 const IMG_AI_SUMMARY  = '/images/AIM/ai summary 2.png'
 
+// ─── Research method cards (Identify it tab) ─────────────────────────────
+const RESEARCH_METHODS = [
+  {
+    number: '01',
+    title: 'User interviews',
+    description:
+      'Interviewed financial leads, branch managers, branch reps and POs across multiple products to understand the full lending ecosystem.',
+    image: '/images/AIM/research-user-interviews.png',
+    caption: 'Figjam Screenshot of actual research outputs from user interviews',
+  },
+  {
+    number: '02',
+    title: 'Workflow mapping',
+    description:
+      'Documented every tool, spreadsheet, and sticky-note system that lenders used to fill the gaps in existing products.',
+    image: '/images/AIM/research-workflow-mapping.png',
+    caption: 'Figjam Screenshot of actual research outputs from workflow mapping',
+  },
+  {
+    number: '04',
+    title: 'Competitive analysis',
+    description:
+      'Studied how competitors and adjacent fintech tools approached the same problems. Identified patterns in what the market had already solved and where the gaps still were.',
+    image: '/images/AIM/research-competitive-analysis.png',
+    caption: 'Figjam Screenshot of actual competitive analysis',
+  },
+] as const
+
+// ─── "What was broken" cards (Identify it tab) ───────────────────────────
+const BROKEN_ITEMS = [
+  {
+    title: 'Five or more tabs open at all times',
+    description:
+      'Lenders managed loans across separate tools, spreadsheets, and browser tabs. Context was scattered. Errors compounded.',
+  },
+  {
+    title: 'Cross-team handoffs broke constantly',
+    description:
+      'Different teams used different products for each phase of the loan process. Handing work from one team to the next meant switching systems and losing context.',
+  },
+  {
+    title: 'Managing the queue was a job before the job',
+    description:
+      'Branch managers came in early just to figure out who should work on what. Queue management was manual. Every morning.',
+  },
+  {
+    title: 'Powerful on paper. Outdated in practice.',
+    description:
+      'Built to do everything. Painful to learn. Impossible to love.',
+  },
+] as const
+
 // ─── Types ─────────────────────────────────────────────────────────────────
-type ProcessTab = 'see-it' | 'own-it' | 'solve-it' | 'do-it'
+type ProcessTab = 'identify-it' | 'face-it' | 'solve-it' | 'prove-it'
 
 const TABS: { id: ProcessTab; label: string }[] = [
-  { id: 'see-it',   label: 'See it'   },
-  { id: 'own-it',   label: 'Own it'   },
-  { id: 'solve-it', label: 'Solve it' },
-  { id: 'do-it',    label: 'Do it'    },
+  { id: 'identify-it', label: 'Identify it' },
+  { id: 'face-it',     label: 'Face it'     },
+  { id: 'solve-it',    label: 'Solve it'    },
+  { id: 'prove-it',    label: 'Prove it'    },
 ]
 
 /** Phase token mapping — drives tab pill color, text color, and section background per tab */
@@ -42,10 +96,10 @@ const PHASE_MAP: Record<ProcessTab, {
   bg: string
   hover: string
 }> = {
-  'see-it':   { tab: 'var(--phase-impact-tab)',    extended: 'var(--phase-impact-extended)',    glass: 'var(--phase-impact-glass)',    bg: 'var(--phase-impact-bg)',    hover: 'rgba(209,188,254,0.08)' },
-  'own-it':   { tab: 'var(--phase-problem-tab)',   extended: 'var(--phase-problem-extended)',   glass: 'var(--phase-problem-glass)',   bg: 'var(--phase-problem-bg)',   hover: 'rgba(229,195,153,0.08)' },
-  'solve-it': { tab: 'var(--phase-discovery-tab)', extended: 'var(--phase-discovery-extended)', glass: 'var(--phase-discovery-glass)', bg: 'var(--phase-discovery-bg)', hover: 'rgba(34,105,92,0.25)'   },
-  'do-it':    { tab: 'var(--phase-solution-tab)',  extended: 'var(--phase-solution-extended)',  glass: 'var(--phase-solution-glass)',  bg: 'var(--phase-solution-bg)',  hover: 'rgba(162,202,248,0.08)' },
+  'identify-it': { tab: 'var(--phase-impact-tab)',    extended: 'var(--phase-impact-extended)',    glass: 'var(--phase-impact-glass)',    bg: 'var(--phase-impact-bg)',    hover: 'rgba(209,188,254,0.08)' },
+  'face-it':     { tab: 'var(--phase-problem-tab)',   extended: 'var(--phase-problem-extended)',   glass: 'var(--phase-problem-glass)',   bg: 'var(--phase-problem-bg)',   hover: 'rgba(229,195,153,0.08)' },
+  'solve-it':    { tab: 'var(--phase-discovery-tab)', extended: 'var(--phase-discovery-extended)', glass: 'var(--phase-discovery-glass)', bg: 'var(--phase-discovery-bg)', hover: 'rgba(34,105,92,0.25)'   },
+  'prove-it':    { tab: 'var(--phase-solution-tab)',  extended: 'var(--phase-solution-extended)',  glass: 'var(--phase-solution-glass)',  bg: 'var(--phase-solution-bg)',  hover: 'rgba(162,202,248,0.08)' },
 }
 
 // ─── Shared sub-components ─────────────────────────────────────────────────
@@ -109,34 +163,97 @@ function IconFrame({ src, alt }: { src: string; alt: string }) {
 }
 
 /** "What was broken" tinted list card */
-function BrokenCard({ title, body }: { title: string; body: string }) {
+/** Numbered research method card — "Identify it" tab */
+function ResearchMethodCard({
+  number,
+  title,
+  description,
+}: {
+  number: string
+  title: string
+  description: string
+}) {
   return (
-    <div
-      className="flex-1 min-w-0 rounded-[4px] border border-[var(--color-border-subtle-16)]"
-      style={{ background: 'var(--phase-impact-card)' }}
-    >
-      <div className="flex flex-col px-4 py-[10px]">
+    <div className="flex flex-1 min-w-0 flex-col gap-[var(--space-component-base)]">
+      {/* Number label with accent bottom border */}
+      <div
+        className="pb-2"
+        style={{ borderBottom: '2px solid var(--phase-impact-extended)' }}
+      >
         <p
-          className="font-normal text-[var(--color-ink)]"
+          className="font-semibold"
           style={{
-            fontSize: 'var(--text-body-md-size)',
-            lineHeight: 'var(--text-body-md-line-height)',
-            letterSpacing: 'var(--text-body-md-tracking)',
+            fontSize: 'var(--text-ui-sm-size)',
+            lineHeight: 'var(--text-ui-sm-line-height)',
+            letterSpacing: 'var(--text-ui-sm-tracking)',
+            color: 'var(--phase-impact-extended)',
           }}
         >
-          {title}
-        </p>
-        <p
-          className="font-normal text-[var(--color-text-muted)]"
-          style={{
-            fontSize: 'var(--text-body-size)',
-            lineHeight: 'var(--text-body-line-height)',
-            letterSpacing: 'var(--text-body-tracking)',
-          }}
-        >
-          {body}
+          {number}
         </p>
       </div>
+      {/* Title */}
+      <p
+        className="font-medium text-[var(--color-ink)]"
+        style={{
+          fontSize: 'var(--text-h3-size)',
+          lineHeight: 'var(--text-h3-line-height)',
+        }}
+      >
+        {title}
+      </p>
+      {/* Description */}
+      <p
+        className="font-normal text-[var(--color-text-secondary)]"
+        style={{
+          fontSize: 'var(--text-body-md-size)',
+          lineHeight: 'var(--text-body-md-line-height)',
+          letterSpacing: 'var(--text-body-md-tracking)',
+        }}
+      >
+        {description}
+      </p>
+    </div>
+  )
+}
+
+/** Phase-tinted "What was broken" card */
+function BrokenCard({
+  title,
+  description,
+}: {
+  title: string
+  description: string
+}) {
+  return (
+    <div
+      className="flex flex-1 min-w-0 flex-col rounded-[4px]"
+      style={{
+        background: 'var(--phase-impact-card)',
+        border: '1px solid var(--color-border-subtle-16)',
+        padding: 'var(--space-component-md)',
+      }}
+    >
+      <p
+        className="font-normal text-[var(--color-ink)]"
+        style={{
+          fontSize: 'var(--text-body-md-size)',
+          lineHeight: 'var(--text-body-md-line-height)',
+          letterSpacing: 'var(--text-body-md-tracking)',
+        }}
+      >
+        {title}
+      </p>
+      <p
+        className="font-normal text-[var(--color-text-muted)]"
+        style={{
+          fontSize: 'var(--text-body-size)',
+          lineHeight: 'var(--text-body-line-height)',
+          letterSpacing: 'var(--text-body-tracking)',
+        }}
+      >
+        {description}
+      </p>
     </div>
   )
 }
@@ -153,7 +270,7 @@ function TakeawayCard({
 }) {
   return (
     <div
-      className="flex flex-1 flex-col gap-3 overflow-hidden rounded-[8px] border border-[var(--color-border)] p-[25px]"
+      className="flex flex-1 flex-col gap-[var(--space-component-base)] overflow-hidden rounded-[8px] border border-[var(--color-border)] p-[var(--space-component-lg)]"
       style={{ background: 'var(--color-surface)' }}
     >
       <p
@@ -191,7 +308,7 @@ function TakeawayCard({
 // ─── Page ──────────────────────────────────────────────────────────────────
 
 export default function AimPage() {
-  const [activeTab, setActiveTab] = useState<ProcessTab>('see-it')
+  const [activeTab, setActiveTab] = useState<ProcessTab>('identify-it')
   const [hoveredTab, setHoveredTab] = useState<ProcessTab | null>(null)
 
   // ── Sticky tab dock state ────────────────────────────────────────────────
@@ -269,7 +386,7 @@ export default function AimPage() {
         ══════════════════════════════════════════════════════════ */}
         <section className="w-full bg-[var(--aim-hero-bg)]">
           <div
-            className="mx-auto flex items-center justify-center py-10 md:py-[80px]"
+            className="mx-auto flex items-center justify-center py-12 md:py-20"
             style={{
               maxWidth: 'var(--space-layout-max)',
               paddingLeft: 'var(--space-page-margin)',
@@ -293,12 +410,12 @@ export default function AimPage() {
           <div
             className="mx-auto"
             style={{
-              maxWidth: 'var(--space-content-max)',
+              maxWidth: 'calc(var(--space-content-max) + var(--space-page-margin) * 2)',
               padding: 'var(--space-section-xl) var(--space-page-margin)',
             }}
           >
             {/* Icon + title — 80px gap below before overview/goal/role */}
-            <div className="mb-10 md:mb-[80px] flex flex-col items-center gap-4">
+            <div className="mb-[var(--space-section-xl)] flex flex-col items-center gap-[var(--space-component-lg)]">
               <IconFrame src={IMG_APP_ICON} alt="AIM loan management platform" />
               <h1
                 className="text-center font-normal text-[var(--color-ink)]"
@@ -314,10 +431,10 @@ export default function AimPage() {
             </div>
 
             {/* Two-column: overview + goal left, role right */}
-            <div className="flex flex-col md:flex-row gap-8 md:gap-[70px]">
+            <div className="flex flex-col md:flex-row gap-[var(--space-stack-lg)] md:gap-[var(--space-7)]">
               {/* Left */}
-              <div className="flex flex-1 flex-col gap-8">
-                <div className="flex flex-col gap-4">
+              <div className="flex flex-1 flex-col gap-[var(--space-stack-lg)]">
+                <div className="flex flex-col gap-[var(--space-component-md)]">
                   <h3
                     className="shrink-0 whitespace-nowrap font-medium text-[var(--color-text-secondary)]"
                     style={{
@@ -339,7 +456,7 @@ export default function AimPage() {
                   </p>
                 </div>
 
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-[var(--space-component-md)]">
                   <h3
                     className="shrink-0 whitespace-nowrap font-medium text-[var(--color-text-secondary)]"
                     style={{
@@ -363,7 +480,7 @@ export default function AimPage() {
               </div>
 
               {/* Right: Role */}
-              <div className="flex shrink-0 flex-col gap-4 md:whitespace-nowrap md:pt-2">
+              <div className="flex shrink-0 flex-col gap-[var(--space-component-md)] md:whitespace-nowrap md:pt-[var(--space-component-sm)]">
                 <p
                   className="font-medium text-[var(--color-text-secondary)]"
                   style={{
@@ -422,9 +539,9 @@ export default function AimPage() {
           }}
         >
           <div
-            className="mx-auto flex flex-col gap-12 md:gap-[80px]"
+            className="mx-auto flex flex-col gap-[var(--space-section-xl)]"
             style={{
-              maxWidth: 'var(--space-content-max)',
+              maxWidth: 'calc(var(--space-content-max) + var(--space-page-margin) * 2)',
               padding: 'var(--space-section-xl) var(--space-page-margin)',
             }}
           >
@@ -438,7 +555,7 @@ export default function AimPage() {
               Design process
             </h2>
 
-            <div ref={containerRef} className="flex flex-col gap-10 md:gap-[70px]">
+            <div ref={containerRef} className="flex flex-col gap-[var(--space-section-xl)]">
               {/* Segment tabs — sticky below nav; exits when container bottom passes.
                  Desktop and mobile are separate renders to avoid responsive conflicts. */}
               <div
@@ -644,92 +761,256 @@ export default function AimPage() {
                 {docked && <div className="md:hidden" style={{ height: 72 }} />}
               </div>{/* end sticky wrapper */}
 
-              {/* ── "See it" tab content ── */}
-              {activeTab === 'see-it' && (
-                <div className="flex flex-col gap-[70px]">
+              {/* ── "Identify it" tab content ── */}
+              {activeTab === 'identify-it' && (
+                <div className="flex flex-col gap-[var(--space-section-xl)]">
 
-                  {/* The problem */}
-                  <div className="flex flex-col gap-6">
-                    <div className="flex flex-col gap-4">
-                      <h3
-                        className="font-medium text-[var(--color-ink)]"
-                        style={{
-                          fontSize: 'var(--text-h1-size)',
-                          lineHeight: 'var(--text-h1-line-height)',
-                        }}
-                      >
-                        The problem
-                      </h3>
+                  {/* What it means */}
+                  <div className="flex flex-col" style={{ gap: 'var(--space-subsection)' }}>
+                    <h3
+                      className="font-medium text-[var(--color-ink)]"
+                      style={{
+                        fontSize: 'var(--text-h1-size)',
+                        lineHeight: 'var(--text-h1-line-height)',
+                      }}
+                    >
+                      What it means
+                    </h3>
+                    <div className="flex flex-col gap-[var(--space-component-md)]">
                       <p
-                        className="font-normal text-[var(--color-text-secondary)]"
+                        className="font-medium text-[var(--color-text-secondary)]"
                         style={{
                           fontSize: 'var(--text-h3-size)',
                           lineHeight: 'var(--text-h3-line-height)',
+                          letterSpacing: 'var(--text-h3-tracking)',
                         }}
                       >
-                        {aim.cardImpactLine}
+                        Nothing is fact until we identify it.
                       </p>
-                    </div>
-                    <p
-                      className="font-normal text-[var(--color-text-secondary)]"
-                      style={{
-                        fontSize: 'var(--text-body-md-size)',
-                        lineHeight: 'var(--text-body-md-line-height)',
-                        letterSpacing: 'var(--text-body-md-tracking)',
-                      }}
-                    >
-                      {blockText(aim.problem.content[0])}
-                    </p>
-
-                    {/* Screenshot pair — label + two equal-width images */}
-                    <div className="flex flex-col gap-2">
-                      {/* Section label — matches Figma Portfolio/label/medium */}
                       <p
-                        className="font-medium text-[var(--color-text-muted)]"
+                        className="font-normal text-[var(--color-text-secondary)]"
                         style={{
-                          fontSize: 'var(--text-label-size)',
-                          lineHeight: 'var(--text-label-line-height)',
-                          letterSpacing: 'var(--text-label-tracking)',
+                          fontSize: 'var(--text-body-lg-size)',
+                          lineHeight: 'var(--text-body-lg-line-height)',
+                          letterSpacing: 'var(--text-body-lg-tracking)',
                         }}
                       >
-                        CIM 2024 — In 2024 was still the do it all power-user loan management platform clients were using
+                        Every project starts with assumptions. Mine. The stakeholders. The brief. I start by questioning all of it. What is the real goal. What is the actual problem. What are we all pretending we already know. Nothing is fact until we identify it.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* How to identify it */}
+                  <div className="flex flex-col" style={{ gap: 'var(--space-subsection)' }}>
+                    <h3
+                      className="font-medium text-[var(--color-ink)]"
+                      style={{
+                        fontSize: 'var(--text-h1-size)',
+                        lineHeight: 'var(--text-h1-line-height)',
+                      }}
+                    >
+                      How to identify it
+                    </h3>
+
+                    {/* Intro — subtitle + two body paragraphs */}
+                    <div className="flex flex-col gap-[var(--space-component-md)]">
+                      <p
+                        className="font-medium text-[var(--color-text-secondary)]"
+                        style={{
+                          fontSize: 'var(--text-h3-size)',
+                          lineHeight: 'var(--text-h3-line-height)',
+                          letterSpacing: 'var(--text-h3-tracking)',
+                        }}
+                      >
+                        Choose the right research methods
+                      </p>
+                      <p
+                        className="font-normal text-[var(--color-text-secondary)]"
+                        style={{
+                          fontSize: 'var(--text-body-lg-size)',
+                          lineHeight: 'var(--text-body-lg-line-height)',
+                          letterSpacing: 'var(--text-body-lg-tracking)',
+                        }}
+                      >
+                        The assumption was clear. We were losing clients to competitors like Salesforce and their proposed solution was a more powerful dashboard. That was the brief. That was the starting point. Not the full answer.
+                      </p>
+                      <p
+                        className="font-normal text-[var(--color-text-secondary)]"
+                        style={{
+                          fontSize: 'var(--text-body-lg-size)',
+                          lineHeight: 'var(--text-body-lg-line-height)',
+                          letterSpacing: 'var(--text-body-lg-tracking)',
+                        }}
+                      >
+                        Based on those assumptions I chose these methods to find what we were missing, and what was actually true.
+                      </p>
+                    </div>
+
+                    {/* Research method rows — alternating card + image */}
+                    <div className="flex flex-col" style={{ gap: 'var(--space-stack-lg)' }}>
+                      {RESEARCH_METHODS.map((card, i) => {
+                        const imageFirst = i % 2 !== 0
+                        const cardEl = (
+                          <ResearchMethodCard
+                            key={card.number}
+                            number={card.number}
+                            title={card.title}
+                            description={card.description}
+                          />
+                        )
+                        const imageEl = (
+                          <div className="flex flex-1 min-w-0 flex-col gap-[var(--space-component-xs)]">
+                            <div
+                              className="relative w-full overflow-hidden rounded-[4px]"
+                              style={{
+                                aspectRatio: '422 / 217',
+                                border: '1px solid rgba(255, 255, 255, 0.14)',
+                              }}
+                            >
+                              <Image
+                                src={card.image}
+                                alt={card.caption}
+                                fill
+                                sizes="50vw"
+                                style={{ objectFit: 'cover' }}
+                              />
+                            </div>
+                            <p
+                              className="font-medium text-[var(--color-text-muted)]"
+                              style={{
+                                fontSize: '11px',
+                                lineHeight: '16px',
+                                letterSpacing: '0.5px',
+                              }}
+                            >
+                              {card.caption}
+                            </p>
+                          </div>
+                        )
+                        return (
+                          <div
+                            key={card.number}
+                            className="flex flex-col md:flex-row"
+                            style={{ gap: 'var(--space-stack-md)' }}
+                          >
+                            {imageFirst ? imageEl : cardEl}
+                            {imageFirst ? cardEl : imageEl}
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
+
+                  {/* The problem identified */}
+                  <div className="flex flex-col" style={{ gap: 'var(--space-subsection)' }}>
+                    <h3
+                      className="font-medium text-[var(--color-ink)]"
+                      style={{
+                        fontSize: 'var(--text-h1-size)',
+                        lineHeight: 'var(--text-h1-line-height)',
+                      }}
+                    >
+                      The problem identified
+                    </h3>
+
+                    {/* Subtitle + body + images */}
+                    <div className="flex flex-col gap-[var(--space-component-md)]">
+                      <p
+                        className="font-medium text-[var(--color-text-secondary)]"
+                        style={{
+                          fontSize: 'var(--text-h3-size)',
+                          lineHeight: 'var(--text-h3-line-height)',
+                          letterSpacing: 'var(--text-h3-tracking)',
+                        }}
+                      >
+                        The current software was driving clients away
                       </p>
 
-                      <div className="flex flex-col md:flex-row items-start gap-4">
-                        <div className="flex min-w-0 flex-1 flex-col gap-1">
-                          <div className="aspect-video overflow-hidden rounded-[4px] border border-[var(--color-border-mid)]">
-                            <img
-                              src={IMG_CIM_1}
-                              alt="Legacy CIM interface — actual screens clients were using in 2024"
-                              className="h-full w-full object-cover"
-                            />
+                      {/* Body + CIM images */}
+                      <div className="flex flex-col gap-[var(--space-stack-md)]">
+                        <p
+                          className="font-normal text-[var(--color-text-secondary)]"
+                          style={{
+                            fontSize: 'var(--text-body-lg-size)',
+                            lineHeight: 'var(--text-body-lg-line-height)',
+                            letterSpacing: 'var(--text-body-lg-tracking)',
+                          }}
+                        >
+                          {blockText(aim.problem.content[0])}
+                        </p>
+
+                        {/* CIM 2024 image pair */}
+                        <div className="flex flex-col md:flex-row items-start gap-[var(--space-component-md)]">
+                          <div className="flex min-w-0 flex-1 flex-col gap-[var(--space-component-xs)]">
+                            <div
+                              className="overflow-hidden rounded-[4px]"
+                              style={{ border: '1px solid rgba(255, 255, 255, 0.14)' }}
+                            >
+                              <img
+                                src={IMG_CIM_1}
+                                alt="Legacy CIM interface — actual screens clients were using in 2024"
+                                className="h-full w-full object-cover"
+                              />
+                            </div>
+                            <p
+                              className="font-medium text-[var(--color-text-muted)]"
+                              style={{
+                                fontSize: '11px',
+                                lineHeight: '16px',
+                                letterSpacing: '0.5px',
+                              }}
+                            >
+                              CIM 2024
+                            </p>
                           </div>
-                          <p
-                            className="font-medium text-[var(--color-text-muted)]"
-                            style={{
-                              fontSize: 'var(--text-label-size)',
-                              lineHeight: 'var(--text-label-line-height)',
-                              letterSpacing: 'var(--text-label-tracking)',
-                            }}
-                          >
-                            CIM 2024
-                          </p>
+
+                          <div className="flex min-w-0 flex-1 flex-col gap-[var(--space-component-xs)]">
+                            <div
+                              className="overflow-hidden rounded-[4px]"
+                              style={{ border: '1px solid rgba(255, 255, 255, 0.14)' }}
+                            >
+                              <img
+                                src={IMG_CIM_2}
+                                alt="CIM 2024 legacy interface"
+                                className="h-full w-full object-cover"
+                              />
+                            </div>
+                            <p
+                              className="font-medium text-[var(--color-text-muted)]"
+                              style={{
+                                fontSize: '11px',
+                                lineHeight: '16px',
+                                letterSpacing: '0.5px',
+                              }}
+                            >
+                              CIM 2024
+                            </p>
+                          </div>
                         </div>
 
-                        <div className="flex min-w-0 flex-1 flex-col gap-1">
-                          <div className="aspect-video overflow-hidden rounded-[4px] border border-[var(--color-border-mid)]">
-                            <img
-                              src={IMG_CIM_2}
-                              alt="CIM 2024 legacy interface"
-                              className="h-full w-full object-cover"
+                        {/* Full-width CIM image */}
+                        <div className="flex flex-col gap-[var(--space-component-xs)]">
+                          <div
+                            className="relative w-full overflow-hidden rounded-[4px]"
+                            style={{
+                              aspectRatio: '422 / 217',
+                              border: '1px solid rgba(255, 255, 255, 0.14)',
+                            }}
+                          >
+                            <Image
+                              src={IMG_CIM_3}
+                              alt="CIM 2024 legacy workflow"
+                              fill
+                              sizes="100vw"
+                              style={{ objectFit: 'cover' }}
                             />
                           </div>
                           <p
                             className="font-medium text-[var(--color-text-muted)]"
                             style={{
-                              fontSize: 'var(--text-label-size)',
-                              lineHeight: 'var(--text-label-line-height)',
-                              letterSpacing: 'var(--text-label-tracking)',
+                              fontSize: '11px',
+                              lineHeight: '16px',
+                              letterSpacing: '0.5px',
                             }}
                           >
                             CIM 2024
@@ -737,62 +1018,327 @@ export default function AimPage() {
                         </div>
                       </div>
                     </div>
-                  </div>
 
-                  {/* What was broken */}
-                  <div className="flex flex-col gap-6">
-                    <h3
-                      className="font-medium text-[var(--color-ink)]"
-                      style={{
-                        fontSize: 'var(--text-h1-size)',
-                        lineHeight: 'var(--text-h1-line-height)',
-                      }}
-                    >
-                      What was broken
-                    </h3>
-                    <div className="flex flex-col gap-6">
-                      <div className="flex flex-col md:flex-row gap-6">
-                        {(aim.brokenItems ?? []).slice(0, 2).map((item) => (
-                          <BrokenCard key={item.title} title={item.title} body={item.body} />
-                        ))}
-                      </div>
-                      <div className="flex flex-col md:flex-row gap-6">
-                        {(aim.brokenItems ?? []).slice(2, 4).map((item) => (
-                          <BrokenCard key={item.title} title={item.title} body={item.body} />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
+                    {/* What was broken — subtitle + card grid */}
+                    <div className="flex flex-col gap-[var(--space-stack-md)]">
+                      <p
+                        className="font-medium text-[var(--color-text-secondary)]"
+                        style={{
+                          fontSize: 'var(--text-h3-size)',
+                          lineHeight: 'var(--text-h3-line-height)',
+                          letterSpacing: 'var(--text-h3-tracking)',
+                        }}
+                      >
+                        What was broken
+                      </p>
 
-                  {/* The GAIN deadline */}
-                  <div className="flex flex-col gap-6">
-                    <h3
-                      className="font-medium text-[var(--color-ink)]"
-                      style={{
-                        fontSize: 'var(--text-h1-size)',
-                        lineHeight: 'var(--text-h1-line-height)',
-                      }}
-                    >
-                      The GAIN deadline
-                    </h3>
-                    <div
-                      className="font-normal text-[var(--color-text-secondary)]"
-                      style={{
-                        fontSize: 'var(--text-body-md-size)',
-                        lineHeight: 'var(--text-body-md-line-height)',
-                        letterSpacing: 'var(--text-body-md-tracking)',
-                      }}
-                    >
-                      <p>{blockText(aim.problem.content[2])}</p>
-                      <p className="mt-3">{blockText(aim.problem.content[3])}</p>
-                      <p className="mt-3">{blockText(aim.problem.content[4])}</p>
+                      {/* 2x2 card grid */}
+                      <div className="flex flex-col gap-[var(--space-stack-md)]">
+                        <div className="flex flex-col md:flex-row gap-[var(--space-stack-md)]">
+                          {BROKEN_ITEMS.slice(0, 2).map((item) => (
+                            <BrokenCard key={item.title} title={item.title} description={item.description} />
+                          ))}
+                        </div>
+                        <div className="flex flex-col md:flex-row gap-[var(--space-stack-md)]">
+                          {BROKEN_ITEMS.slice(2, 4).map((item) => (
+                            <BrokenCard key={item.title} title={item.title} description={item.description} />
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               )}
 
-              {/* ── Empty tab placeholder (Own it / Solve it / Do it) ── */}
-              {activeTab !== 'see-it' && (
+              {/* ── "Face it" tab content ── */}
+              {activeTab === 'face-it' && (
+                <div className="flex flex-col gap-[var(--space-section-xl)]">
+
+                  {/* What it means */}
+                  <div className="flex flex-col" style={{ gap: 'var(--space-subsection)' }}>
+                    <h3
+                      className="font-medium text-[var(--color-ink)]"
+                      style={{
+                        fontSize: 'var(--text-h1-size)',
+                        lineHeight: 'var(--text-h1-line-height)',
+                      }}
+                    >
+                      What it means
+                    </h3>
+                    <div className="flex flex-col gap-[var(--space-component-md)]">
+                      <p
+                        className="font-medium text-[var(--color-text-secondary)]"
+                        style={{
+                          fontSize: 'var(--text-h3-size)',
+                          lineHeight: 'var(--text-h3-line-height)',
+                          letterSpacing: 'var(--text-h3-tracking)',
+                        }}
+                      >
+                        You can&apos;t build the right solution until you know what you&apos;re facing.
+                      </p>
+                      <p
+                        className="font-normal text-[var(--color-text-secondary)]"
+                        style={{
+                          fontSize: 'var(--text-body-lg-size)',
+                          lineHeight: 'var(--text-body-lg-line-height)',
+                          letterSpacing: 'var(--text-body-lg-tracking)',
+                        }}
+                      >
+                        Face it is about confronting reality after you have identified it. You now know what is actually true. But knowing it and facing it are different things.
+                      </p>
+                      <p
+                        className="font-normal text-[var(--color-text-secondary)]"
+                        style={{
+                          fontSize: 'var(--text-body-lg-size)',
+                          lineHeight: 'var(--text-body-lg-line-height)',
+                          letterSpacing: 'var(--text-body-lg-tracking)',
+                        }}
+                      >
+                        Facing it means looking at the constraints without flinching. The technical debt. The budget. The timeline. The gap between what users need and what the business can actually deliver. The politics. The things nobody wants to say out loud in the room.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* The constraints */}
+                  <div className="flex flex-col" style={{ gap: 'var(--space-subsection)' }}>
+                    <h3
+                      className="font-medium text-[var(--color-ink)]"
+                      style={{
+                        fontSize: 'var(--text-h1-size)',
+                        lineHeight: 'var(--text-h1-line-height)',
+                      }}
+                    >
+                      The constraints
+                    </h3>
+
+                    {/* Four months */}
+                    <div className="flex flex-col gap-[var(--space-component-md)]">
+                      <p
+                        className="font-medium text-[var(--color-text-secondary)]"
+                        style={{
+                          fontSize: 'var(--text-h3-size)',
+                          lineHeight: 'var(--text-h3-line-height)',
+                          letterSpacing: 'var(--text-h3-tracking)',
+                        }}
+                      >
+                        Four months to prove it was worth building.
+                      </p>
+                      <p
+                        className="font-semibold text-[var(--color-ink)]"
+                        style={{
+                          fontSize: 'var(--text-body-lg-size)',
+                          lineHeight: 'var(--text-body-lg-line-height)',
+                          letterSpacing: '0.15px',
+                        }}
+                      >
+                        No prototype, no funding.
+                      </p>
+                      <p
+                        className="font-normal text-[var(--color-text-secondary)]"
+                        style={{
+                          fontSize: 'var(--text-body-lg-size)',
+                          lineHeight: 'var(--text-body-lg-line-height)',
+                          letterSpacing: 'var(--text-body-lg-tracking)',
+                        }}
+                      >
+                        GAIN is our annual client conference. Where deals are made, products are demoed, and contracts are renewed. If we wanted funding to continue this project we needed something to show. We had four months from first contact to working prototype.
+                      </p>
+                    </div>
+
+                    {/* Client lock-in */}
+                    <div className="flex flex-col gap-[var(--space-component-md)]">
+                      <p
+                        className="font-medium text-[var(--color-text-secondary)]"
+                        style={{
+                          fontSize: 'var(--text-h3-size)',
+                          lineHeight: 'var(--text-h3-line-height)',
+                          letterSpacing: 'var(--text-h3-tracking)',
+                        }}
+                      >
+                        Client lock-in
+                      </p>
+                      <p
+                        className="font-normal text-[var(--color-text-secondary)]"
+                        style={{
+                          fontSize: 'var(--text-body-lg-size)',
+                          lineHeight: 'var(--text-body-lg-line-height)',
+                          letterSpacing: 'var(--text-body-lg-tracking)',
+                        }}
+                      >
+                        Certain clients were paying the bills and had hard coded features built specifically for them. Features that did not translate to the broader lender market. Designing for everyone meant navigating what was built for someone.
+                      </p>
+                    </div>
+
+                    {/* Ecosystem complexity */}
+                    <div className="flex flex-col gap-[var(--space-component-md)]">
+                      <p
+                        className="font-medium text-[var(--color-text-secondary)]"
+                        style={{
+                          fontSize: 'var(--text-h3-size)',
+                          lineHeight: 'var(--text-h3-line-height)',
+                          letterSpacing: 'var(--text-h3-tracking)',
+                        }}
+                      >
+                        Ecosystem complexity
+                      </p>
+                      <p
+                        className="font-normal text-[var(--color-text-secondary)]"
+                        style={{
+                          fontSize: 'var(--text-body-lg-size)',
+                          lineHeight: 'var(--text-body-lg-line-height)',
+                          letterSpacing: 'var(--text-body-lg-tracking)',
+                        }}
+                      >
+                        AIM was not a standalone product. It had to receive loan applications from multiple upstream products, GTO and others, each with their own code, their own POs, their own logic. You could not design in isolation. Every decision had to work across the whole ecosystem. That meant getting close with every dev lead and PO across multiple products before a single screen could be finalized.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* The complexity */}
+                  <div className="flex flex-col" style={{ gap: 'var(--space-subsection)' }}>
+                    <h3
+                      className="font-medium text-[var(--color-ink)]"
+                      style={{
+                        fontSize: 'var(--text-h1-size)',
+                        lineHeight: 'var(--text-h1-line-height)',
+                      }}
+                    >
+                      The complexity
+                    </h3>
+
+                    {/* The dashboard problem */}
+                    <div className="flex flex-col gap-[var(--space-component-md)]">
+                      <p
+                        className="font-medium text-[var(--color-text-secondary)]"
+                        style={{
+                          fontSize: 'var(--text-h3-size)',
+                          lineHeight: 'var(--text-h3-line-height)',
+                          letterSpacing: 'var(--text-h3-tracking)',
+                        }}
+                      >
+                        The dashboard problem
+                      </p>
+                      <p
+                        className="font-normal text-[var(--color-text-secondary)]"
+                        style={{
+                          fontSize: 'var(--text-body-lg-size)',
+                          lineHeight: 'var(--text-body-lg-line-height)',
+                          letterSpacing: 'var(--text-body-lg-tracking)',
+                        }}
+                      >
+                        Clients wanted to create custom tiles, with data tables, columns, customize field logic, control what they saw and how. But infinite customization without guardrails creates chaos. Too much flexibility and nobody knows where anything is. Too little and the clients feel like the product does not fit their workflow. Finding that line is genuinely hard to think through.
+                      </p>
+                    </div>
+
+                    {/* The decision engine integration */}
+                    <div className="flex flex-col gap-[var(--space-component-md)]">
+                      <p
+                        className="font-medium text-[var(--color-text-secondary)]"
+                        style={{
+                          fontSize: 'var(--text-h3-size)',
+                          lineHeight: 'var(--text-h3-line-height)',
+                          letterSpacing: 'var(--text-h3-tracking)',
+                        }}
+                      >
+                        The decision engine integration
+                      </p>
+                      <p
+                        className="font-normal text-[var(--color-text-secondary)]"
+                        style={{
+                          fontSize: 'var(--text-body-lg-size)',
+                          lineHeight: 'var(--text-body-lg-line-height)',
+                          letterSpacing: 'var(--text-body-lg-tracking)',
+                        }}
+                      >
+                        Every client had their own automated decision engine set up their own way. AIM had to surface the right data at the right time to feed into a system that was different for every single client. You could not design one flow. You had to design something flexible enough to serve all of them without breaking any of them.
+                      </p>
+                    </div>
+
+                    {/* The settings complexity */}
+                    <div className="flex flex-col gap-[var(--space-component-md)]">
+                      <p
+                        className="font-medium text-[var(--color-text-secondary)]"
+                        style={{
+                          fontSize: 'var(--text-h3-size)',
+                          lineHeight: 'var(--text-h3-line-height)',
+                          letterSpacing: 'var(--text-h3-tracking)',
+                        }}
+                      >
+                        The settings complexity
+                      </p>
+                      <p
+                        className="font-normal text-[var(--color-text-secondary)]"
+                        style={{
+                          fontSize: 'var(--text-body-lg-size)',
+                          lineHeight: 'var(--text-body-lg-line-height)',
+                          letterSpacing: 'var(--text-body-lg-tracking)',
+                        }}
+                      >
+                        All of that customization has to live somewhere. And designing a settings experience that is powerful enough for a technical admin but does not terrify everyone else is its own challenge.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* The curse of knowledge */}
+                  <div className="flex flex-col" style={{ gap: 'var(--space-subsection)' }}>
+                    <h3
+                      className="font-medium text-[var(--color-ink)]"
+                      style={{
+                        fontSize: 'var(--text-h1-size)',
+                        lineHeight: 'var(--text-h1-line-height)',
+                      }}
+                    >
+                      The curse of knowledge
+                    </h3>
+                    <div className="flex flex-col gap-[var(--space-component-md)]">
+                      <p
+                        className="font-medium text-[var(--color-ink)]"
+                        style={{
+                          fontSize: 'var(--text-h3-size)',
+                          lineHeight: 'var(--text-h3-line-height)',
+                          letterSpacing: 'var(--text-h3-tracking)',
+                        }}
+                      >
+                        The people who built it could no longer see it the way the people using it did.
+                      </p>
+                      <p
+                        className="font-normal text-[var(--color-text-secondary)]"
+                        style={{
+                          fontSize: 'var(--text-body-lg-size)',
+                          lineHeight: 'var(--text-body-lg-line-height)',
+                          letterSpacing: 'var(--text-body-lg-tracking)',
+                        }}
+                      >
+                        We did the research. We had research validating what users told us. Interview notes. Real evidence. But stakeholders had been living inside this product for years and had solutions in mind before the research even started.
+                      </p>
+                      <p
+                        className="font-normal text-[var(--color-text-secondary)]"
+                        style={{
+                          fontSize: 'var(--text-body-lg-size)',
+                          lineHeight: 'var(--text-body-lg-line-height)',
+                          letterSpacing: 'var(--text-body-lg-tracking)',
+                        }}
+                      >
+                        When you understand something deeply enough you stop being able to see it the way someone new does. They wanted more data on every screen, more customization over every field, more control over every element. To them that was power. To Erica it was noise.
+                      </p>
+                      <p
+                        className="font-normal text-[var(--color-text-secondary)]"
+                        style={{
+                          fontSize: 'var(--text-body-lg-size)',
+                          lineHeight: 'var(--text-body-lg-line-height)',
+                          letterSpacing: 'var(--text-body-lg-tracking)',
+                        }}
+                      >
+                        Our job was not just to design the right solution. It was to bridge two completely different versions of reality that both genuinely believed they were right. That is harder than any design problem.
+                      </p>
+                    </div>
+                  </div>
+
+                </div>
+              )}
+
+              {/* ── Empty tab placeholder (Solve it / Prove it) ── */}
+              {(activeTab === 'solve-it' || activeTab === 'prove-it') && (
                 <div className="flex items-center justify-center py-20">
                   <p
                     className="font-normal text-[var(--color-text-muted)]"
@@ -815,9 +1361,9 @@ export default function AimPage() {
         ══════════════════════════════════════════════════════════ */}
         <section className="w-full">
           <div
-            className="mx-auto flex flex-col gap-12 md:gap-[80px]"
+            className="mx-auto flex flex-col gap-[var(--space-section-xl)]"
             style={{
-              maxWidth: 'var(--space-content-max)',
+              maxWidth: 'calc(var(--space-content-max) + var(--space-page-margin) * 2)',
               padding: 'var(--space-section-xl) var(--space-page-margin)',
             }}
           >
@@ -833,7 +1379,7 @@ export default function AimPage() {
             </h2>
 
             {/* Metric cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-[var(--space-component-md)]">
               <div
                 className="flex flex-col gap-[var(--space-stack-xs)] rounded-[8px] border border-[var(--color-border)] p-[var(--space-component-lg)]"
                 style={{ background: 'rgba(255,255,255,0.06)' }}
@@ -901,7 +1447,7 @@ export default function AimPage() {
                 What AIM did
               </h3>
               <ul
-                className="flex flex-col gap-2 list-disc pl-8 text-[var(--color-ink)]"
+                className="flex flex-col gap-[var(--space-component-sm)] list-disc pl-[var(--space-component-lg)] text-[var(--color-ink)]"
                 style={{
                   fontSize: 'var(--text-h3-size)',
                   lineHeight: 'var(--text-h3-line-height)',
@@ -946,9 +1492,9 @@ export default function AimPage() {
         ══════════════════════════════════════════════════════════ */}
         <section className="w-full">
           <div
-            className="mx-auto flex flex-col gap-12 md:gap-[80px]"
+            className="mx-auto flex flex-col gap-[var(--space-section-xl)]"
             style={{
-              maxWidth: 'var(--space-content-max)',
+              maxWidth: 'calc(var(--space-content-max) + var(--space-page-margin) * 2)',
               padding: 'var(--space-section-xl) var(--space-page-margin)',
             }}
           >
@@ -963,8 +1509,8 @@ export default function AimPage() {
             </h2>
 
             {/* Two-column reflection */}
-            <div className="flex flex-col md:flex-row gap-8 md:gap-[70px]">
-              <div className="flex flex-1 flex-col gap-6">
+            <div className="flex flex-col md:flex-row gap-[var(--space-stack-lg)] md:gap-[var(--space-7)]">
+              <div className="flex flex-1 flex-col gap-[var(--space-component-lg)]">
                 <p
                   className="md:whitespace-nowrap font-normal text-[var(--color-ink)]"
                   style={{
@@ -985,7 +1531,7 @@ export default function AimPage() {
                 </p>
               </div>
 
-              <div className="flex flex-1 flex-col gap-6">
+              <div className="flex flex-1 flex-col gap-[var(--space-component-lg)]">
                 <p
                   className="md:whitespace-nowrap font-normal text-[var(--color-ink)]"
                   style={{
@@ -1008,7 +1554,7 @@ export default function AimPage() {
             </div>
 
             {/* ── Explorations that didn't ship ── */}
-            <div className="flex flex-col gap-10">
+            <div className="flex flex-col gap-[var(--space-subsection)]">
               <h3
                 className="font-medium text-[var(--color-text-secondary)]"
                 style={{
@@ -1020,8 +1566,8 @@ export default function AimPage() {
               </h3>
 
               {/* Exploration cards — all three from data */}
-              <div className="flex flex-col gap-6">
-                <div className="flex flex-col md:flex-row gap-6">
+              <div className="flex flex-col gap-[var(--space-component-lg)]">
+                <div className="flex flex-col md:flex-row gap-[var(--space-component-lg)]">
                   {(aim.explorations ?? []).slice(0, 2).map((exp, i) => (
                     <TakeawayCard
                       key={exp.title}
@@ -1046,7 +1592,7 @@ export default function AimPage() {
                 const withImage = (aim.explorations ?? []).find(e => e.image)
                 if (!withImage?.image) return null
                 return (
-                  <div className="flex flex-col gap-1">
+                  <div className="flex flex-col gap-[var(--space-component-xs)]">
                     <div className="aspect-video w-full overflow-hidden rounded-[4px] border border-[var(--color-border-mid)]">
                       <img
                         src={withImage.image.src}
@@ -1079,9 +1625,9 @@ export default function AimPage() {
         ══════════════════════════════════════════════════════════ */}
         <section className="w-full">
           <div
-            className="mx-auto flex flex-col items-center gap-6 text-center"
+            className="mx-auto flex flex-col items-center gap-[var(--space-component-lg)] text-center"
             style={{
-              maxWidth: 'var(--space-content-max)',
+              maxWidth: 'calc(var(--space-content-max) + var(--space-page-margin) * 2)',
               padding: 'var(--space-section-xl) var(--space-page-margin)',
             }}
           >
@@ -1127,9 +1673,9 @@ export default function AimPage() {
             className="group block"
           >
             <div
-              className="mx-auto flex flex-col items-center gap-3 text-center"
+              className="mx-auto flex flex-col items-center gap-[var(--space-component-base)] text-center"
               style={{
-                maxWidth: 'var(--space-content-max)',
+                maxWidth: 'calc(var(--space-content-max) + var(--space-page-margin) * 2)',
                 padding: 'var(--space-section-xl) var(--space-page-margin)',
               }}
             >

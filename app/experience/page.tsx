@@ -31,7 +31,7 @@ export default function ExperiencePage() {
               <h1 className="text-display text-[var(--color-ink)]" style={{ marginTop: '-14px' }}>
                 Experience
               </h1>
-              <div className="grid grid-cols-2 gap-[8px] mx-auto" style={{ maxWidth: '320px', marginTop: 'var(--space-stack-md)' }}>
+              <div className="grid grid-cols-2 gap-[var(--space-component-sm)] mx-auto" style={{ maxWidth: '320px', marginTop: 'var(--space-stack-md)' }}>
                 <Button variant="glass" href="/api/resume" className="w-full">
                   Download resume
                 </Button>
@@ -70,7 +70,7 @@ export default function ExperiencePage() {
                 }}
               >
                 <ScrollReveal>
-                  <h3 className="text-h2 text-[var(--color-ink)] mb-[var(--space-stack-sm)]">
+                  <h3 className="text-h3 text-[var(--color-ink)] mb-[var(--space-stack-sm)]">
                     {job.role}
                   </h3>
                   <p className="text-h4 text-[var(--color-text-muted)] mb-[var(--space-stack-md)]">
@@ -254,7 +254,7 @@ export default function ExperiencePage() {
                 <p className="text-body-lg text-[var(--color-text-secondary)] mb-[var(--space-stack-md)]">
                   Download the resume or reach out directly.
                 </p>
-                <div className="grid grid-cols-2 gap-[8px]" style={{ maxWidth: '320px' }}>
+                <div className="grid grid-cols-2 gap-[var(--space-component-sm)]" style={{ maxWidth: '320px' }}>
                   <Button variant="glass" href="/api/resume" className="w-full">
                     Download resume
                   </Button>

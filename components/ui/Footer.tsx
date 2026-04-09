@@ -44,7 +44,7 @@ export default function Footer() {
           <span
             style={{
               fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-              fontSize: '16px',
+              fontSize: 'var(--text-body-md-size)',
               fontWeight: 500,
               color: 'var(--color-ink)',
               letterSpacing: '-0.01em',
@@ -56,18 +56,18 @@ export default function Footer() {
 
         {/* Center — nav links */}
         <nav aria-label="Footer navigation">
-          <ul className="flex flex-wrap gap-x-[24px] gap-y-[8px] list-none p-0 m-0">
+          <ul className="flex flex-wrap gap-x-[var(--space-component-lg)] gap-y-[var(--space-component-sm)] list-none p-0 m-0">
             {NAV_LINKS.map(link => (
               <li key={link.href}>
                 <Link
                   href={link.href}
                   style={{
                     fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-                    fontSize:   '12px',
+                    fontSize:   'var(--text-ui-sm-size)',
                     fontWeight: 400,
                     color:      'var(--color-text-muted)',
                     textDecoration: 'none',
-                    transition: 'color 0.2s ease',
+                    transition: 'color var(--transition-base)',
                   }}
                   className="hover:text-[var(--color-ink)]"
                 >
@@ -80,7 +80,7 @@ export default function Footer() {
 
         {/* Right — social links */}
         <nav aria-label="Social links">
-          <ul className="flex gap-[16px] list-none p-0 m-0">
+          <ul className="flex gap-[var(--space-component-md)] list-none p-0 m-0">
             {SOCIAL_LINKS.map(link => (
               <li key={link.href}>
                 <a
@@ -89,11 +89,11 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   style={{
                     fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-                    fontSize:   '12px',
+                    fontSize:   'var(--text-ui-sm-size)',
                     fontWeight: 400,
                     color:      'var(--color-text-muted)',
                     textDecoration: 'none',
-                    transition: 'color 0.2s ease',
+                    transition: 'color var(--transition-base)',
                   }}
                   className="hover:text-[var(--color-ink)]"
                 >
@@ -115,12 +115,8 @@ export default function Footer() {
         "
       >
         <span
-          style={{
-            fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-            fontSize:   '11px',
-            fontWeight: 300,
-            color:      'var(--color-text-muted)',
-          }}
+          className="text-label text-[var(--color-text-muted)]"
+          style={{ fontWeight: 300 }}
         >
           &copy; {year} Jay Shock
         </span>

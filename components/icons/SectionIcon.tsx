@@ -1,155 +1,97 @@
-'use client'
-
-import { useState, useEffect, useRef } from 'react'
-import dynamic from 'next/dynamic'
 import type { IconVariant } from './SectionIconCanvas'
-
-const SectionIconCanvas = dynamic(() => import('./SectionIconCanvas'), {
-  ssr: false,
-  loading: () => null,
-})
 
 interface SectionIconProps {
   variant: IconVariant
   glowColor: string
-  /** Raw hex color for Three.js point light override */
   glowColorHex?: string
 }
 
-function hasWebGL(): boolean {
-  if (typeof document === 'undefined') return false
-  try {
-    const c = document.createElement('canvas')
-    return !!(c.getContext('webgl2') || c.getContext('webgl'))
-  } catch {
-    return false
-  }
-}
-
-/** Static placeholder shown instantly while Three.js loads */
-function IconPlaceholder({ variant, glowColor }: { variant: IconVariant; glowColor: string }) {
-  return (
-    <div
-      style={{
-        width: '100%',
-        height: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <div
-        style={{
-          width: '40%',
-          height: '40%',
-          borderRadius: variant === 'about' || variant === 'skills' ? '50%' : '20%',
-          background: `radial-gradient(circle at 50% 70%, color-mix(in oklch, ${glowColor} 12%, transparent), rgba(255,255,255,0.02))`,
-          border: '0.5px solid rgba(255,255,255,0.08)',
-          transition: 'opacity 0.4s ease',
-        }}
-      />
-    </div>
-  )
-}
-
-export default function SectionIcon({ variant, glowColor, glowColorHex }: SectionIconProps) {
-  const [webgl, setWebgl] = useState(true)
-  const [inView, setInView] = useState(false)
-  const [canvasReady, setCanvasReady] = useState(false)
-  const ref = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    setWebgl(hasWebGL())
-  }, [])
-
-  // Only mount the Three.js canvas when the icon scrolls into view
-  useEffect(() => {
-    const el = ref.current
-    if (!el || !webgl) return
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setInView(true)
-          observer.disconnect()
-        }
-      },
-      { rootMargin: '200px 0px' }, // start loading 200px before visible
-    )
-
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [webgl])
-
+/**
+ * Section icon — SVG inside a subtle elevated container.
+ * No glass, no Three.js. Thin border + faint color glow at the base.
+ */
+export default function SectionIcon({ variant, glowColor }: SectionIconProps) {
   return (
     <div
       className="flex justify-center"
       style={{ marginBottom: 'var(--space-stack-md)' }}
     >
-      <div style={{ position: 'relative' }} ref={ref}>
-        {/* Dark container — glow stays inside */}
+      <div
+        style={{
+          position: 'relative',
+          width: 'clamp(56px, 7vw, 64px)',
+          height: 'clamp(56px, 7vw, 64px)',
+          borderRadius: '14px',
+          background: 'var(--color-surface)',
+          border: '0.5px solid var(--color-border)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          overflow: 'hidden',
+        }}
+      >
+        {/* Subtle color glow at the bottom edge */}
         <div
           style={{
-            position: 'relative',
-            width: 'clamp(80px, 9vw, 104px)',
-            height: 'clamp(80px, 9vw, 104px)',
-            borderRadius: '18px',
-            background: `
-              radial-gradient(ellipse 100% 50% at 50% 100%, color-mix(in oklch, ${glowColor} 15%, #0c0c0c), transparent 65%),
-              linear-gradient(180deg, #101010, #0a0a0a)
-            `,
-            border: '0.5px solid rgba(255, 255, 255, 0.06)',
-            boxShadow: `
-              0 1px 0 rgba(255, 255, 255, 0.04) inset,
-              0 -1px 0 rgba(255, 255, 255, 0.02) inset
-            `,
-            overflow: 'hidden',
-            zIndex: 1,
+            position: 'absolute',
+            bottom: '-6px',
+            left: '20%',
+            right: '20%',
+            height: '20px',
+            background: `radial-gradient(ellipse at center, ${glowColor}, transparent 70%)`,
+            opacity: 0.2,
+            pointerEvents: 'none',
           }}
-        >
-          {/* Warm bottom edge highlight */}
-          <div
-            style={{
-              position: 'absolute',
-              bottom: 0,
-              left: '15%',
-              right: '15%',
-              height: '2px',
-              background: `linear-gradient(90deg, transparent, ${glowColor}, transparent)`,
-              opacity: 0.4,
-              borderRadius: '1px',
-            }}
-            aria-hidden="true"
-          />
+          aria-hidden="true"
+        />
 
-          {webgl && inView ? (
-            <>
-              {/* Show placeholder until canvas first paints */}
-              {!canvasReady && (
-                <div style={{ position: 'absolute', inset: 0 }}>
-                  <IconPlaceholder variant={variant} glowColor={glowColor} />
-                </div>
-              )}
-              <div
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  opacity: canvasReady ? 1 : 0,
-                  transition: 'opacity 0.5s ease',
-                }}
-              >
-                <SectionIconCanvas
-                  variant={variant}
-                  glowColorHex={glowColorHex}
-                  onCreated={() => setCanvasReady(true)}
-                />
-              </div>
-            </>
-          ) : (
-            <IconPlaceholder variant={variant} glowColor={glowColor} />
-          )}
-        </div>
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="var(--color-text-muted)"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+          style={{ position: 'relative', zIndex: 1 }}
+        >
+          {ICON_PATHS[variant]}
+        </svg>
       </div>
     </div>
   )
+}
+
+const ICON_PATHS: Record<IconVariant, React.ReactNode> = {
+  /* Briefcase — work / case studies */
+  work: (
+    <>
+      <rect x="2" y="7" width="20" height="14" rx="2" />
+      <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+    </>
+  ),
+  /* User — about */
+  about: (
+    <>
+      <circle cx="12" cy="8" r="4" />
+      <path d="M20 21a8 8 0 0 0-16 0" />
+    </>
+  ),
+  /* Layers — skills / experience */
+  skills: (
+    <>
+      <path d="M12 2 2 7l10 5 10-5-10-5Z" />
+      <path d="m2 17 10 5 10-5" />
+      <path d="m2 12 10 5 10-5" />
+    </>
+  ),
+  /* Mail — contact */
+  contact: (
+    <>
+      <rect x="2" y="4" width="20" height="16" rx="2" />
+      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+    </>
+  ),
 }

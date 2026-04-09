@@ -59,7 +59,7 @@ export default function ToolsToggle() {
       <div
         role="tablist"
         aria-label="Tool categories"
-        className="segment-group mb-[16px]"
+        className="segment-group mb-[var(--space-component-md)]"
       >
         {CATEGORIES.map((c, i) => {
           const isActive = active === i
@@ -98,11 +98,11 @@ export default function ToolsToggle() {
         className="w-full"
       >
         <div
-          className="flex flex-wrap gap-x-[8px] gap-y-[16px]"
+          className="flex flex-wrap gap-x-[var(--space-component-sm)] gap-y-[var(--space-component-md)]"
           style={{
             border: '1px solid var(--color-border-subtle-16)',
             borderRadius: '8px',
-            padding: '20px 24px',
+            padding: 'var(--space-component-lg)',
           }}
         >
           {cat.items.map((item) => (
