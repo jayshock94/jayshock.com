@@ -42,7 +42,7 @@ export default function HomePage() {
         aria-label="Introduction"
       >
         <div
-          className="max-w-content mx-auto flex flex-col items-center gap-[24px]"
+          className="max-w-content mx-auto flex flex-col items-center gap-[var(--space-stack-md)]"
         >
 
           {/* Headline — word-by-word reveal, bold words carry the message */}
@@ -76,7 +76,7 @@ export default function HomePage() {
 
           {/* Status chips — Figma spec: rounded-8, border-subtle-16, h-32, 14px/500 */}
           <div
-            className="flex flex-wrap gap-[8px] items-center justify-center hero-fade-up"
+            className="flex flex-wrap gap-[var(--space-component-sm)] items-center justify-center hero-fade-up"
             style={{ animationDelay: '750ms' }}
           >
             {/* Chip 1 — with green availability dot */}
@@ -84,10 +84,10 @@ export default function HomePage() {
               style={{
                 display:         'inline-flex',
                 alignItems:      'center',
-                gap:             '8px',
+                gap:             'var(--space-component-sm)',
                 height:          '32px',
-                paddingLeft:     '8px',
-                paddingRight:    '16px',
+                paddingLeft:     'var(--space-component-sm)',
+                paddingRight:    'var(--space-component-md)',
                 borderRadius:    '8px',
                 border:          '1px solid var(--color-border-subtle-16)',
                 background:      'var(--color-surface)',
@@ -120,8 +120,8 @@ export default function HomePage() {
                 display:       'inline-flex',
                 alignItems:    'center',
                 height:        '32px',
-                paddingLeft:   '16px',
-                paddingRight:  '16px',
+                paddingLeft:   'var(--space-component-md)',
+                paddingRight:  'var(--space-component-md)',
                 borderRadius:  '8px',
                 border:        '1px solid var(--color-border-subtle-16)',
                 background:    'var(--color-surface)',
@@ -140,7 +140,7 @@ export default function HomePage() {
 
           {/* CTAs — grid forces equal width regardless of label length */}
           <div
-            className="grid grid-cols-2 gap-[8px] hero-fade-up"
+            className="grid grid-cols-2 gap-[var(--space-component-sm)] hero-fade-up"
             style={{ animationDelay: '900ms' }}
           >
             <Button variant="glass" href="/contact" className="w-full">
@@ -180,7 +180,7 @@ export default function HomePage() {
             className="
               grid grid-cols-1 gap-[var(--space-component-lg)] items-stretch
             "
-            style={{ marginTop: 'clamp(40px, 8vw, 70px)' }}
+            style={{ marginTop: 'var(--space-subsection-gap)' }}
           >
             {featured.map((cs, i) => (
               <div
@@ -221,25 +221,25 @@ export default function HomePage() {
           className="mx-auto"
           style={{ maxWidth: 'var(--space-content-max)' }}
         >
-          <div className="flex flex-col items-center" style={{ gap: 'clamp(40px, 8vw, 70px)' }}>
+          <div className="flex flex-col items-center" style={{ gap: 'var(--space-subsection-gap)' }}>
 
             {/* Section header — icon + display heading */}
             <ScrollReveal>
               <div className="text-center">
                 <SectionIcon variant="about" glowColor="var(--phase-problem-label)" />
-                <p
+                <h2
                   className="text-display"
                   style={{ color: 'var(--color-ink)', marginTop: '-14px' }}
                 >
                   About me
-                </p>
+                </h2>
               </div>
             </ScrollReveal>
 
             {/* Subsection 1 — I got here by paying attention */}
             <ScrollReveal>
               {/* Photo + copy row */}
-              <div className="flex flex-col items-center md:items-start gap-[var(--space-stack-lg)] md:flex-row md:gap-[48px]">
+              <div className="flex flex-col items-center md:items-start gap-[var(--space-stack-lg)] md:flex-row md:gap-[var(--space-7)]">
 
                 {/* Photo — mobile: fixed 220×220; desktop: stretches to content column height */}
                 <div
@@ -255,13 +255,13 @@ export default function HomePage() {
                 </div>
 
                 {/* Content */}
-                <div className="flex-1 flex flex-col" style={{ gap: '24px' }}>
-                  <h2 className="text-h1 text-[var(--color-ink)]">
+                <div className="flex-1 flex flex-col" style={{ gap: 'var(--space-stack-md)' }}>
+                  <h3 className="text-h1 text-[var(--color-ink)]">
                     I got here by paying attention.
-                  </h2>
+                  </h3>
                   <AboutText />
                   {/* Buttons */}
-                  <div className="grid grid-cols-2 gap-[8px] self-center md:self-start" style={{ maxWidth: '320px' }}>
+                  <div className="grid grid-cols-2 gap-[var(--space-component-sm)] self-center md:self-start" style={{ maxWidth: '320px' }}>
                     <Button variant="glass" href="/contact" className="w-full">
                       Get in touch
                     </Button>
@@ -298,26 +298,26 @@ export default function HomePage() {
           <ScrollReveal>
             <div className="text-center">
               <SectionIcon variant="skills" glowColor="var(--phase-discovery-label)" />
-              <p className="text-display" style={{ color: 'var(--color-ink)', marginTop: '-14px' }}>
+              <h2 className="text-display" style={{ color: 'var(--color-ink)', marginTop: '-14px' }}>
                 Experience
-              </p>
+              </h2>
             </div>
           </ScrollReveal>
-          <div style={{ marginTop: 'clamp(40px, 8vw, 70px)' }}>
+          <div style={{ marginTop: 'var(--space-subsection-gap)' }}>
             <ScrollReveal>
               <Toolkit />
             </ScrollReveal>
           </div>
 
           {/* Experience — subsection within Skills */}
-          <div id="experience" style={{ marginTop: 'clamp(40px, 8vw, 70px)' }}>
+          <div id="experience" style={{ marginTop: 'var(--space-subsection-gap)' }}>
             <ScrollReveal>
               <div className="mb-[var(--space-stack-sm)]">
-                <h2 className="text-h1 text-[var(--color-ink)] mb-[var(--space-stack-md)]">
+                <h3 className="text-h1 text-[var(--color-ink)] mb-[var(--space-stack-md)]">
                   Where I have been.
-                </h2>
+                </h3>
                 <div className="flex justify-center md:justify-start">
-                  <Button variant="glass" href="/experience">
+                  <Button variant="glass" href="/api/resume">
                     Download resume
                   </Button>
                 </div>
@@ -374,14 +374,14 @@ export default function HomePage() {
                               transition-colors duration-200
                               block
                             "
-                            style={{ marginTop: '24px' }}
+                            style={{ marginTop: 'var(--space-stack-md)' }}
                           >
                             View case study &rarr;
                           </Link>
                         ) : (
                           <span
                             className="text-ui-md text-[var(--color-text-placeholder)] block"
-                            style={{ marginTop: '24px' }}
+                            style={{ marginTop: 'var(--space-stack-md)' }}
                           >
                             Case study coming soon
                           </span>
@@ -405,16 +405,16 @@ export default function HomePage() {
         className="py-[var(--space-section-md)] px-[var(--space-page-margin)]"
         aria-label="Contact"
       >
-        <div className="max-w-content mx-auto flex flex-col gap-[clamp(40px,8vw,70px)]">
+        <div className="max-w-content mx-auto flex flex-col gap-[var(--space-subsection-gap)]">
 
           {/* Block 1 — section icon + "Contact" title, centered */}
           <ScrollReveal>
             <div className="text-center">
               <SectionIcon variant="contact" glowColor="var(--phase-solution-label)" />
-              <p className="text-display" style={{ marginTop: '-14px' }}>
+              <h2 className="text-display" style={{ marginTop: '-14px' }}>
                 <span style={{ color: 'var(--color-text-secondary)', fontWeight: 300 }}>Contact</span>{' '}
                 <span style={{ color: 'var(--color-ink)' }}>Jay</span>
-              </p>
+              </h2>
             </div>
           </ScrollReveal>
 
@@ -422,10 +422,10 @@ export default function HomePage() {
           <div className="flex flex-col gap-[var(--space-stack-lg)]">
             <ScrollReveal>
               <div className="flex flex-col">
-                <h2 className="text-h1" style={{ marginBottom: 'var(--space-stack-title)' }}>
+                <h3 className="text-h1" style={{ marginBottom: 'var(--space-stack-title)' }}>
                   <span style={{ color: 'var(--color-text-secondary)', fontWeight: 300 }}>Let&apos;s make it</span>{' '}
                   <span style={{ color: 'var(--color-ink)' }}>simple.</span>
-                </h2>
+                </h3>
                 <p className="text-intro text-[var(--color-text-secondary)] text-center md:text-left" style={{ maxWidth: '700px', marginBottom: 'var(--space-stack-md)' }}>
                   I want to hear about whatever complex system, product, or problem we could be working on.
                 </p>

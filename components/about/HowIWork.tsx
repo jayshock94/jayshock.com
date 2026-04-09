@@ -68,12 +68,12 @@ export default function HowIWork() {
 
       {/* Heading + subtitle */}
       <div className="flex flex-col gap-[var(--space-stack-sm)]">
-        <h2
+        <h3
           className="text-h1"
           style={{ color: 'var(--color-ink)' }}
         >
           No matter the project.
-        </h2>
+        </h3>
         <p className="text-body-lg text-[var(--color-text-secondary)] text-center md:text-left" style={{ maxWidth: '700px' }}>
           Scopes change, problems arise, constraints shift. This is how I handle it.
         </p>
@@ -122,7 +122,7 @@ export default function HowIWork() {
           role="tabpanel"
           aria-labelledby={`tab-${phase.id}`}
           style={{
-            padding:            '20px 24px',
+            padding:            'var(--space-component-lg)',
             borderRadius:       '12px',
             border:             '1px solid var(--color-border-subtle-16)',
             background:         phase.cardBg,

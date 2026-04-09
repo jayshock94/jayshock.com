@@ -18,18 +18,18 @@ const TOPIC_OPTIONS = [
 const FIELD_STYLE: React.CSSProperties = {
   width: '100%',
   height: '56px',
-  padding: '4px 16px',
-  borderRadius: '4px',
-  background: 'rgba(0, 0, 0, 0.20)',
-  border: '1px solid rgba(238, 240, 241, 0.16)',
+  padding: 'var(--space-component-xs) var(--space-component-md)',
+  borderRadius: 'var(--radius-sm)',
+  background: 'var(--color-surface-elevated)',
+  border: '1px solid var(--color-border-mid)',
   color: 'var(--color-ink)',
   outline: 'none',
   fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-  fontSize: '16px',
+  fontSize: 'var(--text-body-md-size)',
   fontWeight: 400,
-  lineHeight: '24px',
-  letterSpacing: '0.5px',
-  transition: 'border-color 0.2s ease',
+  lineHeight: 'var(--text-body-md-line-height)',
+  letterSpacing: 'var(--text-body-md-tracking)',
+  transition: 'border-color var(--transition-base)',
   boxSizing: 'border-box' as const,
 }
 
@@ -37,12 +37,12 @@ const FIELD_STYLE: React.CSSProperties = {
 const LABEL_STYLE: React.CSSProperties = {
   display: 'block',
   fontFamily: 'var(--font-outfit), system-ui, sans-serif',
-  fontSize: '12px',
+  fontSize: 'var(--text-ui-sm-size)',
   fontWeight: 500,
-  lineHeight: '16px',
-  letterSpacing: '0.5px',
+  lineHeight: 'var(--text-ui-sm-line-height)',
+  letterSpacing: 'var(--text-ui-sm-tracking)',
   color: 'var(--color-text-muted)',
-  marginBottom: '4px',
+  marginBottom: 'var(--space-component-xs)',
 }
 
 function SubmitButton() {
@@ -60,11 +60,11 @@ function SubmitButton() {
 }
 
 function handleFocus(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
-  e.currentTarget.style.borderColor = 'rgba(238, 240, 241, 0.40)'
+  e.currentTarget.style.borderColor = 'var(--color-border-strong)'
 }
 
 function handleBlur(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
-  e.currentTarget.style.borderColor = 'rgba(238, 240, 241, 0.16)'
+  e.currentTarget.style.borderColor = 'var(--color-border-mid)'
 }
 
 export default function ContactForm() {
@@ -73,14 +73,14 @@ export default function ContactForm() {
 
   /* Glass card — matches CaseStudyGate modal */
   const cardStyle: React.CSSProperties = {
-    borderRadius: '16px',
+    borderRadius: 'var(--radius-lg)',
     overflow: 'hidden',
-    background: 'linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 50%, transparent 100%), rgba(255,255,255,0.04)',
+    background: 'linear-gradient(180deg, var(--glass-ultra-thin) 0%, var(--color-hover-subtle) 50%, transparent 100%), var(--color-hover-subtle)',
     backdropFilter: 'blur(48px) saturate(180%)',
     WebkitBackdropFilter: 'blur(48px) saturate(180%)',
-    border: '0.5px solid rgba(255,255,255,0.08)',
-    boxShadow: '0 2px 24px rgba(0,0,0,0.24), inset 0 1px 0 rgba(255,255,255,0.06)',
-    padding: '24px',
+    border: '0.5px solid var(--color-border)',
+    boxShadow: '0 2px 24px var(--shadow-surface-color), inset 0 1px 0 var(--glass-ultra-thin)',
+    padding: 'var(--space-component-lg)',
   }
 
   if (state.status === 'success') {
@@ -112,10 +112,10 @@ export default function ContactForm() {
 
   return (
     <div style={cardStyle}>
-      <form action={formAction} className="flex flex-col gap-[24px]">
+      <form action={formAction} className="flex flex-col gap-[var(--space-stack-md)]">
 
         {/* Name + Email — stacked on mobile, side by side on desktop */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-[24px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-[var(--space-stack-md)]">
           <div>
             <label htmlFor="contact-name" style={LABEL_STYLE}>Name</label>
             <input
@@ -161,7 +161,7 @@ export default function ContactForm() {
               style={{
                 ...FIELD_STYLE,
                 appearance: 'none',
-                paddingRight: '48px',
+                paddingRight: 'var(--space-7)',
                 cursor: 'pointer',
                 color: topicSelected ? 'var(--color-ink)' : 'var(--color-text-muted)',
               }}
@@ -184,7 +184,7 @@ export default function ContactForm() {
               aria-hidden="true"
               style={{
                 position: 'absolute',
-                right: '16px',
+                right: 'var(--space-component-md)',
                 top: '50%',
                 transform: 'translateY(-50%)',
                 pointerEvents: 'none',
@@ -210,8 +210,8 @@ export default function ContactForm() {
               ...FIELD_STYLE,
               height: '117px',
               resize: 'vertical',
-              paddingTop: '16px',
-              paddingBottom: '16px',
+              paddingTop: 'var(--space-component-md)',
+              paddingBottom: 'var(--space-component-md)',
             }}
             onFocus={handleFocus}
             onBlur={handleBlur}
@@ -220,7 +220,7 @@ export default function ContactForm() {
 
         {/* Error */}
         {state.status === 'error' && (
-          <p style={{ ...LABEL_STYLE, color: 'rgba(220, 100, 100, 0.9)' }}>
+          <p style={{ ...LABEL_STYLE, color: 'var(--color-status-error)' }}>
             {state.message}
           </p>
         )}
